@@ -1,0 +1,15 @@
+{
+  "navigationBarTitleText": "",
+  "navigationStyle": "custom",
+  "backgroundColor": "#f6f6f6",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "u-gap": "/uni_modules/uview-ui/components/u-gap/u-gap",
+    "u-tabs": "/uni_modules/uview-ui/components/u-tabs/u-tabs",
+    "u-icon": "/uni_modules/uview-ui/components/u-icon/u-icon",
+    "u--text": "/uni_modules/uview-ui/components/u--text/u--text",
+    "u-cell": "/uni_modules/uview-ui/components/u-cell/u-cell",
+    "u-back-top": "/uni_modules/uview-ui/components/u-back-top/u-back-top",
+    "ls-skeleton": "/components/ls-skeleton/ls-skeleton"
+  }
+}

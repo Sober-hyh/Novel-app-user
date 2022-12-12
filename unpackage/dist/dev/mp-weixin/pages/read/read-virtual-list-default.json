@@ -1,0 +1,8 @@
+{
+  "component": true,
+  "usingComponents": {
+    "read-virtual-list-default": "/pages/read/read-virtual-list-default",
+    "battery": "/components/battery",
+    "virtual-list": "/components/virtualList"
+  }
+}
