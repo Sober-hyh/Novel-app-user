@@ -79,11 +79,9 @@
 									<view class="flex" style="width: 100%;">
 										<span class="cuIcon-hotfill" :class="[item1+1<=3 && item==0 ? 'hotr':'hotw']">
 										</span>
-<<<<<<< Updated upstream
+
 										<u--text :lines="2" :size="13" :bold="true" text="我用十年青春,赴你最后之约"></u--text>
-=======
-										<u--text :lines="2" :size="13" :bold="true" text="我用十年青春,赴你最后之约."></u--text>
->>>>>>> Stashed changes
+
 									</view>
 									
 									<view class="text-sm padding-top-xs smhot padding-left-sm">
@@ -152,11 +150,11 @@
 						<img src="https://p3-tt.byteimg.com/img/pgc-image/4a43885803954ec1b49550bd1327050f~180x234.jpg" alt="">
 						<div class="ws">
 							<view class="onetext">
-<<<<<<< Updated upstream
+
 								<u--text :lines="2" :size="15"  text="我用十年青春,赴你最后之约我用十年青春,赴你最后之约"></u--text>
-=======
-								<u--text :lines="2" :size="15"  text="我用十年青春,赴你最后之约.我用十年青春,赴你最后之约"></u--text>
->>>>>>> Stashed changes
+
+			
+
 								<text style="color: #b1b1b1;font-weight: 600;" class="padding-bottom-xs">111人在读</text>
 							</view>
 						</div>
