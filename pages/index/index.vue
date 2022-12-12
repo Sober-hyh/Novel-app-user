@@ -80,7 +80,6 @@
 										<span class="cuIcon-hotfill" :class="[item1+1<=3 && item==0 ? 'hotr':'hotw']">
 										</span>
 										<u--text :lines="2" :size="13" :bold="true" text="我用十年青春,赴你最后之约"></u--text>
-										<u--text :lines="2" :size="13" :bold="true" text="我用十年青春,赴你最后之约."></u--text>
 									</view>
 									
 									<view class="text-sm padding-top-xs smhot padding-left-sm">
@@ -150,7 +149,6 @@
 						<div class="ws">
 							<view class="onetext">
 								<u--text :lines="2" :size="15"  text="我用十年青春,赴你最后之约我用十年青春,赴你最后之约"></u--text>
-								<u--text :lines="2" :size="15"  text="我用十年青春,赴你最后之约.我用十年青春,赴你最后之约"></u--text>
 								<text style="color: #b1b1b1;font-weight: 600;" class="padding-bottom-xs">111人在读</text>
 							</view>
 						</div>
