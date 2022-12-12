@@ -149,6 +149,7 @@
 						<div class="ws">
 							<view class="onetext">
 								<u--text :lines="2" :size="15"  text="我用十年青春,赴你最后之约我用十年青春,赴你最后之约"></u--text>
+								<u--text :lines="2" :size="15"  text="我用十年青春,赴你最后之约.我用十年青春,赴你最后之约"></u--text>
 								<text style="color: #b1b1b1;font-weight: 600;" class="padding-bottom-xs">111人在读</text>
 							</view>
 						</div>
