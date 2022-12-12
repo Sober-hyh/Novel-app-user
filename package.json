@@ -1,0 +1,12 @@
+{
+    "id": "ls-skeleton",
+    "name": "skeleton骨架屏（可随意配置骨架内容结构）",
+    "version": "1.0.0",
+    "description": "可随意配置骨架内容结构的骨架屏插件，自由度高，复用性强，扩展性强",
+    "keywords": [
+        "动画效果",
+        "VUE",
+        "NVUE",
+        "微信小程序"
+    ]
+}

@@ -1,0 +1,57 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/read/read",
+    "pages/Category/Category",
+    "pages/Bookshelf/Bookshelf",
+    "pages/my/my"
+  ],
+  "subPackages": [
+    {
+      "root": "subpackageA",
+      "pages": [
+        "searchRes/searchRes",
+        "allLists/allLists",
+        "allBooks/allBooks"
+      ]
+    }
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "color": "#b6b6b6",
+    "selectedColor": "#000000",
+    "backgroundColor": "#fafafa",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "书城",
+        "iconPath": "./static/icon/notab/shucheng.png",
+        "selectedIconPath": "./static/icon/curtab/shucheng.png"
+      },
+      {
+        "pagePath": "pages/Category/Category",
+        "text": "分类",
+        "iconPath": "./static/icon/notab/fenlei.png",
+        "selectedIconPath": "./static/icon/curtab/fenlei.png"
+      },
+      {
+        "pagePath": "pages/Bookshelf/Bookshelf",
+        "text": "书架",
+        "iconPath": "./static/icon/notab/shujia.png",
+        "selectedIconPath": "./static/icon/curtab/shujia.png"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "text": "我的",
+        "iconPath": "./static/icon/notab/my.png",
+        "selectedIconPath": "./static/icon/curtab/my.png"
+      }
+    ]
+  },
+  "usingComponents": {}
+}
