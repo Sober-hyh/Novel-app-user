@@ -16,8 +16,8 @@ import uView from '@/uni_modules/uview-ui'
 Vue.use(uView)
 // require("@/commons/request.js")(app);
 // //导入utils小工具
-// import utils from "commons/utils.js";
-// Vue.use(utils,app);
+import utils from "commons/utils.js";
+Vue.use(utils,app);
 // Vue.prototype.staticServer = "http://hyh-demo.top/";
 // Vue.prototype.checkLogin = function(backpage, backtype){
 // 	var SUID  = uni.getStorageSync('SUID');

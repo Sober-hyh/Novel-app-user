@@ -8,29 +8,47 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(global) {Object.defineProperty(exports, "__esModule", { value: true });exports.createApp = createApp;exports.createComponent = createComponent;exports.createPage = createPage;exports.createPlugin = createPlugin;exports.createSubpackageApp = createSubpackageApp;exports.default = void 0;var _uniI18n = __webpack_require__(/*! @dcloudio/uni-i18n */ 3);
-var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 4));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _slicedToArray(arr, i) {return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();}function _nonIterableRest() {throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _iterableToArrayLimit(arr, i) {if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;var _arr = [];var _n = true;var _d = false;var _e = undefined;try {for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {_arr.push(_s.value);if (i && _arr.length === i) break;}} catch (err) {_d = true;_e = err;} finally {try {if (!_n && _i["return"] != null) _i["return"]();} finally {if (_d) throw _e;}}return _arr;}function _arrayWithHoles(arr) {if (Array.isArray(arr)) return arr;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(o);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _iterableToArray(iter) {if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) return _arrayLikeToArray(arr);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}
+/* WEBPACK VAR INJECTION */(function(global) {
 
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 3);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.createApp = createApp;
+exports.createComponent = createComponent;
+exports.createPage = createPage;
+exports.createPlugin = createPlugin;
+exports.createSubpackageApp = createSubpackageApp;
+exports.default = void 0;
+var _slicedToArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ 4));
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ 10));
+var _construct2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/construct */ 14));
+var _toConsumableArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/toConsumableArray */ 17));
+var _typeof2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/typeof */ 12));
+var _uniI18n = __webpack_require__(/*! @dcloudio/uni-i18n */ 21);
+var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 24));
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 var realAtob;
-
 var b64 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
 var b64re = /^(?:[A-Za-z\d+/]{4})*?(?:[A-Za-z\d+/]{2}(?:==)?|[A-Za-z\d+/]{3}=?)?$/;
-
 if (typeof atob !== 'function') {
   realAtob = function realAtob(str) {
     str = String(str).replace(/[\t\n\f\r ]+/g, '');
-    if (!b64re.test(str)) {throw new Error("Failed to execute 'atob' on 'Window': The string to be decoded is not correctly encoded.");}
+    if (!b64re.test(str)) {
+      throw new Error("Failed to execute 'atob' on 'Window': The string to be decoded is not correctly encoded.");
+    }
 
     // Adding the padding if missing, for semplicity
     str += '=='.slice(2 - (str.length & 3));
-    var bitmap;var result = '';var r1;var r2;var i = 0;
+    var bitmap;
+    var result = '';
+    var r1;
+    var r2;
+    var i = 0;
     for (; i < str.length;) {
-      bitmap = b64.indexOf(str.charAt(i++)) << 18 | b64.indexOf(str.charAt(i++)) << 12 |
-      (r1 = b64.indexOf(str.charAt(i++))) << 6 | (r2 = b64.indexOf(str.charAt(i++)));
-
-      result += r1 === 64 ? String.fromCharCode(bitmap >> 16 & 255) :
-      r2 === 64 ? String.fromCharCode(bitmap >> 16 & 255, bitmap >> 8 & 255) :
-      String.fromCharCode(bitmap >> 16 & 255, bitmap >> 8 & 255, bitmap & 255);
+      bitmap = b64.indexOf(str.charAt(i++)) << 18 | b64.indexOf(str.charAt(i++)) << 12 | (r1 = b64.indexOf(str.charAt(i++))) << 6 | (r2 = b64.indexOf(str.charAt(i++)));
+      result += r1 === 64 ? String.fromCharCode(bitmap >> 16 & 255) : r2 === 64 ? String.fromCharCode(bitmap >> 16 & 255, bitmap >> 8 & 255) : String.fromCharCode(bitmap >> 16 & 255, bitmap >> 8 & 255, bitmap & 255);
     }
     return result;
   };
@@ -38,13 +56,11 @@ if (typeof atob !== 'function') {
   // 注意atob只能在全局对象上调用，例如：`const Base64 = {atob};Base64.atob('xxxx')`是错误的用法
   realAtob = atob;
 }
-
 function b64DecodeUnicode(str) {
   return decodeURIComponent(realAtob(str).split('').map(function (c) {
     return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
   }).join(''));
 }
-
 function getCurrentUserInfo() {
   var token = wx.getStorageSync('uni_id_token') || '';
   var tokenArr = token.split('.');
@@ -53,8 +69,8 @@ function getCurrentUserInfo() {
       uid: null,
       role: [],
       permission: [],
-      tokenExpired: 0 };
-
+      tokenExpired: 0
+    };
   }
   var userInfo;
   try {
@@ -67,52 +83,45 @@ function getCurrentUserInfo() {
   delete userInfo.iat;
   return userInfo;
 }
-
 function uniIdMixin(Vue) {
-  Vue.prototype.uniIDHasRole = function (roleId) {var _getCurrentUserInfo =
-
-
-    getCurrentUserInfo(),role = _getCurrentUserInfo.role;
+  Vue.prototype.uniIDHasRole = function (roleId) {
+    var _getCurrentUserInfo = getCurrentUserInfo(),
+      role = _getCurrentUserInfo.role;
     return role.indexOf(roleId) > -1;
   };
-  Vue.prototype.uniIDHasPermission = function (permissionId) {var _getCurrentUserInfo2 =
-
-
-    getCurrentUserInfo(),permission = _getCurrentUserInfo2.permission;
+  Vue.prototype.uniIDHasPermission = function (permissionId) {
+    var _getCurrentUserInfo2 = getCurrentUserInfo(),
+      permission = _getCurrentUserInfo2.permission;
     return this.uniIDHasRole('admin') || permission.indexOf(permissionId) > -1;
   };
-  Vue.prototype.uniIDTokenValid = function () {var _getCurrentUserInfo3 =
-
-
-    getCurrentUserInfo(),tokenExpired = _getCurrentUserInfo3.tokenExpired;
+  Vue.prototype.uniIDTokenValid = function () {
+    var _getCurrentUserInfo3 = getCurrentUserInfo(),
+      tokenExpired = _getCurrentUserInfo3.tokenExpired;
     return tokenExpired > Date.now();
   };
 }
-
 var _toString = Object.prototype.toString;
 var hasOwnProperty = Object.prototype.hasOwnProperty;
-
 function isFn(fn) {
   return typeof fn === 'function';
 }
-
 function isStr(str) {
   return typeof str === 'string';
 }
-
+function isObject(obj) {
+  return obj !== null && (0, _typeof2.default)(obj) === 'object';
+}
 function isPlainObject(obj) {
   return _toString.call(obj) === '[object Object]';
 }
-
 function hasOwn(obj, key) {
   return hasOwnProperty.call(obj, key);
 }
-
 function noop() {}
 
 /**
-                    * Create a cached version of a pure function.
-                    */
+ * Create a cached version of a pure function.
+ */
 function cached(fn) {
   var cache = Object.create(null);
   return function cachedFn(str) {
@@ -122,13 +131,14 @@ function cached(fn) {
 }
 
 /**
-   * Camelize a hyphen-delimited string.
-   */
+ * Camelize a hyphen-delimited string.
+ */
 var camelizeRE = /-(\w)/g;
 var camelize = cached(function (str) {
-  return str.replace(camelizeRE, function (_, c) {return c ? c.toUpperCase() : '';});
+  return str.replace(camelizeRE, function (_, c) {
+    return c ? c.toUpperCase() : '';
+  });
 });
-
 function sortObject(obj) {
   var sortObj = {};
   if (isPlainObject(obj)) {
@@ -138,30 +148,13 @@ function sortObject(obj) {
   }
   return !Object.keys(sortObj) ? obj : sortObj;
 }
-
-var HOOKS = [
-'invoke',
-'success',
-'fail',
-'complete',
-'returnValue'];
-
-
+var HOOKS = ['invoke', 'success', 'fail', 'complete', 'returnValue'];
 var globalInterceptors = {};
 var scopedInterceptors = {};
-
 function mergeHook(parentVal, childVal) {
-  var res = childVal ?
-  parentVal ?
-  parentVal.concat(childVal) :
-  Array.isArray(childVal) ?
-  childVal : [childVal] :
-  parentVal;
-  return res ?
-  dedupeHooks(res) :
-  res;
+  var res = childVal ? parentVal ? parentVal.concat(childVal) : Array.isArray(childVal) ? childVal : [childVal] : parentVal;
+  return res ? dedupeHooks(res) : res;
 }
-
 function dedupeHooks(hooks) {
   var res = [];
   for (var i = 0; i < hooks.length; i++) {
@@ -171,14 +164,12 @@ function dedupeHooks(hooks) {
   }
   return res;
 }
-
 function removeHook(hooks, hook) {
   var index = hooks.indexOf(hook);
   if (index !== -1) {
     hooks.splice(index, 1);
   }
 }
-
 function mergeInterceptorHook(interceptor, option) {
   Object.keys(option).forEach(function (hook) {
     if (HOOKS.indexOf(hook) !== -1 && isFn(option[hook])) {
@@ -186,7 +177,6 @@ function mergeInterceptorHook(interceptor, option) {
     }
   });
 }
-
 function removeInterceptorHook(interceptor, option) {
   if (!interceptor || !option) {
     return;
@@ -197,7 +187,6 @@ function removeInterceptorHook(interceptor, option) {
     }
   });
 }
-
 function addInterceptor(method, option) {
   if (typeof method === 'string' && isPlainObject(option)) {
     mergeInterceptorHook(scopedInterceptors[method] || (scopedInterceptors[method] = {}), option);
@@ -205,7 +194,6 @@ function addInterceptor(method, option) {
     mergeInterceptorHook(globalInterceptors, method);
   }
 }
-
 function removeInterceptor(method, option) {
   if (typeof method === 'string') {
     if (isPlainObject(option)) {
@@ -217,17 +205,14 @@ function removeInterceptor(method, option) {
     removeInterceptorHook(globalInterceptors, method);
   }
 }
-
 function wrapperHook(hook) {
   return function (data) {
     return hook(data) || data;
   };
 }
-
 function isPromise(obj) {
-  return !!obj && (typeof obj === 'object' || typeof obj === 'function') && typeof obj.then === 'function';
+  return !!obj && ((0, _typeof2.default)(obj) === 'object' || typeof obj === 'function') && typeof obj.then === 'function';
 }
-
 function queue(hooks, data) {
   var promise = false;
   for (var i = 0; i < hooks.length; i++) {
@@ -241,19 +226,19 @@ function queue(hooks, data) {
       }
       if (res === false) {
         return {
-          then: function then() {} };
-
+          then: function then() {}
+        };
       }
     }
   }
   return promise || {
     then: function then(callback) {
       return callback(data);
-    } };
-
+    }
+  };
 }
-
-function wrapperOptions(interceptor) {var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+function wrapperOptions(interceptor) {
+  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
   ['success', 'fail', 'complete'].forEach(function (name) {
     if (Array.isArray(interceptor[name])) {
       var oldCallback = options[name];
@@ -267,22 +252,20 @@ function wrapperOptions(interceptor) {var options = arguments.length > 1 && argu
   });
   return options;
 }
-
 function wrapperReturnValue(method, returnValue) {
   var returnValueHooks = [];
   if (Array.isArray(globalInterceptors.returnValue)) {
-    returnValueHooks.push.apply(returnValueHooks, _toConsumableArray(globalInterceptors.returnValue));
+    returnValueHooks.push.apply(returnValueHooks, (0, _toConsumableArray2.default)(globalInterceptors.returnValue));
   }
   var interceptor = scopedInterceptors[method];
   if (interceptor && Array.isArray(interceptor.returnValue)) {
-    returnValueHooks.push.apply(returnValueHooks, _toConsumableArray(interceptor.returnValue));
+    returnValueHooks.push.apply(returnValueHooks, (0, _toConsumableArray2.default)(interceptor.returnValue));
   }
   returnValueHooks.forEach(function (hook) {
     returnValue = hook(returnValue) || returnValue;
   });
   return returnValue;
 }
-
 function getApiInterceptorHooks(method) {
   var interceptor = Object.create(null);
   Object.keys(globalInterceptors).forEach(function (hook) {
@@ -300,8 +283,10 @@ function getApiInterceptorHooks(method) {
   }
   return interceptor;
 }
-
-function invokeApi(method, api, options) {for (var _len = arguments.length, params = new Array(_len > 3 ? _len - 3 : 0), _key = 3; _key < _len; _key++) {params[_key - 3] = arguments[_key];}
+function invokeApi(method, api, options) {
+  for (var _len = arguments.length, params = new Array(_len > 3 ? _len - 3 : 0), _key = 3; _key < _len; _key++) {
+    params[_key - 3] = arguments[_key];
+  }
   var interceptor = getApiInterceptorHooks(method);
   if (interceptor && Object.keys(interceptor).length) {
     if (Array.isArray(interceptor.invoke)) {
@@ -315,7 +300,6 @@ function invokeApi(method, api, options) {for (var _len = arguments.length, para
   }
   return api.apply(void 0, [options].concat(params));
 }
-
 var promiseInterceptor = {
   returnValue: function returnValue(res) {
     if (!isPromise(res)) {
@@ -330,12 +314,9 @@ var promiseInterceptor = {
         }
       });
     });
-  } };
-
-
-var SYNC_API_RE =
-/^\$|Window$|WindowStyle$|sendHostEvent|sendNativeEvent|restoreGlobal|requireGlobal|getCurrentSubNVue|getMenuButtonBoundingClientRect|^report|interceptors|Interceptor$|getSubNVueById|requireNativePlugin|upx2px|hideKeyboard|canIUse|^create|Sync$|Manager$|base64ToArrayBuffer|arrayBufferToBase64|getLocale|setLocale|invokePushCallback|getWindowInfo|getDeviceInfo|getAppBaseInfo|getSystemSetting|getAppAuthorizeSetting/;
-
+  }
+};
+var SYNC_API_RE = /^\$|Window$|WindowStyle$|sendHostEvent|sendNativeEvent|restoreGlobal|requireGlobal|getCurrentSubNVue|getMenuButtonBoundingClientRect|^report|interceptors|Interceptor$|getSubNVueById|requireNativePlugin|upx2px|hideKeyboard|canIUse|^create|Sync$|Manager$|base64ToArrayBuffer|arrayBufferToBase64|getLocale|setLocale|invokePushCallback|getWindowInfo|getDeviceInfo|getAppBaseInfo|getSystemSetting|getAppAuthorizeSetting/;
 var CONTEXT_API_RE = /^create|Manager$/;
 
 // Context例外情况
@@ -343,33 +324,25 @@ var CONTEXT_API_RE_EXC = ['createBLEConnection'];
 
 // 同步例外情况
 var ASYNC_API = ['createBLEConnection', 'createPushMessage'];
-
 var CALLBACK_API_RE = /^on|^off/;
-
 function isContextApi(name) {
   return CONTEXT_API_RE.test(name) && CONTEXT_API_RE_EXC.indexOf(name) === -1;
 }
 function isSyncApi(name) {
   return SYNC_API_RE.test(name) && ASYNC_API.indexOf(name) === -1;
 }
-
 function isCallbackApi(name) {
   return CALLBACK_API_RE.test(name) && name !== 'onPush';
 }
-
 function handlePromise(promise) {
   return promise.then(function (data) {
     return [null, data];
-  }).
-  catch(function (err) {return [err];});
+  }).catch(function (err) {
+    return [err];
+  });
 }
-
 function shouldPromise(name) {
-  if (
-  isContextApi(name) ||
-  isSyncApi(name) ||
-  isCallbackApi(name))
-  {
+  if (isContextApi(name) || isSyncApi(name) || isCallbackApi(name)) {
     return false;
   }
   return true;
@@ -379,55 +352,56 @@ function shouldPromise(name) {
 if (!Promise.prototype.finally) {
   Promise.prototype.finally = function (callback) {
     var promise = this.constructor;
-    return this.then(
-    function (value) {return promise.resolve(callback()).then(function () {return value;});},
-    function (reason) {return promise.resolve(callback()).then(function () {
+    return this.then(function (value) {
+      return promise.resolve(callback()).then(function () {
+        return value;
+      });
+    }, function (reason) {
+      return promise.resolve(callback()).then(function () {
         throw reason;
-      });});
-
+      });
+    });
   };
 }
-
 function promisify(name, api) {
   if (!shouldPromise(name)) {
     return api;
   }
-  return function promiseApi() {var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};for (var _len2 = arguments.length, params = new Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {params[_key2 - 1] = arguments[_key2];}
+  return function promiseApi() {
+    var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+    for (var _len2 = arguments.length, params = new Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
+      params[_key2 - 1] = arguments[_key2];
+    }
     if (isFn(options.success) || isFn(options.fail) || isFn(options.complete)) {
       return wrapperReturnValue(name, invokeApi.apply(void 0, [name, api, options].concat(params)));
     }
     return wrapperReturnValue(name, handlePromise(new Promise(function (resolve, reject) {
       invokeApi.apply(void 0, [name, api, Object.assign({}, options, {
         success: resolve,
-        fail: reject })].concat(
-      params));
+        fail: reject
+      })].concat(params));
     })));
   };
 }
-
 var EPS = 1e-4;
 var BASE_DEVICE_WIDTH = 750;
 var isIOS = false;
 var deviceWidth = 0;
 var deviceDPR = 0;
-
-function checkDeviceWidth() {var _wx$getSystemInfoSync =
-
-
-
-
-  wx.getSystemInfoSync(),platform = _wx$getSystemInfoSync.platform,pixelRatio = _wx$getSystemInfoSync.pixelRatio,windowWidth = _wx$getSystemInfoSync.windowWidth; // uni=>wx runtime 编译目标是 uni 对象，内部不允许直接使用 uni
+function checkDeviceWidth() {
+  var _wx$getSystemInfoSync = wx.getSystemInfoSync(),
+    platform = _wx$getSystemInfoSync.platform,
+    pixelRatio = _wx$getSystemInfoSync.pixelRatio,
+    windowWidth = _wx$getSystemInfoSync.windowWidth; // uni=>wx runtime 编译目标是 uni 对象，内部不允许直接使用 uni
 
   deviceWidth = windowWidth;
   deviceDPR = pixelRatio;
   isIOS = platform === 'ios';
 }
-
 function upx2px(number, newDeviceWidth) {
   if (deviceWidth === 0) {
     checkDeviceWidth();
   }
-
   number = Number(number);
   if (number === 0) {
     return 0;
@@ -446,21 +420,16 @@ function upx2px(number, newDeviceWidth) {
   }
   return number < 0 ? -result : result;
 }
-
 var LOCALE_ZH_HANS = 'zh-Hans';
 var LOCALE_ZH_HANT = 'zh-Hant';
 var LOCALE_EN = 'en';
 var LOCALE_FR = 'fr';
 var LOCALE_ES = 'es';
-
 var messages = {};
-
 var locale;
-
 {
   locale = normalizeLocale(wx.getSystemInfoSync().language) || LOCALE_EN;
 }
-
 function initI18nMessages() {
   if (!isEnableLocale()) {
     return;
@@ -478,16 +447,12 @@ function initI18nMessages() {
     });
   }
 }
-
 initI18nMessages();
-
-var i18n = (0, _uniI18n.initVueI18n)(
-locale,
-{});
-
+var i18n = (0, _uniI18n.initVueI18n)(locale, {});
 var t = i18n.t;
 var i18nMixin = i18n.mixin = {
-  beforeCreate: function beforeCreate() {var _this = this;
+  beforeCreate: function beforeCreate() {
+    var _this = this;
     var unwatch = i18n.i18n.watchLocale(function () {
       _this.$forceUpdate();
     });
@@ -498,16 +463,15 @@ var i18nMixin = i18n.mixin = {
   methods: {
     $$t: function $$t(key, values) {
       return t(key, values);
-    } } };
-
-
+    }
+  }
+};
 var setLocale = i18n.setLocale;
 var getLocale = i18n.getLocale;
-
 function initAppLocale(Vue, appVm, locale) {
   var state = Vue.observable({
-    locale: locale || i18n.getLocale() });
-
+    locale: locale || i18n.getLocale()
+  });
   var localeWatchers = [];
   appVm.$watchLocale = function (fn) {
     localeWatchers.push(fn);
@@ -518,23 +482,25 @@ function initAppLocale(Vue, appVm, locale) {
     },
     set: function set(v) {
       state.locale = v;
-      localeWatchers.forEach(function (watch) {return watch(v);});
-    } });
-
+      localeWatchers.forEach(function (watch) {
+        return watch(v);
+      });
+    }
+  });
 }
-
 function isEnableLocale() {
   return typeof __uniConfig !== 'undefined' && __uniConfig.locales && !!Object.keys(__uniConfig.locales).length;
 }
-
 function include(str, parts) {
-  return !!parts.find(function (part) {return str.indexOf(part) !== -1;});
+  return !!parts.find(function (part) {
+    return str.indexOf(part) !== -1;
+  });
 }
-
 function startsWith(str, parts) {
-  return parts.find(function (part) {return str.indexOf(part) === 0;});
+  return parts.find(function (part) {
+    return str.indexOf(part) === 0;
+  });
 }
-
 function normalizeLocale(locale, messages) {
   if (!locale) {
     return;
@@ -577,14 +543,13 @@ function normalizeLocale(locale, messages) {
 function getLocale$1() {
   // 优先使用 $locale
   var app = getApp({
-    allowDefault: true });
-
+    allowDefault: true
+  });
   if (app && app.$vm) {
     return app.$vm.$locale;
   }
   return normalizeLocale(wx.getSystemInfoSync().language) || LOCALE_EN;
 }
-
 function setLocale$1(locale) {
   var app = getApp();
   if (!app) {
@@ -593,29 +558,27 @@ function setLocale$1(locale) {
   var oldLocale = app.$vm.$locale;
   if (oldLocale !== locale) {
     app.$vm.$locale = locale;
-    onLocaleChangeCallbacks.forEach(function (fn) {return fn({
-        locale: locale });});
-
+    onLocaleChangeCallbacks.forEach(function (fn) {
+      return fn({
+        locale: locale
+      });
+    });
     return true;
   }
   return false;
 }
-
 var onLocaleChangeCallbacks = [];
 function onLocaleChange(fn) {
   if (onLocaleChangeCallbacks.indexOf(fn) === -1) {
     onLocaleChangeCallbacks.push(fn);
   }
 }
-
 if (typeof global !== 'undefined') {
   global.getLocale = getLocale$1;
 }
-
 var interceptors = {
-  promiseInterceptor: promiseInterceptor };
-
-
+  promiseInterceptor: promiseInterceptor
+};
 var baseApi = /*#__PURE__*/Object.freeze({
   __proto__: null,
   upx2px: upx2px,
@@ -624,9 +587,8 @@ var baseApi = /*#__PURE__*/Object.freeze({
   onLocaleChange: onLocaleChange,
   addInterceptor: addInterceptor,
   removeInterceptor: removeInterceptor,
-  interceptors: interceptors });
-
-
+  interceptors: interceptors
+});
 function findExistsPageIndex(url) {
   var pages = getCurrentPages();
   var len = pages.length;
@@ -638,7 +600,6 @@ function findExistsPageIndex(url) {
   }
   return -1;
 }
-
 var redirectTo = {
   name: function name(fromArgs) {
     if (fromArgs.exists === 'back' && fromArgs.delta) {
@@ -656,9 +617,8 @@ var redirectTo = {
         }
       }
     }
-  } };
-
-
+  }
+};
 var previewImage = {
   args: function args(fromArgs) {
     var currentIndex = parseInt(fromArgs.current);
@@ -680,19 +640,18 @@ var previewImage = {
     }
     if (currentIndex > 0) {
       fromArgs.current = urls[currentIndex];
-      fromArgs.urls = urls.filter(
-      function (item, index) {return index < currentIndex ? item !== urls[currentIndex] : true;});
-
+      fromArgs.urls = urls.filter(function (item, index) {
+        return index < currentIndex ? item !== urls[currentIndex] : true;
+      });
     } else {
       fromArgs.current = urls[0];
     }
     return {
       indicator: false,
-      loop: false };
-
-  } };
-
-
+      loop: false
+    };
+  }
+};
 var UUID_KEY = '__DC_STAT_UUID';
 var deviceId;
 function useDeviceId(result) {
@@ -701,12 +660,11 @@ function useDeviceId(result) {
     deviceId = Date.now() + '' + Math.floor(Math.random() * 1e7);
     wx.setStorage({
       key: UUID_KEY,
-      data: deviceId });
-
+      data: deviceId
+    });
   }
   result.deviceId = deviceId;
 }
-
 function addSafeAreaInsets(result) {
   if (result.safeArea) {
     var safeArea = result.safeArea;
@@ -714,18 +672,26 @@ function addSafeAreaInsets(result) {
       top: safeArea.top,
       left: safeArea.left,
       right: result.windowWidth - safeArea.right,
-      bottom: result.screenHeight - safeArea.bottom };
-
+      bottom: result.screenHeight - safeArea.bottom
+    };
   }
 }
-
-function populateParameters(result) {var _result$brand =
-
-
-
-
-
-  result.brand,brand = _result$brand === void 0 ? '' : _result$brand,_result$model = result.model,model = _result$model === void 0 ? '' : _result$model,_result$system = result.system,system = _result$system === void 0 ? '' : _result$system,_result$language = result.language,language = _result$language === void 0 ? '' : _result$language,theme = result.theme,version = result.version,platform = result.platform,fontSizeSetting = result.fontSizeSetting,SDKVersion = result.SDKVersion,pixelRatio = result.pixelRatio,deviceOrientation = result.deviceOrientation;
+function populateParameters(result) {
+  var _result$brand = result.brand,
+    brand = _result$brand === void 0 ? '' : _result$brand,
+    _result$model = result.model,
+    model = _result$model === void 0 ? '' : _result$model,
+    _result$system = result.system,
+    system = _result$system === void 0 ? '' : _result$system,
+    _result$language = result.language,
+    language = _result$language === void 0 ? '' : _result$language,
+    theme = result.theme,
+    version = result.version,
+    platform = result.platform,
+    fontSizeSetting = result.fontSizeSetting,
+    SDKVersion = result.SDKVersion,
+    pixelRatio = result.pixelRatio,
+    deviceOrientation = result.deviceOrientation;
   // const isQuickApp = "mp-weixin".indexOf('quickapp-webview') !== -1
 
   // osName osVersion
@@ -766,8 +732,8 @@ function populateParameters(result) {var _result$brand =
     appVersion: "1.0.0",
     appVersionCode: "100",
     appLanguage: getAppLanguage(hostLanguage),
-    uniCompileVersion: "3.6.5",
-    uniRuntimeVersion: "3.6.5",
+    uniCompileVersion: "3.6.13",
+    uniRuntimeVersion: "3.6.13",
     uniPlatform: undefined || "mp-weixin",
     deviceBrand: deviceBrand,
     deviceModel: model,
@@ -790,20 +756,18 @@ function populateParameters(result) {var _result$brand =
     ua: undefined,
     hostPackageName: undefined,
     browserName: undefined,
-    browserVersion: undefined };
-
-
+    browserVersion: undefined
+  };
   Object.assign(result, parameters);
 }
-
 function getGetDeviceType(result, model) {
   var deviceType = result.deviceType || 'phone';
   {
     var deviceTypeMaps = {
       ipad: 'pad',
       windows: 'pc',
-      mac: 'pc' };
-
+      mac: 'pc'
+    };
     var deviceTypeMapsKeys = Object.keys(deviceTypeMaps);
     var _model = model.toLocaleLowerCase();
     for (var index = 0; index < deviceTypeMapsKeys.length; index++) {
@@ -816,7 +780,6 @@ function getGetDeviceType(result, model) {
   }
   return deviceType;
 }
-
 function getDeviceBrand(brand) {
   var deviceBrand = brand;
   if (deviceBrand) {
@@ -824,13 +787,9 @@ function getDeviceBrand(brand) {
   }
   return deviceBrand;
 }
-
 function getAppLanguage(defaultLanguage) {
-  return getLocale$1 ?
-  getLocale$1() :
-  defaultLanguage;
+  return getLocale$1 ? getLocale$1() : defaultLanguage;
 }
-
 function getHostName(result) {
   var _platform = 'WeChat';
   var _hostName = result.hostName || _platform; // mp-jd
@@ -841,34 +800,31 @@ function getHostName(result) {
       _hostName = result.host.env;
     }
   }
-
   return _hostName;
 }
-
 var getSystemInfo = {
   returnValue: function returnValue(result) {
     useDeviceId(result);
     addSafeAreaInsets(result);
     populateParameters(result);
-  } };
-
-
+  }
+};
 var showActionSheet = {
   args: function args(fromArgs) {
-    if (typeof fromArgs === 'object') {
+    if ((0, _typeof2.default)(fromArgs) === 'object') {
       fromArgs.alertText = fromArgs.title;
     }
-  } };
-
-
+  }
+};
 var getAppBaseInfo = {
-  returnValue: function returnValue(result) {var _result =
-    result,version = _result.version,language = _result.language,SDKVersion = _result.SDKVersion,theme = _result.theme;
-
+  returnValue: function returnValue(result) {
+    var _result = result,
+      version = _result.version,
+      language = _result.language,
+      SDKVersion = _result.SDKVersion,
+      theme = _result.theme;
     var _hostName = getHostName(result);
-
     var hostLanguage = language.replace('_', '-');
-
     result = sortObject(Object.assign(result, {
       appId: "__UNI__B22580B",
       appName: "小说",
@@ -879,49 +835,45 @@ var getAppBaseInfo = {
       hostLanguage: hostLanguage,
       hostName: _hostName,
       hostSDKVersion: SDKVersion,
-      hostTheme: theme }));
-
-  } };
-
-
+      hostTheme: theme
+    }));
+  }
+};
 var getDeviceInfo = {
-  returnValue: function returnValue(result) {var _result2 =
-    result,brand = _result2.brand,model = _result2.model;
+  returnValue: function returnValue(result) {
+    var _result2 = result,
+      brand = _result2.brand,
+      model = _result2.model;
     var deviceType = getGetDeviceType(result, model);
     var deviceBrand = getDeviceBrand(brand);
     useDeviceId(result);
-
     result = sortObject(Object.assign(result, {
       deviceType: deviceType,
       deviceBrand: deviceBrand,
-      deviceModel: model }));
-
-  } };
-
-
+      deviceModel: model
+    }));
+  }
+};
 var getWindowInfo = {
   returnValue: function returnValue(result) {
     addSafeAreaInsets(result);
-
     result = sortObject(Object.assign(result, {
       windowTop: 0,
-      windowBottom: 0 }));
-
-  } };
-
-
+      windowBottom: 0
+    }));
+  }
+};
 var getAppAuthorizeSetting = {
-  returnValue: function returnValue(result) {var
-    locationReducedAccuracy = result.locationReducedAccuracy;
-
+  returnValue: function returnValue(result) {
+    var locationReducedAccuracy = result.locationReducedAccuracy;
     result.locationAccuracy = 'unsupported';
     if (locationReducedAccuracy === true) {
       result.locationAccuracy = 'reduced';
     } else if (locationReducedAccuracy === false) {
       result.locationAccuracy = 'full';
     }
-  } };
-
+  }
+};
 
 // import navigateTo from 'uni-helpers/navigate-to'
 
@@ -935,26 +887,22 @@ var protocols = {
   getAppBaseInfo: getAppBaseInfo,
   getDeviceInfo: getDeviceInfo,
   getWindowInfo: getWindowInfo,
-  getAppAuthorizeSetting: getAppAuthorizeSetting };
-
-var todos = [
-'vibrate',
-'preloadPage',
-'unPreloadPage',
-'loadSubPackage'];
-
+  getAppAuthorizeSetting: getAppAuthorizeSetting
+};
+var todos = ['vibrate', 'preloadPage', 'unPreloadPage', 'loadSubPackage'];
 var canIUses = [];
-
 var CALLBACKS = ['success', 'fail', 'cancel', 'complete'];
-
 function processCallback(methodName, method, returnValue) {
   return function (res) {
     return method(processReturnValue(methodName, res, returnValue));
   };
 }
-
-function processArgs(methodName, fromArgs) {var argsOption = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};var returnValue = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};var keepFromArgs = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : false;
-  if (isPlainObject(fromArgs)) {// 一般 api 的参数解析
+function processArgs(methodName, fromArgs) {
+  var argsOption = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+  var returnValue = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
+  var keepFromArgs = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : false;
+  if (isPlainObject(fromArgs)) {
+    // 一般 api 的参数解析
     var toArgs = keepFromArgs === true ? fromArgs : {}; // returnValue 为 false 时，说明是格式化返回值，直接在返回值对象上修改赋值
     if (isFn(argsOption)) {
       argsOption = argsOption(fromArgs, toArgs) || {};
@@ -965,11 +913,14 @@ function processArgs(methodName, fromArgs) {var argsOption = arguments.length > 
         if (isFn(keyOption)) {
           keyOption = keyOption(fromArgs[key], fromArgs, toArgs);
         }
-        if (!keyOption) {// 不支持的参数
+        if (!keyOption) {
+          // 不支持的参数
           console.warn("The '".concat(methodName, "' method of platform '\u5FAE\u4FE1\u5C0F\u7A0B\u5E8F' does not support option '").concat(key, "'"));
-        } else if (isStr(keyOption)) {// 重写参数 key
+        } else if (isStr(keyOption)) {
+          // 重写参数 key
           toArgs[keyOption] = fromArgs[key];
-        } else if (isPlainObject(keyOption)) {// {name:newName,value:value}可重新指定参数 key:value
+        } else if (isPlainObject(keyOption)) {
+          // {name:newName,value:value}可重新指定参数 key:value
           toArgs[keyOption.name ? keyOption.name : key] = keyOption.value;
         }
       } else if (CALLBACKS.indexOf(key) !== -1) {
@@ -988,30 +939,30 @@ function processArgs(methodName, fromArgs) {var argsOption = arguments.length > 
   }
   return fromArgs;
 }
-
-function processReturnValue(methodName, res, returnValue) {var keepReturnValue = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
-  if (isFn(protocols.returnValue)) {// 处理通用 returnValue
+function processReturnValue(methodName, res, returnValue) {
+  var keepReturnValue = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+  if (isFn(protocols.returnValue)) {
+    // 处理通用 returnValue
     res = protocols.returnValue(methodName, res);
   }
   return processArgs(methodName, res, returnValue, {}, keepReturnValue);
 }
-
 function wrapper(methodName, method) {
   if (hasOwn(protocols, methodName)) {
     var protocol = protocols[methodName];
-    if (!protocol) {// 暂不支持的 api
+    if (!protocol) {
+      // 暂不支持的 api
       return function () {
         console.error("Platform '\u5FAE\u4FE1\u5C0F\u7A0B\u5E8F' does not support '".concat(methodName, "'."));
       };
     }
-    return function (arg1, arg2) {// 目前 api 最多两个参数
+    return function (arg1, arg2) {
+      // 目前 api 最多两个参数
       var options = protocol;
       if (isFn(protocol)) {
         options = protocol(arg1);
       }
-
       arg1 = processArgs(methodName, arg1, options.args, options.returnValue);
-
       var args = [arg1];
       if (typeof arg2 !== 'undefined') {
         args.push(arg2);
@@ -1022,7 +973,8 @@ function wrapper(methodName, method) {
         methodName = options.name;
       }
       var returnValue = wx[methodName].apply(wx, args);
-      if (isSyncApi(methodName)) {// 同步 api
+      if (isSyncApi(methodName)) {
+        // 同步 api
         return processReturnValue(methodName, returnValue, options.returnValue, isContextApi(methodName));
       }
       return returnValue;
@@ -1030,70 +982,53 @@ function wrapper(methodName, method) {
   }
   return method;
 }
-
 var todoApis = Object.create(null);
-
-var TODOS = [
-'onTabBarMidButtonTap',
-'subscribePush',
-'unsubscribePush',
-'onPush',
-'offPush',
-'share'];
-
-
+var TODOS = ['onTabBarMidButtonTap', 'subscribePush', 'unsubscribePush', 'onPush', 'offPush', 'share'];
 function createTodoApi(name) {
-  return function todoApi(_ref)
-
-
-  {var fail = _ref.fail,complete = _ref.complete;
+  return function todoApi(_ref) {
+    var fail = _ref.fail,
+      complete = _ref.complete;
     var res = {
-      errMsg: "".concat(name, ":fail method '").concat(name, "' not supported") };
-
+      errMsg: "".concat(name, ":fail method '").concat(name, "' not supported")
+    };
     isFn(fail) && fail(res);
     isFn(complete) && complete(res);
   };
 }
-
 TODOS.forEach(function (name) {
   todoApis[name] = createTodoApi(name);
 });
-
 var providers = {
   oauth: ['weixin'],
   share: ['weixin'],
   payment: ['wxpay'],
-  push: ['weixin'] };
-
-
-function getProvider(_ref2)
-
-
-
-
-{var service = _ref2.service,success = _ref2.success,fail = _ref2.fail,complete = _ref2.complete;
+  push: ['weixin']
+};
+function getProvider(_ref2) {
+  var service = _ref2.service,
+    success = _ref2.success,
+    fail = _ref2.fail,
+    complete = _ref2.complete;
   var res = false;
   if (providers[service]) {
     res = {
       errMsg: 'getProvider:ok',
       service: service,
-      provider: providers[service] };
-
+      provider: providers[service]
+    };
     isFn(success) && success(res);
   } else {
     res = {
-      errMsg: 'getProvider:fail service not found' };
-
+      errMsg: 'getProvider:fail service not found'
+    };
     isFn(fail) && fail(res);
   }
   isFn(complete) && complete(res);
 }
-
 var extraApi = /*#__PURE__*/Object.freeze({
   __proto__: null,
-  getProvider: getProvider });
-
-
+  getProvider: getProvider
+});
 var getEmitter = function () {
   var Emitter;
   return function getUniEmitter() {
@@ -1103,11 +1038,9 @@ var getEmitter = function () {
     return Emitter;
   };
 }();
-
 function apply(ctx, method, args) {
   return ctx[method].apply(ctx, args);
 }
-
 function $on() {
   return apply(getEmitter(), '$on', Array.prototype.slice.call(arguments));
 }
@@ -1120,21 +1053,20 @@ function $once() {
 function $emit() {
   return apply(getEmitter(), '$emit', Array.prototype.slice.call(arguments));
 }
-
 var eventApi = /*#__PURE__*/Object.freeze({
   __proto__: null,
   $on: $on,
   $off: $off,
   $once: $once,
-  $emit: $emit });
-
+  $emit: $emit
+});
 
 /**
-                    * 框架内 try-catch
-                    */
+ * 框架内 try-catch
+ */
 /**
-                        * 开发者 try-catch
-                        */
+ * 开发者 try-catch
+ */
 function tryCatch(fn) {
   return function () {
     try {
@@ -1145,7 +1077,6 @@ function tryCatch(fn) {
     }
   };
 }
-
 function getApiCallbacks(params) {
   var apiCallbacks = {};
   for (var name in params) {
@@ -1157,21 +1088,16 @@ function getApiCallbacks(params) {
   }
   return apiCallbacks;
 }
-
 var cid;
 var cidErrMsg;
 var enabled;
-
 function normalizePushMessage(message) {
   try {
     return JSON.parse(message);
   } catch (e) {}
   return message;
 }
-
-function invokePushCallback(
-args)
-{
+function invokePushCallback(args) {
   if (args.type === 'enabled') {
     enabled = true;
   } else if (args.type === 'clientId') {
@@ -1181,8 +1107,8 @@ args)
   } else if (args.type === 'pushMsg') {
     var message = {
       type: 'receive',
-      data: normalizePushMessage(args.message) };
-
+      data: normalizePushMessage(args.message)
+    };
     for (var i = 0; i < onPushMessageCallbacks.length; i++) {
       var callback = onPushMessageCallbacks[i];
       callback(message);
@@ -1195,34 +1121,29 @@ args)
     onPushMessageCallbacks.forEach(function (callback) {
       callback({
         type: 'click',
-        data: normalizePushMessage(args.message) });
-
+        data: normalizePushMessage(args.message)
+      });
     });
   }
 }
-
 var getPushCidCallbacks = [];
-
 function invokeGetPushCidCallbacks(cid, errMsg) {
   getPushCidCallbacks.forEach(function (callback) {
     callback(cid, errMsg);
   });
   getPushCidCallbacks.length = 0;
 }
-
 function getPushClientId(args) {
   if (!isPlainObject(args)) {
     args = {};
-  }var _getApiCallbacks =
-
-
-
-
-  getApiCallbacks(args),success = _getApiCallbacks.success,fail = _getApiCallbacks.fail,complete = _getApiCallbacks.complete;
+  }
+  var _getApiCallbacks = getApiCallbacks(args),
+    success = _getApiCallbacks.success,
+    fail = _getApiCallbacks.fail,
+    complete = _getApiCallbacks.complete;
   var hasSuccess = isFn(success);
   var hasFail = isFn(fail);
   var hasComplete = isFn(complete);
-
   Promise.resolve().then(function () {
     if (typeof enabled === 'undefined') {
       enabled = false;
@@ -1234,13 +1155,13 @@ function getPushClientId(args) {
       if (cid) {
         res = {
           errMsg: 'getPushClientId:ok',
-          cid: cid };
-
+          cid: cid
+        };
         hasSuccess && success(res);
       } else {
         res = {
-          errMsg: 'getPushClientId:fail' + (errMsg ? ' ' + errMsg : '') };
-
+          errMsg: 'getPushClientId:fail' + (errMsg ? ' ' + errMsg : '')
+        };
         hasFail && fail(res);
       }
       hasComplete && complete(res);
@@ -1250,7 +1171,6 @@ function getPushClientId(args) {
     }
   });
 }
-
 var onPushMessageCallbacks = [];
 // 不使用 defineOnApi 实现，是因为 defineOnApi 依赖 UniServiceJSBridge ，该对象目前在小程序上未提供，故简单实现
 var onPushMessage = function onPushMessage(fn) {
@@ -1258,7 +1178,6 @@ var onPushMessage = function onPushMessage(fn) {
     onPushMessageCallbacks.push(fn);
   }
 };
-
 var offPushMessage = function offPushMessage(fn) {
   if (!fn) {
     onPushMessageCallbacks.length = 0;
@@ -1269,27 +1188,143 @@ var offPushMessage = function offPushMessage(fn) {
     }
   }
 };
-
 var api = /*#__PURE__*/Object.freeze({
   __proto__: null,
   getPushClientId: getPushClientId,
   onPushMessage: onPushMessage,
   offPushMessage: offPushMessage,
-  invokePushCallback: invokePushCallback });
+  invokePushCallback: invokePushCallback
+});
+var mocks = ['__route__', '__wxExparserNodeId__', '__wxWebviewId__'];
+function findVmByVueId(vm, vuePid) {
+  var $children = vm.$children;
+  // 优先查找直属(反向查找:https://github.com/dcloudio/uni-app/issues/1200)
+  for (var i = $children.length - 1; i >= 0; i--) {
+    var childVm = $children[i];
+    if (childVm.$scope._$vueId === vuePid) {
+      return childVm;
+    }
+  }
+  // 反向递归查找
+  var parentVm;
+  for (var _i = $children.length - 1; _i >= 0; _i--) {
+    parentVm = findVmByVueId($children[_i], vuePid);
+    if (parentVm) {
+      return parentVm;
+    }
+  }
+}
+function initBehavior(options) {
+  return Behavior(options);
+}
+function isPage() {
+  return !!this.route;
+}
+function initRelation(detail) {
+  this.triggerEvent('__l', detail);
+}
+function selectAllComponents(mpInstance, selector, $refs) {
+  var components = mpInstance.selectAllComponents(selector) || [];
+  components.forEach(function (component) {
+    var ref = component.dataset.ref;
+    $refs[ref] = component.$vm || toSkip(component);
+    {
+      if (component.dataset.vueGeneric === 'scoped') {
+        component.selectAllComponents('.scoped-ref').forEach(function (scopedComponent) {
+          selectAllComponents(scopedComponent, selector, $refs);
+        });
+      }
+    }
+  });
+}
+function syncRefs(refs, newRefs) {
+  var oldKeys = (0, _construct2.default)(Set, (0, _toConsumableArray2.default)(Object.keys(refs)));
+  var newKeys = Object.keys(newRefs);
+  newKeys.forEach(function (key) {
+    var oldValue = refs[key];
+    var newValue = newRefs[key];
+    if (Array.isArray(oldValue) && Array.isArray(newValue) && oldValue.length === newValue.length && newValue.every(function (value) {
+      return oldValue.includes(value);
+    })) {
+      return;
+    }
+    refs[key] = newValue;
+    oldKeys.delete(key);
+  });
+  oldKeys.forEach(function (key) {
+    delete refs[key];
+  });
+  return refs;
+}
+function initRefs(vm) {
+  var mpInstance = vm.$scope;
+  var refs = {};
+  Object.defineProperty(vm, '$refs', {
+    get: function get() {
+      var $refs = {};
+      selectAllComponents(mpInstance, '.vue-ref', $refs);
+      // TODO 暂不考虑 for 中的 scoped
+      var forComponents = mpInstance.selectAllComponents('.vue-ref-in-for') || [];
+      forComponents.forEach(function (component) {
+        var ref = component.dataset.ref;
+        if (!$refs[ref]) {
+          $refs[ref] = [];
+        }
+        $refs[ref].push(component.$vm || toSkip(component));
+      });
+      return syncRefs(refs, $refs);
+    }
+  });
+}
+function handleLink(event) {
+  var _ref3 = event.detail || event.value,
+    vuePid = _ref3.vuePid,
+    vueOptions = _ref3.vueOptions; // detail 是微信,value 是百度(dipatch)
 
-
+  var parentVm;
+  if (vuePid) {
+    parentVm = findVmByVueId(this.$vm, vuePid);
+  }
+  if (!parentVm) {
+    parentVm = this.$vm;
+  }
+  vueOptions.parent = parentVm;
+}
+function markMPComponent(component) {
+  // 在 Vue 中标记为小程序组件
+  var IS_MP = '__v_isMPComponent';
+  Object.defineProperty(component, IS_MP, {
+    configurable: true,
+    enumerable: false,
+    value: true
+  });
+  return component;
+}
+function toSkip(obj) {
+  var OB = '__ob__';
+  var SKIP = '__v_skip';
+  if (isObject(obj) && Object.isExtensible(obj)) {
+    // 避免被 @vue/composition-api 观测
+    Object.defineProperty(obj, OB, {
+      configurable: true,
+      enumerable: false,
+      value: (0, _defineProperty2.default)({}, SKIP, true)
+    });
+  }
+  return obj;
+}
 var MPPage = Page;
 var MPComponent = Component;
-
 var customizeRE = /:/g;
-
 var customize = cached(function (str) {
   return camelize(str.replace(customizeRE, '-'));
 });
-
 function initTriggerEvent(mpInstance) {
   var oldTriggerEvent = mpInstance.triggerEvent;
-  var newTriggerEvent = function newTriggerEvent(event) {for (var _len3 = arguments.length, args = new Array(_len3 > 1 ? _len3 - 1 : 0), _key3 = 1; _key3 < _len3; _key3++) {args[_key3 - 1] = arguments[_key3];}
+  var newTriggerEvent = function newTriggerEvent(event) {
+    for (var _len3 = arguments.length, args = new Array(_len3 > 1 ? _len3 - 1 : 0), _key3 = 1; _key3 < _len3; _key3++) {
+      args[_key3 - 1] = arguments[_key3];
+    }
     // 事件名统一转驼峰格式，仅处理：当前组件为 vue 组件、当前组件为 vue 组件子组件
     if (this.$vm || this.dataset && this.dataset.comType) {
       event = customize(event);
@@ -1309,45 +1344,34 @@ function initTriggerEvent(mpInstance) {
     mpInstance._triggerEvent = newTriggerEvent;
   }
 }
-
 function initHook(name, options, isComponent) {
   var oldHook = options[name];
-  if (!oldHook) {
-    options[name] = function () {
-      initTriggerEvent(this);
-    };
-  } else {
-    options[name] = function () {
-      initTriggerEvent(this);for (var _len4 = arguments.length, args = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {args[_key4] = arguments[_key4];}
+  options[name] = function () {
+    markMPComponent(this);
+    initTriggerEvent(this);
+    if (oldHook) {
+      for (var _len4 = arguments.length, args = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
+        args[_key4] = arguments[_key4];
+      }
       return oldHook.apply(this, args);
-    };
-  }
+    }
+  };
 }
 if (!MPPage.__$wrappered) {
   MPPage.__$wrappered = true;
-  Page = function Page() {var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  Page = function Page() {
+    var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
     initHook('onLoad', options);
     return MPPage(options);
   };
   Page.after = MPPage.after;
-
-  Component = function Component() {var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  Component = function Component() {
+    var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
     initHook('created', options);
     return MPComponent(options);
   };
 }
-
-var PAGE_EVENT_HOOKS = [
-'onPullDownRefresh',
-'onReachBottom',
-'onAddToFavorites',
-'onShareTimeline',
-'onShareAppMessage',
-'onPageScroll',
-'onResize',
-'onTabItemTap'];
-
-
+var PAGE_EVENT_HOOKS = ['onPullDownRefresh', 'onReachBottom', 'onAddToFavorites', 'onShareTimeline', 'onShareAppMessage', 'onPageScroll', 'onResize', 'onTabItemTap'];
 function initMocks(vm, mocks) {
   var mpInstance = vm.$mp[vm.mpType];
   mocks.forEach(function (mock) {
@@ -1356,39 +1380,33 @@ function initMocks(vm, mocks) {
     }
   });
 }
-
 function hasHook(hook, vueOptions) {
   if (!vueOptions) {
     return true;
   }
-
   if (_vue.default.options && Array.isArray(_vue.default.options[hook])) {
     return true;
   }
-
   vueOptions = vueOptions.default || vueOptions;
-
   if (isFn(vueOptions)) {
     if (isFn(vueOptions.extendOptions[hook])) {
       return true;
     }
-    if (vueOptions.super &&
-    vueOptions.super.options &&
-    Array.isArray(vueOptions.super.options[hook])) {
+    if (vueOptions.super && vueOptions.super.options && Array.isArray(vueOptions.super.options[hook])) {
       return true;
     }
     return false;
   }
-
-  if (isFn(vueOptions[hook])) {
+  if (isFn(vueOptions[hook]) || Array.isArray(vueOptions[hook])) {
     return true;
   }
   var mixins = vueOptions.mixins;
   if (Array.isArray(mixins)) {
-    return !!mixins.find(function (mixin) {return hasHook(hook, mixin);});
+    return !!mixins.find(function (mixin) {
+      return hasHook(hook, mixin);
+    });
   }
 }
-
 function initHooks(mpOptions, hooks, vueOptions) {
   hooks.forEach(function (hook) {
     if (hasHook(hook, vueOptions)) {
@@ -1398,12 +1416,14 @@ function initHooks(mpOptions, hooks, vueOptions) {
     }
   });
 }
-
-function initUnknownHooks(mpOptions, vueOptions) {var excludes = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
-  findHooks(vueOptions).forEach(function (hook) {return initHook$1(mpOptions, hook, excludes);});
+function initUnknownHooks(mpOptions, vueOptions) {
+  var excludes = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
+  findHooks(vueOptions).forEach(function (hook) {
+    return initHook$1(mpOptions, hook, excludes);
+  });
 }
-
-function findHooks(vueOptions) {var hooks = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
+function findHooks(vueOptions) {
+  var hooks = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
   if (vueOptions) {
     Object.keys(vueOptions).forEach(function (name) {
       if (name.indexOf('on') === 0 && isFn(vueOptions[name])) {
@@ -1413,7 +1433,6 @@ function findHooks(vueOptions) {var hooks = arguments.length > 1 && arguments[1]
   }
   return hooks;
 }
-
 function initHook$1(mpOptions, hook, excludes) {
   if (excludes.indexOf(hook) === -1 && !hasOwn(mpOptions, hook)) {
     mpOptions[hook] = function (args) {
@@ -1421,7 +1440,6 @@ function initHook$1(mpOptions, hook, excludes) {
     };
   }
 }
-
 function initVueComponent(Vue, vueOptions) {
   vueOptions = vueOptions.default || vueOptions;
   var VueComponent;
@@ -1433,7 +1451,6 @@ function initVueComponent(Vue, vueOptions) {
   vueOptions = VueComponent.options;
   return [VueComponent, vueOptions];
 }
-
 function initSlots(vm, vueSlots) {
   if (Array.isArray(vueSlots) && vueSlots.length) {
     var $slots = Object.create(null);
@@ -1443,11 +1460,9 @@ function initSlots(vm, vueSlots) {
     vm.$scopedSlots = vm.$slots = $slots;
   }
 }
-
 function initVueIds(vueIds, mpInstance) {
   vueIds = (vueIds || '').split(',');
   var len = vueIds.length;
-
   if (len === 1) {
     mpInstance._$vueId = vueIds[0];
   } else if (len === 2) {
@@ -1455,16 +1470,14 @@ function initVueIds(vueIds, mpInstance) {
     mpInstance._$vuePid = vueIds[1];
   }
 }
-
 function initData(vueOptions, context) {
   var data = vueOptions.data || {};
   var methods = vueOptions.methods || {};
-
   if (typeof data === 'function') {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"VUE_APP_NAME":"小说","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"小说","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -1474,22 +1487,17 @@ function initData(vueOptions, context) {
       data = JSON.parse(JSON.stringify(data));
     } catch (e) {}
   }
-
   if (!isPlainObject(data)) {
     data = {};
   }
-
   Object.keys(methods).forEach(function (methodName) {
     if (context.__lifecycle_hooks__.indexOf(methodName) === -1 && !hasOwn(data, methodName)) {
       data[methodName] = methods[methodName];
     }
   });
-
   return data;
 }
-
 var PROP_TYPES = [String, Number, Boolean, Object, Array, null];
-
 function createObserver(name) {
   return function observer(newVal, oldVal) {
     if (this.$vm) {
@@ -1502,13 +1510,10 @@ function initBehaviors(vueOptions, initBehavior) {
   var vueBehaviors = vueOptions.behaviors;
   var vueExtends = vueOptions.extends;
   var vueMixins = vueOptions.mixins;
-
   var vueProps = vueOptions.props;
-
   if (!vueProps) {
     vueOptions.props = vueProps = [];
   }
-
   var behaviors = [];
   if (Array.isArray(vueBehaviors)) {
     vueBehaviors.forEach(function (behavior) {
@@ -1520,37 +1525,32 @@ function initBehaviors(vueOptions, initBehavior) {
         } else {
           vueProps.name = {
             type: String,
-            default: '' };
-
+            default: ''
+          };
           vueProps.value = {
             type: [String, Number, Boolean, Array, Object, Date],
-            default: '' };
-
+            default: ''
+          };
         }
       }
     });
   }
   if (isPlainObject(vueExtends) && vueExtends.props) {
-    behaviors.push(
-    initBehavior({
-      properties: initProperties(vueExtends.props, true) }));
-
-
+    behaviors.push(initBehavior({
+      properties: initProperties(vueExtends.props, true)
+    }));
   }
   if (Array.isArray(vueMixins)) {
     vueMixins.forEach(function (vueMixin) {
       if (isPlainObject(vueMixin) && vueMixin.props) {
-        behaviors.push(
-        initBehavior({
-          properties: initProperties(vueMixin.props, true) }));
-
-
+        behaviors.push(initBehavior({
+          properties: initProperties(vueMixin.props, true)
+        }));
       }
     });
   }
   return behaviors;
 }
-
 function parsePropType(key, type, defaultValue, file) {
   // [String]=>String
   if (Array.isArray(type) && type.length === 1) {
@@ -1558,32 +1558,35 @@ function parsePropType(key, type, defaultValue, file) {
   }
   return type;
 }
-
-function initProperties(props) {var isBehavior = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;var file = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';var options = arguments.length > 3 ? arguments[3] : undefined;
+function initProperties(props) {
+  var isBehavior = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+  var file = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+  var options = arguments.length > 3 ? arguments[3] : undefined;
   var properties = {};
   if (!isBehavior) {
     properties.vueId = {
       type: String,
-      value: '' };
-
+      value: ''
+    };
     {
       if (options.virtualHost) {
         properties.virtualHostStyle = {
           type: null,
-          value: '' };
-
+          value: ''
+        };
         properties.virtualHostClass = {
           type: null,
-          value: '' };
-
+          value: ''
+        };
       }
     }
     // scopedSlotsCompiler auto
     properties.scopedSlotsCompiler = {
       type: String,
-      value: '' };
-
-    properties.vueSlots = { // 小程序不能直接定义 $slots 的 props，所以通过 vueSlots 转换到 $slots
+      value: ''
+    };
+    properties.vueSlots = {
+      // 小程序不能直接定义 $slots 的 props，所以通过 vueSlots 转换到 $slots
       type: null,
       value: [],
       observer: function observer(newVal, oldVal) {
@@ -1592,82 +1595,76 @@ function initProperties(props) {var isBehavior = arguments.length > 1 && argumen
           $slots[slotName] = true;
         });
         this.setData({
-          $slots: $slots });
-
-      } };
-
+          $slots: $slots
+        });
+      }
+    };
   }
-  if (Array.isArray(props)) {// ['title']
+  if (Array.isArray(props)) {
+    // ['title']
     props.forEach(function (key) {
       properties[key] = {
         type: null,
-        observer: createObserver(key) };
-
+        observer: createObserver(key)
+      };
     });
-  } else if (isPlainObject(props)) {// {title:{type:String,default:''},content:String}
+  } else if (isPlainObject(props)) {
+    // {title:{type:String,default:''},content:String}
     Object.keys(props).forEach(function (key) {
       var opts = props[key];
-      if (isPlainObject(opts)) {// title:{type:String,default:''}
+      if (isPlainObject(opts)) {
+        // title:{type:String,default:''}
         var value = opts.default;
         if (isFn(value)) {
           value = value();
         }
-
         opts.type = parsePropType(key, opts.type);
-
         properties[key] = {
           type: PROP_TYPES.indexOf(opts.type) !== -1 ? opts.type : null,
           value: value,
-          observer: createObserver(key) };
-
-      } else {// content:String
+          observer: createObserver(key)
+        };
+      } else {
+        // content:String
         var type = parsePropType(key, opts);
         properties[key] = {
           type: PROP_TYPES.indexOf(type) !== -1 ? type : null,
-          observer: createObserver(key) };
-
+          observer: createObserver(key)
+        };
       }
     });
   }
   return properties;
 }
-
 function wrapper$1(event) {
   // TODO 又得兼容 mpvue 的 mp 对象
   try {
     event.mp = JSON.parse(JSON.stringify(event));
   } catch (e) {}
-
   event.stopPropagation = noop;
   event.preventDefault = noop;
-
   event.target = event.target || {};
-
   if (!hasOwn(event, 'detail')) {
     event.detail = {};
   }
-
   if (hasOwn(event, 'markerId')) {
-    event.detail = typeof event.detail === 'object' ? event.detail : {};
+    event.detail = (0, _typeof2.default)(event.detail) === 'object' ? event.detail : {};
     event.detail.markerId = event.markerId;
   }
-
   if (isPlainObject(event.detail)) {
     event.target = Object.assign({}, event.target, event.detail);
   }
-
   return event;
 }
-
 function getExtraValue(vm, dataPathsArray) {
   var context = vm;
   dataPathsArray.forEach(function (dataPathArray) {
     var dataPath = dataPathArray[0];
     var value = dataPathArray[2];
-    if (dataPath || typeof value !== 'undefined') {// ['','',index,'disable']
+    if (dataPath || typeof value !== 'undefined') {
+      // ['','',index,'disable']
       var propPath = dataPathArray[1];
       var valuePath = dataPathArray[3];
-
       var vFor;
       if (Number.isInteger(dataPath)) {
         vFor = dataPath;
@@ -1680,7 +1677,6 @@ function getExtraValue(vm, dataPathsArray) {
           vFor = vm.__get_value(dataPath, context);
         }
       }
-
       if (Number.isInteger(vFor)) {
         context = value;
       } else if (!propPath) {
@@ -1698,7 +1694,6 @@ function getExtraValue(vm, dataPathsArray) {
           console.error('v-for 暂不支持循环数据：', vFor);
         }
       }
-
       if (valuePath) {
         context = vm.__get_value(valuePath, context);
       }
@@ -1706,32 +1701,33 @@ function getExtraValue(vm, dataPathsArray) {
   });
   return context;
 }
-
 function processEventExtra(vm, extra, event, __args__) {
   var extraObj = {};
-
   if (Array.isArray(extra) && extra.length) {
     /**
-                                              *[
-                                              *    ['data.items', 'data.id', item.data.id],
-                                              *    ['metas', 'id', meta.id]
-                                              *],
-                                              *[
-                                              *    ['data.items', 'data.id', item.data.id],
-                                              *    ['metas', 'id', meta.id]
-                                              *],
-                                              *'test'
-                                              */
+     *[
+     *    ['data.items', 'data.id', item.data.id],
+     *    ['metas', 'id', meta.id]
+     *],
+     *[
+     *    ['data.items', 'data.id', item.data.id],
+     *    ['metas', 'id', meta.id]
+     *],
+     *'test'
+     */
     extra.forEach(function (dataPath, index) {
       if (typeof dataPath === 'string') {
-        if (!dataPath) {// model,prop.sync
+        if (!dataPath) {
+          // model,prop.sync
           extraObj['$' + index] = vm;
         } else {
-          if (dataPath === '$event') {// $event
+          if (dataPath === '$event') {
+            // $event
             extraObj['$' + index] = event;
           } else if (dataPath === 'arguments') {
             extraObj['$' + index] = event.detail ? event.detail.__args__ || __args__ : __args__;
-          } else if (dataPath.indexOf('$event.') === 0) {// $event.target.value
+          } else if (dataPath.indexOf('$event.') === 0) {
+            // $event.target.value
             extraObj['$' + index] = vm.__get_value(dataPath.replace('$event.', ''), event);
           } else {
             extraObj['$' + index] = vm.__get_value(dataPath);
@@ -1742,10 +1738,8 @@ function processEventExtra(vm, extra, event, __args__) {
       }
     });
   }
-
   return extraObj;
 }
-
 function getObjByArray(arr) {
   var obj = {};
   for (var i = 1; i < arr.length; i++) {
@@ -1754,38 +1748,38 @@ function getObjByArray(arr) {
   }
   return obj;
 }
-
-function processEventArgs(vm, event) {var args = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];var extra = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : [];var isCustom = arguments.length > 4 ? arguments[4] : undefined;var methodName = arguments.length > 5 ? arguments[5] : undefined;
+function processEventArgs(vm, event) {
+  var args = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
+  var extra = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : [];
+  var isCustom = arguments.length > 4 ? arguments[4] : undefined;
+  var methodName = arguments.length > 5 ? arguments[5] : undefined;
   var isCustomMPEvent = false; // wxcomponent 组件，传递原始 event 对象
 
   // fixed 用户直接触发 mpInstance.triggerEvent
-  var __args__ = isPlainObject(event.detail) ?
-  event.detail.__args__ || [event.detail] :
-  [event.detail];
-
-  if (isCustom) {// 自定义事件
-    isCustomMPEvent = event.currentTarget &&
-    event.currentTarget.dataset &&
-    event.currentTarget.dataset.comType === 'wx';
-    if (!args.length) {// 无参数，直接传入 event 或 detail 数组
+  var __args__ = isPlainObject(event.detail) ? event.detail.__args__ || [event.detail] : [event.detail];
+  if (isCustom) {
+    // 自定义事件
+    isCustomMPEvent = event.currentTarget && event.currentTarget.dataset && event.currentTarget.dataset.comType === 'wx';
+    if (!args.length) {
+      // 无参数，直接传入 event 或 detail 数组
       if (isCustomMPEvent) {
         return [event];
       }
       return __args__;
     }
   }
-
   var extraObj = processEventExtra(vm, extra, event, __args__);
-
   var ret = [];
   args.forEach(function (arg) {
     if (arg === '$event') {
-      if (methodName === '__set_model' && !isCustom) {// input v-model value
+      if (methodName === '__set_model' && !isCustom) {
+        // input v-model value
         ret.push(event.target.value);
       } else {
         if (isCustom && !isCustomMPEvent) {
           ret.push(__args__[0]);
-        } else {// wxcomponent 组件或内置组件
+        } else {
+          // wxcomponent 组件或内置组件
           ret.push(event);
         }
       }
@@ -1799,24 +1793,13 @@ function processEventArgs(vm, event) {var args = arguments.length > 2 && argumen
       }
     }
   });
-
   return ret;
 }
-
 var ONCE = '~';
 var CUSTOM = '^';
-
 function isMatchEventType(eventType, optType) {
-  return eventType === optType ||
-
-  optType === 'regionchange' && (
-
-  eventType === 'begin' ||
-  eventType === 'end');
-
-
+  return eventType === optType || optType === 'regionchange' && (eventType === 'begin' || eventType === 'end');
 }
-
 function getContextVm(vm) {
   var $parent = vm.$parent;
   // 父组件是 scoped slots 或者其他自定义组件时继续查找
@@ -1825,8 +1808,8 @@ function getContextVm(vm) {
   }
   return $parent && $parent.$parent;
 }
-
-function handleEvent(event) {var _this2 = this;
+function handleEvent(event) {
+  var _this2 = this;
   event = wrapper$1(event);
 
   // [['tap',[['handle',[1,2,a]],['handle1',[1,2,a]]]]]
@@ -1841,36 +1824,25 @@ function handleEvent(event) {var _this2 = this;
 
   // [['handle',[1,2,a]],['handle1',[1,2,a]]]
   var eventType = event.type;
-
   var ret = [];
-
   eventOpts.forEach(function (eventOpt) {
     var type = eventOpt[0];
     var eventsArray = eventOpt[1];
-
     var isCustom = type.charAt(0) === CUSTOM;
     type = isCustom ? type.slice(1) : type;
     var isOnce = type.charAt(0) === ONCE;
     type = isOnce ? type.slice(1) : type;
-
     if (eventsArray && isMatchEventType(eventType, type)) {
       eventsArray.forEach(function (eventArray) {
         var methodName = eventArray[0];
         if (methodName) {
           var handlerCtx = _this2.$vm;
-          if (handlerCtx.$options.generic) {// mp-weixin,mp-toutiao 抽象节点模拟 scoped slots
+          if (handlerCtx.$options.generic) {
+            // mp-weixin,mp-toutiao 抽象节点模拟 scoped slots
             handlerCtx = getContextVm(handlerCtx) || handlerCtx;
           }
           if (methodName === '$emit') {
-            handlerCtx.$emit.apply(handlerCtx,
-            processEventArgs(
-            _this2.$vm,
-            event,
-            eventArray[1],
-            eventArray[2],
-            isCustom,
-            methodName));
-
+            handlerCtx.$emit.apply(handlerCtx, processEventArgs(_this2.$vm, event, eventArray[1], eventArray[2], isCustom, methodName));
             return;
           }
           var handler = handlerCtx[methodName];
@@ -1885,14 +1857,7 @@ function handleEvent(event) {var _this2 = this;
             }
             handler.once = true;
           }
-          var params = processEventArgs(
-          _this2.$vm,
-          event,
-          eventArray[1],
-          eventArray[2],
-          isCustom,
-          methodName);
-
+          var params = processEventArgs(_this2.$vm, event, eventArray[1], eventArray[2], isCustom, methodName);
           params = Array.isArray(params) ? params : [];
           // 参数尾部增加原始事件对象用于复杂表达式内获取额外数据
           if (/=\s*\S+\.eventParams\s*\|\|\s*\S+\[['"]event-params['"]\]/.test(handler.toString())) {
@@ -1904,20 +1869,12 @@ function handleEvent(event) {var _this2 = this;
       });
     }
   });
-
-  if (
-  eventType === 'input' &&
-  ret.length === 1 &&
-  typeof ret[0] !== 'undefined')
-  {
+  if (eventType === 'input' && ret.length === 1 && typeof ret[0] !== 'undefined') {
     return ret[0];
   }
 }
-
 var eventChannels = {};
-
 var eventChannelStack = [];
-
 function getEventChannel(id) {
   if (id) {
     var eventChannel = eventChannels[id];
@@ -1926,16 +1883,7 @@ function getEventChannel(id) {
   }
   return eventChannelStack.shift();
 }
-
-var hooks = [
-'onShow',
-'onHide',
-'onError',
-'onPageNotFound',
-'onThemeChange',
-'onUnhandledRejection'];
-
-
+var hooks = ['onShow', 'onHide', 'onError', 'onPageNotFound', 'onThemeChange', 'onUnhandledRejection'];
 function initEventChannel() {
   _vue.default.prototype.getOpenerEventChannel = function () {
     // 微信小程序使用自身getOpenerEventChannel
@@ -1952,11 +1900,9 @@ function initEventChannel() {
     return callHook.call(this, hook, args);
   };
 }
-
 function initScopedSlotsParams() {
   var center = {};
   var parents = {};
-
   _vue.default.prototype.$hasScopedSlotsParams = function (vueId) {
     var has = center[vueId];
     if (!has) {
@@ -1967,7 +1913,6 @@ function initScopedSlotsParams() {
     }
     return has;
   };
-
   _vue.default.prototype.$getScopedSlotsParams = function (vueId, name, key) {
     var data = center[vueId];
     if (data) {
@@ -1980,7 +1925,6 @@ function initScopedSlotsParams() {
       });
     }
   };
-
   _vue.default.prototype.$setScopedSlotsParams = function (name, value) {
     var vueIds = this.$options.propsData.vueId;
     if (vueIds) {
@@ -1992,7 +1936,6 @@ function initScopedSlotsParams() {
       }
     }
   };
-
   _vue.default.mixin({
     destroyed: function destroyed() {
       var propsData = this.$options.propsData;
@@ -2001,14 +1944,12 @@ function initScopedSlotsParams() {
         delete center[vueId];
         delete parents[vueId];
       }
-    } });
-
+    }
+  });
 }
-
-function parseBaseApp(vm, _ref3)
-
-
-{var mocks = _ref3.mocks,initRefs = _ref3.initRefs;
+function parseBaseApp(vm, _ref4) {
+  var mocks = _ref4.mocks,
+    initRefs = _ref4.initRefs;
   initEventChannel();
   {
     initScopedSlotsParams();
@@ -2017,27 +1958,21 @@ function parseBaseApp(vm, _ref3)
     _vue.default.prototype.$store = vm.$options.store;
   }
   uniIdMixin(_vue.default);
-
   _vue.default.prototype.mpHost = "mp-weixin";
-
   _vue.default.mixin({
     beforeCreate: function beforeCreate() {
       if (!this.$options.mpType) {
         return;
       }
-
       this.mpType = this.$options.mpType;
-
-      this.$mp = _defineProperty({
-        data: {} },
-      this.mpType, this.$options.mpInstance);
-
-
+      this.$mp = (0, _defineProperty2.default)({
+        data: {}
+      }, this.mpType, this.$options.mpInstance);
       this.$scope = this.$options.mpInstance;
-
       delete this.$options.mpType;
       delete this.$options.mpInstance;
-      if (this.mpType === 'page' && typeof getApp === 'function') {// hack vue-i18n
+      if (this.mpType === 'page' && typeof getApp === 'function') {
+        // hack vue-i18n
         var app = getApp();
         if (app.$vm && app.$vm.$i18n) {
           this._i18n = app.$vm.$i18n;
@@ -2047,36 +1982,32 @@ function parseBaseApp(vm, _ref3)
         initRefs(this);
         initMocks(this, mocks);
       }
-    } });
-
-
+    }
+  });
   var appOptions = {
     onLaunch: function onLaunch(args) {
-      if (this.$vm) {// 已经初始化过了，主要是为了百度，百度 onShow 在 onLaunch 之前
+      if (this.$vm) {
+        // 已经初始化过了，主要是为了百度，百度 onShow 在 onLaunch 之前
         return;
       }
       {
-        if (wx.canIUse && !wx.canIUse('nextTick')) {// 事实 上2.2.3 即可，简单使用 2.3.0 的 nextTick 判断
+        if (wx.canIUse && !wx.canIUse('nextTick')) {
+          // 事实 上2.2.3 即可，简单使用 2.3.0 的 nextTick 判断
           console.error('当前微信基础库版本过低，请将 微信开发者工具-详情-项目设置-调试基础库版本 更换为`2.3.0`以上');
         }
       }
-
       this.$vm = vm;
-
       this.$vm.$mp = {
-        app: this };
-
-
+        app: this
+      };
       this.$vm.$scope = this;
       // vm 上也挂载 globalData
       this.$vm.globalData = this.globalData;
-
       this.$vm._isMounted = true;
       this.$vm.__call_hook('mounted', args);
-
       this.$vm.__call_hook('onLaunch', args);
-    } };
-
+    }
+  };
 
   // 兼容旧版本 globalData
   appOptions.globalData = vm.$options.globalData || {};
@@ -2087,137 +2018,43 @@ function parseBaseApp(vm, _ref3)
       appOptions[name] = methods[name];
     });
   }
-
   initAppLocale(_vue.default, vm, normalizeLocale(wx.getSystemInfoSync().language) || LOCALE_EN);
-
   initHooks(appOptions, hooks);
   initUnknownHooks(appOptions, vm.$options);
-
   return appOptions;
 }
-
-var mocks = ['__route__', '__wxExparserNodeId__', '__wxWebviewId__'];
-
-function findVmByVueId(vm, vuePid) {
-  var $children = vm.$children;
-  // 优先查找直属(反向查找:https://github.com/dcloudio/uni-app/issues/1200)
-  for (var i = $children.length - 1; i >= 0; i--) {
-    var childVm = $children[i];
-    if (childVm.$scope._$vueId === vuePid) {
-      return childVm;
-    }
-  }
-  // 反向递归查找
-  var parentVm;
-  for (var _i = $children.length - 1; _i >= 0; _i--) {
-    parentVm = findVmByVueId($children[_i], vuePid);
-    if (parentVm) {
-      return parentVm;
-    }
-  }
-}
-
-function initBehavior(options) {
-  return Behavior(options);
-}
-
-function isPage() {
-  return !!this.route;
-}
-
-function initRelation(detail) {
-  this.triggerEvent('__l', detail);
-}
-
-function selectAllComponents(mpInstance, selector, $refs) {
-  var components = mpInstance.selectAllComponents(selector);
-  components.forEach(function (component) {
-    var ref = component.dataset.ref;
-    $refs[ref] = component.$vm || component;
-    {
-      if (component.dataset.vueGeneric === 'scoped') {
-        component.selectAllComponents('.scoped-ref').forEach(function (scopedComponent) {
-          selectAllComponents(scopedComponent, selector, $refs);
-        });
-      }
-    }
-  });
-}
-
-function initRefs(vm) {
-  var mpInstance = vm.$scope;
-  Object.defineProperty(vm, '$refs', {
-    get: function get() {
-      var $refs = {};
-      selectAllComponents(mpInstance, '.vue-ref', $refs);
-      // TODO 暂不考虑 for 中的 scoped
-      var forComponents = mpInstance.selectAllComponents('.vue-ref-in-for');
-      forComponents.forEach(function (component) {
-        var ref = component.dataset.ref;
-        if (!$refs[ref]) {
-          $refs[ref] = [];
-        }
-        $refs[ref].push(component.$vm || component);
-      });
-      return $refs;
-    } });
-
-}
-
-function handleLink(event) {var _ref4 =
-
-
-
-  event.detail || event.value,vuePid = _ref4.vuePid,vueOptions = _ref4.vueOptions; // detail 是微信,value 是百度(dipatch)
-
-  var parentVm;
-
-  if (vuePid) {
-    parentVm = findVmByVueId(this.$vm, vuePid);
-  }
-
-  if (!parentVm) {
-    parentVm = this.$vm;
-  }
-
-  vueOptions.parent = parentVm;
-}
-
 function parseApp(vm) {
   return parseBaseApp(vm, {
     mocks: mocks,
-    initRefs: initRefs });
-
+    initRefs: initRefs
+  });
 }
-
 function createApp(vm) {
   App(parseApp(vm));
   return vm;
 }
-
 var encodeReserveRE = /[!'()*]/g;
-var encodeReserveReplacer = function encodeReserveReplacer(c) {return '%' + c.charCodeAt(0).toString(16);};
+var encodeReserveReplacer = function encodeReserveReplacer(c) {
+  return '%' + c.charCodeAt(0).toString(16);
+};
 var commaRE = /%2C/g;
 
 // fixed encodeURIComponent which is more conformant to RFC3986:
 // - escapes [!'()*]
 // - preserve commas
-var encode = function encode(str) {return encodeURIComponent(str).
-  replace(encodeReserveRE, encodeReserveReplacer).
-  replace(commaRE, ',');};
-
-function stringifyQuery(obj) {var encodeStr = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : encode;
+var encode = function encode(str) {
+  return encodeURIComponent(str).replace(encodeReserveRE, encodeReserveReplacer).replace(commaRE, ',');
+};
+function stringifyQuery(obj) {
+  var encodeStr = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : encode;
   var res = obj ? Object.keys(obj).map(function (key) {
     var val = obj[key];
-
     if (val === undefined) {
       return '';
     }
-
     if (val === null) {
       return encodeStr(key);
     }
-
     if (Array.isArray(val)) {
       var result = [];
       val.forEach(function (val2) {
@@ -2232,31 +2069,31 @@ function stringifyQuery(obj) {var encodeStr = arguments.length > 1 && arguments[
       });
       return result.join('&');
     }
-
     return encodeStr(key) + '=' + encodeStr(val);
-  }).filter(function (x) {return x.length > 0;}).join('&') : null;
+  }).filter(function (x) {
+    return x.length > 0;
+  }).join('&') : null;
   return res ? "?".concat(res) : '';
 }
-
-function parseBaseComponent(vueComponentOptions)
-
-
-{var _ref5 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},isPage = _ref5.isPage,initRelation = _ref5.initRelation;var _initVueComponent =
-  initVueComponent(_vue.default, vueComponentOptions),_initVueComponent2 = _slicedToArray(_initVueComponent, 2),VueComponent = _initVueComponent2[0],vueOptions = _initVueComponent2[1];
-
+function parseBaseComponent(vueComponentOptions) {
+  var _ref5 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
+    isPage = _ref5.isPage,
+    initRelation = _ref5.initRelation;
+  var needVueOptions = arguments.length > 2 ? arguments[2] : undefined;
+  var _initVueComponent = initVueComponent(_vue.default, vueComponentOptions),
+    _initVueComponent2 = (0, _slicedToArray2.default)(_initVueComponent, 2),
+    VueComponent = _initVueComponent2[0],
+    vueOptions = _initVueComponent2[1];
   var options = _objectSpread({
     multipleSlots: true,
-    addGlobalClass: true },
-  vueOptions.options || {});
-
-
+    addGlobalClass: true
+  }, vueOptions.options || {});
   {
     // 微信 multipleSlots 部分情况有 bug，导致内容顺序错乱 如 u-list，提供覆盖选项
     if (vueOptions['mp-weixin'] && vueOptions['mp-weixin'].options) {
       Object.assign(options, vueOptions['mp-weixin'].options);
     }
   }
-
   var componentOptions = {
     options: options,
     data: initData(vueOptions, _vue.default.prototype),
@@ -2265,20 +2102,18 @@ function parseBaseComponent(vueComponentOptions)
     lifetimes: {
       attached: function attached() {
         var properties = this.properties;
-
         var options = {
           mpType: isPage.call(this) ? 'page' : 'component',
           mpInstance: this,
-          propsData: properties };
-
-
+          propsData: properties
+        };
         initVueIds(properties.vueId, this);
 
         // 处理父子关系
         initRelation.call(this, {
           vuePid: this._$vuePid,
-          vueOptions: options });
-
+          vueOptions: options
+        });
 
         // 初始化 vue 实例
         this.$vm = new VueComponent(options);
@@ -2300,8 +2135,8 @@ function parseBaseComponent(vueComponentOptions)
       },
       detached: function detached() {
         this.$vm && this.$vm.$destroy();
-      } },
-
+      }
+    },
     pageLifetimes: {
       show: function show(args) {
         this.$vm && this.$vm.__call_hook('onPageShow', args);
@@ -2311,18 +2146,17 @@ function parseBaseComponent(vueComponentOptions)
       },
       resize: function resize(size) {
         this.$vm && this.$vm.__call_hook('onPageResize', size);
-      } },
-
+      }
+    },
     methods: {
       __l: handleLink,
-      __e: handleEvent } };
-
-
+      __e: handleEvent
+    }
+  };
   // externalClasses
   if (vueOptions.externalClasses) {
     componentOptions.externalClasses = vueOptions.externalClasses;
   }
-
   if (Array.isArray(vueOptions.wxsCallMethods)) {
     vueOptions.wxsCallMethods.forEach(function (callMethod) {
       componentOptions.methods[callMethod] = function (args) {
@@ -2330,77 +2164,61 @@ function parseBaseComponent(vueComponentOptions)
       };
     });
   }
-
+  if (needVueOptions) {
+    return [componentOptions, vueOptions, VueComponent];
+  }
   if (isPage) {
     return componentOptions;
   }
   return [componentOptions, VueComponent];
 }
-
-function parseComponent(vueComponentOptions) {
+function parseComponent(vueComponentOptions, needVueOptions) {
   return parseBaseComponent(vueComponentOptions, {
     isPage: isPage,
-    initRelation: initRelation });
-
+    initRelation: initRelation
+  }, needVueOptions);
 }
-
-var hooks$1 = [
-'onShow',
-'onHide',
-'onUnload'];
-
-
+var hooks$1 = ['onShow', 'onHide', 'onUnload'];
 hooks$1.push.apply(hooks$1, PAGE_EVENT_HOOKS);
-
-function parseBasePage(vuePageOptions, _ref6)
-
-
-{var isPage = _ref6.isPage,initRelation = _ref6.initRelation;
-  var pageOptions = parseComponent(vuePageOptions);
-
-  initHooks(pageOptions.methods, hooks$1, vuePageOptions);
-
+function parseBasePage(vuePageOptions) {
+  var _parseComponent = parseComponent(vuePageOptions, true),
+    _parseComponent2 = (0, _slicedToArray2.default)(_parseComponent, 2),
+    pageOptions = _parseComponent2[0],
+    vueOptions = _parseComponent2[1];
+  initHooks(pageOptions.methods, hooks$1, vueOptions);
   pageOptions.methods.onLoad = function (query) {
     this.options = query;
     var copyQuery = Object.assign({}, query);
     delete copyQuery.__id__;
     this.$page = {
-      fullPath: '/' + (this.route || this.is) + stringifyQuery(copyQuery) };
-
+      fullPath: '/' + (this.route || this.is) + stringifyQuery(copyQuery)
+    };
     this.$vm.$mp.query = query; // 兼容 mpvue
     this.$vm.__call_hook('onLoad', query);
   };
   {
     initUnknownHooks(pageOptions.methods, vuePageOptions, ['onReady']);
   }
-
   return pageOptions;
 }
-
 function parsePage(vuePageOptions) {
-  return parseBasePage(vuePageOptions, {
-    isPage: isPage,
-    initRelation: initRelation });
-
+  return parseBasePage(vuePageOptions);
 }
-
 function createPage(vuePageOptions) {
   {
     return Component(parsePage(vuePageOptions));
   }
 }
-
 function createComponent(vueOptions) {
   {
     return Component(parseComponent(vueOptions));
   }
 }
-
 function createSubpackageApp(vm) {
   var appOptions = parseApp(vm);
   var app = getApp({
-    allowDefault: true });
-
+    allowDefault: true
+  });
   vm.$scope = app;
   var globalData = app.globalData;
   if (globalData) {
@@ -2416,12 +2234,18 @@ function createSubpackageApp(vm) {
     }
   });
   if (isFn(appOptions.onShow) && wx.onAppShow) {
-    wx.onAppShow(function () {for (var _len5 = arguments.length, args = new Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {args[_key5] = arguments[_key5];}
+    wx.onAppShow(function () {
+      for (var _len5 = arguments.length, args = new Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
+        args[_key5] = arguments[_key5];
+      }
       vm.__call_hook('onShow', args);
     });
   }
   if (isFn(appOptions.onHide) && wx.onAppHide) {
-    wx.onAppHide(function () {for (var _len6 = arguments.length, args = new Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {args[_key6] = arguments[_key6];}
+    wx.onAppHide(function () {
+      for (var _len6 = arguments.length, args = new Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
+        args[_key6] = arguments[_key6];
+      }
       vm.__call_hook('onHide', args);
     });
   }
@@ -2431,16 +2255,21 @@ function createSubpackageApp(vm) {
   }
   return vm;
 }
-
 function createPlugin(vm) {
   var appOptions = parseApp(vm);
   if (isFn(appOptions.onShow) && wx.onAppShow) {
-    wx.onAppShow(function () {for (var _len7 = arguments.length, args = new Array(_len7), _key7 = 0; _key7 < _len7; _key7++) {args[_key7] = arguments[_key7];}
+    wx.onAppShow(function () {
+      for (var _len7 = arguments.length, args = new Array(_len7), _key7 = 0; _key7 < _len7; _key7++) {
+        args[_key7] = arguments[_key7];
+      }
       vm.__call_hook('onShow', args);
     });
   }
   if (isFn(appOptions.onHide) && wx.onAppHide) {
-    wx.onAppHide(function () {for (var _len8 = arguments.length, args = new Array(_len8), _key8 = 0; _key8 < _len8; _key8++) {args[_key8] = arguments[_key8];}
+    wx.onAppHide(function () {
+      for (var _len8 = arguments.length, args = new Array(_len8), _key8 = 0; _key8 < _len8; _key8++) {
+        args[_key8] = arguments[_key8];
+      }
       vm.__call_hook('onHide', args);
     });
   }
@@ -2450,21 +2279,16 @@ function createPlugin(vm) {
   }
   return vm;
 }
-
 todos.forEach(function (todoApi) {
   protocols[todoApi] = false;
 });
-
 canIUses.forEach(function (canIUseApi) {
-  var apiName = protocols[canIUseApi] && protocols[canIUseApi].name ? protocols[canIUseApi].name :
-  canIUseApi;
+  var apiName = protocols[canIUseApi] && protocols[canIUseApi].name ? protocols[canIUseApi].name : canIUseApi;
   if (!wx.canIUse(apiName)) {
     protocols[canIUseApi] = false;
   }
 });
-
 var uni = {};
-
 if (typeof Proxy !== 'undefined' && "mp-weixin" !== 'app-plus') {
   uni = new Proxy({}, {
     get: function get(target, name) {
@@ -2488,7 +2312,7 @@ if (typeof Proxy !== 'undefined' && "mp-weixin" !== 'app-plus') {
       if (eventApi[name]) {
         return eventApi[name];
       }
-      if (!hasOwn(wx, name) && !hasOwn(protocols, name)) {
+      if (typeof wx[name] !== 'function' && !hasOwn(protocols, name)) {
         return;
       }
       return promisify(name, wrapper(name, wx[name]));
@@ -2496,13 +2320,12 @@ if (typeof Proxy !== 'undefined' && "mp-weixin" !== 'app-plus') {
     set: function set(target, name, value) {
       target[name] = value;
       return true;
-    } });
-
+    }
+  });
 } else {
   Object.keys(baseApi).forEach(function (name) {
     uni[name] = baseApi[name];
   });
-
   {
     Object.keys(todoApis).forEach(function (name) {
       uni[name] = promisify(name, todoApis[name]);
@@ -2511,31 +2334,26 @@ if (typeof Proxy !== 'undefined' && "mp-weixin" !== 'app-plus') {
       uni[name] = promisify(name, todoApis[name]);
     });
   }
-
   Object.keys(eventApi).forEach(function (name) {
     uni[name] = eventApi[name];
   });
-
   Object.keys(api).forEach(function (name) {
     uni[name] = promisify(name, api[name]);
   });
-
   Object.keys(wx).forEach(function (name) {
     if (hasOwn(wx, name) || hasOwn(protocols, name)) {
       uni[name] = promisify(name, wrapper(name, wx[name]));
     }
   });
 }
-
 wx.createApp = createApp;
 wx.createPage = createPage;
 wx.createComponent = createComponent;
 wx.createSubpackageApp = createSubpackageApp;
 wx.createPlugin = createPlugin;
-
-var uni$1 = uni;var _default =
-
-uni$1;exports.default = _default;
+var uni$1 = uni;
+var _default = uni$1;
+exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../webpack/buildin/global.js */ 2)))
 
 /***/ }),
@@ -2570,6 +2388,342 @@ module.exports = g;
 
 /***/ }),
 /* 3 */
+/*!**********************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/interopRequireDefault.js ***!
+  \**********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : {
+    "default": obj
+  };
+}
+module.exports = _interopRequireDefault, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+/* 4 */
+/*!**************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/slicedToArray.js ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayWithHoles = __webpack_require__(/*! ./arrayWithHoles.js */ 5);
+var iterableToArrayLimit = __webpack_require__(/*! ./iterableToArrayLimit.js */ 6);
+var unsupportedIterableToArray = __webpack_require__(/*! ./unsupportedIterableToArray.js */ 7);
+var nonIterableRest = __webpack_require__(/*! ./nonIterableRest.js */ 9);
+function _slicedToArray(arr, i) {
+  return arrayWithHoles(arr) || iterableToArrayLimit(arr, i) || unsupportedIterableToArray(arr, i) || nonIterableRest();
+}
+module.exports = _slicedToArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+/* 5 */
+/*!***************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/arrayWithHoles.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _arrayWithHoles(arr) {
+  if (Array.isArray(arr)) return arr;
+}
+module.exports = _arrayWithHoles, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+/* 6 */
+/*!*********************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/iterableToArrayLimit.js ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _iterableToArrayLimit(arr, i) {
+  var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"];
+  if (null != _i) {
+    var _s,
+      _e,
+      _x,
+      _r,
+      _arr = [],
+      _n = !0,
+      _d = !1;
+    try {
+      if (_x = (_i = _i.call(arr)).next, 0 === i) {
+        if (Object(_i) !== _i) return;
+        _n = !1;
+      } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0) {
+        ;
+      }
+    } catch (err) {
+      _d = !0, _e = err;
+    } finally {
+      try {
+        if (!_n && null != _i["return"] && (_r = _i["return"](), Object(_r) !== _r)) return;
+      } finally {
+        if (_d) throw _e;
+      }
+    }
+    return _arr;
+  }
+}
+module.exports = _iterableToArrayLimit, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+/* 7 */
+/*!***************************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/unsupportedIterableToArray.js ***!
+  \***************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayLikeToArray = __webpack_require__(/*! ./arrayLikeToArray.js */ 8);
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return arrayLikeToArray(o, minLen);
+}
+module.exports = _unsupportedIterableToArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+/* 8 */
+/*!*****************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/arrayLikeToArray.js ***!
+  \*****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+  for (var i = 0, arr2 = new Array(len); i < len; i++) {
+    arr2[i] = arr[i];
+  }
+  return arr2;
+}
+module.exports = _arrayLikeToArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+/* 9 */
+/*!****************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/nonIterableRest.js ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _nonIterableRest() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+module.exports = _nonIterableRest, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+/* 10 */
+/*!***************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/defineProperty.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var toPropertyKey = __webpack_require__(/*! ./toPropertyKey.js */ 11);
+function _defineProperty(obj, key, value) {
+  key = toPropertyKey(key);
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+  return obj;
+}
+module.exports = _defineProperty, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+/* 11 */
+/*!**************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/toPropertyKey.js ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var _typeof = __webpack_require__(/*! ./typeof.js */ 12)["default"];
+var toPrimitive = __webpack_require__(/*! ./toPrimitive.js */ 13);
+function _toPropertyKey(arg) {
+  var key = toPrimitive(arg, "string");
+  return _typeof(key) === "symbol" ? key : String(key);
+}
+module.exports = _toPropertyKey, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+/* 12 */
+/*!*******************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/typeof.js ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _typeof(obj) {
+  "@babel/helpers - typeof";
+
+  return (module.exports = _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) {
+    return typeof obj;
+  } : function (obj) {
+    return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+  }, module.exports.__esModule = true, module.exports["default"] = module.exports), _typeof(obj);
+}
+module.exports = _typeof, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+/* 13 */
+/*!************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/toPrimitive.js ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var _typeof = __webpack_require__(/*! ./typeof.js */ 12)["default"];
+function _toPrimitive(input, hint) {
+  if (_typeof(input) !== "object" || input === null) return input;
+  var prim = input[Symbol.toPrimitive];
+  if (prim !== undefined) {
+    var res = prim.call(input, hint || "default");
+    if (_typeof(res) !== "object") return res;
+    throw new TypeError("@@toPrimitive must return a primitive value.");
+  }
+  return (hint === "string" ? String : Number)(input);
+}
+module.exports = _toPrimitive, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+/* 14 */
+/*!**********************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/construct.js ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var setPrototypeOf = __webpack_require__(/*! ./setPrototypeOf.js */ 15);
+var isNativeReflectConstruct = __webpack_require__(/*! ./isNativeReflectConstruct.js */ 16);
+function _construct(Parent, args, Class) {
+  if (isNativeReflectConstruct()) {
+    module.exports = _construct = Reflect.construct.bind(), module.exports.__esModule = true, module.exports["default"] = module.exports;
+  } else {
+    module.exports = _construct = function _construct(Parent, args, Class) {
+      var a = [null];
+      a.push.apply(a, args);
+      var Constructor = Function.bind.apply(Parent, a);
+      var instance = new Constructor();
+      if (Class) setPrototypeOf(instance, Class.prototype);
+      return instance;
+    }, module.exports.__esModule = true, module.exports["default"] = module.exports;
+  }
+  return _construct.apply(null, arguments);
+}
+module.exports = _construct, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+/* 15 */
+/*!***************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/setPrototypeOf.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _setPrototypeOf(o, p) {
+  module.exports = _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
+    o.__proto__ = p;
+    return o;
+  }, module.exports.__esModule = true, module.exports["default"] = module.exports;
+  return _setPrototypeOf(o, p);
+}
+module.exports = _setPrototypeOf, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+/* 16 */
+/*!*************************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/isNativeReflectConstruct.js ***!
+  \*************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _isNativeReflectConstruct() {
+  if (typeof Reflect === "undefined" || !Reflect.construct) return false;
+  if (Reflect.construct.sham) return false;
+  if (typeof Proxy === "function") return true;
+  try {
+    Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+module.exports = _isNativeReflectConstruct, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+/* 17 */
+/*!******************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/toConsumableArray.js ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayWithoutHoles = __webpack_require__(/*! ./arrayWithoutHoles.js */ 18);
+var iterableToArray = __webpack_require__(/*! ./iterableToArray.js */ 19);
+var unsupportedIterableToArray = __webpack_require__(/*! ./unsupportedIterableToArray.js */ 7);
+var nonIterableSpread = __webpack_require__(/*! ./nonIterableSpread.js */ 20);
+function _toConsumableArray(arr) {
+  return arrayWithoutHoles(arr) || iterableToArray(arr) || unsupportedIterableToArray(arr) || nonIterableSpread();
+}
+module.exports = _toConsumableArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+/* 18 */
+/*!******************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/arrayWithoutHoles.js ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayLikeToArray = __webpack_require__(/*! ./arrayLikeToArray.js */ 8);
+function _arrayWithoutHoles(arr) {
+  if (Array.isArray(arr)) return arrayLikeToArray(arr);
+}
+module.exports = _arrayWithoutHoles, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+/* 19 */
+/*!****************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/iterableToArray.js ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _iterableToArray(iter) {
+  if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
+}
+module.exports = _iterableToArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+/* 20 */
+/*!******************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/nonIterableSpread.js ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _nonIterableSpread() {
+  throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+module.exports = _nonIterableSpread, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+/* 21 */
 /*!*************************************************************!*\
   !*** ./node_modules/@dcloudio/uni-i18n/dist/uni-i18n.es.js ***!
   \*************************************************************/
@@ -2577,14 +2731,39 @@ module.exports = g;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni, global) {Object.defineProperty(exports, "__esModule", { value: true });exports.compileI18nJsonStr = compileI18nJsonStr;exports.hasI18nJson = hasI18nJson;exports.initVueI18n = initVueI18n;exports.isI18nStr = isI18nStr;exports.normalizeLocale = normalizeLocale;exports.parseI18nJson = parseI18nJson;exports.resolveLocale = resolveLocale;exports.isString = exports.LOCALE_ZH_HANT = exports.LOCALE_ZH_HANS = exports.LOCALE_FR = exports.LOCALE_ES = exports.LOCALE_EN = exports.I18n = exports.Formatter = void 0;function _slicedToArray(arr, i) {return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();}function _nonIterableRest() {throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(o);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}function _iterableToArrayLimit(arr, i) {if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;var _arr = [];var _n = true;var _d = false;var _e = undefined;try {for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {_arr.push(_s.value);if (i && _arr.length === i) break;}} catch (err) {_d = true;_e = err;} finally {try {if (!_n && _i["return"] != null) _i["return"]();} finally {if (_d) throw _e;}}return _arr;}function _arrayWithHoles(arr) {if (Array.isArray(arr)) return arr;}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;}var isArray = Array.isArray;
-var isObject = function isObject(val) {return val !== null && typeof val === 'object';};
-var defaultDelimiters = ['{', '}'];var
-BaseFormatter = /*#__PURE__*/function () {
-  function BaseFormatter() {_classCallCheck(this, BaseFormatter);
+/* WEBPACK VAR INJECTION */(function(uni, global) {
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 3);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.LOCALE_ZH_HANT = exports.LOCALE_ZH_HANS = exports.LOCALE_FR = exports.LOCALE_ES = exports.LOCALE_EN = exports.I18n = exports.Formatter = void 0;
+exports.compileI18nJsonStr = compileI18nJsonStr;
+exports.hasI18nJson = hasI18nJson;
+exports.initVueI18n = initVueI18n;
+exports.isI18nStr = isI18nStr;
+exports.isString = void 0;
+exports.normalizeLocale = normalizeLocale;
+exports.parseI18nJson = parseI18nJson;
+exports.resolveLocale = resolveLocale;
+var _slicedToArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ 4));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ 22));
+var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ 23));
+var _typeof2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/typeof */ 12));
+var isArray = Array.isArray;
+var isObject = function isObject(val) {
+  return val !== null && (0, _typeof2.default)(val) === 'object';
+};
+var defaultDelimiters = ['{', '}'];
+var BaseFormatter = /*#__PURE__*/function () {
+  function BaseFormatter() {
+    (0, _classCallCheck2.default)(this, BaseFormatter);
     this._caches = Object.create(null);
-  }_createClass(BaseFormatter, [{ key: "interpolate", value: function interpolate(
-    message, values) {var delimiters = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultDelimiters;
+  }
+  (0, _createClass2.default)(BaseFormatter, [{
+    key: "interpolate",
+    value: function interpolate(message, values) {
+      var delimiters = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultDelimiters;
       if (!values) {
         return [message];
       }
@@ -2594,11 +2773,17 @@ BaseFormatter = /*#__PURE__*/function () {
         this._caches[message] = tokens;
       }
       return compile(tokens, values);
-    } }]);return BaseFormatter;}();exports.Formatter = BaseFormatter;
-
+    }
+  }]);
+  return BaseFormatter;
+}();
+exports.Formatter = BaseFormatter;
 var RE_TOKEN_LIST_VALUE = /^(?:\d)+/;
 var RE_TOKEN_NAMED_VALUE = /^(?:\w)+/;
-function parse(format, _ref) {var _ref2 = _slicedToArray(_ref, 2),startDelimiter = _ref2[0],endDelimiter = _ref2[1];
+function parse(format, _ref) {
+  var _ref2 = (0, _slicedToArray2.default)(_ref, 2),
+    startDelimiter = _ref2[0],
+    endDelimiter = _ref2[1];
   var tokens = [];
   var position = 0;
   var text = '';
@@ -2606,7 +2791,10 @@ function parse(format, _ref) {var _ref2 = _slicedToArray(_ref, 2),startDelimiter
     var char = format[position++];
     if (char === startDelimiter) {
       if (text) {
-        tokens.push({ type: 'text', value: text });
+        tokens.push({
+          type: 'text',
+          value: text
+        });
       }
       text = '';
       var sub = '';
@@ -2616,12 +2804,11 @@ function parse(format, _ref) {var _ref2 = _slicedToArray(_ref, 2),startDelimiter
         char = format[position++];
       }
       var isClosed = char === endDelimiter;
-      var type = RE_TOKEN_LIST_VALUE.test(sub) ?
-      'list' :
-      isClosed && RE_TOKEN_NAMED_VALUE.test(sub) ?
-      'named' :
-      'unknown';
-      tokens.push({ value: sub, type: type });
+      var type = RE_TOKEN_LIST_VALUE.test(sub) ? 'list' : isClosed && RE_TOKEN_NAMED_VALUE.test(sub) ? 'named' : 'unknown';
+      tokens.push({
+        value: sub,
+        type: type
+      });
     }
     //  else if (char === '%') {
     //   // when found rails i18n syntax, skip text capture
@@ -2630,20 +2817,19 @@ function parse(format, _ref) {var _ref2 = _slicedToArray(_ref, 2),startDelimiter
     //   }
     // }
     else {
-        text += char;
-      }
+      text += char;
+    }
   }
-  text && tokens.push({ type: 'text', value: text });
+  text && tokens.push({
+    type: 'text',
+    value: text
+  });
   return tokens;
 }
 function compile(tokens, values) {
   var compiled = [];
   var index = 0;
-  var mode = isArray(values) ?
-  'list' :
-  isObject(values) ?
-  'named' :
-  'unknown';
+  var mode = isArray(values) ? 'list' : isObject(values) ? 'named' : 'unknown';
   if (mode === 'unknown') {
     return compiled;
   }
@@ -2659,8 +2845,7 @@ function compile(tokens, values) {
       case 'named':
         if (mode === 'named') {
           compiled.push(values[token.value]);
-        } else
-        {
+        } else {
           if (true) {
             console.warn("Type of token '".concat(token.type, "' and format of value '").concat(mode, "' don't match!"));
           }
@@ -2670,26 +2855,36 @@ function compile(tokens, values) {
         if (true) {
           console.warn("Detect 'unknown' type of token!");
         }
-        break;}
-
+        break;
+    }
     index++;
   }
   return compiled;
 }
-
-var LOCALE_ZH_HANS = 'zh-Hans';exports.LOCALE_ZH_HANS = LOCALE_ZH_HANS;
-var LOCALE_ZH_HANT = 'zh-Hant';exports.LOCALE_ZH_HANT = LOCALE_ZH_HANT;
-var LOCALE_EN = 'en';exports.LOCALE_EN = LOCALE_EN;
-var LOCALE_FR = 'fr';exports.LOCALE_FR = LOCALE_FR;
-var LOCALE_ES = 'es';exports.LOCALE_ES = LOCALE_ES;
+var LOCALE_ZH_HANS = 'zh-Hans';
+exports.LOCALE_ZH_HANS = LOCALE_ZH_HANS;
+var LOCALE_ZH_HANT = 'zh-Hant';
+exports.LOCALE_ZH_HANT = LOCALE_ZH_HANT;
+var LOCALE_EN = 'en';
+exports.LOCALE_EN = LOCALE_EN;
+var LOCALE_FR = 'fr';
+exports.LOCALE_FR = LOCALE_FR;
+var LOCALE_ES = 'es';
+exports.LOCALE_ES = LOCALE_ES;
 var hasOwnProperty = Object.prototype.hasOwnProperty;
-var hasOwn = function hasOwn(val, key) {return hasOwnProperty.call(val, key);};
+var hasOwn = function hasOwn(val, key) {
+  return hasOwnProperty.call(val, key);
+};
 var defaultFormatter = new BaseFormatter();
 function include(str, parts) {
-  return !!parts.find(function (part) {return str.indexOf(part) !== -1;});
+  return !!parts.find(function (part) {
+    return str.indexOf(part) !== -1;
+  });
 }
 function startsWith(str, parts) {
-  return parts.find(function (part) {return str.indexOf(part) === 0;});
+  return parts.find(function (part) {
+    return str.indexOf(part) === 0;
+  });
 }
 function normalizeLocale(locale, messages) {
   if (!locale) {
@@ -2716,9 +2911,15 @@ function normalizeLocale(locale, messages) {
   if (lang) {
     return lang;
   }
-}var
-I18n = /*#__PURE__*/function () {
-  function I18n(_ref3) {var locale = _ref3.locale,fallbackLocale = _ref3.fallbackLocale,messages = _ref3.messages,watcher = _ref3.watcher,formater = _ref3.formater;_classCallCheck(this, I18n);
+}
+var I18n = /*#__PURE__*/function () {
+  function I18n(_ref3) {
+    var locale = _ref3.locale,
+      fallbackLocale = _ref3.fallbackLocale,
+      messages = _ref3.messages,
+      watcher = _ref3.watcher,
+      formater = _ref3.formater;
+    (0, _classCallCheck2.default)(this, I18n);
     this.locale = LOCALE_EN;
     this.fallbackLocale = LOCALE_EN;
     this.message = {};
@@ -2733,8 +2934,11 @@ I18n = /*#__PURE__*/function () {
     if (watcher) {
       this.watchLocale(watcher);
     }
-  }_createClass(I18n, [{ key: "setLocale", value: function setLocale(
-    locale) {var _this = this;
+  }
+  (0, _createClass2.default)(I18n, [{
+    key: "setLocale",
+    value: function setLocale(locale) {
+      var _this = this;
       var oldLocale = this.locale;
       this.locale = normalizeLocale(locale, this.messages) || this.fallbackLocale;
       if (!this.messages[this.locale]) {
@@ -2748,44 +2952,53 @@ I18n = /*#__PURE__*/function () {
           watcher(_this.locale, oldLocale);
         });
       }
-    } }, { key: "getLocale", value: function getLocale()
-    {
+    }
+  }, {
+    key: "getLocale",
+    value: function getLocale() {
       return this.locale;
-    } }, { key: "watchLocale", value: function watchLocale(
-    fn) {var _this2 = this;
+    }
+  }, {
+    key: "watchLocale",
+    value: function watchLocale(fn) {
+      var _this2 = this;
       var index = this.watchers.push(fn) - 1;
       return function () {
         _this2.watchers.splice(index, 1);
       };
-    } }, { key: "add", value: function add(
-    locale, message) {var override = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+    }
+  }, {
+    key: "add",
+    value: function add(locale, message) {
+      var override = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
       var curMessages = this.messages[locale];
       if (curMessages) {
         if (override) {
           Object.assign(curMessages, message);
-        } else
-        {
+        } else {
           Object.keys(message).forEach(function (key) {
             if (!hasOwn(curMessages, key)) {
               curMessages[key] = message[key];
             }
           });
         }
-      } else
-      {
+      } else {
         this.messages[locale] = message;
       }
-    } }, { key: "f", value: function f(
-    message, values, delimiters) {
+    }
+  }, {
+    key: "f",
+    value: function f(message, values, delimiters) {
       return this.formater.interpolate(message, values, delimiters).join('');
-    } }, { key: "t", value: function t(
-    key, locale, values) {
+    }
+  }, {
+    key: "t",
+    value: function t(key, locale, values) {
       var message = this.message;
       if (typeof locale === 'string') {
         locale = normalizeLocale(locale, this.messages);
         locale && (message = this.messages[locale]);
-      } else
-      {
+      } else {
         values = locale;
       }
       if (!hasOwn(message, key)) {
@@ -2793,9 +3006,11 @@ I18n = /*#__PURE__*/function () {
         return key;
       }
       return this.formater.interpolate(message[key], values).join('');
-    } }]);return I18n;}();exports.I18n = I18n;
-
-
+    }
+  }]);
+  return I18n;
+}();
+exports.I18n = I18n;
 function watchAppLocale(appVm, i18n) {
   // 需要保证 watch 的触发在组件渲染之前
   if (appVm.$watchLocale) {
@@ -2803,9 +3018,10 @@ function watchAppLocale(appVm, i18n) {
     appVm.$watchLocale(function (newLocale) {
       i18n.setLocale(newLocale);
     });
-  } else
-  {
-    appVm.$watch(function () {return appVm.$locale;}, function (newLocale) {
+  } else {
+    appVm.$watch(function () {
+      return appVm.$locale;
+    }, function (newLocale) {
       i18n.setLocale(newLocale);
     });
   }
@@ -2820,29 +3036,29 @@ function getDefaultLocale() {
   }
   return LOCALE_EN;
 }
-function initVueI18n(locale) {var messages = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};var fallbackLocale = arguments.length > 2 ? arguments[2] : undefined;var watcher = arguments.length > 3 ? arguments[3] : undefined;
+function initVueI18n(locale) {
+  var messages = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  var fallbackLocale = arguments.length > 2 ? arguments[2] : undefined;
+  var watcher = arguments.length > 3 ? arguments[3] : undefined;
   // 兼容旧版本入参
-  if (typeof locale !== 'string') {var _ref4 =
-    [
-    messages,
-    locale];locale = _ref4[0];messages = _ref4[1];
-
+  if (typeof locale !== 'string') {
+    var _ref4 = [messages, locale];
+    locale = _ref4[0];
+    messages = _ref4[1];
   }
   if (typeof locale !== 'string') {
     // 因为小程序平台，uni-i18n 和 uni 互相引用，导致此时访问 uni 时，为 undefined
     locale = getDefaultLocale();
   }
   if (typeof fallbackLocale !== 'string') {
-    fallbackLocale =
-    typeof __uniConfig !== 'undefined' && __uniConfig.fallbackLocale ||
-    LOCALE_EN;
+    fallbackLocale = typeof __uniConfig !== 'undefined' && __uniConfig.fallbackLocale || LOCALE_EN;
   }
   var i18n = new I18n({
     locale: locale,
     fallbackLocale: fallbackLocale,
     messages: messages,
-    watcher: watcher });
-
+    watcher: watcher
+  });
   var _t = function t(key, values) {
     if (typeof getApp !== 'function') {
       // app view
@@ -2850,8 +3066,7 @@ function initVueI18n(locale) {var messages = arguments.length > 1 && arguments[1
       _t = function t(key, values) {
         return i18n.t(key, values);
       };
-    } else
-    {
+    } else {
       var isWatchedAppLocale = false;
       _t = function t(key, values) {
         var appVm = getApp().$vm;
@@ -2889,7 +3104,8 @@ function initVueI18n(locale) {var messages = arguments.length > 1 && arguments[1
     t: function t(key, values) {
       return _t(key, values);
     },
-    add: function add(locale, message) {var override = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+    add: function add(locale, message) {
+      var override = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
       return i18n.add(locale, message, override);
     },
     watch: function watch(fn) {
@@ -2900,11 +3116,13 @@ function initVueI18n(locale) {var messages = arguments.length > 1 && arguments[1
     },
     setLocale: function setLocale(newLocale) {
       return i18n.setLocale(newLocale);
-    } };
-
+    }
+  };
 }
-
-var isString = function isString(val) {return typeof val === 'string';};exports.isString = isString;
+var isString = function isString(val) {
+  return typeof val === 'string';
+};
+exports.isString = isString;
 var formater;
 function hasI18nJson(jsonObj, delimiters) {
   if (!formater) {
@@ -2916,8 +3134,7 @@ function hasI18nJson(jsonObj, delimiters) {
       if (isI18nStr(value, delimiters)) {
         return true;
       }
-    } else
-    {
+    } else {
       return hasI18nJson(value, delimiters);
     }
   });
@@ -2932,14 +3149,16 @@ function parseI18nJson(jsonObj, values, delimiters) {
       if (isI18nStr(value, delimiters)) {
         jsonObj[key] = compileStr(value, values, delimiters);
       }
-    } else
-    {
+    } else {
       parseI18nJson(value, values, delimiters);
     }
   });
   return jsonObj;
 }
-function compileI18nJsonStr(jsonStr, _ref5) {var locale = _ref5.locale,locales = _ref5.locales,delimiters = _ref5.delimiters;
+function compileI18nJsonStr(jsonStr, _ref5) {
+  var locale = _ref5.locale,
+    locales = _ref5.locales,
+    delimiters = _ref5.delimiters;
   if (!isI18nStr(jsonStr, delimiters)) {
     return jsonStr;
   }
@@ -2951,15 +3170,17 @@ function compileI18nJsonStr(jsonStr, _ref5) {var locale = _ref5.locale,locales =
     if (name !== locale) {
       localeValues.push({
         locale: name,
-        values: locales[name] });
-
+        values: locales[name]
+      });
     }
   });
-  localeValues.unshift({ locale: locale, values: locales[locale] });
+  localeValues.unshift({
+    locale: locale,
+    values: locales[locale]
+  });
   try {
     return JSON.stringify(compileJsonObj(JSON.parse(jsonStr), localeValues, delimiters), null, 2);
-  }
-  catch (e) {}
+  } catch (e) {}
   return jsonStr;
 }
 function isI18nStr(value, delimiters) {
@@ -2982,8 +3203,7 @@ function compileValue(jsonObj, key, localeValues, delimiters) {
         });
       }
     }
-  } else
-  {
+  } else {
     compileJsonObj(value, localeValues, delimiters);
   }
 }
@@ -3000,8 +3220,7 @@ function walkJsonObj(jsonObj, walk) {
         return true;
       }
     }
-  } else
-  if (isObject(jsonObj)) {
+  } else if (isObject(jsonObj)) {
     for (var key in jsonObj) {
       if (walk(jsonObj, key)) {
         return true;
@@ -3010,14 +3229,15 @@ function walkJsonObj(jsonObj, walk) {
   }
   return false;
 }
-
 function resolveLocale(locales) {
   return function (locale) {
     if (!locale) {
       return locale;
     }
     locale = normalizeLocale(locale) || locale;
-    return resolveLocaleChain(locale).find(function (locale) {return locales.indexOf(locale) > -1;});
+    return resolveLocaleChain(locale).find(function (locale) {
+      return locales.indexOf(locale) > -1;
+    });
   };
 }
 function resolveLocaleChain(locale) {
@@ -3032,7 +3252,50 @@ function resolveLocaleChain(locale) {
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"], __webpack_require__(/*! ./../../../webpack/buildin/global.js */ 2)))
 
 /***/ }),
-/* 4 */
+/* 22 */
+/*!***************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/classCallCheck.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+module.exports = _classCallCheck, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+/* 23 */
+/*!************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/createClass.js ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var toPropertyKey = __webpack_require__(/*! ./toPropertyKey.js */ 11);
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, toPropertyKey(descriptor.key), descriptor);
+  }
+}
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
+  Object.defineProperty(Constructor, "prototype", {
+    writable: false
+  });
+  return Constructor;
+}
+module.exports = _createClass, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+/* 24 */
 /*!******************************************************************************************!*\
   !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js ***!
   \******************************************************************************************/
@@ -4034,7 +4297,8 @@ function observe (value, asRootData) {
     !isServerRendering() &&
     (Array.isArray(value) || isPlainObject(value)) &&
     Object.isExtensible(value) &&
-    !value._isVue
+    !value._isVue &&
+    !value.__v_isMPComponent
   ) {
     ob = new Observer(value);
   }
@@ -8452,6 +8716,8 @@ Vue.version = '2.6.11';
  */
 var ARRAYTYPE = '[object Array]';
 var OBJECTTYPE = '[object Object]';
+var NULLTYPE = '[object Null]';
+var UNDEFINEDTYPE = '[object Undefined]';
 // const FUNCTIONTYPE = '[object Function]'
 
 function diff(current, pre) {
@@ -8485,6 +8751,16 @@ function syncKeys(current, pre) {
     }
 }
 
+function nullOrUndefined(currentType, preType) {
+    if(
+        (currentType === NULLTYPE || currentType === UNDEFINEDTYPE) && 
+        (preType === NULLTYPE || preType === UNDEFINEDTYPE)
+    ) {
+        return false
+    }
+    return true
+}
+
 function _diff(current, pre, path, result) {
     if (current === pre) { return }
     var rootCurrentType = type(current);
@@ -8499,7 +8775,7 @@ function _diff(current, pre, path, result) {
                 var currentType = type(currentValue);
                 var preType = type(preValue);
                 if (currentType != ARRAYTYPE && currentType != OBJECTTYPE) {
-                    if (currentValue !== pre[key]) {
+                    if (currentValue !== pre[key] && nullOrUndefined(currentType, preType)) {
                         setResult(result, (path == '' ? '' : path + ".") + key, currentValue);
                     }
                 } else if (currentType == ARRAYTYPE) {
@@ -8558,7 +8834,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"VUE_APP_NAME":"小说","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"小说","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -8579,14 +8855,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"VUE_APP_NAME":"小说","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"小说","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"VUE_APP_NAME":"小说","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"小说","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -8616,6 +8892,16 @@ function nextTick$1(vm, cb) {
 }
 
 /*  */
+
+function clearInstance(key, value) {
+  // 简易去除 Vue 和小程序组件实例
+  if (value) {
+    if (value._isVue || value.__v_isMPComponent) {
+      return {}
+    }
+  }
+  return value
+}
 
 function cloneWithData(vm) {
   // 确保当前 vm 所有数据被同步
@@ -8648,7 +8934,7 @@ function cloneWithData(vm) {
     ret['value'] = vm.value;
   }
 
-  return JSON.parse(JSON.stringify(ret))
+  return JSON.parse(JSON.stringify(ret, clearInstance))
 }
 
 var patch = function(oldVnode, vnode) {
@@ -8672,7 +8958,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = this.$shouldDiffData === false ? data : diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"VUE_APP_NAME":"小说","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"小说","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -8860,9 +9146,13 @@ function internalMixin(Vue) {
     if (this.$scope && event) {
       var triggerEvent = this.$scope['_triggerEvent'] || this.$scope['triggerEvent'];
       if (triggerEvent) {
-        triggerEvent.call(this.$scope, event, {
-          __args__: toArray(arguments, 1)
-        });
+        try {
+          triggerEvent.call(this.$scope, event, {
+            __args__: toArray(arguments, 1)
+          });
+        } catch (error) {
+
+        }
       }
     }
     return oldEmit.apply(this, arguments)
@@ -9085,7 +9375,7 @@ internalMixin(Vue);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../webpack/buildin/global.js */ 2)))
 
 /***/ }),
-/* 5 */
+/* 25 */
 /*!*********************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/pages.json ***!
   \*********************************************************************************************/
@@ -9095,7 +9385,7 @@ internalMixin(Vue);
 
 
 /***/ }),
-/* 6 */
+/* 26 */
 /*!*************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/store/index.js ***!
   \*************************************************************************************************/
@@ -9103,25 +9393,26 @@ internalMixin(Vue);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 4));
-var _vuex = _interopRequireDefault(__webpack_require__(/*! vuex */ 7));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 3);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 24));
+var _vuex = _interopRequireDefault(__webpack_require__(/*! vuex */ 27));
 _vue.default.use(_vuex.default);
-
 var store = new _vuex.default.Store({
   state: {},
-
   mutations: {},
-
-  actions: {} });var _default =
-
-
-
-
-store;exports.default = _default;
+  actions: {}
+});
+var _default = store;
+exports.default = _default;
 
 /***/ }),
-/* 7 */
+/* 27 */
 /*!**************************************************************************************!*\
   !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vuex3/dist/vuex.common.js ***!
   \**************************************************************************************/
@@ -10377,12 +10668,12 @@ module.exports = index_cjs;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../webpack/buildin/global.js */ 2)))
 
 /***/ }),
-/* 8 */,
-/* 9 */,
-/* 10 */,
-/* 11 */,
-/* 12 */,
-/* 13 */
+/* 28 */,
+/* 29 */,
+/* 30 */,
+/* 31 */,
+/* 32 */,
+/* 33 */
 /*!**********************************************************************************************************!*\
   !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js ***!
   \**********************************************************************************************************/
@@ -10510,7 +10801,7 @@ function normalizeComponent (
 
 
 /***/ }),
-/* 14 */
+/* 34 */
 /*!****************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/index.js ***!
   \****************************************************************************************************************/
@@ -10518,46 +10809,40 @@ function normalizeComponent (
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+/* WEBPACK VAR INJECTION */(function(uni) {
 
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 3);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ 10));
+var _mixin = _interopRequireDefault(__webpack_require__(/*! ./libs/mixin/mixin.js */ 35));
+var _mpMixin = _interopRequireDefault(__webpack_require__(/*! ./libs/mixin/mpMixin.js */ 36));
+var _luchRequest = _interopRequireDefault(__webpack_require__(/*! ./libs/luch-request */ 37));
+var _route = _interopRequireDefault(__webpack_require__(/*! ./libs/util/route.js */ 55));
+var _colorGradient = _interopRequireDefault(__webpack_require__(/*! ./libs/function/colorGradient.js */ 56));
+var _test = _interopRequireDefault(__webpack_require__(/*! ./libs/function/test.js */ 57));
+var _debounce = _interopRequireDefault(__webpack_require__(/*! ./libs/function/debounce.js */ 58));
+var _throttle = _interopRequireDefault(__webpack_require__(/*! ./libs/function/throttle.js */ 59));
+var _index = _interopRequireDefault(__webpack_require__(/*! ./libs/function/index.js */ 60));
+var _config = _interopRequireDefault(__webpack_require__(/*! ./libs/config/config.js */ 63));
+var _props = _interopRequireDefault(__webpack_require__(/*! ./libs/config/props.js */ 64));
+var _zIndex = _interopRequireDefault(__webpack_require__(/*! ./libs/config/zIndex.js */ 154));
+var _color = _interopRequireDefault(__webpack_require__(/*! ./libs/config/color.js */ 112));
+var _platform = _interopRequireDefault(__webpack_require__(/*! ./libs/function/platform */ 155));
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+// 看到此报错，是因为没有配置vue.config.js的【transpileDependencies】，详见：https://www.uviewui.com/components/npmSetting.html#_5-cli模式额外配置
+var pleaseSetTranspileDependencies = {},
+  babelTest = pleaseSetTranspileDependencies === null || pleaseSetTranspileDependencies === void 0 ? void 0 : pleaseSetTranspileDependencies.test;
 
+// 引入全局mixin
 
-
-
-var _mixin = _interopRequireDefault(__webpack_require__(/*! ./libs/mixin/mixin.js */ 15));
-
-var _mpMixin = _interopRequireDefault(__webpack_require__(/*! ./libs/mixin/mpMixin.js */ 16));
-
-var _luchRequest = _interopRequireDefault(__webpack_require__(/*! ./libs/luch-request */ 17));
-
-
-var _route = _interopRequireDefault(__webpack_require__(/*! ./libs/util/route.js */ 35));
-
-var _colorGradient = _interopRequireDefault(__webpack_require__(/*! ./libs/function/colorGradient.js */ 39));
-
-
-var _test = _interopRequireDefault(__webpack_require__(/*! ./libs/function/test.js */ 40));
-
-var _debounce = _interopRequireDefault(__webpack_require__(/*! ./libs/function/debounce.js */ 41));
-
-var _throttle = _interopRequireDefault(__webpack_require__(/*! ./libs/function/throttle.js */ 42));
-
-var _index = _interopRequireDefault(__webpack_require__(/*! ./libs/function/index.js */ 43));
-
-
-var _config = _interopRequireDefault(__webpack_require__(/*! ./libs/config/config.js */ 45));
-
-var _props = _interopRequireDefault(__webpack_require__(/*! ./libs/config/props.js */ 46));
-
-var _zIndex = _interopRequireDefault(__webpack_require__(/*! ./libs/config/zIndex.js */ 136));
-
-var _color = _interopRequireDefault(__webpack_require__(/*! ./libs/config/color.js */ 94));
-
-var _platform = _interopRequireDefault(__webpack_require__(/*! ./libs/function/platform */ 137));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;} // 看到此报错，是因为没有配置vue.config.js的【transpileDependencies】，详见：https://www.uviewui.com/components/npmSetting.html#_5-cli模式额外配置
-var pleaseSetTranspileDependencies = {},babelTest = pleaseSetTranspileDependencies === null || pleaseSetTranspileDependencies === void 0 ? void 0 : pleaseSetTranspileDependencies.test; // 引入全局mixin
 var $u = _objectSpread(_objectSpread({
   route: _route.default,
-  date: _index.default.timeFormat, // 另名date
+  date: _index.default.timeFormat,
+  // 另名date
   colorGradient: _colorGradient.default.colorGradient,
   hexToRgb: _colorGradient.default.hexToRgb,
   rgbToHex: _colorGradient.default.rgbToHex,
@@ -10565,41 +10850,47 @@ var $u = _objectSpread(_objectSpread({
   test: _test.default,
   type: ['primary', 'success', 'error', 'warning', 'info'],
   http: new _luchRequest.default(),
-  config: _config.default, // uView配置信息相关，比如版本号
+  config: _config.default,
+  // uView配置信息相关，比如版本号
   zIndex: _zIndex.default,
   debounce: _debounce.default,
   throttle: _throttle.default,
   mixin: _mixin.default,
   mpMixin: _mpMixin.default,
-  props: _props.default },
-_index.default), {}, {
+  props: _props.default
+}, _index.default), {}, {
   color: _color.default,
-  platform: _platform.default });
-
+  platform: _platform.default
+});
 
 // $u挂载到uni对象上
 uni.$u = $u;
-
 var install = function install(Vue) {
   // 时间格式化，同时两个名称，date和timeFormat
-  Vue.filter('timeFormat', function (timestamp, format) {return uni.$u.timeFormat(timestamp, format);});
-  Vue.filter('date', function (timestamp, format) {return uni.$u.timeFormat(timestamp, format);});
+  Vue.filter('timeFormat', function (timestamp, format) {
+    return uni.$u.timeFormat(timestamp, format);
+  });
+  Vue.filter('date', function (timestamp, format) {
+    return uni.$u.timeFormat(timestamp, format);
+  });
   // 将多久以前的方法，注入到全局过滤器
-  Vue.filter('timeFrom', function (timestamp, format) {return uni.$u.timeFrom(timestamp, format);});
+  Vue.filter('timeFrom', function (timestamp, format) {
+    return uni.$u.timeFrom(timestamp, format);
+  });
   // 同时挂载到uni和Vue.prototype中
 
   // 只有vue，挂载到Vue.prototype才有意义，因为nvue中全局Vue.prototype和Vue.mixin是无效的
   Vue.prototype.$u = $u;
   Vue.mixin(_mixin.default);
-
-};var _default =
-
-{
-  install: install };exports.default = _default;
+};
+var _default = {
+  install: install
+};
+exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 15 */
+/* 35 */
 /*!***************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/mixin/mixin.js ***!
   \***************************************************************************************************************************/
@@ -10612,23 +10903,25 @@ var install = function install(Vue) {
     // 每个组件都有的父组件传递的样式，可以为字符串或者对象形式
     customStyle: {
       type: [Object, String],
-      default: function _default() {return {};} },
-
+      default: function _default() {
+        return {};
+      }
+    },
     customClass: {
       type: String,
-      default: '' },
-
+      default: ''
+    },
     // 跳转的页面路径
     url: {
       type: String,
-      default: '' },
-
+      default: ''
+    },
     // 页面跳转的类型
     linkType: {
       type: String,
-      default: 'navigateTo' } },
-
-
+      default: 'navigateTo'
+    }
+  },
   data: function data() {
     return {};
   },
@@ -10645,29 +10938,25 @@ var install = function install(Vue) {
     // 所以这里通过computed计算属性将其附加到this.$u上，就可以在模板或者js中使用uni.$u.xxx
     // 只在nvue环境通过此方式引入完整的$u，其他平台会出现性能问题，非nvue则按需引入（主要原因是props过大）
     $u: function $u() {
-
       // 在非nvue端，移除props，http，mixin等对象，避免在小程序setData时数据过大影响性能
       return uni.$u.deepMerge(uni.$u, {
         props: undefined,
         http: undefined,
-        mixin: undefined });
-
-
-
-
-
+        mixin: undefined
+      });
     },
     /**
-        * 生成bem规则类名
-        * 由于微信小程序，H5，nvue之间绑定class的差异，无法通过:class="[bem()]"的形式进行同用
-        * 故采用如下折中做法，最后返回的是数组（一般平台）或字符串（支付宝和字节跳动平台），类似['a', 'b', 'c']或'a b c'的形式
-        * @param {String} name 组件名称
-        * @param {Array} fixed 一直会存在的类名
-        * @param {Array} change 会根据变量值为true或者false而出现或者隐藏的类名
-        * @returns {Array|string}
-        */
+     * 生成bem规则类名
+     * 由于微信小程序，H5，nvue之间绑定class的差异，无法通过:class="[bem()]"的形式进行同用
+     * 故采用如下折中做法，最后返回的是数组（一般平台）或字符串（支付宝和字节跳动平台），类似['a', 'b', 'c']或'a b c'的形式
+     * @param {String} name 组件名称
+     * @param {Array} fixed 一直会存在的类名
+     * @param {Array} change 会根据变量值为true或者false而出现或者隐藏的类名
+     * @returns {Array|string}
+     */
     bem: function bem() {
-      return function (name, fixed, change) {var _this = this;
+      return function (name, fixed, change) {
+        var _this = this;
         // 类名前缀
         var prefix = "u-".concat(name, "--");
         var classes = {};
@@ -10685,42 +10974,41 @@ var install = function install(Vue) {
         }
         return Object.keys(classes);
         // 支付宝，头条小程序无法动态绑定一个数组类名，否则解析出来的结果会带有","，而导致失效
-
-
-
       };
-    } },
+    }
+  },
 
   methods: {
     // 跳转某一个页面
-    openPage: function openPage() {var urlKey = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'url';
+    openPage: function openPage() {
+      var urlKey = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'url';
       var url = this[urlKey];
       if (url) {
         // 执行类似uni.navigateTo的方法
         uni[this.linkType]({
-          url: url });
-
+          url: url
+        });
       }
     },
     // 查询节点信息
     // 目前此方法在支付宝小程序中无法获取组件跟接点的尺寸，为支付宝的bug(2020-07-21)
     // 解决办法为在组件根部再套一个没有任何作用的view元素
-    $uGetRect: function $uGetRect(selector, all) {var _this2 = this;
+    $uGetRect: function $uGetRect(selector, all) {
+      var _this2 = this;
       return new Promise(function (resolve) {
-        uni.createSelectorQuery().
-        in(_this2)[all ? 'selectAll' : 'select'](selector).
-        boundingClientRect(function (rect) {
+        uni.createSelectorQuery().in(_this2)[all ? 'selectAll' : 'select'](selector).boundingClientRect(function (rect) {
           if (all && Array.isArray(rect) && rect.length) {
             resolve(rect);
           }
           if (!all && rect) {
             resolve(rect);
           }
-        }).
-        exec();
+        }).exec();
       });
     },
-    getParentData: function getParentData() {var _this3 = this;var parentName = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+    getParentData: function getParentData() {
+      var _this3 = this;
+      var parentName = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
       // 避免在created中去定义parent变量
       if (!this.parent) this.parent = {};
       // 这里的本质原理是，通过获取父组件实例(也即类似u-radio的父组件u-radio-group的this)
@@ -10746,12 +11034,13 @@ var install = function install(Vue) {
     // 空操作
     noop: function noop(e) {
       this.preventEvent(e);
-    } },
-
+    }
+  },
   onReachBottom: function onReachBottom() {
     uni.$emit('uOnReachBottom');
   },
-  beforeDestroy: function beforeDestroy() {var _this4 = this;
+  beforeDestroy: function beforeDestroy() {
+    var _this4 = this;
     // 判断当前页面是否存在parent和chldren，一般在checkbox和checkbox-group父子联动的场景会有此情况
     // 组件销毁时，移除子组件在父组件children数组中的实例，释放资源，避免数据混乱
     if (this.parent && uni.$u.test.array(this.parent.children)) {
@@ -10764,11 +11053,12 @@ var install = function install(Vue) {
         }
       });
     }
-  } };
+  }
+};
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 16 */
+/* 36 */
 /*!*****************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/mixin/mpMixin.js ***!
   \*****************************************************************************************************************************/
@@ -10776,14 +11066,22 @@ var install = function install(Vue) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
 
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
   // 将自定义节点设置成虚拟的，更加接近Vue组件的表现，能更好的使用flex属性
   options: {
-    virtualHost: true } };exports.default = _default;
+    virtualHost: true
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 17 */
+/* 37 */
 /*!**********************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/luch-request/index.js ***!
   \**********************************************************************************************************************************/
@@ -10791,12 +11089,19 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _Request = _interopRequireDefault(__webpack_require__(/*! ./core/Request */ 18));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var _default =
 
-_Request.default;exports.default = _default;
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 3);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _Request = _interopRequireDefault(__webpack_require__(/*! ./core/Request */ 38));
+var _default = _Request.default;
+exports.default = _default;
 
 /***/ }),
-/* 18 */
+/* 38 */
 /*!*****************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/luch-request/core/Request.js ***!
   \*****************************************************************************************************************************************/
@@ -10804,42 +11109,42 @@ _Request.default;exports.default = _default;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
 
-
-
-
-
-
-
-
-
-
-
-var _dispatchRequest = _interopRequireDefault(__webpack_require__(/*! ./dispatchRequest */ 19));
-var _InterceptorManager = _interopRequireDefault(__webpack_require__(/*! ./InterceptorManager */ 27));
-var _mergeConfig = _interopRequireDefault(__webpack_require__(/*! ./mergeConfig */ 28));
-var _defaults = _interopRequireDefault(__webpack_require__(/*! ./defaults */ 29));
-var _utils = __webpack_require__(/*! ../utils */ 22);
-var _clone = _interopRequireDefault(__webpack_require__(/*! ../utils/clone */ 30));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;}var
-
-Request = /*#__PURE__*/function () {
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 3);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ 10));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ 22));
+var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ 23));
+var _dispatchRequest = _interopRequireDefault(__webpack_require__(/*! ./dispatchRequest */ 39));
+var _InterceptorManager = _interopRequireDefault(__webpack_require__(/*! ./InterceptorManager */ 47));
+var _mergeConfig = _interopRequireDefault(__webpack_require__(/*! ./mergeConfig */ 48));
+var _defaults = _interopRequireDefault(__webpack_require__(/*! ./defaults */ 49));
+var _utils = __webpack_require__(/*! ../utils */ 42);
+var _clone = _interopRequireDefault(__webpack_require__(/*! ../utils/clone */ 50));
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+var Request = /*#__PURE__*/function () {
   /**
-                                    * @param {Object} arg - 全局配置
-                                    * @param {String} arg.baseURL - 全局根路径
-                                    * @param {Object} arg.header - 全局header
-                                    * @param {String} arg.method = [GET|POST|PUT|DELETE|CONNECT|HEAD|OPTIONS|TRACE] - 全局默认请求方式
-                                    * @param {String} arg.dataType = [json] - 全局默认的dataType
-                                    * @param {String} arg.responseType = [text|arraybuffer] - 全局默认的responseType。支付宝小程序不支持
-                                    * @param {Object} arg.custom - 全局默认的自定义参数
-                                    * @param {Number} arg.timeout - 全局默认的超时时间，单位 ms。默认60000。H5(HBuilderX 2.9.9+)、APP(HBuilderX 2.9.9+)、微信小程序（2.10.0）、支付宝小程序
-                                    * @param {Boolean} arg.sslVerify - 全局默认的是否验证 ssl 证书。默认true.仅App安卓端支持（HBuilderX 2.3.3+）
-                                    * @param {Boolean} arg.withCredentials - 全局默认的跨域请求时是否携带凭证（cookies）。默认false。仅H5支持（HBuilderX 2.6.15+）
-                                    * @param {Boolean} arg.firstIpv4 - 全DNS解析时优先使用ipv4。默认false。仅 App-Android 支持 (HBuilderX 2.8.0+)
-                                    * @param {Function(statusCode):Boolean} arg.validateStatus - 全局默认的自定义验证器。默认statusCode >= 200 && statusCode < 300
-                                    */
-  function Request() {var arg = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};_classCallCheck(this, Request);
+  * @param {Object} arg - 全局配置
+  * @param {String} arg.baseURL - 全局根路径
+  * @param {Object} arg.header - 全局header
+  * @param {String} arg.method = [GET|POST|PUT|DELETE|CONNECT|HEAD|OPTIONS|TRACE] - 全局默认请求方式
+  * @param {String} arg.dataType = [json] - 全局默认的dataType
+  * @param {String} arg.responseType = [text|arraybuffer] - 全局默认的responseType。支付宝小程序不支持
+  * @param {Object} arg.custom - 全局默认的自定义参数
+  * @param {Number} arg.timeout - 全局默认的超时时间，单位 ms。默认60000。H5(HBuilderX 2.9.9+)、APP(HBuilderX 2.9.9+)、微信小程序（2.10.0）、支付宝小程序
+  * @param {Boolean} arg.sslVerify - 全局默认的是否验证 ssl 证书。默认true.仅App安卓端支持（HBuilderX 2.3.3+）
+  * @param {Boolean} arg.withCredentials - 全局默认的跨域请求时是否携带凭证（cookies）。默认false。仅H5支持（HBuilderX 2.6.15+）
+  * @param {Boolean} arg.firstIpv4 - 全DNS解析时优先使用ipv4。默认false。仅 App-Android 支持 (HBuilderX 2.8.0+)
+  * @param {Function(statusCode):Boolean} arg.validateStatus - 全局默认的自定义验证器。默认statusCode >= 200 && statusCode < 300
+  */
+  function Request() {
+    var arg = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+    (0, _classCallCheck2.default)(this, Request);
     if (!(0, _utils.isPlainObject)(arg)) {
       arg = {};
       console.warn('设置全局参数必须接收一个Object');
@@ -10847,164 +11152,162 @@ Request = /*#__PURE__*/function () {
     this.config = (0, _clone.default)(_objectSpread(_objectSpread({}, _defaults.default), arg));
     this.interceptors = {
       request: new _InterceptorManager.default(),
-      response: new _InterceptorManager.default() };
-
+      response: new _InterceptorManager.default()
+    };
   }
 
   /**
-    * @Function
-    * @param {Request~setConfigCallback} f - 设置全局默认配置
-    */_createClass(Request, [{ key: "setConfig", value: function setConfig(
-    f) {
+  * @Function
+  * @param {Request~setConfigCallback} f - 设置全局默认配置
+  */
+  (0, _createClass2.default)(Request, [{
+    key: "setConfig",
+    value: function setConfig(f) {
       this.config = f(this.config);
-    } }, { key: "middleware", value: function middleware(
-
-    config) {
+    }
+  }, {
+    key: "middleware",
+    value: function middleware(config) {
       config = (0, _mergeConfig.default)(this.config, config);
       var chain = [_dispatchRequest.default, undefined];
       var promise = Promise.resolve(config);
-
       this.interceptors.request.forEach(function (interceptor) {
         chain.unshift(interceptor.fulfilled, interceptor.rejected);
       });
-
       this.interceptors.response.forEach(function (interceptor) {
         chain.push(interceptor.fulfilled, interceptor.rejected);
       });
-
       while (chain.length) {
         promise = promise.then(chain.shift(), chain.shift());
       }
-
       return promise;
     }
 
     /**
-      * @Function
-      * @param {Object} config - 请求配置项
-      * @prop {String} options.url - 请求路径
-      * @prop {Object} options.data - 请求参数
-      * @prop {Object} [options.responseType = config.responseType] [text|arraybuffer] - 响应的数据类型
-      * @prop {Object} [options.dataType = config.dataType] - 如果设为 json，会尝试对返回的数据做一次 JSON.parse
-      * @prop {Object} [options.header = config.header] - 请求header
-      * @prop {Object} [options.method = config.method] - 请求方法
-      * @returns {Promise<unknown>}
-      */ }, { key: "request", value: function request()
-    {var config = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+    * @Function
+    * @param {Object} config - 请求配置项
+    * @prop {String} options.url - 请求路径
+    * @prop {Object} options.data - 请求参数
+    * @prop {Object} [options.responseType = config.responseType] [text|arraybuffer] - 响应的数据类型
+    * @prop {Object} [options.dataType = config.dataType] - 如果设为 json，会尝试对返回的数据做一次 JSON.parse
+    * @prop {Object} [options.header = config.header] - 请求header
+    * @prop {Object} [options.method = config.method] - 请求方法
+    * @returns {Promise<unknown>}
+    */
+  }, {
+    key: "request",
+    value: function request() {
+      var config = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
       return this.middleware(config);
-    } }, { key: "get", value: function get(
-
-    url) {var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    }
+  }, {
+    key: "get",
+    value: function get(url) {
+      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
       return this.middleware(_objectSpread({
         url: url,
-        method: 'GET' },
-      options));
-
-    } }, { key: "post", value: function post(
-
-    url, data) {var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-      return this.middleware(_objectSpread({
-        url: url,
-        data: data,
-        method: 'POST' },
-      options));
-
-    } }, { key: "put", value: function put(
-
-
-    url, data) {var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+        method: 'GET'
+      }, options));
+    }
+  }, {
+    key: "post",
+    value: function post(url, data) {
+      var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
       return this.middleware(_objectSpread({
         url: url,
         data: data,
-        method: 'PUT' },
-      options));
-
-    } }, { key: "delete", value: function _delete(
-
-
-
-
-    url, data) {var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+        method: 'POST'
+      }, options));
+    }
+  }, {
+    key: "put",
+    value: function put(url, data) {
+      var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
       return this.middleware(_objectSpread({
         url: url,
         data: data,
-        method: 'DELETE' },
-      options));
-
-    } }, { key: "connect", value: function connect(
-
-
-
-
-    url, data) {var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+        method: 'PUT'
+      }, options));
+    }
+  }, {
+    key: "delete",
+    value: function _delete(url, data) {
+      var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
       return this.middleware(_objectSpread({
         url: url,
         data: data,
-        method: 'CONNECT' },
-      options));
-
-    } }, { key: "head", value: function head(
-
-
-
-
-    url, data) {var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+        method: 'DELETE'
+      }, options));
+    }
+  }, {
+    key: "connect",
+    value: function connect(url, data) {
+      var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
       return this.middleware(_objectSpread({
         url: url,
         data: data,
-        method: 'HEAD' },
-      options));
-
-    } }, { key: "options", value: function options(
-
-
-
-
-    url, data) {var _options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+        method: 'CONNECT'
+      }, options));
+    }
+  }, {
+    key: "head",
+    value: function head(url, data) {
+      var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
       return this.middleware(_objectSpread({
         url: url,
         data: data,
-        method: 'OPTIONS' },
-      _options));
-
-    } }, { key: "trace", value: function trace(
-
-
-
-
-    url, data) {var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+        method: 'HEAD'
+      }, options));
+    }
+  }, {
+    key: "options",
+    value: function options(url, data) {
+      var _options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
       return this.middleware(_objectSpread({
         url: url,
         data: data,
-        method: 'TRACE' },
-      options));
-
-    } }, { key: "upload", value: function upload(
-
-
-
-    url) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+        method: 'OPTIONS'
+      }, _options));
+    }
+  }, {
+    key: "trace",
+    value: function trace(url, data) {
+      var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+      return this.middleware(_objectSpread({
+        url: url,
+        data: data,
+        method: 'TRACE'
+      }, options));
+    }
+  }, {
+    key: "upload",
+    value: function upload(url) {
+      var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
       config.url = url;
       config.method = 'UPLOAD';
       return this.middleware(config);
-    } }, { key: "download", value: function download(
-
-    url) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    }
+  }, {
+    key: "download",
+    value: function download(url) {
+      var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
       config.url = url;
       config.method = 'DOWNLOAD';
       return this.middleware(config);
-    } }]);return Request;}();
-
-
+    }
+  }]);
+  return Request;
+}();
 /**
-                               * setConfig回调
-                               * @return {Object} - 返回操作后的config
-                               * @callback Request~setConfigCallback
-                               * @param {Object} config - 全局默认config
-                               */exports.default = Request;
+ * setConfig回调
+ * @return {Object} - 返回操作后的config
+ * @callback Request~setConfigCallback
+ * @param {Object} config - 全局默认config
+ */
+exports.default = Request;
 
 /***/ }),
-/* 19 */
+/* 39 */
 /*!*************************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/luch-request/core/dispatchRequest.js ***!
   \*************************************************************************************************************************************************/
@@ -11012,12 +11315,21 @@ Request = /*#__PURE__*/function () {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _index = _interopRequireDefault(__webpack_require__(/*! ../adapters/index */ 20));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var _default =
 
-function _default(config) {return (0, _index.default)(config);};exports.default = _default;
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 3);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _index = _interopRequireDefault(__webpack_require__(/*! ../adapters/index */ 40));
+var _default = function _default(config) {
+  return (0, _index.default)(config);
+};
+exports.default = _default;
 
 /***/ }),
-/* 20 */
+/* 40 */
 /*!*******************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/luch-request/adapters/index.js ***!
   \*******************************************************************************************************************************************/
@@ -11025,17 +11337,26 @@ function _default(config) {return (0, _index.default)(config);};exports.default 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _buildURL = _interopRequireDefault(__webpack_require__(/*! ../helpers/buildURL */ 21));
-var _buildFullPath = _interopRequireDefault(__webpack_require__(/*! ../core/buildFullPath */ 23));
-var _settle = _interopRequireDefault(__webpack_require__(/*! ../core/settle */ 26));
-var _utils = __webpack_require__(/*! ../utils */ 22);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
+/* WEBPACK VAR INJECTION */(function(uni) {
 
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 3);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ 10));
+var _buildURL = _interopRequireDefault(__webpack_require__(/*! ../helpers/buildURL */ 41));
+var _buildFullPath = _interopRequireDefault(__webpack_require__(/*! ../core/buildFullPath */ 43));
+var _settle = _interopRequireDefault(__webpack_require__(/*! ../core/settle */ 46));
+var _utils = __webpack_require__(/*! ../utils */ 42);
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           * 返回可选值存在的配置
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           * @param {Array} keys - 可选值数组
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           * @param {Object} config2 - 配置
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           * @return {{}} - 存在的配置项
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           */
+ * 返回可选值存在的配置
+ * @param {Array} keys - 可选值数组
+ * @param {Object} config2 - 配置
+ * @return {{}} - 存在的配置项
+ */
 var mergeKeys = function mergeKeys(keys, config2) {
   var config = {};
   keys.forEach(function (prop) {
@@ -11044,8 +11365,9 @@ var mergeKeys = function mergeKeys(keys, config2) {
     }
   });
   return config;
-};var _default =
-function _default(config) {return new Promise(function (resolve, reject) {
+};
+var _default = function _default(config) {
+  return new Promise(function (resolve, reject) {
     var fullPath = (0, _buildURL.default)((0, _buildFullPath.default)(config.baseURL, config.url), config.params);
     var _config = {
       url: fullPath,
@@ -11059,73 +11381,36 @@ function _default(config) {return new Promise(function (resolve, reject) {
             response.data = JSON.parse(response.data);
           }
           // eslint-disable-next-line no-empty
-        } catch (e) {
-        }
+        } catch (e) {}
         (0, _settle.default)(resolve, reject, response);
-      } };
-
+      }
+    };
     var requestTask;
     if (config.method === 'UPLOAD') {
       delete _config.header['content-type'];
       delete _config.header['Content-Type'];
       var otherConfig = {
-
-
-
         filePath: config.filePath,
-        name: config.name };
-
-      var optionalKeys = [
-
-
-
-
-
-
-
-
-
-      'formData'];
-
+        name: config.name
+      };
+      var optionalKeys = ['formData'];
       requestTask = uni.uploadFile(_objectSpread(_objectSpread(_objectSpread({}, _config), otherConfig), mergeKeys(optionalKeys, config)));
     } else if (config.method === 'DOWNLOAD') {
-
-
-
-
-
       requestTask = uni.downloadFile(_config);
     } else {
-      var _optionalKeys = [
-      'data',
-      'method',
-
-      'timeout',
-
-      'dataType',
-
-      'responseType'];
-
-
-
-
-
-
-
-
-
-
-
+      var _optionalKeys = ['data', 'method', 'timeout', 'dataType', 'responseType'];
       requestTask = uni.request(_objectSpread(_objectSpread({}, _config), mergeKeys(_optionalKeys, config)));
     }
     if (config.getTask) {
       config.getTask(requestTask, config);
     }
-  });};exports.default = _default;
+  });
+};
+exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 21 */
+/* 41 */
 /*!*********************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/luch-request/helpers/buildURL.js ***!
   \*********************************************************************************************************************************************/
@@ -11133,51 +11418,46 @@ function _default(config) {return new Promise(function (resolve, reject) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = buildURL;
 
-var utils = _interopRequireWildcard(__webpack_require__(/*! ../utils */ 22));function _getRequireWildcardCache() {if (typeof WeakMap !== "function") return null;var cache = new WeakMap();_getRequireWildcardCache = function _getRequireWildcardCache() {return cache;};return cache;}function _interopRequireWildcard(obj) {if (obj && obj.__esModule) {return obj;}if (obj === null || typeof obj !== "object" && typeof obj !== "function") {return { default: obj };}var cache = _getRequireWildcardCache();if (cache && cache.has(obj)) {return cache.get(obj);}var newObj = {};var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor;for (var key in obj) {if (Object.prototype.hasOwnProperty.call(obj, key)) {var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null;if (desc && (desc.get || desc.set)) {Object.defineProperty(newObj, key, desc);} else {newObj[key] = obj[key];}}}newObj.default = obj;if (cache) {cache.set(obj, newObj);}return newObj;}
 
+var _typeof = __webpack_require__(/*! @babel/runtime/helpers/typeof */ 12);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = buildURL;
+var utils = _interopRequireWildcard(__webpack_require__(/*! ../utils */ 42));
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function encode(val) {
-  return encodeURIComponent(val).
-  replace(/%40/gi, '@').
-  replace(/%3A/gi, ':').
-  replace(/%24/g, '$').
-  replace(/%2C/gi, ',').
-  replace(/%20/g, '+').
-  replace(/%5B/gi, '[').
-  replace(/%5D/gi, ']');
+  return encodeURIComponent(val).replace(/%40/gi, '@').replace(/%3A/gi, ':').replace(/%24/g, '$').replace(/%2C/gi, ',').replace(/%20/g, '+').replace(/%5B/gi, '[').replace(/%5D/gi, ']');
 }
 
 /**
-   * Build a URL by appending params to the end
-   *
-   * @param {string} url The base of the url (e.g., http://www.google.com)
-   * @param {object} [params] The params to be appended
-   * @returns {string} The formatted url
-   */
+ * Build a URL by appending params to the end
+ *
+ * @param {string} url The base of the url (e.g., http://www.google.com)
+ * @param {object} [params] The params to be appended
+ * @returns {string} The formatted url
+ */
 function buildURL(url, params) {
   /* eslint no-param-reassign:0 */
   if (!params) {
     return url;
   }
-
   var serializedParams;
   if (utils.isURLSearchParams(params)) {
     serializedParams = params.toString();
   } else {
     var parts = [];
-
     utils.forEach(params, function (val, key) {
       if (val === null || typeof val === 'undefined') {
         return;
       }
-
       if (utils.isArray(val)) {
         key = "".concat(key, "[]");
       } else {
         val = [val];
       }
-
       utils.forEach(val, function (v) {
         if (utils.isDate(v)) {
           v = v.toISOString();
@@ -11187,24 +11467,20 @@ function buildURL(url, params) {
         parts.push("".concat(encode(key), "=").concat(encode(v)));
       });
     });
-
     serializedParams = parts.join('&');
   }
-
   if (serializedParams) {
     var hashmarkIndex = url.indexOf('#');
     if (hashmarkIndex !== -1) {
       url = url.slice(0, hashmarkIndex);
     }
-
     url += (url.indexOf('?') === -1 ? '?' : '&') + serializedParams;
   }
-
   return url;
 }
 
 /***/ }),
-/* 22 */
+/* 42 */
 /*!**********************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/luch-request/utils.js ***!
   \**********************************************************************************************************************************/
@@ -11215,61 +11491,74 @@ function buildURL(url, params) {
 
 
 // utils is a library of generic helper functions non-specific to axios
-Object.defineProperty(exports, "__esModule", { value: true });exports.isArray = isArray;exports.isObject = isObject;exports.isDate = isDate;exports.isURLSearchParams = isURLSearchParams;exports.forEach = forEach;exports.isBoolean = isBoolean;exports.isPlainObject = isPlainObject;exports.deepMerge = deepMerge;exports.isUndefined = isUndefined;var
-toString = Object.prototype.toString;
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 3);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.deepMerge = deepMerge;
+exports.forEach = forEach;
+exports.isArray = isArray;
+exports.isBoolean = isBoolean;
+exports.isDate = isDate;
+exports.isObject = isObject;
+exports.isPlainObject = isPlainObject;
+exports.isURLSearchParams = isURLSearchParams;
+exports.isUndefined = isUndefined;
+var _typeof2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/typeof */ 12));
+var toString = Object.prototype.toString;
 
 /**
-                                       * Determine if a value is an Array
-                                       *
-                                       * @param {Object} val The value to test
-                                       * @returns {boolean} True if value is an Array, otherwise false
-                                       */
+ * Determine if a value is an Array
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is an Array, otherwise false
+ */
 function isArray(val) {
   return toString.call(val) === '[object Array]';
 }
 
 /**
-   * Determine if a value is an Object
-   *
-   * @param {Object} val The value to test
-   * @returns {boolean} True if value is an Object, otherwise false
-   */
+ * Determine if a value is an Object
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is an Object, otherwise false
+ */
 function isObject(val) {
-  return val !== null && typeof val === 'object';
+  return val !== null && (0, _typeof2.default)(val) === 'object';
 }
 
 /**
-   * Determine if a value is a Date
-   *
-   * @param {Object} val The value to test
-   * @returns {boolean} True if value is a Date, otherwise false
-   */
+ * Determine if a value is a Date
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a Date, otherwise false
+ */
 function isDate(val) {
   return toString.call(val) === '[object Date]';
 }
 
 /**
-   * Determine if a value is a URLSearchParams object
-   *
-   * @param {Object} val The value to test
-   * @returns {boolean} True if value is a URLSearchParams object, otherwise false
-   */
+ * Determine if a value is a URLSearchParams object
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a URLSearchParams object, otherwise false
+ */
 function isURLSearchParams(val) {
   return typeof URLSearchParams !== 'undefined' && val instanceof URLSearchParams;
 }
 
 /**
-   * Iterate over an Array or an Object invoking a function for each item.
-   *
-   * If `obj` is an Array callback will be called passing
-   * the value, index, and complete array for each item.
-   *
-   * If 'obj' is an Object callback will be called passing
-   * the value, key, and complete object for each property.
-   *
-   * @param {Object|Array} obj The object to iterate
-   * @param {Function} fn The callback to invoke for each item
-   */
+ * Iterate over an Array or an Object invoking a function for each item.
+ *
+ * If `obj` is an Array callback will be called passing
+ * the value, index, and complete array for each item.
+ *
+ * If 'obj' is an Object callback will be called passing
+ * the value, key, and complete object for each property.
+ *
+ * @param {Object|Array} obj The object to iterate
+ * @param {Function} fn The callback to invoke for each item
+ */
 function forEach(obj, fn) {
   // Don't bother if no value provided
   if (obj === null || typeof obj === 'undefined') {
@@ -11277,11 +11566,10 @@ function forEach(obj, fn) {
   }
 
   // Force an array if not already something iterable
-  if (typeof obj !== 'object') {
+  if ((0, _typeof2.default)(obj) !== 'object') {
     /* eslint no-param-reassign:0 */
     obj = [obj];
   }
-
   if (isArray(obj)) {
     // Iterate over array values
     for (var i = 0, l = obj.length; i < l; i++) {
@@ -11298,37 +11586,38 @@ function forEach(obj, fn) {
 }
 
 /**
-   * 是否为boolean 值
-   * @param val
-   * @returns {boolean}
-   */
+ * 是否为boolean 值
+ * @param val
+ * @returns {boolean}
+ */
 function isBoolean(val) {
   return typeof val === 'boolean';
 }
 
 /**
-   * 是否为真正的对象{} new Object
-   * @param {any} obj - 检测的对象
-   * @returns {boolean}
-   */
+ * 是否为真正的对象{} new Object
+ * @param {any} obj - 检测的对象
+ * @returns {boolean}
+ */
 function isPlainObject(obj) {
   return Object.prototype.toString.call(obj) === '[object Object]';
 }
 
 /**
-   * Function equal to merge with the difference being that no reference
-   * to original objects is kept.
-   *
-   * @see merge
-   * @param {Object} obj1 Object to merge
-   * @returns {Object} Result of all merge properties
-   */
-function deepMerge() /* obj1, obj2, obj3, ... */{
+ * Function equal to merge with the difference being that no reference
+ * to original objects is kept.
+ *
+ * @see merge
+ * @param {Object} obj1 Object to merge
+ * @returns {Object} Result of all merge properties
+ */
+function deepMerge( /* obj1, obj2, obj3, ... */
+) {
   var result = {};
   function assignValue(val, key) {
-    if (typeof result[key] === 'object' && typeof val === 'object') {
+    if ((0, _typeof2.default)(result[key]) === 'object' && (0, _typeof2.default)(val) === 'object') {
       result[key] = deepMerge(result[key], val);
-    } else if (typeof val === 'object') {
+    } else if ((0, _typeof2.default)(val) === 'object') {
       result[key] = deepMerge({}, val);
     } else {
       result[key] = val;
@@ -11339,13 +11628,12 @@ function deepMerge() /* obj1, obj2, obj3, ... */{
   }
   return result;
 }
-
 function isUndefined(val) {
   return typeof val === 'undefined';
 }
 
 /***/ }),
-/* 23 */
+/* 43 */
 /*!***********************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/luch-request/core/buildFullPath.js ***!
   \***********************************************************************************************************************************************/
@@ -11353,20 +11641,24 @@ function isUndefined(val) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = buildFullPath;
 
-var _isAbsoluteURL = _interopRequireDefault(__webpack_require__(/*! ../helpers/isAbsoluteURL */ 24));
-var _combineURLs = _interopRequireDefault(__webpack_require__(/*! ../helpers/combineURLs */ 25));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 3);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = buildFullPath;
+var _isAbsoluteURL = _interopRequireDefault(__webpack_require__(/*! ../helpers/isAbsoluteURL */ 44));
+var _combineURLs = _interopRequireDefault(__webpack_require__(/*! ../helpers/combineURLs */ 45));
 /**
-                                                                                                                                                                            * Creates a new URL by combining the baseURL with the requestedURL,
-                                                                                                                                                                            * only when the requestedURL is not already an absolute URL.
-                                                                                                                                                                            * If the requestURL is absolute, this function returns the requestedURL untouched.
-                                                                                                                                                                            *
-                                                                                                                                                                            * @param {string} baseURL The base URL
-                                                                                                                                                                            * @param {string} requestedURL Absolute or relative URL to combine
-                                                                                                                                                                            * @returns {string} The combined full path
-                                                                                                                                                                            */
+ * Creates a new URL by combining the baseURL with the requestedURL,
+ * only when the requestedURL is not already an absolute URL.
+ * If the requestURL is absolute, this function returns the requestedURL untouched.
+ *
+ * @param {string} baseURL The base URL
+ * @param {string} requestedURL Absolute or relative URL to combine
+ * @returns {string} The combined full path
+ */
 function buildFullPath(baseURL, requestedURL) {
   if (baseURL && !(0, _isAbsoluteURL.default)(requestedURL)) {
     return (0, _combineURLs.default)(baseURL, requestedURL);
@@ -11375,7 +11667,7 @@ function buildFullPath(baseURL, requestedURL) {
 }
 
 /***/ }),
-/* 24 */
+/* 44 */
 /*!**************************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/luch-request/helpers/isAbsoluteURL.js ***!
   \**************************************************************************************************************************************************/
@@ -11386,11 +11678,15 @@ function buildFullPath(baseURL, requestedURL) {
 
 
 /**
-               * Determines whether the specified URL is absolute
-               *
-               * @param {string} url The URL to test
-               * @returns {boolean} True if the specified URL is absolute, otherwise false
-               */Object.defineProperty(exports, "__esModule", { value: true });exports.default = isAbsoluteURL;
+ * Determines whether the specified URL is absolute
+ *
+ * @param {string} url The URL to test
+ * @returns {boolean} True if the specified URL is absolute, otherwise false
+ */
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = isAbsoluteURL;
 function isAbsoluteURL(url) {
   // A URL is considered absolute if it begins with "<scheme>://" or "//" (protocol-relative URL).
   // RFC 3986 defines scheme name as a sequence of characters beginning with a letter and followed
@@ -11399,7 +11695,7 @@ function isAbsoluteURL(url) {
 }
 
 /***/ }),
-/* 25 */
+/* 45 */
 /*!************************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/luch-request/helpers/combineURLs.js ***!
   \************************************************************************************************************************************************/
@@ -11410,20 +11706,22 @@ function isAbsoluteURL(url) {
 
 
 /**
-               * Creates a new URL by combining the specified URLs
-               *
-               * @param {string} baseURL The base URL
-               * @param {string} relativeURL The relative URL
-               * @returns {string} The combined URL
-               */Object.defineProperty(exports, "__esModule", { value: true });exports.default = combineURLs;
+ * Creates a new URL by combining the specified URLs
+ *
+ * @param {string} baseURL The base URL
+ * @param {string} relativeURL The relative URL
+ * @returns {string} The combined URL
+ */
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = combineURLs;
 function combineURLs(baseURL, relativeURL) {
-  return relativeURL ? "".concat(
-  baseURL.replace(/\/+$/, ''), "/").concat(relativeURL.replace(/^\/+/, '')) :
-  baseURL;
+  return relativeURL ? "".concat(baseURL.replace(/\/+$/, ''), "/").concat(relativeURL.replace(/^\/+/, '')) : baseURL;
 }
 
 /***/ }),
-/* 26 */
+/* 46 */
 /*!****************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/luch-request/core/settle.js ***!
   \****************************************************************************************************************************************/
@@ -11431,15 +11729,21 @@ function combineURLs(baseURL, relativeURL) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = settle; /**
-                                                                                                      * Resolve or reject a Promise based on response status.
-                                                                                                      *
-                                                                                                      * @param {Function} resolve A function that resolves the promise.
-                                                                                                      * @param {Function} reject A function that rejects the promise.
-                                                                                                      * @param {object} response The response.
-                                                                                                      */
-function settle(resolve, reject, response) {var
-  validateStatus = response.config.validateStatus;
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = settle;
+/**
+ * Resolve or reject a Promise based on response status.
+ *
+ * @param {Function} resolve A function that resolves the promise.
+ * @param {Function} reject A function that rejects the promise.
+ * @param {object} response The response.
+ */
+function settle(resolve, reject, response) {
+  var validateStatus = response.config.validateStatus;
   var status = response.statusCode;
   if (status && (!validateStatus || validateStatus(status))) {
     resolve(response);
@@ -11449,7 +11753,7 @@ function settle(resolve, reject, response) {var
 }
 
 /***/ }),
-/* 27 */
+/* 47 */
 /*!****************************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/luch-request/core/InterceptorManager.js ***!
   \****************************************************************************************************************************************************/
@@ -11457,33 +11761,37 @@ function settle(resolve, reject, response) {var
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
 function InterceptorManager() {
   this.handlers = [];
 }
 
 /**
-   * Add a new interceptor to the stack
-   *
-   * @param {Function} fulfilled The function to handle `then` for a `Promise`
-   * @param {Function} rejected The function to handle `reject` for a `Promise`
-   *
-   * @return {Number} An ID used to remove interceptor later
-   */
+ * Add a new interceptor to the stack
+ *
+ * @param {Function} fulfilled The function to handle `then` for a `Promise`
+ * @param {Function} rejected The function to handle `reject` for a `Promise`
+ *
+ * @return {Number} An ID used to remove interceptor later
+ */
 InterceptorManager.prototype.use = function use(fulfilled, rejected) {
   this.handlers.push({
     fulfilled: fulfilled,
-    rejected: rejected });
-
+    rejected: rejected
+  });
   return this.handlers.length - 1;
 };
 
 /**
-    * Remove an interceptor from the stack
-    *
-    * @param {Number} id The ID that was returned by `use`
-    */
+ * Remove an interceptor from the stack
+ *
+ * @param {Number} id The ID that was returned by `use`
+ */
 InterceptorManager.prototype.eject = function eject(id) {
   if (this.handlers[id]) {
     this.handlers[id] = null;
@@ -11491,25 +11799,25 @@ InterceptorManager.prototype.eject = function eject(id) {
 };
 
 /**
-    * Iterate over all the registered interceptors
-    *
-    * This method is particularly useful for skipping over any
-    * interceptors that may have become `null` calling `eject`.
-    *
-    * @param {Function} fn The function to call for each interceptor
-    */
+ * Iterate over all the registered interceptors
+ *
+ * This method is particularly useful for skipping over any
+ * interceptors that may have become `null` calling `eject`.
+ *
+ * @param {Function} fn The function to call for each interceptor
+ */
 InterceptorManager.prototype.forEach = function forEach(fn) {
   this.handlers.forEach(function (h) {
     if (h !== null) {
       fn(h);
     }
   });
-};var _default =
-
-InterceptorManager;exports.default = _default;
+};
+var _default = InterceptorManager;
+exports.default = _default;
 
 /***/ }),
-/* 28 */
+/* 48 */
 /*!*********************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/luch-request/core/mergeConfig.js ***!
   \*********************************************************************************************************************************************/
@@ -11517,15 +11825,24 @@ InterceptorManager;exports.default = _default;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _utils = __webpack_require__(/*! ../utils */ 22);function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
 
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 3);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ 10));
+var _utils = __webpack_require__(/*! ../utils */ 42);
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  * 合并局部配置优先的配置，如果局部有该配置项则用局部，如果全局有该配置项则用全局
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  * @param {Array} keys - 配置项
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  * @param {Object} globalsConfig - 当前的全局配置
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  * @param {Object} config2 - 局部配置
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  * @return {{}}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  */
+ * 合并局部配置优先的配置，如果局部有该配置项则用局部，如果全局有该配置项则用全局
+ * @param {Array} keys - 配置项
+ * @param {Object} globalsConfig - 当前的全局配置
+ * @param {Object} config2 - 局部配置
+ * @return {{}}
+ */
 var mergeKeys = function mergeKeys(keys, globalsConfig, config2) {
   var config = {};
   keys.forEach(function (prop) {
@@ -11538,12 +11855,13 @@ var mergeKeys = function mergeKeys(keys, globalsConfig, config2) {
   return config;
 };
 /**
-    *
-    * @param globalsConfig - 当前实例的全局配置
-    * @param config2 - 当前的局部配置
-    * @return - 合并后的配置
-    */var _default =
-function _default(globalsConfig) {var config2 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+ *
+ * @param globalsConfig - 当前实例的全局配置
+ * @param config2 - 当前的局部配置
+ * @return - 合并后的配置
+ */
+var _default = function _default(globalsConfig) {
+  var config2 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
   var method = config2.method || globalsConfig.method || 'GET';
   var config = {
     baseURL: globalsConfig.baseURL || '',
@@ -11551,78 +11869,31 @@ function _default(globalsConfig) {var config2 = arguments.length > 1 && argument
     url: config2.url || '',
     params: config2.params || {},
     custom: _objectSpread(_objectSpread({}, globalsConfig.custom || {}), config2.custom || {}),
-    header: (0, _utils.deepMerge)(globalsConfig.header || {}, config2.header || {}) };
-
+    header: (0, _utils.deepMerge)(globalsConfig.header || {}, config2.header || {})
+  };
   var defaultToConfig2Keys = ['getTask', 'validateStatus'];
   config = _objectSpread(_objectSpread({}, config), mergeKeys(defaultToConfig2Keys, globalsConfig, config2));
 
   // eslint-disable-next-line no-empty
-  if (method === 'DOWNLOAD') {
-
-
-
-
-
-
-
-  } else if (method === 'UPLOAD') {
+  if (method === 'DOWNLOAD') {} else if (method === 'UPLOAD') {
     delete config.header['content-type'];
     delete config.header['Content-Type'];
-    var uploadKeys = [
-
-
-
-
-
-
-
-
-
-    'filePath',
-    'name',
-
-
-
-    'formData'];
-
+    var uploadKeys = ['filePath', 'name', 'formData'];
     uploadKeys.forEach(function (prop) {
       if (!(0, _utils.isUndefined)(config2[prop])) {
         config[prop] = config2[prop];
       }
     });
-
-
-
-
-
   } else {
-    var defaultsKeys = [
-    'data',
-
-    'timeout',
-
-    'dataType',
-
-    'responseType'];
-
-
-
-
-
-
-
-
-
-
-
+    var defaultsKeys = ['data', 'timeout', 'dataType', 'responseType'];
     config = _objectSpread(_objectSpread({}, config), mergeKeys(defaultsKeys, globalsConfig, config2));
   }
-
   return config;
-};exports.default = _default;
+};
+exports.default = _default;
 
 /***/ }),
-/* 29 */
+/* 49 */
 /*!******************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/luch-request/core/defaults.js ***!
   \******************************************************************************************************************************************/
@@ -11630,37 +11901,31 @@ function _default(globalsConfig) {var config2 = arguments.length > 1 && argument
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /**
-                                                                                                      * 默认的全局配置
-                                                                                                      */var _default =
 
-{
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/**
+ * 默认的全局配置
+ */
+var _default = {
   baseURL: '',
   header: {},
   method: 'GET',
   dataType: 'json',
-
   responseType: 'text',
-
   custom: {},
-
   timeout: 60000,
-
-
-
-
-
-
-
-
-
-
   validateStatus: function validateStatus(status) {
     return status >= 200 && status < 300;
-  } };exports.default = _default;
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 30 */
+/* 50 */
 /*!****************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/luch-request/utils/clone.js ***!
   \****************************************************************************************************************************************/
@@ -11668,14 +11933,21 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(Buffer) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /* eslint-disable */
+/* WEBPACK VAR INJECTION */(function(Buffer) {
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 3);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _typeof2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/typeof */ 12));
+/* eslint-disable */
 var clone = function () {
   'use strict';
 
   function _instanceof(obj, type) {
     return type != null && obj instanceof type;
   }
-
   var nativeMap;
   try {
     nativeMap = Map;
@@ -11684,14 +11956,12 @@ var clone = function () {
     // value will ever be an instanceof.
     nativeMap = function nativeMap() {};
   }
-
   var nativeSet;
   try {
     nativeSet = Set;
   } catch (_) {
     nativeSet = function nativeSet() {};
   }
-
   var nativePromise;
   try {
     nativePromise = Promise;
@@ -11700,28 +11970,28 @@ var clone = function () {
   }
 
   /**
-     * Clones (copies) an Object using deep copying.
-     *
-     * This function supports circular references by default, but if you are certain
-     * there are no circular references in your object, you can save some CPU time
-     * by calling clone(obj, false).
-     *
-     * Caution: if `circular` is false and `parent` contains circular references,
-     * your program may enter an infinite loop and crash.
-     *
-     * @param `parent` - the object to be cloned
-     * @param `circular` - set to true if the object to be cloned may contain
-     *    circular references. (optional - true by default)
-     * @param `depth` - set to a number if the object is only to be cloned to
-     *    a particular depth. (optional - defaults to Infinity)
-     * @param `prototype` - sets the prototype to be used when cloning an object.
-     *    (optional - defaults to parent prototype).
-     * @param `includeNonEnumerable` - set to true if the non-enumerable properties
-     *    should be cloned as well. Non-enumerable properties on the prototype
-     *    chain will be ignored. (optional - false by default)
-     */
+   * Clones (copies) an Object using deep copying.
+   *
+   * This function supports circular references by default, but if you are certain
+   * there are no circular references in your object, you can save some CPU time
+   * by calling clone(obj, false).
+   *
+   * Caution: if `circular` is false and `parent` contains circular references,
+   * your program may enter an infinite loop and crash.
+   *
+   * @param `parent` - the object to be cloned
+   * @param `circular` - set to true if the object to be cloned may contain
+   *    circular references. (optional - true by default)
+   * @param `depth` - set to a number if the object is only to be cloned to
+   *    a particular depth. (optional - defaults to Infinity)
+   * @param `prototype` - sets the prototype to be used when cloning an object.
+   *    (optional - defaults to parent prototype).
+   * @param `includeNonEnumerable` - set to true if the non-enumerable properties
+   *    should be cloned as well. Non-enumerable properties on the prototype
+   *    chain will be ignored. (optional - false by default)
+   */
   function clone(parent, circular, depth, prototype, includeNonEnumerable) {
-    if (typeof circular === 'object') {
+    if ((0, _typeof2.default)(circular) === 'object') {
       depth = circular.depth;
       prototype = circular.prototype;
       includeNonEnumerable = circular.includeNonEnumerable;
@@ -11731,30 +12001,20 @@ var clone = function () {
     // and children have the same index
     var allParents = [];
     var allChildren = [];
-
     var useBuffer = typeof Buffer != 'undefined';
-
-    if (typeof circular == 'undefined')
-    circular = true;
-
-    if (typeof depth == 'undefined')
-    depth = Infinity;
+    if (typeof circular == 'undefined') circular = true;
+    if (typeof depth == 'undefined') depth = Infinity;
 
     // recurse this function so we don't reset allParents and allChildren
     function _clone(parent, depth) {
       // cloning null always returns null
-      if (parent === null)
-      return null;
-
-      if (depth === 0)
-      return parent;
-
+      if (parent === null) return null;
+      if (depth === 0) return parent;
       var child;
       var proto;
-      if (typeof parent != 'object') {
+      if ((0, _typeof2.default)(parent) != 'object') {
         return parent;
       }
-
       if (_instanceof(parent, nativeMap)) {
         child = new nativeMap();
       } else if (_instanceof(parent, nativeSet)) {
@@ -11790,23 +12050,19 @@ var clone = function () {
         if (typeof prototype == 'undefined') {
           proto = Object.getPrototypeOf(parent);
           child = Object.create(proto);
-        } else
-        {
+        } else {
           child = Object.create(prototype);
           proto = prototype;
         }
       }
-
       if (circular) {
         var index = allParents.indexOf(parent);
-
         if (index != -1) {
           return allChildren[index];
         }
         allParents.push(parent);
         allChildren.push(child);
       }
-
       if (_instanceof(parent, nativeMap)) {
         parent.forEach(function (value, key) {
           var keyChild = _clone(key, depth - 1);
@@ -11820,13 +12076,11 @@ var clone = function () {
           child.add(entryChild);
         });
       }
-
       for (var i in parent) {
         var attrs = Object.getOwnPropertyDescriptor(parent, i);
         if (attrs) {
           child[i] = _clone(parent[i], depth - 1);
         }
-
         try {
           var objProperty = Object.getOwnPropertyDescriptor(parent, i);
           if (objProperty.set === 'undefined') {
@@ -11844,9 +12098,7 @@ var clone = function () {
             continue;
           }
         }
-
       }
-
       if (Object.getOwnPropertySymbols) {
         var symbols = Object.getOwnPropertySymbols(parent);
         for (var i = 0; i < symbols.length; i++) {
@@ -11861,7 +12113,6 @@ var clone = function () {
           Object.defineProperty(child, symbol, descriptor);
         }
       }
-
       if (includeNonEnumerable) {
         var allPropertyNames = Object.getOwnPropertyNames(parent);
         for (var i = 0; i < allPropertyNames.length; i++) {
@@ -11874,24 +12125,20 @@ var clone = function () {
           Object.defineProperty(child, propertyName, descriptor);
         }
       }
-
       return child;
     }
-
     return _clone(parent, depth);
   }
 
   /**
-     * Simple flat clone using prototype, accepts only objects, usefull for property
-     * override on FLAT configuration object (no nested props).
-     *
-     * USE WITH CAUTION! This may not behave as you wish if you do not know how this
-     * works.
-     */
+   * Simple flat clone using prototype, accepts only objects, usefull for property
+   * override on FLAT configuration object (no nested props).
+   *
+   * USE WITH CAUTION! This may not behave as you wish if you do not know how this
+   * works.
+   */
   clone.clonePrototype = function clonePrototype(parent) {
-    if (parent === null)
-    return null;
-
+    if (parent === null) return null;
     var c = function c() {};
     c.prototype = parent;
     return new c();
@@ -11903,22 +12150,18 @@ var clone = function () {
     return Object.prototype.toString.call(o);
   }
   clone.__objToStr = __objToStr;
-
   function __isDate(o) {
-    return typeof o === 'object' && __objToStr(o) === '[object Date]';
+    return (0, _typeof2.default)(o) === 'object' && __objToStr(o) === '[object Date]';
   }
   clone.__isDate = __isDate;
-
   function __isArray(o) {
-    return typeof o === 'object' && __objToStr(o) === '[object Array]';
+    return (0, _typeof2.default)(o) === 'object' && __objToStr(o) === '[object Array]';
   }
   clone.__isArray = __isArray;
-
   function __isRegExp(o) {
-    return typeof o === 'object' && __objToStr(o) === '[object RegExp]';
+    return (0, _typeof2.default)(o) === 'object' && __objToStr(o) === '[object RegExp]';
   }
   clone.__isRegExp = __isRegExp;
-
   function __getRegExpFlags(re) {
     var flags = '';
     if (re.global) flags += 'g';
@@ -11927,15 +12170,14 @@ var clone = function () {
     return flags;
   }
   clone.__getRegExpFlags = __getRegExpFlags;
-
   return clone;
-}();var _default =
-
-clone;exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/buffer/index.js */ 31).Buffer))
+}();
+var _default = clone;
+exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/buffer/index.js */ 51).Buffer))
 
 /***/ }),
-/* 31 */
+/* 51 */
 /*!**************************************!*\
   !*** ./node_modules/buffer/index.js ***!
   \**************************************/
@@ -11953,9 +12195,9 @@ clone;exports.default = _default;
 
 
 
-var base64 = __webpack_require__(/*! base64-js */ 32)
-var ieee754 = __webpack_require__(/*! ieee754 */ 33)
-var isArray = __webpack_require__(/*! isarray */ 34)
+var base64 = __webpack_require__(/*! base64-js */ 52)
+var ieee754 = __webpack_require__(/*! ieee754 */ 53)
+var isArray = __webpack_require__(/*! isarray */ 54)
 
 exports.Buffer = Buffer
 exports.SlowBuffer = SlowBuffer
@@ -13736,7 +13978,7 @@ function isnan (val) {
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../webpack/buildin/global.js */ 2)))
 
 /***/ }),
-/* 32 */
+/* 52 */
 /*!*****************************************!*\
   !*** ./node_modules/base64-js/index.js ***!
   \*****************************************/
@@ -13871,9 +14113,7 @@ function fromByteArray (uint8) {
 
   // go through the array every three bytes, we'll deal with trailing stuff later
   for (var i = 0, len2 = len - extraBytes; i < len2; i += maxChunkLength) {
-    parts.push(encodeChunk(
-      uint8, i, (i + maxChunkLength) > len2 ? len2 : (i + maxChunkLength)
-    ))
+    parts.push(encodeChunk(uint8, i, (i + maxChunkLength) > len2 ? len2 : (i + maxChunkLength)))
   }
 
   // pad the end with zeros, but make sure to not forget the extra bytes
@@ -13899,13 +14139,14 @@ function fromByteArray (uint8) {
 
 
 /***/ }),
-/* 33 */
+/* 53 */
 /*!***************************************!*\
   !*** ./node_modules/ieee754/index.js ***!
   \***************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
+/*! ieee754. BSD-3-Clause License. Feross Aboukhadijeh <https://feross.org/opensource> */
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   var e, m
   var eLen = (nBytes * 8) - mLen - 1
@@ -13993,7 +14234,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
 
 
 /***/ }),
-/* 34 */
+/* 54 */
 /*!***************************************!*\
   !*** ./node_modules/isarray/index.js ***!
   \***************************************/
@@ -14008,7 +14249,7 @@ module.exports = Array.isArray || function (arr) {
 
 
 /***/ }),
-/* 35 */
+/* 55 */
 /*!**************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/util/route.js ***!
   \**************************************************************************************************************************/
@@ -14016,21 +14257,34 @@ module.exports = Array.isArray || function (arr) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 36));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;} /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * 路由跳转方法，该方法相对于直接使用uni.xxx的好处是使用更加简单快捷
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * 并且带有路由拦截功能
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */var
+/* WEBPACK VAR INJECTION */(function(uni) {
 
-Router = /*#__PURE__*/function () {
-  function Router() {_classCallCheck(this, Router);
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 3);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ 22));
+var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ 23));
+/**
+ * 路由跳转方法，该方法相对于直接使用uni.xxx的好处是使用更加简单快捷
+ * 并且带有路由拦截功能
+ */
+var Router = /*#__PURE__*/function () {
+  function Router() {
+    (0, _classCallCheck2.default)(this, Router);
     // 原始属性定义
     this.config = {
       type: 'navigateTo',
       url: '',
-      delta: 1, // navigateBack页面后退时,回退的层数
-      params: {}, // 传递的参数
-      animationType: 'pop-in', // 窗口动画,只在APP有效
-      animationDuration: 300, // 窗口动画持续时间,单位毫秒,只在APP有效
+      delta: 1,
+      // navigateBack页面后退时,回退的层数
+      params: {},
+      // 传递的参数
+      animationType: 'pop-in',
+      // 窗口动画,只在APP有效
+      animationDuration: 300,
+      // 窗口动画持续时间,单位毫秒,只在APP有效
       intercept: false // 是否需要拦截
     };
     // 因为route方法是需要对外赋值给另外的对象使用，同时route内部有使用this，会导致route失去上下文
@@ -14039,12 +14293,16 @@ Router = /*#__PURE__*/function () {
   }
 
   // 判断url前面是否有"/"，如果没有则加上，否则无法跳转
-  _createClass(Router, [{ key: "addRootPath", value: function addRootPath(url) {
+  (0, _createClass2.default)(Router, [{
+    key: "addRootPath",
+    value: function addRootPath(url) {
       return url[0] === '/' ? url : "/".concat(url);
     }
 
     // 整合路由参数
-  }, { key: "mixinParam", value: function mixinParam(url, params) {
+  }, {
+    key: "mixinParam",
+    value: function mixinParam(url, params) {
       url = url && this.addRootPath(url);
 
       // 使用正则匹配，主要依据是判断是否有"/","?","="等，如“/page/index/index?name=mary"
@@ -14062,876 +14320,92 @@ Router = /*#__PURE__*/function () {
     }
 
     // 对外的方法名称
-  }, { key: "route", value: function () {var _route = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var options,params,mergeConfig,isNext,_args = arguments;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:options = _args.length > 0 && _args[0] !== undefined ? _args[0] : {};params = _args.length > 1 && _args[1] !== undefined ? _args[1] : {};
-                // 合并用户的配置和内部的默认配置
-                mergeConfig = {};
+  }, {
+    key: "route",
+    value: async function route() {
+      var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+      var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+      // 合并用户的配置和内部的默认配置
+      var mergeConfig = {};
+      if (typeof options === 'string') {
+        // 如果options为字符串，则为route(url, params)的形式
+        mergeConfig.url = this.mixinParam(options, params);
+        mergeConfig.type = 'navigateTo';
+      } else {
+        mergeConfig = uni.$u.deepMerge(options, this.config);
+        // 否则正常使用mergeConfig中的url和params进行拼接
+        mergeConfig.url = this.mixinParam(options.url, options.params);
+      }
 
-                if (typeof options === 'string') {
-                  // 如果options为字符串，则为route(url, params)的形式
-                  mergeConfig.url = this.mixinParam(options, params);
-                  mergeConfig.type = 'navigateTo';
-                } else {
-                  mergeConfig = uni.$u.deepMerge(options, this.config);
-                  // 否则正常使用mergeConfig中的url和params进行拼接
-                  mergeConfig.url = this.mixinParam(options.url, options.params);
-                }
-
-                // 如果本次跳转的路径和本页面路径一致，不执行跳转，防止用户快速点击跳转按钮，造成多次跳转同一个页面的问题
-                if (!(mergeConfig.url === uni.$u.page())) {_context.next = 6;break;}return _context.abrupt("return");case 6:
-
-                if (params.intercept) {
-                  this.config.intercept = params.intercept;
-                }
-                // params参数也带给拦截器
-                mergeConfig.params = params;
-                // 合并内外部参数
-                mergeConfig = uni.$u.deepMerge(this.config, mergeConfig);
-                // 判断用户是否定义了拦截器
-                if (!(typeof uni.$u.routeIntercept === 'function')) {_context.next = 16;break;}_context.next = 12;return (
-
-                  new Promise(function (resolve, reject) {
-                    uni.$u.routeIntercept(mergeConfig, resolve);
-                  }));case 12:isNext = _context.sent;
-                // 如果isNext为true，则执行路由跳转
-                isNext && this.openPage(mergeConfig);_context.next = 17;break;case 16:
-
-                this.openPage(mergeConfig);case 17:case "end":return _context.stop();}}}, _callee, this);}));function route() {return _route.apply(this, arguments);}return route;}()
-
-
+      // 如果本次跳转的路径和本页面路径一致，不执行跳转，防止用户快速点击跳转按钮，造成多次跳转同一个页面的问题
+      if (mergeConfig.url === uni.$u.page()) return;
+      if (params.intercept) {
+        this.config.intercept = params.intercept;
+      }
+      // params参数也带给拦截器
+      mergeConfig.params = params;
+      // 合并内外部参数
+      mergeConfig = uni.$u.deepMerge(this.config, mergeConfig);
+      // 判断用户是否定义了拦截器
+      if (typeof uni.$u.routeIntercept === 'function') {
+        // 定一个promise，根据用户执行resolve(true)或者resolve(false)来决定是否进行路由跳转
+        var isNext = await new Promise(function (resolve, reject) {
+          uni.$u.routeIntercept(mergeConfig, resolve);
+        });
+        // 如果isNext为true，则执行路由跳转
+        isNext && this.openPage(mergeConfig);
+      } else {
+        this.openPage(mergeConfig);
+      }
+    }
 
     // 执行路由跳转
-  }, { key: "openPage", value: function openPage(config) {
+  }, {
+    key: "openPage",
+    value: function openPage(config) {
       // 解构参数
-      var
-      url =
-
-
-
-
-      config.url,type = config.type,delta = config.delta,animationType = config.animationType,animationDuration = config.animationDuration;
+      var url = config.url,
+        type = config.type,
+        delta = config.delta,
+        animationType = config.animationType,
+        animationDuration = config.animationDuration;
       if (config.type == 'navigateTo' || config.type == 'to') {
         uni.navigateTo({
           url: url,
           animationType: animationType,
-          animationDuration: animationDuration });
-
+          animationDuration: animationDuration
+        });
       }
       if (config.type == 'redirectTo' || config.type == 'redirect') {
         uni.redirectTo({
-          url: url });
-
+          url: url
+        });
       }
       if (config.type == 'switchTab' || config.type == 'tab') {
         uni.switchTab({
-          url: url });
-
+          url: url
+        });
       }
       if (config.type == 'reLaunch' || config.type == 'launch') {
         uni.reLaunch({
-          url: url });
-
+          url: url
+        });
       }
       if (config.type == 'navigateBack' || config.type == 'back') {
         uni.navigateBack({
-          delta: delta });
-
+          delta: delta
+        });
       }
-    } }]);return Router;}();var _default =
-
-
-new Router().route;exports.default = _default;
+    }
+  }]);
+  return Router;
+}();
+var _default = new Router().route;
+exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 36 */
-/*!**********************************************************!*\
-  !*** ./node_modules/@babel/runtime/regenerator/index.js ***!
-  \**********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(/*! regenerator-runtime */ 37);
-
-/***/ }),
-/* 37 */
-/*!************************************************************!*\
-  !*** ./node_modules/regenerator-runtime/runtime-module.js ***!
-  \************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * Copyright (c) 2014-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-// This method of obtaining a reference to the global object needs to be
-// kept identical to the way it is obtained in runtime.js
-var g = (function() {
-  return this || (typeof self === "object" && self);
-})() || Function("return this")();
-
-// Use `getOwnPropertyNames` because not all browsers support calling
-// `hasOwnProperty` on the global `self` object in a worker. See #183.
-var hadRuntime = g.regeneratorRuntime &&
-  Object.getOwnPropertyNames(g).indexOf("regeneratorRuntime") >= 0;
-
-// Save the old regeneratorRuntime in case it needs to be restored later.
-var oldRuntime = hadRuntime && g.regeneratorRuntime;
-
-// Force reevalutation of runtime.js.
-g.regeneratorRuntime = undefined;
-
-module.exports = __webpack_require__(/*! ./runtime */ 38);
-
-if (hadRuntime) {
-  // Restore the original runtime.
-  g.regeneratorRuntime = oldRuntime;
-} else {
-  // Remove the global property added by runtime.js.
-  try {
-    delete g.regeneratorRuntime;
-  } catch(e) {
-    g.regeneratorRuntime = undefined;
-  }
-}
-
-
-/***/ }),
-/* 38 */
-/*!*****************************************************!*\
-  !*** ./node_modules/regenerator-runtime/runtime.js ***!
-  \*****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-/**
- * Copyright (c) 2014-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-!(function(global) {
-  "use strict";
-
-  var Op = Object.prototype;
-  var hasOwn = Op.hasOwnProperty;
-  var undefined; // More compressible than void 0.
-  var $Symbol = typeof Symbol === "function" ? Symbol : {};
-  var iteratorSymbol = $Symbol.iterator || "@@iterator";
-  var asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator";
-  var toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag";
-
-  var inModule = typeof module === "object";
-  var runtime = global.regeneratorRuntime;
-  if (runtime) {
-    if (inModule) {
-      // If regeneratorRuntime is defined globally and we're in a module,
-      // make the exports object identical to regeneratorRuntime.
-      module.exports = runtime;
-    }
-    // Don't bother evaluating the rest of this file if the runtime was
-    // already defined globally.
-    return;
-  }
-
-  // Define the runtime globally (as expected by generated code) as either
-  // module.exports (if we're in a module) or a new, empty object.
-  runtime = global.regeneratorRuntime = inModule ? module.exports : {};
-
-  function wrap(innerFn, outerFn, self, tryLocsList) {
-    // If outerFn provided and outerFn.prototype is a Generator, then outerFn.prototype instanceof Generator.
-    var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator;
-    var generator = Object.create(protoGenerator.prototype);
-    var context = new Context(tryLocsList || []);
-
-    // The ._invoke method unifies the implementations of the .next,
-    // .throw, and .return methods.
-    generator._invoke = makeInvokeMethod(innerFn, self, context);
-
-    return generator;
-  }
-  runtime.wrap = wrap;
-
-  // Try/catch helper to minimize deoptimizations. Returns a completion
-  // record like context.tryEntries[i].completion. This interface could
-  // have been (and was previously) designed to take a closure to be
-  // invoked without arguments, but in all the cases we care about we
-  // already have an existing method we want to call, so there's no need
-  // to create a new function object. We can even get away with assuming
-  // the method takes exactly one argument, since that happens to be true
-  // in every case, so we don't have to touch the arguments object. The
-  // only additional allocation required is the completion record, which
-  // has a stable shape and so hopefully should be cheap to allocate.
-  function tryCatch(fn, obj, arg) {
-    try {
-      return { type: "normal", arg: fn.call(obj, arg) };
-    } catch (err) {
-      return { type: "throw", arg: err };
-    }
-  }
-
-  var GenStateSuspendedStart = "suspendedStart";
-  var GenStateSuspendedYield = "suspendedYield";
-  var GenStateExecuting = "executing";
-  var GenStateCompleted = "completed";
-
-  // Returning this object from the innerFn has the same effect as
-  // breaking out of the dispatch switch statement.
-  var ContinueSentinel = {};
-
-  // Dummy constructor functions that we use as the .constructor and
-  // .constructor.prototype properties for functions that return Generator
-  // objects. For full spec compliance, you may wish to configure your
-  // minifier not to mangle the names of these two functions.
-  function Generator() {}
-  function GeneratorFunction() {}
-  function GeneratorFunctionPrototype() {}
-
-  // This is a polyfill for %IteratorPrototype% for environments that
-  // don't natively support it.
-  var IteratorPrototype = {};
-  IteratorPrototype[iteratorSymbol] = function () {
-    return this;
-  };
-
-  var getProto = Object.getPrototypeOf;
-  var NativeIteratorPrototype = getProto && getProto(getProto(values([])));
-  if (NativeIteratorPrototype &&
-      NativeIteratorPrototype !== Op &&
-      hasOwn.call(NativeIteratorPrototype, iteratorSymbol)) {
-    // This environment has a native %IteratorPrototype%; use it instead
-    // of the polyfill.
-    IteratorPrototype = NativeIteratorPrototype;
-  }
-
-  var Gp = GeneratorFunctionPrototype.prototype =
-    Generator.prototype = Object.create(IteratorPrototype);
-  GeneratorFunction.prototype = Gp.constructor = GeneratorFunctionPrototype;
-  GeneratorFunctionPrototype.constructor = GeneratorFunction;
-  GeneratorFunctionPrototype[toStringTagSymbol] =
-    GeneratorFunction.displayName = "GeneratorFunction";
-
-  // Helper for defining the .next, .throw, and .return methods of the
-  // Iterator interface in terms of a single ._invoke method.
-  function defineIteratorMethods(prototype) {
-    ["next", "throw", "return"].forEach(function(method) {
-      prototype[method] = function(arg) {
-        return this._invoke(method, arg);
-      };
-    });
-  }
-
-  runtime.isGeneratorFunction = function(genFun) {
-    var ctor = typeof genFun === "function" && genFun.constructor;
-    return ctor
-      ? ctor === GeneratorFunction ||
-        // For the native GeneratorFunction constructor, the best we can
-        // do is to check its .name property.
-        (ctor.displayName || ctor.name) === "GeneratorFunction"
-      : false;
-  };
-
-  runtime.mark = function(genFun) {
-    if (Object.setPrototypeOf) {
-      Object.setPrototypeOf(genFun, GeneratorFunctionPrototype);
-    } else {
-      genFun.__proto__ = GeneratorFunctionPrototype;
-      if (!(toStringTagSymbol in genFun)) {
-        genFun[toStringTagSymbol] = "GeneratorFunction";
-      }
-    }
-    genFun.prototype = Object.create(Gp);
-    return genFun;
-  };
-
-  // Within the body of any async function, `await x` is transformed to
-  // `yield regeneratorRuntime.awrap(x)`, so that the runtime can test
-  // `hasOwn.call(value, "__await")` to determine if the yielded value is
-  // meant to be awaited.
-  runtime.awrap = function(arg) {
-    return { __await: arg };
-  };
-
-  function AsyncIterator(generator) {
-    function invoke(method, arg, resolve, reject) {
-      var record = tryCatch(generator[method], generator, arg);
-      if (record.type === "throw") {
-        reject(record.arg);
-      } else {
-        var result = record.arg;
-        var value = result.value;
-        if (value &&
-            typeof value === "object" &&
-            hasOwn.call(value, "__await")) {
-          return Promise.resolve(value.__await).then(function(value) {
-            invoke("next", value, resolve, reject);
-          }, function(err) {
-            invoke("throw", err, resolve, reject);
-          });
-        }
-
-        return Promise.resolve(value).then(function(unwrapped) {
-          // When a yielded Promise is resolved, its final value becomes
-          // the .value of the Promise<{value,done}> result for the
-          // current iteration.
-          result.value = unwrapped;
-          resolve(result);
-        }, function(error) {
-          // If a rejected Promise was yielded, throw the rejection back
-          // into the async generator function so it can be handled there.
-          return invoke("throw", error, resolve, reject);
-        });
-      }
-    }
-
-    var previousPromise;
-
-    function enqueue(method, arg) {
-      function callInvokeWithMethodAndArg() {
-        return new Promise(function(resolve, reject) {
-          invoke(method, arg, resolve, reject);
-        });
-      }
-
-      return previousPromise =
-        // If enqueue has been called before, then we want to wait until
-        // all previous Promises have been resolved before calling invoke,
-        // so that results are always delivered in the correct order. If
-        // enqueue has not been called before, then it is important to
-        // call invoke immediately, without waiting on a callback to fire,
-        // so that the async generator function has the opportunity to do
-        // any necessary setup in a predictable way. This predictability
-        // is why the Promise constructor synchronously invokes its
-        // executor callback, and why async functions synchronously
-        // execute code before the first await. Since we implement simple
-        // async functions in terms of async generators, it is especially
-        // important to get this right, even though it requires care.
-        previousPromise ? previousPromise.then(
-          callInvokeWithMethodAndArg,
-          // Avoid propagating failures to Promises returned by later
-          // invocations of the iterator.
-          callInvokeWithMethodAndArg
-        ) : callInvokeWithMethodAndArg();
-    }
-
-    // Define the unified helper method that is used to implement .next,
-    // .throw, and .return (see defineIteratorMethods).
-    this._invoke = enqueue;
-  }
-
-  defineIteratorMethods(AsyncIterator.prototype);
-  AsyncIterator.prototype[asyncIteratorSymbol] = function () {
-    return this;
-  };
-  runtime.AsyncIterator = AsyncIterator;
-
-  // Note that simple async functions are implemented on top of
-  // AsyncIterator objects; they just return a Promise for the value of
-  // the final result produced by the iterator.
-  runtime.async = function(innerFn, outerFn, self, tryLocsList) {
-    var iter = new AsyncIterator(
-      wrap(innerFn, outerFn, self, tryLocsList)
-    );
-
-    return runtime.isGeneratorFunction(outerFn)
-      ? iter // If outerFn is a generator, return the full iterator.
-      : iter.next().then(function(result) {
-          return result.done ? result.value : iter.next();
-        });
-  };
-
-  function makeInvokeMethod(innerFn, self, context) {
-    var state = GenStateSuspendedStart;
-
-    return function invoke(method, arg) {
-      if (state === GenStateExecuting) {
-        throw new Error("Generator is already running");
-      }
-
-      if (state === GenStateCompleted) {
-        if (method === "throw") {
-          throw arg;
-        }
-
-        // Be forgiving, per 25.3.3.3.3 of the spec:
-        // https://people.mozilla.org/~jorendorff/es6-draft.html#sec-generatorresume
-        return doneResult();
-      }
-
-      context.method = method;
-      context.arg = arg;
-
-      while (true) {
-        var delegate = context.delegate;
-        if (delegate) {
-          var delegateResult = maybeInvokeDelegate(delegate, context);
-          if (delegateResult) {
-            if (delegateResult === ContinueSentinel) continue;
-            return delegateResult;
-          }
-        }
-
-        if (context.method === "next") {
-          // Setting context._sent for legacy support of Babel's
-          // function.sent implementation.
-          context.sent = context._sent = context.arg;
-
-        } else if (context.method === "throw") {
-          if (state === GenStateSuspendedStart) {
-            state = GenStateCompleted;
-            throw context.arg;
-          }
-
-          context.dispatchException(context.arg);
-
-        } else if (context.method === "return") {
-          context.abrupt("return", context.arg);
-        }
-
-        state = GenStateExecuting;
-
-        var record = tryCatch(innerFn, self, context);
-        if (record.type === "normal") {
-          // If an exception is thrown from innerFn, we leave state ===
-          // GenStateExecuting and loop back for another invocation.
-          state = context.done
-            ? GenStateCompleted
-            : GenStateSuspendedYield;
-
-          if (record.arg === ContinueSentinel) {
-            continue;
-          }
-
-          return {
-            value: record.arg,
-            done: context.done
-          };
-
-        } else if (record.type === "throw") {
-          state = GenStateCompleted;
-          // Dispatch the exception by looping back around to the
-          // context.dispatchException(context.arg) call above.
-          context.method = "throw";
-          context.arg = record.arg;
-        }
-      }
-    };
-  }
-
-  // Call delegate.iterator[context.method](context.arg) and handle the
-  // result, either by returning a { value, done } result from the
-  // delegate iterator, or by modifying context.method and context.arg,
-  // setting context.delegate to null, and returning the ContinueSentinel.
-  function maybeInvokeDelegate(delegate, context) {
-    var method = delegate.iterator[context.method];
-    if (method === undefined) {
-      // A .throw or .return when the delegate iterator has no .throw
-      // method always terminates the yield* loop.
-      context.delegate = null;
-
-      if (context.method === "throw") {
-        if (delegate.iterator.return) {
-          // If the delegate iterator has a return method, give it a
-          // chance to clean up.
-          context.method = "return";
-          context.arg = undefined;
-          maybeInvokeDelegate(delegate, context);
-
-          if (context.method === "throw") {
-            // If maybeInvokeDelegate(context) changed context.method from
-            // "return" to "throw", let that override the TypeError below.
-            return ContinueSentinel;
-          }
-        }
-
-        context.method = "throw";
-        context.arg = new TypeError(
-          "The iterator does not provide a 'throw' method");
-      }
-
-      return ContinueSentinel;
-    }
-
-    var record = tryCatch(method, delegate.iterator, context.arg);
-
-    if (record.type === "throw") {
-      context.method = "throw";
-      context.arg = record.arg;
-      context.delegate = null;
-      return ContinueSentinel;
-    }
-
-    var info = record.arg;
-
-    if (! info) {
-      context.method = "throw";
-      context.arg = new TypeError("iterator result is not an object");
-      context.delegate = null;
-      return ContinueSentinel;
-    }
-
-    if (info.done) {
-      // Assign the result of the finished delegate to the temporary
-      // variable specified by delegate.resultName (see delegateYield).
-      context[delegate.resultName] = info.value;
-
-      // Resume execution at the desired location (see delegateYield).
-      context.next = delegate.nextLoc;
-
-      // If context.method was "throw" but the delegate handled the
-      // exception, let the outer generator proceed normally. If
-      // context.method was "next", forget context.arg since it has been
-      // "consumed" by the delegate iterator. If context.method was
-      // "return", allow the original .return call to continue in the
-      // outer generator.
-      if (context.method !== "return") {
-        context.method = "next";
-        context.arg = undefined;
-      }
-
-    } else {
-      // Re-yield the result returned by the delegate method.
-      return info;
-    }
-
-    // The delegate iterator is finished, so forget it and continue with
-    // the outer generator.
-    context.delegate = null;
-    return ContinueSentinel;
-  }
-
-  // Define Generator.prototype.{next,throw,return} in terms of the
-  // unified ._invoke helper method.
-  defineIteratorMethods(Gp);
-
-  Gp[toStringTagSymbol] = "Generator";
-
-  // A Generator should always return itself as the iterator object when the
-  // @@iterator function is called on it. Some browsers' implementations of the
-  // iterator prototype chain incorrectly implement this, causing the Generator
-  // object to not be returned from this call. This ensures that doesn't happen.
-  // See https://github.com/facebook/regenerator/issues/274 for more details.
-  Gp[iteratorSymbol] = function() {
-    return this;
-  };
-
-  Gp.toString = function() {
-    return "[object Generator]";
-  };
-
-  function pushTryEntry(locs) {
-    var entry = { tryLoc: locs[0] };
-
-    if (1 in locs) {
-      entry.catchLoc = locs[1];
-    }
-
-    if (2 in locs) {
-      entry.finallyLoc = locs[2];
-      entry.afterLoc = locs[3];
-    }
-
-    this.tryEntries.push(entry);
-  }
-
-  function resetTryEntry(entry) {
-    var record = entry.completion || {};
-    record.type = "normal";
-    delete record.arg;
-    entry.completion = record;
-  }
-
-  function Context(tryLocsList) {
-    // The root entry object (effectively a try statement without a catch
-    // or a finally block) gives us a place to store values thrown from
-    // locations where there is no enclosing try statement.
-    this.tryEntries = [{ tryLoc: "root" }];
-    tryLocsList.forEach(pushTryEntry, this);
-    this.reset(true);
-  }
-
-  runtime.keys = function(object) {
-    var keys = [];
-    for (var key in object) {
-      keys.push(key);
-    }
-    keys.reverse();
-
-    // Rather than returning an object with a next method, we keep
-    // things simple and return the next function itself.
-    return function next() {
-      while (keys.length) {
-        var key = keys.pop();
-        if (key in object) {
-          next.value = key;
-          next.done = false;
-          return next;
-        }
-      }
-
-      // To avoid creating an additional object, we just hang the .value
-      // and .done properties off the next function object itself. This
-      // also ensures that the minifier will not anonymize the function.
-      next.done = true;
-      return next;
-    };
-  };
-
-  function values(iterable) {
-    if (iterable) {
-      var iteratorMethod = iterable[iteratorSymbol];
-      if (iteratorMethod) {
-        return iteratorMethod.call(iterable);
-      }
-
-      if (typeof iterable.next === "function") {
-        return iterable;
-      }
-
-      if (!isNaN(iterable.length)) {
-        var i = -1, next = function next() {
-          while (++i < iterable.length) {
-            if (hasOwn.call(iterable, i)) {
-              next.value = iterable[i];
-              next.done = false;
-              return next;
-            }
-          }
-
-          next.value = undefined;
-          next.done = true;
-
-          return next;
-        };
-
-        return next.next = next;
-      }
-    }
-
-    // Return an iterator with no values.
-    return { next: doneResult };
-  }
-  runtime.values = values;
-
-  function doneResult() {
-    return { value: undefined, done: true };
-  }
-
-  Context.prototype = {
-    constructor: Context,
-
-    reset: function(skipTempReset) {
-      this.prev = 0;
-      this.next = 0;
-      // Resetting context._sent for legacy support of Babel's
-      // function.sent implementation.
-      this.sent = this._sent = undefined;
-      this.done = false;
-      this.delegate = null;
-
-      this.method = "next";
-      this.arg = undefined;
-
-      this.tryEntries.forEach(resetTryEntry);
-
-      if (!skipTempReset) {
-        for (var name in this) {
-          // Not sure about the optimal order of these conditions:
-          if (name.charAt(0) === "t" &&
-              hasOwn.call(this, name) &&
-              !isNaN(+name.slice(1))) {
-            this[name] = undefined;
-          }
-        }
-      }
-    },
-
-    stop: function() {
-      this.done = true;
-
-      var rootEntry = this.tryEntries[0];
-      var rootRecord = rootEntry.completion;
-      if (rootRecord.type === "throw") {
-        throw rootRecord.arg;
-      }
-
-      return this.rval;
-    },
-
-    dispatchException: function(exception) {
-      if (this.done) {
-        throw exception;
-      }
-
-      var context = this;
-      function handle(loc, caught) {
-        record.type = "throw";
-        record.arg = exception;
-        context.next = loc;
-
-        if (caught) {
-          // If the dispatched exception was caught by a catch block,
-          // then let that catch block handle the exception normally.
-          context.method = "next";
-          context.arg = undefined;
-        }
-
-        return !! caught;
-      }
-
-      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-        var entry = this.tryEntries[i];
-        var record = entry.completion;
-
-        if (entry.tryLoc === "root") {
-          // Exception thrown outside of any try block that could handle
-          // it, so set the completion value of the entire function to
-          // throw the exception.
-          return handle("end");
-        }
-
-        if (entry.tryLoc <= this.prev) {
-          var hasCatch = hasOwn.call(entry, "catchLoc");
-          var hasFinally = hasOwn.call(entry, "finallyLoc");
-
-          if (hasCatch && hasFinally) {
-            if (this.prev < entry.catchLoc) {
-              return handle(entry.catchLoc, true);
-            } else if (this.prev < entry.finallyLoc) {
-              return handle(entry.finallyLoc);
-            }
-
-          } else if (hasCatch) {
-            if (this.prev < entry.catchLoc) {
-              return handle(entry.catchLoc, true);
-            }
-
-          } else if (hasFinally) {
-            if (this.prev < entry.finallyLoc) {
-              return handle(entry.finallyLoc);
-            }
-
-          } else {
-            throw new Error("try statement without catch or finally");
-          }
-        }
-      }
-    },
-
-    abrupt: function(type, arg) {
-      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-        var entry = this.tryEntries[i];
-        if (entry.tryLoc <= this.prev &&
-            hasOwn.call(entry, "finallyLoc") &&
-            this.prev < entry.finallyLoc) {
-          var finallyEntry = entry;
-          break;
-        }
-      }
-
-      if (finallyEntry &&
-          (type === "break" ||
-           type === "continue") &&
-          finallyEntry.tryLoc <= arg &&
-          arg <= finallyEntry.finallyLoc) {
-        // Ignore the finally entry if control is not jumping to a
-        // location outside the try/catch block.
-        finallyEntry = null;
-      }
-
-      var record = finallyEntry ? finallyEntry.completion : {};
-      record.type = type;
-      record.arg = arg;
-
-      if (finallyEntry) {
-        this.method = "next";
-        this.next = finallyEntry.finallyLoc;
-        return ContinueSentinel;
-      }
-
-      return this.complete(record);
-    },
-
-    complete: function(record, afterLoc) {
-      if (record.type === "throw") {
-        throw record.arg;
-      }
-
-      if (record.type === "break" ||
-          record.type === "continue") {
-        this.next = record.arg;
-      } else if (record.type === "return") {
-        this.rval = this.arg = record.arg;
-        this.method = "return";
-        this.next = "end";
-      } else if (record.type === "normal" && afterLoc) {
-        this.next = afterLoc;
-      }
-
-      return ContinueSentinel;
-    },
-
-    finish: function(finallyLoc) {
-      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-        var entry = this.tryEntries[i];
-        if (entry.finallyLoc === finallyLoc) {
-          this.complete(entry.completion, entry.afterLoc);
-          resetTryEntry(entry);
-          return ContinueSentinel;
-        }
-      }
-    },
-
-    "catch": function(tryLoc) {
-      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-        var entry = this.tryEntries[i];
-        if (entry.tryLoc === tryLoc) {
-          var record = entry.completion;
-          if (record.type === "throw") {
-            var thrown = record.arg;
-            resetTryEntry(entry);
-          }
-          return thrown;
-        }
-      }
-
-      // The context.catch method must only be called with a location
-      // argument that corresponds to a known catch block.
-      throw new Error("illegal catch attempt");
-    },
-
-    delegateYield: function(iterable, resultName, nextLoc) {
-      this.delegate = {
-        iterator: values(iterable),
-        resultName: resultName,
-        nextLoc: nextLoc
-      };
-
-      if (this.method === "next") {
-        // Deliberately forget the last sent value so that we don't
-        // accidentally pass it on to the delegate.
-        this.arg = undefined;
-      }
-
-      return ContinueSentinel;
-    }
-  };
-})(
-  // In sloppy mode, unbound `this` refers to the global object, fallback to
-  // Function constructor if we're in global strict mode. That is sadly a form
-  // of indirect eval which violates Content Security Policy.
-  (function() {
-    return this || (typeof self === "object" && self);
-  })() || Function("return this")()
-);
-
-
-/***/ }),
-/* 39 */
+/* 56 */
 /*!**************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/function/colorGradient.js ***!
   \**************************************************************************************************************************************/
@@ -14939,31 +14413,37 @@ if (hadRuntime) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /**
-                                                                                                      * 求两个颜色之间的渐变值
-                                                                                                      * @param {string} startColor 开始的颜色
-                                                                                                      * @param {string} endColor 结束的颜色
-                                                                                                      * @param {number} step 颜色等分的份额
-                                                                                                      * */
-function colorGradient() {var startColor = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'rgb(0, 0, 0)';var endColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'rgb(255, 255, 255)';var step = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 10;
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/**
+ * 求两个颜色之间的渐变值
+ * @param {string} startColor 开始的颜色
+ * @param {string} endColor 结束的颜色
+ * @param {number} step 颜色等分的份额
+ * */
+function colorGradient() {
+  var startColor = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'rgb(0, 0, 0)';
+  var endColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'rgb(255, 255, 255)';
+  var step = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 10;
   var startRGB = hexToRgb(startColor, false); // 转换为rgb数组模式
   var startR = startRGB[0];
   var startG = startRGB[1];
   var startB = startRGB[2];
-
   var endRGB = hexToRgb(endColor, false);
   var endR = endRGB[0];
   var endG = endRGB[1];
   var endB = endRGB[2];
-
   var sR = (endR - startR) / step; // 总差值
   var sG = (endG - startG) / step;
   var sB = (endB - startB) / step;
   var colorArr = [];
   for (var i = 0; i < step; i++) {
     // 计算每一步的hex值
-    var hex = rgbToHex("rgb(".concat(Math.round(sR * i + startR), ",").concat(Math.round(sG * i + startG), ",").concat(Math.round(sB *
-    i + startB), ")"));
+    var hex = rgbToHex("rgb(".concat(Math.round(sR * i + startR), ",").concat(Math.round(sG * i + startG), ",").concat(Math.round(sB * i + startB), ")"));
     // 确保第一个颜色值为startColor的值
     if (i === 0) hex = rgbToHex(startColor);
     // 确保最后一个颜色值为endColor的值
@@ -14974,7 +14454,8 @@ function colorGradient() {var startColor = arguments.length > 0 && arguments[0] 
 }
 
 // 将hex表示方式转换为rgb表示方式(这里返回rgb数组模式)
-function hexToRgb(sColor) {var str = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+function hexToRgb(sColor) {
+  var str = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
   var reg = /^#([0-9a-fA-f]{3}|[0-9a-fA-f]{6})$/;
   sColor = String(sColor).toLowerCase();
   if (sColor && reg.test(sColor)) {
@@ -14994,9 +14475,12 @@ function hexToRgb(sColor) {var str = arguments.length > 1 && arguments[1] !== un
       return sColorChange;
     }
     return "rgb(".concat(sColorChange[0], ",").concat(sColorChange[1], ",").concat(sColorChange[2], ")");
-  }if (/^(rgb|RGB)/.test(sColor)) {
+  }
+  if (/^(rgb|RGB)/.test(sColor)) {
     var arr = sColor.replace(/(?:\(|\)|rgb|RGB)*/g, '').split(',');
-    return arr.map(function (val) {return Number(val);});
+    return arr.map(function (val) {
+      return Number(val);
+    });
   }
   return sColor;
 }
@@ -15020,11 +14504,13 @@ function rgbToHex(rgb) {
       strHex = _this;
     }
     return strHex;
-  }if (reg.test(_this)) {
+  }
+  if (reg.test(_this)) {
     var aNum = _this.replace(/#/, '').split('');
     if (aNum.length === 6) {
       return _this;
-    }if (aNum.length === 3) {
+    }
+    if (aNum.length === 3) {
       var numHex = '#';
       for (var _i2 = 0; _i2 < aNum.length; _i2 += 1) {
         numHex += aNum[_i2] + aNum[_i2];
@@ -15037,10 +14523,10 @@ function rgbToHex(rgb) {
 }
 
 /**
-  * JS颜色十六进制转换为rgb或rgba,返回的格式为 rgba（255，255，255，0.5）字符串
-  * sHex为传入的十六进制的色值
-  * alpha为rgba的透明度
-  */
+* JS颜色十六进制转换为rgb或rgba,返回的格式为 rgba（255，255，255，0.5）字符串
+* sHex为传入的十六进制的色值
+* alpha为rgba的透明度
+*/
 function colorToRgba(color, alpha) {
   color = rgbToHex(color);
   // 十六进制颜色值的正则表达式
@@ -15063,18 +14549,18 @@ function colorToRgba(color, alpha) {
     // return sColorChange.join(',')
     return "rgba(".concat(sColorChange.join(','), ",").concat(alpha, ")");
   }
-
   return sColor;
-}var _default =
-
-{
+}
+var _default = {
   colorGradient: colorGradient,
   hexToRgb: hexToRgb,
   rgbToHex: rgbToHex,
-  colorToRgba: colorToRgba };exports.default = _default;
+  colorToRgba: colorToRgba
+};
+exports.default = _default;
 
 /***/ }),
-/* 40 */
+/* 57 */
 /*!*****************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/function/test.js ***!
   \*****************************************************************************************************************************/
@@ -15082,31 +14568,38 @@ function colorToRgba(color, alpha) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /**
-                                                                                                      * 验证电子邮箱格式
-                                                                                                      */
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 3);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _typeof2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/typeof */ 12));
+/**
+ * 验证电子邮箱格式
+ */
 function email(value) {
   return /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/.test(value);
 }
 
 /**
-   * 验证手机格式
-   */
+ * 验证手机格式
+ */
 function mobile(value) {
   return /^1([3589]\d|4[5-9]|6[1-2,4-7]|7[0-8])\d{8}$/.test(value);
 }
 
 /**
-   * 验证URL格式
-   */
+ * 验证URL格式
+ */
 function url(value) {
-  return /^((https|http|ftp|rtsp|mms):\/\/)(([0-9a-zA-Z_!~*'().&=+$%-]+: )?[0-9a-zA-Z_!~*'().&=+$%-]+@)?(([0-9]{1,3}.){3}[0-9]{1,3}|([0-9a-zA-Z_!~*'()-]+.)*([0-9a-zA-Z][0-9a-zA-Z-]{0,61})?[0-9a-zA-Z].[a-zA-Z]{2,6})(:[0-9]{1,4})?((\/?)|(\/[0-9a-zA-Z_!~*'().;?:@&=+$,%#-]+)+\/?)$/.
-  test(value);
+  return /^((https|http|ftp|rtsp|mms):\/\/)(([0-9a-zA-Z_!~*'().&=+$%-]+: )?[0-9a-zA-Z_!~*'().&=+$%-]+@)?(([0-9]{1,3}.){3}[0-9]{1,3}|([0-9a-zA-Z_!~*'()-]+.)*([0-9a-zA-Z][0-9a-zA-Z-]{0,61})?[0-9a-zA-Z].[a-zA-Z]{2,6})(:[0-9]{1,4})?((\/?)|(\/[0-9a-zA-Z_!~*'().;?:@&=+$,%#-]+)+\/?)$/.test(value);
 }
 
 /**
-   * 验证日期格式
-   */
+ * 验证日期格式
+ */
 function date(value) {
   if (!value) return false;
   // 判断是否数值或者字符串数值(意味着为时间戳)，转为数值，否则new Date无法识别字符串时间戳
@@ -15115,45 +14608,43 @@ function date(value) {
 }
 
 /**
-   * 验证ISO类型的日期格式
-   */
+ * 验证ISO类型的日期格式
+ */
 function dateISO(value) {
   return /^\d{4}[\/\-](0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])$/.test(value);
 }
 
 /**
-   * 验证十进制数字
-   */
+ * 验证十进制数字
+ */
 function number(value) {
   return /^[\+-]?(\d+\.?\d*|\.\d+|\d\.\d+e\+\d+)$/.test(value);
 }
 
 /**
-   * 验证字符串
-   */
+ * 验证字符串
+ */
 function string(value) {
   return typeof value === 'string';
 }
 
 /**
-   * 验证整数
-   */
+ * 验证整数
+ */
 function digits(value) {
   return /^\d+$/.test(value);
 }
 
 /**
-   * 验证身份证号码
-   */
+ * 验证身份证号码
+ */
 function idCard(value) {
-  return /^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/.test(
-  value);
-
+  return /^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/.test(value);
 }
 
 /**
-   * 是否车牌号
-   */
+ * 是否车牌号
+ */
 function carNo(value) {
   // 新能源车牌
   var xreg = /^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}(([0-9]{5}[DF]$)|([DF][A-HJ-NP-Z0-9][0-9]{4}$))/;
@@ -15161,38 +14652,39 @@ function carNo(value) {
   var creg = /^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}[A-HJ-NP-Z0-9]{4}[A-HJ-NP-Z0-9挂学警港澳]{1}$/;
   if (value.length === 7) {
     return creg.test(value);
-  }if (value.length === 8) {
+  }
+  if (value.length === 8) {
     return xreg.test(value);
   }
   return false;
 }
 
 /**
-   * 金额,只允许2位小数
-   */
+ * 金额,只允许2位小数
+ */
 function amount(value) {
   // 金额，只允许保留两位小数
   return /^[1-9]\d*(,\d{3})*(\.\d{1,2})?$|^0\.\d{1,2}$/.test(value);
 }
 
 /**
-   * 中文
-   */
+ * 中文
+ */
 function chinese(value) {
   var reg = /^[\u4e00-\u9fa5]+$/gi;
   return reg.test(value);
 }
 
 /**
-   * 只能输入字母
-   */
+ * 只能输入字母
+ */
 function letter(value) {
   return /^[a-zA-Z]*$/.test(value);
 }
 
 /**
-   * 只能是字母或者数字
-   */
+ * 只能是字母或者数字
+ */
 function enOrNum(value) {
   // 英文或者数字
   var reg = /^[0-9a-zA-Z]*$/g;
@@ -15200,39 +14692,39 @@ function enOrNum(value) {
 }
 
 /**
-   * 验证是否包含某个值
-   */
+ * 验证是否包含某个值
+ */
 function contains(value, param) {
   return value.indexOf(param) >= 0;
 }
 
 /**
-   * 验证一个值范围[min, max]
-   */
+ * 验证一个值范围[min, max]
+ */
 function range(value, param) {
   return value >= param[0] && value <= param[1];
 }
 
 /**
-   * 验证一个长度范围[min, max]
-   */
+ * 验证一个长度范围[min, max]
+ */
 function rangeLength(value, param) {
   return value.length >= param[0] && value.length <= param[1];
 }
 
 /**
-   * 是否固定电话
-   */
+ * 是否固定电话
+ */
 function landline(value) {
   var reg = /^\d{3,4}-\d{7,8}(-\d{3,4})?$/;
   return reg.test(value);
 }
 
 /**
-   * 判断是否为空
-   */
+ * 判断是否为空
+ */
 function empty(value) {
-  switch (typeof value) {
+  switch ((0, _typeof2.default)(value)) {
     case 'undefined':
       return true;
     case 'string':
@@ -15249,19 +14741,19 @@ function empty(value) {
       for (var i in value) {
         return false;
       }
-      return true;}
-
+      return true;
+  }
   return false;
 }
 
 /**
-   * 是否json字符串
-   */
+ * 是否json字符串
+ */
 function jsonString(value) {
   if (typeof value === 'string') {
     try {
       var obj = JSON.parse(value);
-      if (typeof obj === 'object' && obj) {
+      if ((0, _typeof2.default)(obj) === 'object' && obj) {
         return true;
       }
       return false;
@@ -15273,8 +14765,8 @@ function jsonString(value) {
 }
 
 /**
-   * 是否数组
-   */
+ * 是否数组
+ */
 function array(value) {
   if (typeof Array.isArray === 'function') {
     return Array.isArray(value);
@@ -15283,38 +14775,39 @@ function array(value) {
 }
 
 /**
-   * 是否对象
-   */
+ * 是否对象
+ */
 function object(value) {
   return Object.prototype.toString.call(value) === '[object Object]';
 }
 
 /**
-   * 是否短信验证码
-   */
-function code(value) {var len = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 6;
+ * 是否短信验证码
+ */
+function code(value) {
+  var len = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 6;
   return new RegExp("^\\d{".concat(len, "}$")).test(value);
 }
 
 /**
-   * 是否函数方法
-   * @param {Object} value
-   */
+ * 是否函数方法
+ * @param {Object} value
+ */
 function func(value) {
   return typeof value === 'function';
 }
 
 /**
-   * 是否promise对象
-   * @param {Object} value
-   */
+ * 是否promise对象
+ * @param {Object} value
+ */
 function promise(value) {
   return object(value) && func(value.then) && func(value.catch);
 }
 
 /** 是否图片格式
-   * @param {Object} value
-   */
+ * @param {Object} value
+ */
 function image(value) {
   var newValue = value.split('?')[0];
   var IMAGE_REGEXP = /\.(jpeg|jpg|gif|png|svg|webp|jfif|bmp|dpg)/i;
@@ -15322,24 +14815,23 @@ function image(value) {
 }
 
 /**
-   * 是否视频格式
-   * @param {Object} value
-   */
+ * 是否视频格式
+ * @param {Object} value
+ */
 function video(value) {
   var VIDEO_REGEXP = /\.(mp4|mpg|mpeg|dat|asf|avi|rm|rmvb|mov|wmv|flv|mkv|m3u8)/i;
   return VIDEO_REGEXP.test(value);
 }
 
 /**
-   * 是否为正则对象
-   * @param {Object}
-   * @return {Boolean}
-   */
+ * 是否为正则对象
+ * @param {Object}
+ * @return {Boolean}
+ */
 function regExp(o) {
   return o && Object.prototype.toString.call(o) === '[object RegExp]';
-}var _default =
-
-{
+}
+var _default = {
   email: email,
   mobile: mobile,
   url: url,
@@ -15368,10 +14860,12 @@ function regExp(o) {
   video: video,
   image: image,
   regExp: regExp,
-  string: string };exports.default = _default;
+  string: string
+};
+exports.default = _default;
 
 /***/ }),
-/* 41 */
+/* 58 */
 /*!*********************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/function/debounce.js ***!
   \*********************************************************************************************************************************/
@@ -15379,17 +14873,25 @@ function regExp(o) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var timeout = null;
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var timeout = null;
 
 /**
-                                                                                                                         * 防抖原理：一定时间内，只有最后一次操作，再过wait毫秒后才执行函数
-                                                                                                                         *
-                                                                                                                         * @param {Function} func 要执行的回调函数
-                                                                                                                         * @param {Number} wait 延时的时间
-                                                                                                                         * @param {Boolean} immediate 是否立即执行
-                                                                                                                         * @return null
-                                                                                                                         */
-function debounce(func) {var wait = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 500;var immediate = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+ * 防抖原理：一定时间内，只有最后一次操作，再过wait毫秒后才执行函数
+ *
+ * @param {Function} func 要执行的回调函数
+ * @param {Number} wait 延时的时间
+ * @param {Boolean} immediate 是否立即执行
+ * @return null
+ */
+function debounce(func) {
+  var wait = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 500;
+  var immediate = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
   // 清除定时器
   if (timeout !== null) clearTimeout(timeout);
   // 立即执行，此类情况一般用不到
@@ -15405,12 +14907,12 @@ function debounce(func) {var wait = arguments.length > 1 && arguments[1] !== und
       typeof func === 'function' && func();
     }, wait);
   }
-}var _default =
-
-debounce;exports.default = _default;
+}
+var _default = debounce;
+exports.default = _default;
 
 /***/ }),
-/* 42 */
+/* 59 */
 /*!*********************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/function/throttle.js ***!
   \*********************************************************************************************************************************/
@@ -15418,17 +14920,25 @@ debounce;exports.default = _default;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var timer;var
-flag;
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var timer;
+var flag;
 /**
-       * 节流原理：在一定时间内，只能触发一次
-       *
-       * @param {Function} func 要执行的回调函数
-       * @param {Number} wait 延时的时间
-       * @param {Boolean} immediate 是否立即执行
-       * @return null
-       */
-function throttle(func) {var wait = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 500;var immediate = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+ * 节流原理：在一定时间内，只能触发一次
+ *
+ * @param {Function} func 要执行的回调函数
+ * @param {Number} wait 延时的时间
+ * @param {Boolean} immediate 是否立即执行
+ * @return null
+ */
+function throttle(func) {
+  var wait = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 500;
+  var immediate = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
   if (immediate) {
     if (!flag) {
       flag = true;
@@ -15446,11 +14956,12 @@ function throttle(func) {var wait = arguments.length > 1 && arguments[1] !== und
       typeof func === 'function' && func();
     }, wait);
   }
-}var _default =
-throttle;exports.default = _default;
+}
+var _default = throttle;
+exports.default = _default;
 
 /***/ }),
-/* 43 */
+/* 60 */
 /*!******************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/function/index.js ***!
   \******************************************************************************************************************************/
@@ -15458,25 +14969,38 @@ throttle;exports.default = _default;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _test = _interopRequireDefault(__webpack_require__(/*! ./test.js */ 40));
-var _digit = __webpack_require__(/*! ./digit.js */ 44);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _slicedToArray(arr, i) {return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();}function _nonIterableRest() {throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(o);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}function _iterableToArrayLimit(arr, i) {if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;var _arr = [];var _n = true;var _d = false;var _e = undefined;try {for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {_arr.push(_s.value);if (i && _arr.length === i) break;}} catch (err) {_d = true;_e = err;} finally {try {if (!_n && _i["return"] != null) _i["return"]();} finally {if (_d) throw _e;}}return _arr;}function _arrayWithHoles(arr) {if (Array.isArray(arr)) return arr;}
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 3);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _slicedToArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ 4));
+var _typeof2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/typeof */ 12));
+var _test = _interopRequireDefault(__webpack_require__(/*! ./test.js */ 57));
+var _digit = __webpack_require__(/*! ./digit.js */ 61);
 /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             * @description 如果value小于min，取min；如果value大于max，取max
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             * @param {number} min 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             * @param {number} max 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             * @param {number} value
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             */
-function range() {var min = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;var max = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;var value = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+ * @description 如果value小于min，取min；如果value大于max，取max
+ * @param {number} min 
+ * @param {number} max 
+ * @param {number} value
+ */
+function range() {
+  var min = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+  var max = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+  var value = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
   return Math.max(min, Math.min(max, Number(value)));
 }
 
 /**
-   * @description 用于获取用户传递值的px值  如果用户传递了"xxpx"或者"xxrpx"，取出其数值部分，如果是"xxxrpx"还需要用过uni.upx2px进行转换
-   * @param {number|string} value 用户传递值的px值
-   * @param {boolean} unit 
-   * @returns {number|string}
-   */
-function getPx(value) {var unit = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+ * @description 用于获取用户传递值的px值  如果用户传递了"xxpx"或者"xxrpx"，取出其数值部分，如果是"xxxrpx"还需要用过uni.upx2px进行转换
+ * @param {number|string} value 用户传递值的px值
+ * @param {boolean} unit 
+ * @returns {number|string}
+ */
+function getPx(value) {
+  var unit = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
   if (_test.default.number(value)) {
     return unit ? "".concat(value, "px") : Number(value);
   }
@@ -15488,11 +15012,12 @@ function getPx(value) {var unit = arguments.length > 1 && arguments[1] !== undef
 }
 
 /**
-   * @description 进行延时，以达到可以简写代码的目的 比如: await uni.$u.sleep(20)将会阻塞20ms
-   * @param {number} value 堵塞时间 单位ms 毫秒
-   * @returns {Promise} 返回promise
-   */
-function sleep() {var value = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 30;
+ * @description 进行延时，以达到可以简写代码的目的 比如: await uni.$u.sleep(20)将会阻塞20ms
+ * @param {number} value 堵塞时间 单位ms 毫秒
+ * @returns {Promise} 返回promise
+ */
+function sleep() {
+  var value = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 30;
   return new Promise(function (resolve) {
     setTimeout(function () {
       resolve();
@@ -15500,26 +15025,26 @@ function sleep() {var value = arguments.length > 0 && arguments[0] !== undefined
   });
 }
 /**
-   * @description 运行期判断平台
-   * @returns {string} 返回所在平台(小写) 
-   * @link 运行期判断平台 https://uniapp.dcloud.io/frame?id=判断平台
-   */
+ * @description 运行期判断平台
+ * @returns {string} 返回所在平台(小写) 
+ * @link 运行期判断平台 https://uniapp.dcloud.io/frame?id=判断平台
+ */
 function os() {
   return uni.getSystemInfoSync().platform.toLowerCase();
 }
 /**
-   * @description 获取系统信息同步接口
-   * @link 获取系统信息同步接口 https://uniapp.dcloud.io/api/system/info?id=getsysteminfosync 
-   */
+ * @description 获取系统信息同步接口
+ * @link 获取系统信息同步接口 https://uniapp.dcloud.io/api/system/info?id=getsysteminfosync 
+ */
 function sys() {
   return uni.getSystemInfoSync();
 }
 
 /**
-   * @description 取一个区间数
-   * @param {Number} min 最小值
-   * @param {Number} max 最大值
-   */
+ * @description 取一个区间数
+ * @param {Number} min 最小值
+ * @param {Number} max 最大值
+ */
 function random(min, max) {
   if (min >= 0 && max > 0 && max >= min) {
     var gab = max - min + 1;
@@ -15529,24 +15054,27 @@ function random(min, max) {
 }
 
 /**
-   * @param {Number} len uuid的长度
-   * @param {Boolean} firstU 将返回的首字母置为"u"
-   * @param {Nubmer} radix 生成uuid的基数(意味着返回的字符串都是这个基数),2-二进制,8-八进制,10-十进制,16-十六进制
-   */
-function guid() {var len = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 32;var firstU = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;var radix = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+ * @param {Number} len uuid的长度
+ * @param {Boolean} firstU 将返回的首字母置为"u"
+ * @param {Nubmer} radix 生成uuid的基数(意味着返回的字符串都是这个基数),2-二进制,8-八进制,10-十进制,16-十六进制
+ */
+function guid() {
+  var len = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 32;
+  var firstU = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+  var radix = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
   var chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('');
   var uuid = [];
   radix = radix || chars.length;
-
   if (len) {
     // 如果指定uuid长度,只是取随机的字符,0|x为位运算,能去掉x的小数位,返回整数位
-    for (var i = 0; i < len; i++) {uuid[i] = chars[0 | Math.random() * radix];}
+    for (var i = 0; i < len; i++) {
+      uuid[i] = chars[0 | Math.random() * radix];
+    }
   } else {
     var r;
     // rfc4122标准要求返回的uuid中,某些位为固定的字符
     uuid[8] = uuid[13] = uuid[18] = uuid[23] = '-';
     uuid[14] = '4';
-
     for (var _i = 0; _i < 36; _i++) {
       if (!uuid[_i]) {
         r = 0 | Math.random() * 16;
@@ -15563,13 +15091,14 @@ function guid() {var len = arguments.length > 0 && arguments[0] !== undefined ? 
 }
 
 /**
-  * @description 获取父组件的参数，因为支付宝小程序不支持provide/inject的写法
-     this.$parent在非H5中，可以准确获取到父组件，但是在H5中，需要多次this.$parent.$parent.xxx
-     这里默认值等于undefined有它的含义，因为最顶层元素(组件)的$parent就是undefined，意味着不传name
-     值(默认为undefined)，就是查找最顶层的$parent
-  *  @param {string|undefined} name 父组件的参数名
-  */
-function $parent() {var name = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : undefined;
+* @description 获取父组件的参数，因为支付宝小程序不支持provide/inject的写法
+   this.$parent在非H5中，可以准确获取到父组件，但是在H5中，需要多次this.$parent.$parent.xxx
+   这里默认值等于undefined有它的含义，因为最顶层元素(组件)的$parent就是undefined，意味着不传name
+   值(默认为undefined)，就是查找最顶层的$parent
+*  @param {string|undefined} name 父组件的参数名
+*/
+function $parent() {
+  var name = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : undefined;
   var parent = this.$parent;
   // 通过while历遍，这里主要是为了H5需要多层解析的问题
   while (parent) {
@@ -15585,16 +15114,16 @@ function $parent() {var name = arguments.length > 0 && arguments[0] !== undefine
 }
 
 /**
-   * @description 样式转换
-   * 对象转字符串，或者字符串转对象
-   * @param {object | string} customStyle 需要转换的目标
-   * @param {String} target 转换的目的，object-转为对象，string-转为字符串
-   * @returns {object|string}
-   */
-function addStyle(customStyle) {var target = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'object';
+ * @description 样式转换
+ * 对象转字符串，或者字符串转对象
+ * @param {object | string} customStyle 需要转换的目标
+ * @param {String} target 转换的目的，object-转为对象，string-转为字符串
+ * @returns {object|string}
+ */
+function addStyle(customStyle) {
+  var target = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'object';
   // 字符串转字符串，对象转对象情形，直接返回
-  if (_test.default.empty(customStyle) || typeof customStyle === 'object' && target === 'object' || target === 'string' &&
-  typeof customStyle === 'string') {
+  if (_test.default.empty(customStyle) || (0, _typeof2.default)(customStyle) === 'object' && target === 'object' || target === 'string' && typeof customStyle === 'string') {
     return customStyle;
   }
   // 字符串转对象
@@ -15626,52 +15155,57 @@ function addStyle(customStyle) {var target = arguments.length > 1 && arguments[1
 }
 
 /**
-   * @description 添加单位，如果有rpx，upx，%，px等单位结尾或者值为auto，直接返回，否则加上px单位结尾
-   * @param {string|number} value 需要添加单位的值
-   * @param {string} unit 添加的单位名 比如px
-   */
-function addUnit() {var _uni$$u$config$unit, _uni, _uni$$u, _uni$$u$config;var value = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'auto';var unit = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : (_uni$$u$config$unit = (_uni = uni) === null || _uni === void 0 ? void 0 : (_uni$$u = _uni.$u) === null || _uni$$u === void 0 ? void 0 : (_uni$$u$config = _uni$$u.config) === null || _uni$$u$config === void 0 ? void 0 : _uni$$u$config.unit) !== null && _uni$$u$config$unit !== void 0 ? _uni$$u$config$unit : 'px';
+ * @description 添加单位，如果有rpx，upx，%，px等单位结尾或者值为auto，直接返回，否则加上px单位结尾
+ * @param {string|number} value 需要添加单位的值
+ * @param {string} unit 添加的单位名 比如px
+ */
+function addUnit() {
+  var _uni$$u$config$unit, _uni, _uni$$u, _uni$$u$config;
+  var value = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'auto';
+  var unit = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : (_uni$$u$config$unit = (_uni = uni) === null || _uni === void 0 ? void 0 : (_uni$$u = _uni.$u) === null || _uni$$u === void 0 ? void 0 : (_uni$$u$config = _uni$$u.config) === null || _uni$$u$config === void 0 ? void 0 : _uni$$u$config.unit) !== null && _uni$$u$config$unit !== void 0 ? _uni$$u$config$unit : 'px';
   value = String(value);
   // 用uView内置验证规则中的number判断是否为数值
   return _test.default.number(value) ? "".concat(value).concat(unit) : value;
 }
 
 /**
-   * @description 深度克隆
-   * @param {object} obj 需要深度克隆的对象
-   * @returns {*} 克隆后的对象或者原值（不是对象）
-   */
+ * @description 深度克隆
+ * @param {object} obj 需要深度克隆的对象
+ * @returns {*} 克隆后的对象或者原值（不是对象）
+ */
 function deepClone(obj) {
   // 对常见的“非”值，直接返回原来值
   if ([null, undefined, NaN, false].includes(obj)) return obj;
-  if (typeof obj !== 'object' && typeof obj !== 'function') {
+  if ((0, _typeof2.default)(obj) !== 'object' && typeof obj !== 'function') {
     // 原始类型直接返回
     return obj;
   }
   var o = _test.default.array(obj) ? [] : {};
   for (var i in obj) {
     if (obj.hasOwnProperty(i)) {
-      o[i] = typeof obj[i] === 'object' ? deepClone(obj[i]) : obj[i];
+      o[i] = (0, _typeof2.default)(obj[i]) === 'object' ? deepClone(obj[i]) : obj[i];
     }
   }
   return o;
 }
 
 /**
-   * @description JS对象深度合并
-   * @param {object} target 需要拷贝的对象
-   * @param {object} source 拷贝的来源对象
-   * @returns {object|boolean} 深度合并后的对象或者false（入参有不是对象）
-   */
-function deepMerge() {var target = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};var source = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+ * @description JS对象深度合并
+ * @param {object} target 需要拷贝的对象
+ * @param {object} source 拷贝的来源对象
+ * @returns {object|boolean} 深度合并后的对象或者false（入参有不是对象）
+ */
+function deepMerge() {
+  var target = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var source = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
   target = deepClone(target);
-  if (typeof target !== 'object' || typeof source !== 'object') return false;
+  if ((0, _typeof2.default)(target) !== 'object' || (0, _typeof2.default)(source) !== 'object') return false;
   for (var prop in source) {
     if (!source.hasOwnProperty(prop)) continue;
     if (prop in target) {
-      if (typeof target[prop] !== 'object') {
+      if ((0, _typeof2.default)(target[prop]) !== 'object') {
         target[prop] = source[prop];
-      } else if (typeof source[prop] !== 'object') {
+      } else if ((0, _typeof2.default)(source[prop]) !== 'object') {
         target[prop] = source[prop];
       } else if (target[prop].concat && source[prop].concat) {
         target[prop] = target[prop].concat(source[prop]);
@@ -15686,9 +15220,9 @@ function deepMerge() {var target = arguments.length > 0 && arguments[0] !== unde
 }
 
 /**
-   * @description error提示
-   * @param {*} err 错误内容
-   */
+ * @description error提示
+ * @param {*} err 错误内容
+ */
 function error(err) {
   // 开发环境才提示，生产环境不会提示
   if (true) {
@@ -15697,29 +15231,30 @@ function error(err) {
 }
 
 /**
-   * @description 打乱数组
-   * @param {array} array 需要打乱的数组
-   * @returns {array} 打乱后的数组
-   */
-function randomArray() {var array = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+ * @description 打乱数组
+ * @param {array} array 需要打乱的数组
+ * @returns {array} 打乱后的数组
+ */
+function randomArray() {
+  var array = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
   // 原理是sort排序,Math.random()产生0<= x < 1之间的数,会导致x-0.05大于或者小于0
-  return array.sort(function () {return Math.random() - 0.5;});
+  return array.sort(function () {
+    return Math.random() - 0.5;
+  });
 }
 
 // padStart 的 polyfill，因为某些机型或情况，还无法支持es7的padStart，比如电脑版的微信小程序
 // 所以这里做一个兼容polyfill的兼容处理
 if (!String.prototype.padStart) {
   // 为了方便表示这里 fillString 用了ES6 的默认参数，不影响理解
-  String.prototype.padStart = function (maxLength) {var fillString = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : ' ';
+  String.prototype.padStart = function (maxLength) {
+    var fillString = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : ' ';
     if (Object.prototype.toString.call(fillString) !== '[object String]') {
-      throw new TypeError(
-      'fillString must be String');
-
+      throw new TypeError('fillString must be String');
     }
     var str = this;
     // 返回 String(str) 这里是为了使返回的值是字符串字面量，在控制台中更符合直觉
     if (str.length >= maxLength) return String(str);
-
     var fillLength = maxLength - str.length;
     var times = Math.ceil(fillLength / fillString.length);
     while (times >>= 1) {
@@ -15733,12 +15268,14 @@ if (!String.prototype.padStart) {
 }
 
 /**
-   * @description 格式化时间
-   * @param {String|Number} dateTime 需要格式化的时间戳
-   * @param {String} fmt 格式化规则 yyyy:mm:dd|yyyy:mm|yyyy年mm月dd日|yyyy年mm月dd日 hh时MM分等,可自定义组合 默认yyyy-mm-dd
-   * @returns {string} 返回格式化后的字符串
-   */
-function timeFormat() {var dateTime = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;var formatStr = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'yyyy-mm-dd';
+ * @description 格式化时间
+ * @param {String|Number} dateTime 需要格式化的时间戳
+ * @param {String} fmt 格式化规则 yyyy:mm:dd|yyyy:mm|yyyy年mm月dd日|yyyy年mm月dd日 hh时MM分等,可自定义组合 默认yyyy-mm-dd
+ * @returns {string} 返回格式化后的字符串
+ */
+function timeFormat() {
+  var dateTime = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+  var formatStr = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'yyyy-mm-dd';
   var date;
   // 若传入时间为假值，则取当前时间
   if (!dateTime) {
@@ -15746,53 +15283,60 @@ function timeFormat() {var dateTime = arguments.length > 0 && arguments[0] !== u
   }
   // 若为unix秒时间戳，则转为毫秒时间戳（逻辑有点奇怪，但不敢改，以保证历史兼容）
   else if (/^\d{10}$/.test(dateTime === null || dateTime === void 0 ? void 0 : dateTime.toString().trim())) {
-      date = new Date(dateTime * 1000);
-    }
-    // 若用户传入字符串格式时间戳，new Date无法解析，需做兼容
-    else if (typeof dateTime === 'string' && /^\d+$/.test(dateTime.trim())) {
-        date = new Date(Number(dateTime));
-      }
-      // 处理平台性差异，在Safari/Webkit中，new Date仅支持/作为分割符的字符串时间
-      // 处理 '2022-07-10 01:02:03'，跳过 '2022-07-10T01:02:03'
-      else if (typeof dateTime === 'string' && dateTime.includes('-') && !dateTime.includes('T')) {
-          date = new Date(dateTime.replace(/-/g, '/'));
-        }
-        // 其他都认为符合 RFC 2822 规范
-        else {
-            date = new Date(dateTime);
-          }
-
+    date = new Date(dateTime * 1000);
+  }
+  // 若用户传入字符串格式时间戳，new Date无法解析，需做兼容
+  else if (typeof dateTime === 'string' && /^\d+$/.test(dateTime.trim())) {
+    date = new Date(Number(dateTime));
+  }
+  // 处理平台性差异，在Safari/Webkit中，new Date仅支持/作为分割符的字符串时间
+  // 处理 '2022-07-10 01:02:03'，跳过 '2022-07-10T01:02:03'
+  else if (typeof dateTime === 'string' && dateTime.includes('-') && !dateTime.includes('T')) {
+    date = new Date(dateTime.replace(/-/g, '/'));
+  }
+  // 其他都认为符合 RFC 2822 规范
+  else {
+    date = new Date(dateTime);
+  }
   var timeSource = {
-    'y': date.getFullYear().toString(), // 年
-    'm': (date.getMonth() + 1).toString().padStart(2, '0'), // 月
-    'd': date.getDate().toString().padStart(2, '0'), // 日
-    'h': date.getHours().toString().padStart(2, '0'), // 时
-    'M': date.getMinutes().toString().padStart(2, '0'), // 分
+    'y': date.getFullYear().toString(),
+    // 年
+    'm': (date.getMonth() + 1).toString().padStart(2, '0'),
+    // 月
+    'd': date.getDate().toString().padStart(2, '0'),
+    // 日
+    'h': date.getHours().toString().padStart(2, '0'),
+    // 时
+    'M': date.getMinutes().toString().padStart(2, '0'),
+    // 分
     's': date.getSeconds().toString().padStart(2, '0') // 秒
     // 有其他格式化字符需求可以继续添加，必须转化成字符串
   };
 
-  for (var key in timeSource) {var _ref =
-    new RegExp("".concat(key, "+")).exec(formatStr) || [],_ref2 = _slicedToArray(_ref, 1),ret = _ref2[0];
+  for (var key in timeSource) {
+    var _ref = new RegExp("".concat(key, "+")).exec(formatStr) || [],
+      _ref2 = (0, _slicedToArray2.default)(_ref, 1),
+      ret = _ref2[0];
     if (ret) {
       // 年可能只需展示两位
       var beginIndex = key === 'y' && ret.length === 2 ? 2 : 0;
       formatStr = formatStr.replace(ret, timeSource[key].slice(beginIndex));
     }
   }
-
   return formatStr;
 }
 
 /**
-   * @description 时间戳转为多久之前
-   * @param {String|Number} timestamp 时间戳
-   * @param {String|Boolean} format 
-   * 格式化规则如果为时间格式字符串，超出一定时间范围，返回固定的时间格式；
-   * 如果为布尔值false，无论什么时间，都返回多久以前的格式
-   * @returns {string} 转化后的内容
-   */
-function timeFrom() {var timestamp = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;var format = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'yyyy-mm-dd';
+ * @description 时间戳转为多久之前
+ * @param {String|Number} timestamp 时间戳
+ * @param {String|Boolean} format 
+ * 格式化规则如果为时间格式字符串，超出一定时间范围，返回固定的时间格式；
+ * 如果为布尔值false，无论什么时间，都返回多久以前的格式
+ * @returns {string} 转化后的内容
+ */
+function timeFrom() {
+  var timestamp = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+  var format = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'yyyy-mm-dd';
   if (timestamp == null) timestamp = Number(new Date());
   timestamp = parseInt(timestamp);
   // 判断用户输入的时间戳是秒还是毫秒,一般前端js获取的时间戳是毫秒(13位),后端传过来的为秒(10位)
@@ -15824,17 +15368,18 @@ function timeFrom() {var timestamp = arguments.length > 0 && arguments[0] !== un
         }
       } else {
         tips = timeFormat(timestamp, format);
-      }}
-
+      }
+  }
   return tips;
 }
 
 /**
-   * @description 去除空格
-   * @param String str 需要去除空格的字符串
-   * @param String pos both(左右)|left|right|all 默认both
-   */
-function trim(str) {var pos = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'both';
+ * @description 去除空格
+ * @param String str 需要去除空格的字符串
+ * @param String pos both(左右)|left|right|all 默认both
+ */
+function trim(str) {
+  var pos = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'both';
   str = String(str);
   if (pos == 'both') {
     return str.replace(/^\s+|\s+$/g, '');
@@ -15852,16 +15397,19 @@ function trim(str) {var pos = arguments.length > 1 && arguments[1] !== undefined
 }
 
 /**
-   * @description 对象转url参数
-   * @param {object} data,对象
-   * @param {Boolean} isPrefix,是否自动加上"?"
-   * @param {string} arrayFormat 规则 indices|brackets|repeat|comma
-   */
-function queryParams() {var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};var isPrefix = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;var arrayFormat = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'brackets';
+ * @description 对象转url参数
+ * @param {object} data,对象
+ * @param {Boolean} isPrefix,是否自动加上"?"
+ * @param {string} arrayFormat 规则 indices|brackets|repeat|comma
+ */
+function queryParams() {
+  var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var isPrefix = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+  var arrayFormat = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'brackets';
   var prefix = isPrefix ? '?' : '';
   var _result = [];
-  if (['indices', 'brackets', 'repeat', 'comma'].indexOf(arrayFormat) == -1) arrayFormat = 'brackets';var _loop = function _loop(
-  key) {
+  if (['indices', 'brackets', 'repeat', 'comma'].indexOf(arrayFormat) == -1) arrayFormat = 'brackets';
+  var _loop = function _loop(key) {
     var value = data[key];
     // 去掉为空的参数
     if (['', undefined, null].indexOf(value) >= 0) {
@@ -15900,34 +15448,41 @@ function queryParams() {var data = arguments.length > 0 && arguments[0] !== unde
         default:
           value.forEach(function (_value) {
             _result.push("".concat(key, "[]=").concat(_value));
-          });}
-
+          });
+      }
     } else {
       _result.push("".concat(key, "=").concat(value));
-    }};for (var key in data) {var _ret = _loop(key);if (_ret === "continue") continue;
+    }
+  };
+  for (var key in data) {
+    var _ret = _loop(key);
+    if (_ret === "continue") continue;
   }
   return _result.length ? prefix + _result.join('&') : '';
 }
 
 /**
-   * 显示消息提示框
-   * @param {String} title 提示的内容，长度与 icon 取值有关。
-   * @param {Number} duration 提示的延迟时间，单位毫秒，默认：2000
-   */
-function toast(title) {var duration = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 2000;
+ * 显示消息提示框
+ * @param {String} title 提示的内容，长度与 icon 取值有关。
+ * @param {Number} duration 提示的延迟时间，单位毫秒，默认：2000
+ */
+function toast(title) {
+  var duration = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 2000;
   uni.showToast({
     title: String(title),
     icon: 'none',
-    duration: duration });
-
+    duration: duration
+  });
 }
 
 /**
-   * @description 根据主题type值,获取对应的图标
-   * @param {String} type 主题名称,primary|info|error|warning|success
-   * @param {boolean} fill 是否使用fill填充实体的图标
-   */
-function type2icon() {var type = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'success';var fill = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+ * @description 根据主题type值,获取对应的图标
+ * @param {String} type 主题名称,primary|info|error|warning|success
+ * @param {boolean} fill 是否使用fill填充实体的图标
+ */
+function type2icon() {
+  var type = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'success';
+  var fill = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
   // 如果非预置值,默认为success
   if (['primary', 'info', 'error', 'warning', 'success'].indexOf(type) == -1) type = 'success';
   var iconName = '';
@@ -15949,35 +15504,36 @@ function type2icon() {var type = arguments.length > 0 && arguments[0] !== undefi
       iconName = 'checkmark-circle';
       break;
     default:
-      iconName = 'checkmark-circle';}
-
+      iconName = 'checkmark-circle';
+  }
   // 是否是实体类型,加上-fill,在icon组件库中,实体的类名是后面加-fill的
   if (fill) iconName += '-fill';
   return iconName;
 }
 
 /**
-   * @description 数字格式化
-   * @param {number|string} number 要格式化的数字
-   * @param {number} decimals 保留几位小数
-   * @param {string} decimalPoint 小数点符号
-   * @param {string} thousandsSeparator 千分位符号
-   * @returns {string} 格式化后的数字
-   */
-function priceFormat(number) {var decimals = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;var decimalPoint = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '.';var thousandsSeparator = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : ',';
+ * @description 数字格式化
+ * @param {number|string} number 要格式化的数字
+ * @param {number} decimals 保留几位小数
+ * @param {string} decimalPoint 小数点符号
+ * @param {string} thousandsSeparator 千分位符号
+ * @returns {string} 格式化后的数字
+ */
+function priceFormat(number) {
+  var decimals = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+  var decimalPoint = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '.';
+  var thousandsSeparator = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : ',';
   number = "".concat(number).replace(/[^0-9+-Ee.]/g, '');
   var n = !isFinite(+number) ? 0 : +number;
   var prec = !isFinite(+decimals) ? 0 : Math.abs(decimals);
   var sep = typeof thousandsSeparator === 'undefined' ? ',' : thousandsSeparator;
   var dec = typeof decimalPoint === 'undefined' ? '.' : decimalPoint;
   var s = '';
-
   s = (prec ? (0, _digit.round)(n, prec) + '' : "".concat(Math.round(n))).split('.');
   var re = /(-?\d+)(\d{3})/;
   while (re.test(s[0])) {
     s[0] = s[0].replace(re, "$1".concat(sep, "$2"));
   }
-
   if ((s[1] || '').length < prec) {
     s[1] = s[1] || '';
     s[1] += new Array(prec - s[1].length + 1).join('0');
@@ -15986,14 +15542,15 @@ function priceFormat(number) {var decimals = arguments.length > 1 && arguments[1
 }
 
 /**
-   * @description 获取duration值
-   * 如果带有ms或者s直接返回，如果大于一定值，认为是ms单位，小于一定值，认为是s单位
-   * 比如以30位阈值，那么300大于30，可以理解为用户想要的是300ms，而不是想花300s去执行一个动画
-   * @param {String|number} value 比如: "1s"|"100ms"|1|100
-   * @param {boolean} unit  提示: 如果是false 默认返回number
-   * @return {string|number} 
-   */
-function getDuration(value) {var unit = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+ * @description 获取duration值
+ * 如果带有ms或者s直接返回，如果大于一定值，认为是ms单位，小于一定值，认为是s单位
+ * 比如以30位阈值，那么300大于30，可以理解为用户想要的是300ms，而不是想花300s去执行一个动画
+ * @param {String|number} value 比如: "1s"|"100ms"|1|100
+ * @param {boolean} unit  提示: 如果是false 默认返回number
+ * @return {string|number} 
+ */
+function getDuration(value) {
+  var unit = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
   var valueNum = parseInt(value);
   if (unit) {
     if (/s$/.test(value)) return value;
@@ -16005,18 +15562,18 @@ function getDuration(value) {var unit = arguments.length > 1 && arguments[1] !==
 }
 
 /**
-   * @description 日期的月或日补零操作
-   * @param {String} value 需要补零的值
-   */
+ * @description 日期的月或日补零操作
+ * @param {String} value 需要补零的值
+ */
 function padZero(value) {
   return "00".concat(value).slice(-2);
 }
 
 /**
-   * @description 在u-form的子组件内容发生变化，或者失去焦点时，尝试通知u-form执行校验方法
-   * @param {*} instance
-   * @param {*} event
-   */
+ * @description 在u-form的子组件内容发生变化，或者失去焦点时，尝试通知u-form执行校验方法
+ * @param {*} instance
+ * @param {*} event
+ */
 function formValidate(instance, event) {
   var formItem = uni.$u.$parent.call(instance, 'u-form-item');
   var form = uni.$u.$parent.call(instance, 'u-form');
@@ -16028,11 +15585,11 @@ function formValidate(instance, event) {
 }
 
 /**
-   * @description 获取某个对象下的属性，用于通过类似'a.b.c'的形式去获取一个对象的的属性的形式
-   * @param {object} obj 对象
-   * @param {string} key 需要获取的属性字段
-   * @returns {*}
-   */
+ * @description 获取某个对象下的属性，用于通过类似'a.b.c'的形式去获取一个对象的的属性的形式
+ * @param {object} obj 对象
+ * @param {string} key 需要获取的属性字段
+ * @returns {*}
+ */
 function getProperty(obj, key) {
   if (!obj) {
     return;
@@ -16043,7 +15600,6 @@ function getProperty(obj, key) {
   if (key.indexOf('.') !== -1) {
     var keys = key.split('.');
     var firstObj = obj[keys[0]] || {};
-
     for (var i = 1; i < keys.length; i++) {
       if (firstObj) {
         firstObj = firstObj[keys[i]];
@@ -16055,11 +15611,11 @@ function getProperty(obj, key) {
 }
 
 /**
-   * @description 设置对象的属性值，如果'a.b.c'的形式进行设置
-   * @param {object} obj 对象
-   * @param {string} key 需要设置的属性
-   * @param {string} value 设置的值
-   */
+ * @description 设置对象的属性值，如果'a.b.c'的形式进行设置
+ * @param {object} obj 对象
+ * @param {string} key 需要设置的属性
+ * @param {string} value 设置的值
+ */
 function setProperty(obj, key, value) {
   if (!obj) {
     return;
@@ -16074,7 +15630,7 @@ function setProperty(obj, key, value) {
     // 0~length-1个key
     while (keys.length > 1) {
       var k = keys[0];
-      if (!_obj[k] || typeof _obj[k] !== 'object') {
+      if (!_obj[k] || (0, _typeof2.default)(_obj[k]) !== 'object') {
         _obj[k] = {};
       }
       var _key = keys.shift();
@@ -16082,10 +15638,8 @@ function setProperty(obj, key, value) {
       inFn(_obj[k], keys, v);
     }
   };
-
-  if (typeof key !== 'string' || key === '') {
-
-  } else if (key.indexOf('.') !== -1) {// 支持多层级赋值操作
+  if (typeof key !== 'string' || key === '') {} else if (key.indexOf('.') !== -1) {
+    // 支持多层级赋值操作
     var keys = key.split('.');
     inFn(obj, keys, value);
   } else {
@@ -16094,45 +15648,46 @@ function setProperty(obj, key, value) {
 }
 
 /**
-   * @description 获取当前页面路径
-   */
-function page() {var _pages$route, _pages;
+ * @description 获取当前页面路径
+ */
+function page() {
+  var _pages$route, _pages;
   var pages = getCurrentPages();
   // 某些特殊情况下(比如页面进行redirectTo时的一些时机)，pages可能为空数组
   return "/".concat((_pages$route = (_pages = pages[pages.length - 1]) === null || _pages === void 0 ? void 0 : _pages.route) !== null && _pages$route !== void 0 ? _pages$route : '');
 }
 
 /**
-   * @description 获取当前路由栈实例数组
-   */
+ * @description 获取当前路由栈实例数组
+ */
 function pages() {
   var pages = getCurrentPages();
   return pages;
 }
 
 /**
-   * @description 修改uView内置属性值
-   * @param {object} props 修改内置props属性
-   * @param {object} config 修改内置config属性
-   * @param {object} color 修改内置color属性
-   * @param {object} zIndex 修改内置zIndex属性
-   */
-function setConfig(_ref3)
-
-
-
-
-{var _ref3$props = _ref3.props,props = _ref3$props === void 0 ? {} : _ref3$props,_ref3$config = _ref3.config,config = _ref3$config === void 0 ? {} : _ref3$config,_ref3$color = _ref3.color,color = _ref3$color === void 0 ? {} : _ref3$color,_ref3$zIndex = _ref3.zIndex,zIndex = _ref3$zIndex === void 0 ? {} : _ref3$zIndex;var
-
-  deepMerge =
-  uni.$u.deepMerge;
+ * @description 修改uView内置属性值
+ * @param {object} props 修改内置props属性
+ * @param {object} config 修改内置config属性
+ * @param {object} color 修改内置color属性
+ * @param {object} zIndex 修改内置zIndex属性
+ */
+function setConfig(_ref3) {
+  var _ref3$props = _ref3.props,
+    props = _ref3$props === void 0 ? {} : _ref3$props,
+    _ref3$config = _ref3.config,
+    config = _ref3$config === void 0 ? {} : _ref3$config,
+    _ref3$color = _ref3.color,
+    color = _ref3$color === void 0 ? {} : _ref3$color,
+    _ref3$zIndex = _ref3.zIndex,
+    zIndex = _ref3$zIndex === void 0 ? {} : _ref3$zIndex;
+  var deepMerge = uni.$u.deepMerge;
   uni.$u.config = deepMerge(uni.$u.config, config);
   uni.$u.props = deepMerge(uni.$u.props, props);
   uni.$u.color = deepMerge(uni.$u.color, color);
   uni.$u.zIndex = deepMerge(uni.$u.zIndex, zIndex);
-}var _default =
-
-{
+}
+var _default = {
   range: range,
   getPx: getPx,
   sleep: sleep,
@@ -16161,11 +15716,13 @@ function setConfig(_ref3)
   setProperty: setProperty,
   page: page,
   pages: pages,
-  setConfig: setConfig };exports.default = _default;
+  setConfig: setConfig
+};
+exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 44 */
+/* 61 */
 /*!******************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/function/digit.js ***!
   \******************************************************************************************************************************/
@@ -16173,22 +15730,37 @@ function setConfig(_ref3)
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.times = times;exports.plus = plus;exports.minus = minus;exports.divide = divide;exports.round = round;exports.enableBoundaryChecking = enableBoundaryChecking;exports.default = void 0;function _toArray(arr) {return _arrayWithHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableRest();}function _nonIterableRest() {throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(o);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}function _iterableToArray(iter) {if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);}function _arrayWithHoles(arr) {if (Array.isArray(arr)) return arr;}var _boundaryCheckingState = true; // 是否进行越界检查的全局开关
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 3);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+exports.divide = divide;
+exports.enableBoundaryChecking = enableBoundaryChecking;
+exports.minus = minus;
+exports.plus = plus;
+exports.round = round;
+exports.times = times;
+var _toArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/toArray */ 62));
+var _boundaryCheckingState = true; // 是否进行越界检查的全局开关
 
 /**
  * 把错误的数据转正
  * @private
  * @example strip(0.09999999999999998)=0.1
  */
-function strip(num) {var precision = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 15;
+function strip(num) {
+  var precision = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 15;
   return +parseFloat(Number(num).toPrecision(precision));
 }
 
 /**
-   * Return digits length of a number
-   * @private
-   * @param {*number} num Input number
-   */
+ * Return digits length of a number
+ * @private
+ * @param {*number} num Input number
+ */
 function digitLength(num) {
   // Get digit length of e
   var eSplit = num.toString().split(/[eE]/);
@@ -16197,10 +15769,10 @@ function digitLength(num) {
 }
 
 /**
-   * 把小数转成整数,如果是小数则放大成整数
-   * @private
-   * @param {*number} num 输入数
-   */
+ * 把小数转成整数,如果是小数则放大成整数
+ * @private
+ * @param {*number} num 输入数
+ */
 function float2Fixed(num) {
   if (num.toString().indexOf('e') === -1) {
     return Number(num.toString().replace('.', ''));
@@ -16210,10 +15782,10 @@ function float2Fixed(num) {
 }
 
 /**
-   * 检测数字是否越界，如果越界给出提示
-   * @private
-   * @param {*number} num 输入数
-   */
+ * 检测数字是否越界，如果越界给出提示
+ * @private
+ * @param {*number} num 输入数
+ */
 function checkBoundary(num) {
   if (_boundaryCheckingState) {
     if (num > Number.MAX_SAFE_INTEGER || num < Number.MIN_SAFE_INTEGER) {
@@ -16223,52 +15795,57 @@ function checkBoundary(num) {
 }
 
 /**
-   * 把递归操作扁平迭代化
-   * @param {number[]} arr 要操作的数字数组
-   * @param {function} operation 迭代操作
-   * @private
-   */
-function iteratorOperation(arr, operation) {var _arr = _toArray(
-  arr),num1 = _arr[0],num2 = _arr[1],others = _arr.slice(2);
+ * 把递归操作扁平迭代化
+ * @param {number[]} arr 要操作的数字数组
+ * @param {function} operation 迭代操作
+ * @private
+ */
+function iteratorOperation(arr, operation) {
+  var _arr = (0, _toArray2.default)(arr),
+    num1 = _arr[0],
+    num2 = _arr[1],
+    others = _arr.slice(2);
   var res = operation(num1, num2);
-
   others.forEach(function (num) {
     res = operation(res, num);
   });
-
   return res;
 }
 
 /**
-   * 高精度乘法
-   * @export
-   */
-function times() {for (var _len = arguments.length, nums = new Array(_len), _key = 0; _key < _len; _key++) {nums[_key] = arguments[_key];}
+ * 高精度乘法
+ * @export
+ */
+function times() {
+  for (var _len = arguments.length, nums = new Array(_len), _key = 0; _key < _len; _key++) {
+    nums[_key] = arguments[_key];
+  }
   if (nums.length > 2) {
     return iteratorOperation(nums, times);
-  }var
-
-  num1 = nums[0],num2 = nums[1];
+  }
+  var num1 = nums[0],
+    num2 = nums[1];
   var num1Changed = float2Fixed(num1);
   var num2Changed = float2Fixed(num2);
   var baseNum = digitLength(num1) + digitLength(num2);
   var leftValue = num1Changed * num2Changed;
-
   checkBoundary(leftValue);
-
   return leftValue / Math.pow(10, baseNum);
 }
 
 /**
-   * 高精度加法
-   * @export
-   */
-function plus() {for (var _len2 = arguments.length, nums = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {nums[_key2] = arguments[_key2];}
+ * 高精度加法
+ * @export
+ */
+function plus() {
+  for (var _len2 = arguments.length, nums = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+    nums[_key2] = arguments[_key2];
+  }
   if (nums.length > 2) {
     return iteratorOperation(nums, plus);
-  }var
-
-  num1 = nums[0],num2 = nums[1];
+  }
+  var num1 = nums[0],
+    num2 = nums[1];
   // 取最大的小数位
   var baseNum = Math.pow(10, Math.max(digitLength(num1), digitLength(num2)));
   // 把小数都转为整数然后再计算
@@ -16276,29 +15853,35 @@ function plus() {for (var _len2 = arguments.length, nums = new Array(_len2), _ke
 }
 
 /**
-   * 高精度减法
-   * @export
-   */
-function minus() {for (var _len3 = arguments.length, nums = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {nums[_key3] = arguments[_key3];}
+ * 高精度减法
+ * @export
+ */
+function minus() {
+  for (var _len3 = arguments.length, nums = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+    nums[_key3] = arguments[_key3];
+  }
   if (nums.length > 2) {
     return iteratorOperation(nums, minus);
-  }var
-
-  num1 = nums[0],num2 = nums[1];
+  }
+  var num1 = nums[0],
+    num2 = nums[1];
   var baseNum = Math.pow(10, Math.max(digitLength(num1), digitLength(num2)));
   return (times(num1, baseNum) - times(num2, baseNum)) / baseNum;
 }
 
 /**
-   * 高精度除法
-   * @export
-   */
-function divide() {for (var _len4 = arguments.length, nums = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {nums[_key4] = arguments[_key4];}
+ * 高精度除法
+ * @export
+ */
+function divide() {
+  for (var _len4 = arguments.length, nums = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
+    nums[_key4] = arguments[_key4];
+  }
   if (nums.length > 2) {
     return iteratorOperation(nums, divide);
-  }var
-
-  num1 = nums[0],num2 = nums[1];
+  }
+  var num1 = nums[0],
+    num2 = nums[1];
   var num1Changed = float2Fixed(num1);
   var num2Changed = float2Fixed(num2);
   checkBoundary(num1Changed);
@@ -16308,9 +15891,9 @@ function divide() {for (var _len4 = arguments.length, nums = new Array(_len4), _
 }
 
 /**
-   * 四舍五入
-   * @export
-   */
+ * 四舍五入
+ * @export
+ */
 function round(num, ratio) {
   var base = Math.pow(10, ratio);
   var result = divide(Math.round(Math.abs(times(num, base))), base);
@@ -16322,25 +15905,43 @@ function round(num, ratio) {
 }
 
 /**
-   * 是否进行边界检查，默认开启
-   * @param flag 标记开关，true 为开启，false 为关闭，默认为 true
-   * @export
-   */
-function enableBoundaryChecking() {var flag = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+ * 是否进行边界检查，默认开启
+ * @param flag 标记开关，true 为开启，false 为关闭，默认为 true
+ * @export
+ */
+function enableBoundaryChecking() {
+  var flag = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
   _boundaryCheckingState = flag;
-}var _default =
-
-
-{
+}
+var _default = {
   times: times,
   plus: plus,
   minus: minus,
   divide: divide,
   round: round,
-  enableBoundaryChecking: enableBoundaryChecking };exports.default = _default;
+  enableBoundaryChecking: enableBoundaryChecking
+};
+exports.default = _default;
 
 /***/ }),
-/* 45 */
+/* 62 */
+/*!********************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/toArray.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayWithHoles = __webpack_require__(/*! ./arrayWithHoles.js */ 5);
+var iterableToArray = __webpack_require__(/*! ./iterableToArray.js */ 19);
+var unsupportedIterableToArray = __webpack_require__(/*! ./unsupportedIterableToArray.js */ 7);
+var nonIterableRest = __webpack_require__(/*! ./nonIterableRest.js */ 9);
+function _toArray(arr) {
+  return arrayWithHoles(arr) || iterableToArray(arr) || unsupportedIterableToArray(arr) || nonIterableRest();
+}
+module.exports = _toArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+/* 63 */
 /*!*****************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/config.js ***!
   \*****************************************************************************************************************************/
@@ -16348,25 +15949,24 @@ function enableBoundaryChecking() {var flag = arguments.length > 0 && arguments[
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; // 此版本发布于2022-00-24
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+// 此版本发布于2022-00-24
 var version = '2.0.34';
 
 // 开发环境才提示，生产环境不会提示
 if (true) {
   console.log("\n %c uView V".concat(version, " %c https://uviewui.com/ \n\n"), 'color: #ffffff; background: #3c9cff; padding:5px 0; border-radius: 5px;');
-}var _default =
-
-{
+}
+var _default = {
   v: version,
   version: version,
   // 主题名称
-  type: [
-  'primary',
-  'success',
-  'info',
-  'error',
-  'warning'],
-
+  type: ['primary', 'success', 'info', 'error', 'warning'],
   // 颜色部分，本来可以通过scss的:export导出供js使用，但是奈何nvue不支持
   color: {
     'u-primary': '#2979ff',
@@ -16377,13 +15977,15 @@ if (true) {
     'u-main-color': '#303133',
     'u-content-color': '#606266',
     'u-tips-color': '#909399',
-    'u-light-color': '#c0c4cc' },
-
+    'u-light-color': '#c0c4cc'
+  },
   // 默认单位，可以通过配置为rpx，那么在用于传入组件大小参数为数值时，就默认为rpx
-  unit: 'px' };exports.default = _default;
+  unit: 'px'
+};
+exports.default = _default;
 
 /***/ }),
-/* 46 */
+/* 64 */
 /*!****************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props.js ***!
   \****************************************************************************************************************************/
@@ -16391,198 +15993,111 @@ if (true) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
 
-
-
-var _config = _interopRequireDefault(__webpack_require__(/*! ./config */ 45));
-
-var _actionSheet = _interopRequireDefault(__webpack_require__(/*! ./props/actionSheet.js */ 47));
-var _album = _interopRequireDefault(__webpack_require__(/*! ./props/album.js */ 48));
-var _alert = _interopRequireDefault(__webpack_require__(/*! ./props/alert.js */ 49));
-var _avatar = _interopRequireDefault(__webpack_require__(/*! ./props/avatar */ 50));
-var _avatarGroup = _interopRequireDefault(__webpack_require__(/*! ./props/avatarGroup */ 51));
-var _backtop = _interopRequireDefault(__webpack_require__(/*! ./props/backtop */ 52));
-var _badge = _interopRequireDefault(__webpack_require__(/*! ./props/badge */ 53));
-var _button = _interopRequireDefault(__webpack_require__(/*! ./props/button */ 54));
-var _calendar = _interopRequireDefault(__webpack_require__(/*! ./props/calendar */ 55));
-var _carKeyboard = _interopRequireDefault(__webpack_require__(/*! ./props/carKeyboard */ 56));
-var _cell = _interopRequireDefault(__webpack_require__(/*! ./props/cell */ 57));
-var _cellGroup = _interopRequireDefault(__webpack_require__(/*! ./props/cellGroup */ 58));
-var _checkbox = _interopRequireDefault(__webpack_require__(/*! ./props/checkbox */ 59));
-var _checkboxGroup = _interopRequireDefault(__webpack_require__(/*! ./props/checkboxGroup */ 60));
-var _circleProgress = _interopRequireDefault(__webpack_require__(/*! ./props/circleProgress */ 61));
-var _code = _interopRequireDefault(__webpack_require__(/*! ./props/code */ 62));
-var _codeInput = _interopRequireDefault(__webpack_require__(/*! ./props/codeInput */ 63));
-var _col = _interopRequireDefault(__webpack_require__(/*! ./props/col */ 64));
-var _collapse = _interopRequireDefault(__webpack_require__(/*! ./props/collapse */ 65));
-var _collapseItem = _interopRequireDefault(__webpack_require__(/*! ./props/collapseItem */ 66));
-var _columnNotice = _interopRequireDefault(__webpack_require__(/*! ./props/columnNotice */ 67));
-var _countDown = _interopRequireDefault(__webpack_require__(/*! ./props/countDown */ 68));
-var _countTo = _interopRequireDefault(__webpack_require__(/*! ./props/countTo */ 69));
-var _datetimePicker = _interopRequireDefault(__webpack_require__(/*! ./props/datetimePicker */ 70));
-var _divider = _interopRequireDefault(__webpack_require__(/*! ./props/divider */ 71));
-var _empty = _interopRequireDefault(__webpack_require__(/*! ./props/empty */ 72));
-var _form = _interopRequireDefault(__webpack_require__(/*! ./props/form */ 73));
-var _formItem = _interopRequireDefault(__webpack_require__(/*! ./props/formItem */ 74));
-var _gap = _interopRequireDefault(__webpack_require__(/*! ./props/gap */ 75));
-var _grid = _interopRequireDefault(__webpack_require__(/*! ./props/grid */ 76));
-var _gridItem = _interopRequireDefault(__webpack_require__(/*! ./props/gridItem */ 77));
-var _icon = _interopRequireDefault(__webpack_require__(/*! ./props/icon */ 78));
-var _image = _interopRequireDefault(__webpack_require__(/*! ./props/image */ 79));
-var _indexAnchor = _interopRequireDefault(__webpack_require__(/*! ./props/indexAnchor */ 80));
-var _indexList = _interopRequireDefault(__webpack_require__(/*! ./props/indexList */ 81));
-var _input = _interopRequireDefault(__webpack_require__(/*! ./props/input */ 82));
-var _keyboard = _interopRequireDefault(__webpack_require__(/*! ./props/keyboard */ 83));
-var _line = _interopRequireDefault(__webpack_require__(/*! ./props/line */ 84));
-var _lineProgress = _interopRequireDefault(__webpack_require__(/*! ./props/lineProgress */ 85));
-var _link = _interopRequireDefault(__webpack_require__(/*! ./props/link */ 86));
-var _list = _interopRequireDefault(__webpack_require__(/*! ./props/list */ 87));
-var _listItem = _interopRequireDefault(__webpack_require__(/*! ./props/listItem */ 88));
-var _loadingIcon = _interopRequireDefault(__webpack_require__(/*! ./props/loadingIcon */ 89));
-var _loadingPage = _interopRequireDefault(__webpack_require__(/*! ./props/loadingPage */ 90));
-var _loadmore = _interopRequireDefault(__webpack_require__(/*! ./props/loadmore */ 91));
-var _modal = _interopRequireDefault(__webpack_require__(/*! ./props/modal */ 92));
-var _navbar = _interopRequireDefault(__webpack_require__(/*! ./props/navbar */ 93));
-var _noNetwork = _interopRequireDefault(__webpack_require__(/*! ./props/noNetwork */ 95));
-var _noticeBar = _interopRequireDefault(__webpack_require__(/*! ./props/noticeBar */ 96));
-var _notify = _interopRequireDefault(__webpack_require__(/*! ./props/notify */ 97));
-var _numberBox = _interopRequireDefault(__webpack_require__(/*! ./props/numberBox */ 98));
-var _numberKeyboard = _interopRequireDefault(__webpack_require__(/*! ./props/numberKeyboard */ 99));
-var _overlay = _interopRequireDefault(__webpack_require__(/*! ./props/overlay */ 100));
-var _parse = _interopRequireDefault(__webpack_require__(/*! ./props/parse */ 101));
-var _picker = _interopRequireDefault(__webpack_require__(/*! ./props/picker */ 102));
-var _popup = _interopRequireDefault(__webpack_require__(/*! ./props/popup */ 103));
-var _radio = _interopRequireDefault(__webpack_require__(/*! ./props/radio */ 104));
-var _radioGroup = _interopRequireDefault(__webpack_require__(/*! ./props/radioGroup */ 105));
-var _rate = _interopRequireDefault(__webpack_require__(/*! ./props/rate */ 106));
-var _readMore = _interopRequireDefault(__webpack_require__(/*! ./props/readMore */ 107));
-var _row = _interopRequireDefault(__webpack_require__(/*! ./props/row */ 108));
-var _rowNotice = _interopRequireDefault(__webpack_require__(/*! ./props/rowNotice */ 109));
-var _scrollList = _interopRequireDefault(__webpack_require__(/*! ./props/scrollList */ 110));
-var _search = _interopRequireDefault(__webpack_require__(/*! ./props/search */ 111));
-var _section = _interopRequireDefault(__webpack_require__(/*! ./props/section */ 112));
-var _skeleton = _interopRequireDefault(__webpack_require__(/*! ./props/skeleton */ 113));
-var _slider = _interopRequireDefault(__webpack_require__(/*! ./props/slider */ 114));
-var _statusBar = _interopRequireDefault(__webpack_require__(/*! ./props/statusBar */ 115));
-var _steps = _interopRequireDefault(__webpack_require__(/*! ./props/steps */ 116));
-var _stepsItem = _interopRequireDefault(__webpack_require__(/*! ./props/stepsItem */ 117));
-var _sticky = _interopRequireDefault(__webpack_require__(/*! ./props/sticky */ 118));
-var _subsection = _interopRequireDefault(__webpack_require__(/*! ./props/subsection */ 119));
-var _swipeAction = _interopRequireDefault(__webpack_require__(/*! ./props/swipeAction */ 120));
-var _swipeActionItem = _interopRequireDefault(__webpack_require__(/*! ./props/swipeActionItem */ 121));
-var _swiper = _interopRequireDefault(__webpack_require__(/*! ./props/swiper */ 122));
-var _swipterIndicator = _interopRequireDefault(__webpack_require__(/*! ./props/swipterIndicator */ 123));
-var _switch2 = _interopRequireDefault(__webpack_require__(/*! ./props/switch */ 124));
-var _tabbar = _interopRequireDefault(__webpack_require__(/*! ./props/tabbar */ 125));
-var _tabbarItem = _interopRequireDefault(__webpack_require__(/*! ./props/tabbarItem */ 126));
-var _tabs = _interopRequireDefault(__webpack_require__(/*! ./props/tabs */ 127));
-var _tag = _interopRequireDefault(__webpack_require__(/*! ./props/tag */ 128));
-var _text = _interopRequireDefault(__webpack_require__(/*! ./props/text */ 129));
-var _textarea = _interopRequireDefault(__webpack_require__(/*! ./props/textarea */ 130));
-var _toast = _interopRequireDefault(__webpack_require__(/*! ./props/toast */ 131));
-var _toolbar = _interopRequireDefault(__webpack_require__(/*! ./props/toolbar */ 132));
-var _tooltip = _interopRequireDefault(__webpack_require__(/*! ./props/tooltip */ 133));
-var _transition = _interopRequireDefault(__webpack_require__(/*! ./props/transition */ 134));
-var _upload = _interopRequireDefault(__webpack_require__(/*! ./props/upload */ 135));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var
-
-
-color =
-_config.default.color;var _default = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({},
-
-
-_actionSheet.default),
-_album.default),
-_alert.default),
-_avatar.default),
-_avatarGroup.default),
-_backtop.default),
-_badge.default),
-_button.default),
-_calendar.default),
-_carKeyboard.default),
-_cell.default),
-_cellGroup.default),
-_checkbox.default),
-_checkboxGroup.default),
-_circleProgress.default),
-_code.default),
-_codeInput.default),
-_col.default),
-_collapse.default),
-_collapseItem.default),
-_columnNotice.default),
-_countDown.default),
-_countTo.default),
-_datetimePicker.default),
-_divider.default),
-_empty.default),
-_form.default),
-_formItem.default),
-_gap.default),
-_grid.default),
-_gridItem.default),
-_icon.default),
-_image.default),
-_indexAnchor.default),
-_indexList.default),
-_input.default),
-_keyboard.default),
-_line.default),
-_lineProgress.default),
-_link.default),
-_list.default),
-_listItem.default),
-_loadingIcon.default),
-_loadingPage.default),
-_loadmore.default),
-_modal.default),
-_navbar.default),
-_noNetwork.default),
-_noticeBar.default),
-_notify.default),
-_numberBox.default),
-_numberKeyboard.default),
-_overlay.default),
-_parse.default),
-_picker.default),
-_popup.default),
-_radio.default),
-_radioGroup.default),
-_rate.default),
-_readMore.default),
-_row.default),
-_rowNotice.default),
-_scrollList.default),
-_search.default),
-_section.default),
-_skeleton.default),
-_slider.default),
-_statusBar.default),
-_steps.default),
-_stepsItem.default),
-_sticky.default),
-_subsection.default),
-_swipeAction.default),
-_swipeActionItem.default),
-_swiper.default),
-_swipterIndicator.default),
-_switch2.default),
-_tabbar.default),
-_tabbarItem.default),
-_tabs.default),
-_tag.default),
-_text.default),
-_textarea.default),
-_toast.default),
-_toolbar.default),
-_tooltip.default),
-_transition.default),
-_upload.default);exports.default = _default;
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 3);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ 10));
+var _config = _interopRequireDefault(__webpack_require__(/*! ./config */ 63));
+var _actionSheet = _interopRequireDefault(__webpack_require__(/*! ./props/actionSheet.js */ 65));
+var _album = _interopRequireDefault(__webpack_require__(/*! ./props/album.js */ 66));
+var _alert = _interopRequireDefault(__webpack_require__(/*! ./props/alert.js */ 67));
+var _avatar = _interopRequireDefault(__webpack_require__(/*! ./props/avatar */ 68));
+var _avatarGroup = _interopRequireDefault(__webpack_require__(/*! ./props/avatarGroup */ 69));
+var _backtop = _interopRequireDefault(__webpack_require__(/*! ./props/backtop */ 70));
+var _badge = _interopRequireDefault(__webpack_require__(/*! ./props/badge */ 71));
+var _button = _interopRequireDefault(__webpack_require__(/*! ./props/button */ 72));
+var _calendar = _interopRequireDefault(__webpack_require__(/*! ./props/calendar */ 73));
+var _carKeyboard = _interopRequireDefault(__webpack_require__(/*! ./props/carKeyboard */ 74));
+var _cell = _interopRequireDefault(__webpack_require__(/*! ./props/cell */ 75));
+var _cellGroup = _interopRequireDefault(__webpack_require__(/*! ./props/cellGroup */ 76));
+var _checkbox = _interopRequireDefault(__webpack_require__(/*! ./props/checkbox */ 77));
+var _checkboxGroup = _interopRequireDefault(__webpack_require__(/*! ./props/checkboxGroup */ 78));
+var _circleProgress = _interopRequireDefault(__webpack_require__(/*! ./props/circleProgress */ 79));
+var _code = _interopRequireDefault(__webpack_require__(/*! ./props/code */ 80));
+var _codeInput = _interopRequireDefault(__webpack_require__(/*! ./props/codeInput */ 81));
+var _col = _interopRequireDefault(__webpack_require__(/*! ./props/col */ 82));
+var _collapse = _interopRequireDefault(__webpack_require__(/*! ./props/collapse */ 83));
+var _collapseItem = _interopRequireDefault(__webpack_require__(/*! ./props/collapseItem */ 84));
+var _columnNotice = _interopRequireDefault(__webpack_require__(/*! ./props/columnNotice */ 85));
+var _countDown = _interopRequireDefault(__webpack_require__(/*! ./props/countDown */ 86));
+var _countTo = _interopRequireDefault(__webpack_require__(/*! ./props/countTo */ 87));
+var _datetimePicker = _interopRequireDefault(__webpack_require__(/*! ./props/datetimePicker */ 88));
+var _divider = _interopRequireDefault(__webpack_require__(/*! ./props/divider */ 89));
+var _empty = _interopRequireDefault(__webpack_require__(/*! ./props/empty */ 90));
+var _form = _interopRequireDefault(__webpack_require__(/*! ./props/form */ 91));
+var _formItem = _interopRequireDefault(__webpack_require__(/*! ./props/formItem */ 92));
+var _gap = _interopRequireDefault(__webpack_require__(/*! ./props/gap */ 93));
+var _grid = _interopRequireDefault(__webpack_require__(/*! ./props/grid */ 94));
+var _gridItem = _interopRequireDefault(__webpack_require__(/*! ./props/gridItem */ 95));
+var _icon = _interopRequireDefault(__webpack_require__(/*! ./props/icon */ 96));
+var _image = _interopRequireDefault(__webpack_require__(/*! ./props/image */ 97));
+var _indexAnchor = _interopRequireDefault(__webpack_require__(/*! ./props/indexAnchor */ 98));
+var _indexList = _interopRequireDefault(__webpack_require__(/*! ./props/indexList */ 99));
+var _input = _interopRequireDefault(__webpack_require__(/*! ./props/input */ 100));
+var _keyboard = _interopRequireDefault(__webpack_require__(/*! ./props/keyboard */ 101));
+var _line = _interopRequireDefault(__webpack_require__(/*! ./props/line */ 102));
+var _lineProgress = _interopRequireDefault(__webpack_require__(/*! ./props/lineProgress */ 103));
+var _link = _interopRequireDefault(__webpack_require__(/*! ./props/link */ 104));
+var _list = _interopRequireDefault(__webpack_require__(/*! ./props/list */ 105));
+var _listItem = _interopRequireDefault(__webpack_require__(/*! ./props/listItem */ 106));
+var _loadingIcon = _interopRequireDefault(__webpack_require__(/*! ./props/loadingIcon */ 107));
+var _loadingPage = _interopRequireDefault(__webpack_require__(/*! ./props/loadingPage */ 108));
+var _loadmore = _interopRequireDefault(__webpack_require__(/*! ./props/loadmore */ 109));
+var _modal = _interopRequireDefault(__webpack_require__(/*! ./props/modal */ 110));
+var _navbar = _interopRequireDefault(__webpack_require__(/*! ./props/navbar */ 111));
+var _noNetwork = _interopRequireDefault(__webpack_require__(/*! ./props/noNetwork */ 113));
+var _noticeBar = _interopRequireDefault(__webpack_require__(/*! ./props/noticeBar */ 114));
+var _notify = _interopRequireDefault(__webpack_require__(/*! ./props/notify */ 115));
+var _numberBox = _interopRequireDefault(__webpack_require__(/*! ./props/numberBox */ 116));
+var _numberKeyboard = _interopRequireDefault(__webpack_require__(/*! ./props/numberKeyboard */ 117));
+var _overlay = _interopRequireDefault(__webpack_require__(/*! ./props/overlay */ 118));
+var _parse = _interopRequireDefault(__webpack_require__(/*! ./props/parse */ 119));
+var _picker = _interopRequireDefault(__webpack_require__(/*! ./props/picker */ 120));
+var _popup = _interopRequireDefault(__webpack_require__(/*! ./props/popup */ 121));
+var _radio = _interopRequireDefault(__webpack_require__(/*! ./props/radio */ 122));
+var _radioGroup = _interopRequireDefault(__webpack_require__(/*! ./props/radioGroup */ 123));
+var _rate = _interopRequireDefault(__webpack_require__(/*! ./props/rate */ 124));
+var _readMore = _interopRequireDefault(__webpack_require__(/*! ./props/readMore */ 125));
+var _row = _interopRequireDefault(__webpack_require__(/*! ./props/row */ 126));
+var _rowNotice = _interopRequireDefault(__webpack_require__(/*! ./props/rowNotice */ 127));
+var _scrollList = _interopRequireDefault(__webpack_require__(/*! ./props/scrollList */ 128));
+var _search = _interopRequireDefault(__webpack_require__(/*! ./props/search */ 129));
+var _section = _interopRequireDefault(__webpack_require__(/*! ./props/section */ 130));
+var _skeleton = _interopRequireDefault(__webpack_require__(/*! ./props/skeleton */ 131));
+var _slider = _interopRequireDefault(__webpack_require__(/*! ./props/slider */ 132));
+var _statusBar = _interopRequireDefault(__webpack_require__(/*! ./props/statusBar */ 133));
+var _steps = _interopRequireDefault(__webpack_require__(/*! ./props/steps */ 134));
+var _stepsItem = _interopRequireDefault(__webpack_require__(/*! ./props/stepsItem */ 135));
+var _sticky = _interopRequireDefault(__webpack_require__(/*! ./props/sticky */ 136));
+var _subsection = _interopRequireDefault(__webpack_require__(/*! ./props/subsection */ 137));
+var _swipeAction = _interopRequireDefault(__webpack_require__(/*! ./props/swipeAction */ 138));
+var _swipeActionItem = _interopRequireDefault(__webpack_require__(/*! ./props/swipeActionItem */ 139));
+var _swiper = _interopRequireDefault(__webpack_require__(/*! ./props/swiper */ 140));
+var _swipterIndicator = _interopRequireDefault(__webpack_require__(/*! ./props/swipterIndicator */ 141));
+var _switch2 = _interopRequireDefault(__webpack_require__(/*! ./props/switch */ 142));
+var _tabbar = _interopRequireDefault(__webpack_require__(/*! ./props/tabbar */ 143));
+var _tabbarItem = _interopRequireDefault(__webpack_require__(/*! ./props/tabbarItem */ 144));
+var _tabs = _interopRequireDefault(__webpack_require__(/*! ./props/tabs */ 145));
+var _tag = _interopRequireDefault(__webpack_require__(/*! ./props/tag */ 146));
+var _text = _interopRequireDefault(__webpack_require__(/*! ./props/text */ 147));
+var _textarea = _interopRequireDefault(__webpack_require__(/*! ./props/textarea */ 148));
+var _toast = _interopRequireDefault(__webpack_require__(/*! ./props/toast */ 149));
+var _toolbar = _interopRequireDefault(__webpack_require__(/*! ./props/toolbar */ 150));
+var _tooltip = _interopRequireDefault(__webpack_require__(/*! ./props/tooltip */ 151));
+var _transition = _interopRequireDefault(__webpack_require__(/*! ./props/transition */ 152));
+var _upload = _interopRequireDefault(__webpack_require__(/*! ./props/upload */ 153));
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+var color = _config.default.color;
+var _default = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, _actionSheet.default), _album.default), _alert.default), _avatar.default), _avatarGroup.default), _backtop.default), _badge.default), _button.default), _calendar.default), _carKeyboard.default), _cell.default), _cellGroup.default), _checkbox.default), _checkboxGroup.default), _circleProgress.default), _code.default), _codeInput.default), _col.default), _collapse.default), _collapseItem.default), _columnNotice.default), _countDown.default), _countTo.default), _datetimePicker.default), _divider.default), _empty.default), _form.default), _formItem.default), _gap.default), _grid.default), _gridItem.default), _icon.default), _image.default), _indexAnchor.default), _indexList.default), _input.default), _keyboard.default), _line.default), _lineProgress.default), _link.default), _list.default), _listItem.default), _loadingIcon.default), _loadingPage.default), _loadmore.default), _modal.default), _navbar.default), _noNetwork.default), _noticeBar.default), _notify.default), _numberBox.default), _numberKeyboard.default), _overlay.default), _parse.default), _picker.default), _popup.default), _radio.default), _radioGroup.default), _rate.default), _readMore.default), _row.default), _rowNotice.default), _scrollList.default), _search.default), _section.default), _skeleton.default), _slider.default), _statusBar.default), _steps.default), _stepsItem.default), _sticky.default), _subsection.default), _swipeAction.default), _swipeActionItem.default), _swiper.default), _swipterIndicator.default), _switch2.default), _tabbar.default), _tabbarItem.default), _tabs.default), _tag.default), _text.default), _textarea.default), _toast.default), _toolbar.default), _tooltip.default), _transition.default), _upload.default);
+exports.default = _default;
 
 /***/ }),
-/* 47 */
+/* 65 */
 /*!****************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/actionSheet.js ***!
   \****************************************************************************************************************************************/
@@ -16590,32 +16105,43 @@ _upload.default);exports.default = _default;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 16:44:35
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/actionSheet.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 16:44:35
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/actionSheet.js
+ */
+var _default = {
   // action-sheet组件
   actionSheet: {
     show: false,
     title: '',
     description: '',
-    actions: function actions() {return [];},
+    actions: function actions() {
+      return [];
+    },
     index: '',
     cancelText: '',
     closeOnClickAction: true,
     safeAreaInsetBottom: true,
     openType: '',
     closeOnClickOverlay: true,
-    round: 0 } };exports.default = _default;
+    round: 0
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 48 */
+/* 66 */
 /*!**********************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/album.js ***!
   \**********************************************************************************************************************************/
@@ -16623,19 +16149,27 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 16:47:24
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/album.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 16:47:24
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/album.js
+ */
+var _default = {
   // album 组件
   album: {
-    urls: function urls() {return [];},
+    urls: function urls() {
+      return [];
+    },
     keyName: '',
     singleSize: 180,
     multipleSize: 70,
@@ -16645,10 +16179,13 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     maxCount: 9,
     previewFullImage: true,
     rowCount: 3,
-    showMore: true } };exports.default = _default;
+    showMore: true
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 49 */
+/* 67 */
 /*!**********************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/alert.js ***!
   \**********************************************************************************************************************************/
@@ -16656,16 +16193,22 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 16:48:53
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/alert.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 16:48:53
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/alert.js
+ */
+var _default = {
   // alert警告组件
   alert: {
     title: '',
@@ -16675,10 +16218,13 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     showIcon: false,
     effect: 'light',
     center: false,
-    fontSize: 14 } };exports.default = _default;
+    fontSize: 14
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 50 */
+/* 68 */
 /*!***********************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/avatar.js ***!
   \***********************************************************************************************************************************/
@@ -16686,16 +16232,22 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 16:49:22
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/avatar.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 16:49:22
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/avatar.js
+ */
+var _default = {
   // avatar 组件
   avatar: {
     src: '',
@@ -16711,10 +16263,13 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     randomBgColor: false,
     defaultUrl: '',
     colorIndex: '',
-    name: '' } };exports.default = _default;
+    name: ''
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 51 */
+/* 69 */
 /*!****************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/avatarGroup.js ***!
   \****************************************************************************************************************************************/
@@ -16722,19 +16277,27 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 16:49:55
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/avatarGroup.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 16:49:55
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/avatarGroup.js
+ */
+var _default = {
   // avatarGroup 组件
   avatarGroup: {
-    urls: function urls() {return [];},
+    urls: function urls() {
+      return [];
+    },
     maxCount: 5,
     shape: 'circle',
     mode: 'scaleToFill',
@@ -16742,10 +16305,13 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     size: 40,
     keyName: '',
     gap: 0.5,
-    extraValue: 0 } };exports.default = _default;
+    extraValue: 0
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 52 */
+/* 70 */
 /*!************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/backtop.js ***!
   \************************************************************************************************************************************/
@@ -16753,16 +16319,22 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 16:50:18
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/backtop.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 16:50:18
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/backtop.js
+ */
+var _default = {
   // backtop组件
   backtop: {
     mode: 'circle',
@@ -16774,12 +16346,18 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     bottom: 100,
     right: 20,
     zIndex: 9,
-    iconStyle: function iconStyle() {return {
+    iconStyle: function iconStyle() {
+      return {
         color: '#909399',
-        fontSize: '19px' };} } };exports.default = _default;
+        fontSize: '19px'
+      };
+    }
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 53 */
+/* 71 */
 /*!**********************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/badge.js ***!
   \**********************************************************************************************************************************/
@@ -16787,16 +16365,22 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-23 19:51:50
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/badge.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-23 19:51:50
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/badge.js
+ */
+var _default = {
   // 徽标数组件
   badge: {
     isDot: false,
@@ -16809,12 +16393,17 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     color: null,
     shape: 'circle',
     numberType: 'overflow',
-    offset: function offset() {return [];},
+    offset: function offset() {
+      return [];
+    },
     inverted: false,
-    absolute: false } };exports.default = _default;
+    absolute: false
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 54 */
+/* 72 */
 /*!***********************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/button.js ***!
   \***********************************************************************************************************************************/
@@ -16822,16 +16411,22 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 16:51:27
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/button.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 16:51:27
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/button.js
+ */
+var _default = {
   // button组件
   button: {
     hairline: false,
@@ -16861,10 +16456,13 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     text: '',
     icon: '',
     iconColor: '',
-    color: '' } };exports.default = _default;
+    color: ''
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 55 */
+/* 73 */
 /*!*************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/calendar.js ***!
   \*************************************************************************************************************************************/
@@ -16872,16 +16470,22 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 16:52:43
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/calendar.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 16:52:43
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/calendar.js
+ */
+var _default = {
   // calendar 组件
   calendar: {
     title: '日期选择',
@@ -16890,12 +16494,15 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     mode: 'single',
     startText: '开始',
     endText: '结束',
-    customList: function customList() {return [];},
+    customList: function customList() {
+      return [];
+    },
     color: '#3c9cff',
     minDate: 0,
     maxDate: 0,
     defaultDate: null,
-    maxCount: Number.MAX_SAFE_INTEGER, // Infinity
+    maxCount: Number.MAX_SAFE_INTEGER,
+    // Infinity
     rowHeight: 56,
     formatter: null,
     showLunar: false,
@@ -16906,15 +16513,19 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     closeOnClickOverlay: false,
     readonly: false,
     showConfirm: true,
-    maxRange: Number.MAX_SAFE_INTEGER, // Infinity
+    maxRange: Number.MAX_SAFE_INTEGER,
+    // Infinity
     rangePrompt: '',
     showRangePrompt: true,
     allowSameDay: false,
     round: 0,
-    monthNum: 3 } };exports.default = _default;
+    monthNum: 3
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 56 */
+/* 74 */
 /*!****************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/carKeyboard.js ***!
   \****************************************************************************************************************************************/
@@ -16922,22 +16533,31 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 16:53:20
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/carKeyboard.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 16:53:20
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/carKeyboard.js
+ */
+var _default = {
   // 车牌号键盘
   carKeyboard: {
-    random: false } };exports.default = _default;
+    random: false
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 57 */
+/* 75 */
 /*!*********************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/cell.js ***!
   \*********************************************************************************************************************************/
@@ -16945,16 +16565,22 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-23 20:53:09
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/cell.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-23 20:53:09
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/cell.js
+ */
+var _default = {
   // cell组件的props
   cell: {
     customClass: '',
@@ -16977,10 +16603,13 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     titleStyle: {},
     size: '',
     stop: true,
-    name: '' } };exports.default = _default;
+    name: ''
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 58 */
+/* 76 */
 /*!**************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/cellGroup.js ***!
   \**************************************************************************************************************************************/
@@ -16988,24 +16617,33 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 16:54:16
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/cellGroup.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 16:54:16
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/cellGroup.js
+ */
+var _default = {
   // cell-group组件的props
   cellGroup: {
     title: '',
     border: true,
-    customStyle: {} } };exports.default = _default;
+    customStyle: {}
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 59 */
+/* 77 */
 /*!*************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/checkbox.js ***!
   \*************************************************************************************************************************************/
@@ -17013,16 +16651,22 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-23 21:06:59
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/checkbox.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-23 21:06:59
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/checkbox.js
+ */
+var _default = {
   // checkbox组件
   checkbox: {
     name: '',
@@ -17037,10 +16681,13 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     label: '',
     labelSize: '',
     labelColor: '',
-    labelDisabled: '' } };exports.default = _default;
+    labelDisabled: ''
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 60 */
+/* 78 */
 /*!******************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/checkboxGroup.js ***!
   \******************************************************************************************************************************************/
@@ -17048,20 +16695,28 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 16:54:47
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/checkboxGroup.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 16:54:47
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/checkboxGroup.js
+ */
+var _default = {
   // checkbox-group组件
   checkboxGroup: {
     name: '',
-    value: function value() {return [];},
+    value: function value() {
+      return [];
+    },
     shape: 'square',
     disabled: false,
     activeColor: '#2979ff',
@@ -17074,10 +16729,13 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     iconColor: '#ffffff',
     iconSize: 12,
     iconPlacement: 'left',
-    borderBottom: false } };exports.default = _default;
+    borderBottom: false
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 61 */
+/* 79 */
 /*!*******************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/circleProgress.js ***!
   \*******************************************************************************************************************************************/
@@ -17085,22 +16743,31 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 16:55:02
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/circleProgress.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 16:55:02
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/circleProgress.js
+ */
+var _default = {
   // circleProgress 组件
   circleProgress: {
-    percentage: 30 } };exports.default = _default;
+    percentage: 30
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 62 */
+/* 80 */
 /*!*********************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/code.js ***!
   \*********************************************************************************************************************************/
@@ -17108,17 +16775,22 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 16:55:27
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/code.js
-                                                                                                      */var _default =
 
-{
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 16:55:27
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/code.js
+ */
+var _default = {
   // code 组件
   code: {
     seconds: 60,
@@ -17126,10 +16798,13 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     changeText: 'X秒重新获取',
     endText: '重新获取',
     keepRunning: false,
-    uniqueKey: '' } };exports.default = _default;
+    uniqueKey: ''
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 63 */
+/* 81 */
 /*!**************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/codeInput.js ***!
   \**************************************************************************************************************************************/
@@ -17137,16 +16812,22 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 16:55:58
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/codeInput.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 16:55:58
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/codeInput.js
+ */
+var _default = {
   // codeInput 组件
   codeInput: {
     adjustPosition: true,
@@ -17163,10 +16844,13 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     size: 35,
     disabledKeyboard: false,
     borderColor: '#c9cacc',
-    disabledDot: true } };exports.default = _default;
+    disabledDot: true
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 64 */
+/* 82 */
 /*!********************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/col.js ***!
   \********************************************************************************************************************************/
@@ -17174,26 +16858,35 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 16:56:12
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/col.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 16:56:12
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/col.js
+ */
+var _default = {
   // col 组件
   col: {
     span: 12,
     offset: 0,
     justify: 'start',
     align: 'stretch',
-    textAlign: 'left' } };exports.default = _default;
+    textAlign: 'left'
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 65 */
+/* 83 */
 /*!*************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/collapse.js ***!
   \*************************************************************************************************************************************/
@@ -17201,24 +16894,33 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 16:56:30
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/collapse.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 16:56:30
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/collapse.js
+ */
+var _default = {
   // collapse 组件
   collapse: {
     value: null,
     accordion: false,
-    border: true } };exports.default = _default;
+    border: true
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 66 */
+/* 84 */
 /*!*****************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/collapseItem.js ***!
   \*****************************************************************************************************************************************/
@@ -17226,16 +16928,22 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 16:56:42
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/collapseItem.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 16:56:42
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/collapseItem.js
+ */
+var _default = {
   // collapseItem 组件
   collapseItem: {
     title: '',
@@ -17248,10 +16956,13 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     align: 'left',
     name: '',
     icon: '',
-    duration: 300 } };exports.default = _default;
+    duration: 300
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 67 */
+/* 85 */
 /*!*****************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/columnNotice.js ***!
   \*****************************************************************************************************************************************/
@@ -17259,16 +16970,22 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 16:57:16
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/columnNotice.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 16:57:16
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/columnNotice.js
+ */
+var _default = {
   // columnNotice 组件
   columnNotice: {
     text: '',
@@ -17280,10 +16997,13 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     speed: 80,
     step: false,
     duration: 1500,
-    disableTouch: true } };exports.default = _default;
+    disableTouch: true
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 68 */
+/* 86 */
 /*!**************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/countDown.js ***!
   \**************************************************************************************************************************************/
@@ -17291,25 +17011,34 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 17:11:29
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/countDown.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:11:29
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/countDown.js
+ */
+var _default = {
   // u-count-down 计时器组件
   countDown: {
     time: 0,
     format: 'HH:mm:ss',
     autoStart: true,
-    millisecond: false } };exports.default = _default;
+    millisecond: false
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 69 */
+/* 87 */
 /*!************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/countTo.js ***!
   \************************************************************************************************************************************/
@@ -17317,16 +17046,22 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 16:57:32
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/countTo.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 16:57:32
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/countTo.js
+ */
+var _default = {
   // countTo 组件
   countTo: {
     startVal: 0,
@@ -17339,10 +17074,13 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     color: '#606266',
     fontSize: 22,
     bold: false,
-    separator: '' } };exports.default = _default;
+    separator: ''
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 70 */
+/* 88 */
 /*!*******************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/datetimePicker.js ***!
   \*******************************************************************************************************************************************/
@@ -17350,16 +17088,22 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 16:57:48
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/datetimePicker.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 16:57:48
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/datetimePicker.js
+ */
+var _default = {
   // datetimePicker 组件
   datetimePicker: {
     show: false,
@@ -17383,10 +17127,15 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     confirmColor: '#3c9cff',
     visibleItemCount: 5,
     closeOnClickOverlay: false,
-    defaultIndex: function defaultIndex() {return [];} } };exports.default = _default;
+    defaultIndex: function defaultIndex() {
+      return [];
+    }
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 71 */
+/* 89 */
 /*!************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/divider.js ***!
   \************************************************************************************************************************************/
@@ -17394,16 +17143,22 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 16:58:03
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/divider.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 16:58:03
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/divider.js
+ */
+var _default = {
   // divider组件
   divider: {
     dashed: false,
@@ -17413,10 +17168,13 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     text: '',
     textSize: 14,
     textColor: '#909399',
-    lineColor: '#dcdfe6' } };exports.default = _default;
+    lineColor: '#dcdfe6'
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 72 */
+/* 90 */
 /*!**********************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/empty.js ***!
   \**********************************************************************************************************************************/
@@ -17424,16 +17182,22 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 17:03:27
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/empty.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:03:27
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/empty.js
+ */
+var _default = {
   // empty组件
   empty: {
     icon: '',
@@ -17446,10 +17210,13 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     width: 160,
     height: 160,
     show: true,
-    marginTop: 0 } };exports.default = _default;
+    marginTop: 0
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 73 */
+/* 91 */
 /*!*********************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/form.js ***!
   \*********************************************************************************************************************************/
@@ -17457,29 +17224,44 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 17:03:49
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/form.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:03:49
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/form.js
+ */
+var _default = {
   // form 组件
   form: {
-    model: function model() {return {};},
-    rules: function rules() {return {};},
+    model: function model() {
+      return {};
+    },
+    rules: function rules() {
+      return {};
+    },
     errorType: 'message',
     borderBottom: true,
     labelPosition: 'left',
     labelWidth: 45,
     labelAlign: 'left',
-    labelStyle: function labelStyle() {return {};} } };exports.default = _default;
+    labelStyle: function labelStyle() {
+      return {};
+    }
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 74 */
+/* 92 */
 /*!*************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/formItem.js ***!
   \*************************************************************************************************************************************/
@@ -17487,16 +17269,22 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 17:04:32
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/formItem.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:04:32
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/formItem.js
+ */
+var _default = {
   // formItem 组件
   formItem: {
     label: '',
@@ -17507,10 +17295,13 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     rightIcon: '',
     leftIcon: '',
     required: false,
-    leftIconStyle: '' } };exports.default = _default;
+    leftIconStyle: ''
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 75 */
+/* 93 */
 /*!********************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/gap.js ***!
   \********************************************************************************************************************************/
@@ -17518,26 +17309,35 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 17:05:25
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/gap.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:05:25
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/gap.js
+ */
+var _default = {
   // gap组件
   gap: {
     bgColor: 'transparent',
     height: 20,
     marginTop: 0,
     marginBottom: 0,
-    customStyle: {} } };exports.default = _default;
+    customStyle: {}
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 76 */
+/* 94 */
 /*!*********************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/grid.js ***!
   \*********************************************************************************************************************************/
@@ -17545,24 +17345,33 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 17:05:57
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/grid.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:05:57
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/grid.js
+ */
+var _default = {
   // grid组件
   grid: {
     col: 3,
     border: false,
-    align: 'left' } };exports.default = _default;
+    align: 'left'
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 77 */
+/* 95 */
 /*!*************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/gridItem.js ***!
   \*************************************************************************************************************************************/
@@ -17570,23 +17379,32 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 17:06:13
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/gridItem.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:06:13
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/gridItem.js
+ */
+var _default = {
   // grid-item组件
   gridItem: {
     name: null,
-    bgColor: 'transparent' } };exports.default = _default;
+    bgColor: 'transparent'
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 78 */
+/* 96 */
 /*!*********************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/icon.js ***!
   \*********************************************************************************************************************************/
@@ -17594,25 +17412,30 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
 
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 3);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _config = _interopRequireDefault(__webpack_require__(/*! ../config */ 63));
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 18:00:14
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/icon.js
+ */
 
-
-
-
-
-
-var _config = _interopRequireDefault(__webpack_require__(/*! ../config */ 45));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} /*
-                                                                                                                                                          * @Author       : LQ
-                                                                                                                                                          * @Description  :
-                                                                                                                                                          * @version      : 1.0
-                                                                                                                                                          * @Date         : 2021-08-20 16:44:21
-                                                                                                                                                          * @LastAuthor   : LQ
-                                                                                                                                                          * @lastTime     : 2021-08-20 18:00:14
-                                                                                                                                                          * @FilePath     : /u-view2.0/uview-ui/libs/config/props/icon.js
-                                                                                                                                                          */var color = _config.default.color;var _default = { // icon组件
-  icon: { name: '', color: color['u-content-color'],
+var color = _config.default.color;
+var _default = {
+  // icon组件
+  icon: {
+    name: '',
+    color: color['u-content-color'],
     size: '16px',
     bold: false,
     index: '',
@@ -17627,10 +17450,13 @@ var _config = _interopRequireDefault(__webpack_require__(/*! ../config */ 45));f
     width: '',
     height: '',
     top: 0,
-    stop: false } };exports.default = _default;
+    stop: false
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 79 */
+/* 97 */
 /*!**********************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/image.js ***!
   \**********************************************************************************************************************************/
@@ -17638,16 +17464,22 @@ var _config = _interopRequireDefault(__webpack_require__(/*! ../config */ 45));f
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 17:01:51
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/image.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:01:51
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/image.js
+ */
+var _default = {
   // image组件
   image: {
     src: '',
@@ -17665,10 +17497,13 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     fade: true,
     webp: false,
     duration: 500,
-    bgColor: '#f3f4f6' } };exports.default = _default;
+    bgColor: '#f3f4f6'
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 80 */
+/* 98 */
 /*!****************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/indexAnchor.js ***!
   \****************************************************************************************************************************************/
@@ -17676,26 +17511,35 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 17:13:15
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/indexAnchor.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:13:15
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/indexAnchor.js
+ */
+var _default = {
   // indexAnchor 组件
   indexAnchor: {
     text: '',
     color: '#606266',
     size: 14,
     bgColor: '#dedede',
-    height: 32 } };exports.default = _default;
+    height: 32
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 81 */
+/* 99 */
 /*!**************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/indexList.js ***!
   \**************************************************************************************************************************************/
@@ -17703,26 +17547,37 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 17:13:35
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/indexList.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:13:35
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/indexList.js
+ */
+var _default = {
   // indexList 组件
   indexList: {
     inactiveColor: '#606266',
     activeColor: '#5677fc',
-    indexList: function indexList() {return [];},
+    indexList: function indexList() {
+      return [];
+    },
     sticky: true,
-    customNavHeight: 0 } };exports.default = _default;
+    customNavHeight: 0
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 82 */
+/* 100 */
 /*!**********************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/input.js ***!
   \**********************************************************************************************************************************/
@@ -17730,16 +17585,22 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 17:13:55
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/input.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:13:55
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/input.js
+ */
+var _default = {
   // index 组件
   input: {
     value: '',
@@ -17775,10 +17636,13 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     border: 'surround',
     readonly: false,
     shape: 'square',
-    formatter: null } };exports.default = _default;
+    formatter: null
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 83 */
+/* 101 */
 /*!*************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/keyboard.js ***!
   \*************************************************************************************************************************************/
@@ -17786,16 +17650,22 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 17:07:49
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/keyboard.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:07:49
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/keyboard.js
+ */
+var _default = {
   // 键盘组件
   keyboard: {
     mode: 'number',
@@ -17813,10 +17683,13 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     zIndex: 10075,
     cancelText: '取消',
     confirmText: '确定',
-    autoChange: false } };exports.default = _default;
+    autoChange: false
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 84 */
+/* 102 */
 /*!*********************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/line.js ***!
   \*********************************************************************************************************************************/
@@ -17824,16 +17697,22 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 17:04:49
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/line.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:04:49
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/line.js
+ */
+var _default = {
   // line组件
   line: {
     color: '#d6d7d9',
@@ -17841,10 +17720,13 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     direction: 'row',
     hairline: true,
     margin: 0,
-    dashed: false } };exports.default = _default;
+    dashed: false
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 85 */
+/* 103 */
 /*!*****************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/lineProgress.js ***!
   \*****************************************************************************************************************************************/
@@ -17852,26 +17734,35 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 17:14:11
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/lineProgress.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:14:11
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/lineProgress.js
+ */
+var _default = {
   // lineProgress 组件
   lineProgress: {
     activeColor: '#19be6b',
     inactiveColor: '#ececec',
     percentage: 0,
     showText: true,
-    height: 12 } };exports.default = _default;
+    height: 12
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 86 */
+/* 104 */
 /*!*********************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/link.js ***!
   \*********************************************************************************************************************************/
@@ -17879,33 +17770,41 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
 
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 3);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _config = _interopRequireDefault(__webpack_require__(/*! ../config */ 63));
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:45:36
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/link.js
+ */
 
-
-
-
-
-
-var _config = _interopRequireDefault(__webpack_require__(/*! ../config */ 45));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} /*
-                                                                                                                                                          * @Author       : LQ
-                                                                                                                                                          * @Description  :
-                                                                                                                                                          * @version      : 1.0
-                                                                                                                                                          * @Date         : 2021-08-20 16:44:21
-                                                                                                                                                          * @LastAuthor   : LQ
-                                                                                                                                                          * @lastTime     : 2021-08-20 17:45:36
-                                                                                                                                                          * @FilePath     : /u-view2.0/uview-ui/libs/config/props/link.js
-                                                                                                                                                          */var color = _config.default.color;var _default = { // link超链接组件props参数
-  link: { color: color['u-primary'], fontSize: 15,
+var color = _config.default.color;
+var _default = {
+  // link超链接组件props参数
+  link: {
+    color: color['u-primary'],
+    fontSize: 15,
     underLine: false,
     href: '',
     mpTips: '链接已复制，请在浏览器打开',
     lineColor: '',
-    text: '' } };exports.default = _default;
+    text: ''
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 87 */
+/* 105 */
 /*!*********************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/list.js ***!
   \*********************************************************************************************************************************/
@@ -17913,16 +17812,22 @@ var _config = _interopRequireDefault(__webpack_require__(/*! ../config */ 45));f
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 17:14:53
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/list.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:14:53
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/list.js
+ */
+var _default = {
   // list 组件
   list: {
     showScrollbar: false,
@@ -17938,10 +17843,13 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     enableBackToTop: false,
     height: 0,
     width: 0,
-    preLoadScreen: 1 } };exports.default = _default;
+    preLoadScreen: 1
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 88 */
+/* 106 */
 /*!*************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/listItem.js ***!
   \*************************************************************************************************************************************/
@@ -17949,22 +17857,31 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 17:15:40
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/listItem.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:15:40
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/listItem.js
+ */
+var _default = {
   // listItem 组件
   listItem: {
-    anchor: '' } };exports.default = _default;
+    anchor: ''
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 89 */
+/* 107 */
 /*!****************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/loadingIcon.js ***!
   \****************************************************************************************************************************************/
@@ -17972,25 +17889,30 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
 
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 3);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _config = _interopRequireDefault(__webpack_require__(/*! ../config */ 63));
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:45:47
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/loadingIcon.js
+ */
 
-
-
-
-
-
-var _config = _interopRequireDefault(__webpack_require__(/*! ../config */ 45));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} /*
-                                                                                                                                                          * @Author       : LQ
-                                                                                                                                                          * @Description  :
-                                                                                                                                                          * @version      : 1.0
-                                                                                                                                                          * @Date         : 2021-08-20 16:44:21
-                                                                                                                                                          * @LastAuthor   : LQ
-                                                                                                                                                          * @lastTime     : 2021-08-20 17:45:47
-                                                                                                                                                          * @FilePath     : /u-view2.0/uview-ui/libs/config/props/loadingIcon.js
-                                                                                                                                                          */var color = _config.default.color;var _default = { // loading-icon加载中图标组件
-  loadingIcon: { show: true, color: color['u-tips-color'],
+var color = _config.default.color;
+var _default = {
+  // loading-icon加载中图标组件
+  loadingIcon: {
+    show: true,
+    color: color['u-tips-color'],
     textColor: color['u-tips-color'],
     vertical: false,
     mode: 'spinner',
@@ -17999,10 +17921,13 @@ var _config = _interopRequireDefault(__webpack_require__(/*! ../config */ 45));f
     text: '',
     timingFunction: 'ease-in-out',
     duration: 1200,
-    inactiveColor: '' } };exports.default = _default;
+    inactiveColor: ''
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 90 */
+/* 108 */
 /*!****************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/loadingPage.js ***!
   \****************************************************************************************************************************************/
@@ -18010,16 +17935,22 @@ var _config = _interopRequireDefault(__webpack_require__(/*! ../config */ 45));f
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 17:00:23
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/loadingPage.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:00:23
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/loadingPage.js
+ */
+var _default = {
   // loading-page组件
   loadingPage: {
     loadingText: '正在加载',
@@ -18030,10 +17961,13 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     color: '#C8C8C8',
     fontSize: 19,
     iconSize: 28,
-    loadingColor: '#C8C8C8' } };exports.default = _default;
+    loadingColor: '#C8C8C8'
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 91 */
+/* 109 */
 /*!*************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/loadmore.js ***!
   \*************************************************************************************************************************************/
@@ -18041,16 +17975,22 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 17:15:26
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/loadmore.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:15:26
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/loadmore.js
+ */
+var _default = {
   // loadmore 组件
   loadmore: {
     status: 'loadmore',
@@ -18070,10 +18010,13 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     height: 'auto',
     line: false,
     lineColor: '#E6E8EB',
-    dashed: false } };exports.default = _default;
+    dashed: false
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 92 */
+/* 110 */
 /*!**********************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/modal.js ***!
   \**********************************************************************************************************************************/
@@ -18081,16 +18024,22 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 17:15:59
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/modal.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:15:59
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/modal.js
+ */
+var _default = {
   // modal 组件
   modal: {
     show: false,
@@ -18108,10 +18057,13 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     closeOnClickOverlay: false,
     negativeTop: 0,
     width: '650rpx',
-    confirmButtonShape: '' } };exports.default = _default;
+    confirmButtonShape: ''
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 93 */
+/* 111 */
 /*!***********************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/navbar.js ***!
   \***********************************************************************************************************************************/
@@ -18119,25 +18071,32 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
 
-
-
-
-
-
-
-var _color = _interopRequireDefault(__webpack_require__(/*! ../color */ 94));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} /*
-                                                                                                                                                        * @Author       : LQ
-                                                                                                                                                        * @Description  :
-                                                                                                                                                        * @version      : 1.0
-                                                                                                                                                        * @Date         : 2021-08-20 16:44:21
-                                                                                                                                                        * @LastAuthor   : LQ
-                                                                                                                                                        * @lastTime     : 2021-08-20 17:16:18
-                                                                                                                                                        * @FilePath     : /u-view2.0/uview-ui/libs/config/props/navbar.js
-                                                                                                                                                        */var _default = { // navbar 组件
-  navbar: { safeAreaInsetTop: true, placeholder: false, fixed: true, border: false, leftIcon: 'arrow-left', leftText: '',
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 3);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _color = _interopRequireDefault(__webpack_require__(/*! ../color */ 112));
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:16:18
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/navbar.js
+ */
+var _default = {
+  // navbar 组件
+  navbar: {
+    safeAreaInsetTop: true,
+    placeholder: false,
+    fixed: true,
+    border: false,
+    leftIcon: 'arrow-left',
+    leftText: '',
     rightText: '',
     rightIcon: '',
     title: '',
@@ -18147,10 +18106,13 @@ var _color = _interopRequireDefault(__webpack_require__(/*! ../color */ 94));fun
     leftIconSize: 20,
     leftIconColor: _color.default.mainColor,
     autoBack: false,
-    titleStyle: '' } };exports.default = _default;
+    titleStyle: ''
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 94 */
+/* 112 */
 /*!****************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/color.js ***!
   \****************************************************************************************************************************/
@@ -18158,7 +18120,13 @@ var _color = _interopRequireDefault(__webpack_require__(/*! ../color */ 94));fun
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; // 为了让用户能够自定义主题，会逐步弃用此文件，各颜色通过css提供
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+// 为了让用户能够自定义主题，会逐步弃用此文件，各颜色通过css提供
 // 为了给某些特殊场景使用和向后兼容，无需删除此文件(2020-06-20)
 var color = {
   primary: '#3c9cff',
@@ -18171,13 +18139,13 @@ var color = {
   contentColor: '#606266',
   tipsColor: '#909399',
   lightColor: '#c0c4cc',
-  borderColor: '#e4e7ed' };var _default =
-
-
-color;exports.default = _default;
+  borderColor: '#e4e7ed'
+};
+var _default = color;
+exports.default = _default;
 
 /***/ }),
-/* 95 */
+/* 113 */
 /*!**************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/noNetwork.js ***!
   \**************************************************************************************************************************************/
@@ -18185,24 +18153,33 @@ color;exports.default = _default;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 17:16:39
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/noNetwork.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:16:39
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/noNetwork.js
+ */
+var _default = {
   // noNetwork
   noNetwork: {
     tips: '哎呀，网络信号丢失',
     zIndex: '',
-    image: 'data:image/png;base64,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' } };exports.default = _default;
+    image: 'data:image/png;base64,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'
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 96 */
+/* 114 */
 /*!**************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/noticeBar.js ***!
   \**************************************************************************************************************************************/
@@ -18210,19 +18187,27 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 17:17:13
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/noticeBar.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:17:13
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/noticeBar.js
+ */
+var _default = {
   // noticeBar
   noticeBar: {
-    text: function text() {return [];},
+    text: function text() {
+      return [];
+    },
     direction: 'row',
     step: false,
     icon: 'volume',
@@ -18234,10 +18219,13 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     duration: 2000,
     disableTouch: true,
     url: '',
-    linkType: 'navigateTo' } };exports.default = _default;
+    linkType: 'navigateTo'
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 97 */
+/* 115 */
 /*!***********************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/notify.js ***!
   \***********************************************************************************************************************************/
@@ -18245,16 +18233,22 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 17:10:21
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/notify.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:10:21
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/notify.js
+ */
+var _default = {
   // notify组件
   notify: {
     top: 0,
@@ -18264,10 +18258,13 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     message: '',
     duration: 3000,
     fontSize: 15,
-    safeAreaInsetTop: false } };exports.default = _default;
+    safeAreaInsetTop: false
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 98 */
+/* 116 */
 /*!**************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/numberBox.js ***!
   \**************************************************************************************************************************************/
@@ -18275,16 +18272,22 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 17:11:46
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/numberBox.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:11:46
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/numberBox.js
+ */
+var _default = {
   // 步进器组件
   numberBox: {
     name: '',
@@ -18307,10 +18310,13 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     cursorSpacing: 100,
     disableMinus: false,
     disablePlus: false,
-    iconStyle: '' } };exports.default = _default;
+    iconStyle: ''
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 99 */
+/* 117 */
 /*!*******************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/numberKeyboard.js ***!
   \*******************************************************************************************************************************************/
@@ -18318,24 +18324,33 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 17:08:05
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/numberKeyboard.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:08:05
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/numberKeyboard.js
+ */
+var _default = {
   // 数字键盘
   numberKeyboard: {
     mode: 'number',
     dotDisabled: false,
-    random: false } };exports.default = _default;
+    random: false
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 100 */
+/* 118 */
 /*!************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/overlay.js ***!
   \************************************************************************************************************************************/
@@ -18343,25 +18358,34 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 17:06:50
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/overlay.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:06:50
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/overlay.js
+ */
+var _default = {
   // overlay组件
   overlay: {
     show: false,
     zIndex: 10070,
     duration: 300,
-    opacity: 0.5 } };exports.default = _default;
+    opacity: 0.5
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 101 */
+/* 119 */
 /*!**********************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/parse.js ***!
   \**********************************************************************************************************************************/
@@ -18369,16 +18393,22 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 17:17:33
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/parse.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:17:33
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/parse.js
+ */
+var _default = {
   // parse
   parse: {
     copyLink: true,
@@ -18388,10 +18418,13 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     pauseVideo: true,
     previewImg: true,
     setTitle: true,
-    showImgMenu: true } };exports.default = _default;
+    showImgMenu: true
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 102 */
+/* 120 */
 /*!***********************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/picker.js ***!
   \***********************************************************************************************************************************/
@@ -18399,22 +18432,30 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 17:18:20
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/picker.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:18:20
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/picker.js
+ */
+var _default = {
   // picker
   picker: {
     show: false,
     showToolbar: true,
     title: '',
-    columns: function columns() {return [];},
+    columns: function columns() {
+      return [];
+    },
     loading: false,
     itemHeight: 44,
     cancelText: '取消',
@@ -18424,11 +18465,16 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     visibleItemCount: 5,
     keyName: 'text',
     closeOnClickOverlay: false,
-    defaultIndex: function defaultIndex() {return [];},
-    immediateChange: false } };exports.default = _default;
+    defaultIndex: function defaultIndex() {
+      return [];
+    },
+    immediateChange: false
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 103 */
+/* 121 */
 /*!**********************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/popup.js ***!
   \**********************************************************************************************************************************/
@@ -18436,16 +18482,22 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 17:06:33
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/popup.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:06:33
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/popup.js
+ */
+var _default = {
   // popup组件
   popup: {
     show: false,
@@ -18462,10 +18514,13 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     round: 0,
     zoom: true,
     bgColor: '',
-    overlayOpacity: 0.5 } };exports.default = _default;
+    overlayOpacity: 0.5
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 104 */
+/* 122 */
 /*!**********************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/radio.js ***!
   \**********************************************************************************************************************************/
@@ -18473,16 +18528,22 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 17:02:34
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/radio.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:02:34
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/radio.js
+ */
+var _default = {
   // radio组件
   radio: {
     name: '',
@@ -18497,10 +18558,13 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     labelColor: '',
     size: '',
     iconColor: '',
-    placement: '' } };exports.default = _default;
+    placement: ''
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 105 */
+/* 123 */
 /*!***************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/radioGroup.js ***!
   \***************************************************************************************************************************************/
@@ -18508,16 +18572,22 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 17:03:12
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/radioGroup.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:03:12
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/radioGroup.js
+ */
+var _default = {
   // radio-group组件
   radioGroup: {
     value: '',
@@ -18535,10 +18605,13 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     iconColor: '#ffffff',
     iconSize: 12,
     borderBottom: false,
-    iconPlacement: 'left' } };exports.default = _default;
+    iconPlacement: 'left'
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 106 */
+/* 124 */
 /*!*********************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/rate.js ***!
   \*********************************************************************************************************************************/
@@ -18546,16 +18619,22 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 17:05:09
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/rate.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:05:09
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/rate.js
+ */
+var _default = {
   // rate组件
   rate: {
     value: 1,
@@ -18569,10 +18648,13 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     allowHalf: false,
     activeIcon: 'star-fill',
     inactiveIcon: 'star',
-    touchable: true } };exports.default = _default;
+    touchable: true
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 107 */
+/* 125 */
 /*!*************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/readMore.js ***!
   \*************************************************************************************************************************************/
@@ -18580,16 +18662,22 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 17:18:41
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/readMore.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:18:41
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/readMore.js
+ */
+var _default = {
   // readMore
   readMore: {
     showHeight: 400,
@@ -18599,10 +18687,13 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     color: '#2979ff',
     fontSize: 14,
     textIndent: '2em',
-    name: '' } };exports.default = _default;
+    name: ''
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 108 */
+/* 126 */
 /*!********************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/row.js ***!
   \********************************************************************************************************************************/
@@ -18610,24 +18701,33 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 17:18:58
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/row.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:18:58
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/row.js
+ */
+var _default = {
   // row
   row: {
     gutter: 0,
     justify: 'start',
-    align: 'center' } };exports.default = _default;
+    align: 'center'
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 109 */
+/* 127 */
 /*!**************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/rowNotice.js ***!
   \**************************************************************************************************************************************/
@@ -18635,16 +18735,22 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 17:19:13
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/rowNotice.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:19:13
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/rowNotice.js
+ */
+var _default = {
   // rowNotice
   rowNotice: {
     text: '',
@@ -18653,10 +18759,13 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     color: '#f9ae3d',
     bgColor: '#fdf6ec',
     fontSize: 14,
-    speed: 80 } };exports.default = _default;
+    speed: 80
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 110 */
+/* 128 */
 /*!***************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/scrollList.js ***!
   \***************************************************************************************************************************************/
@@ -18664,16 +18773,22 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 17:19:28
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/scrollList.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:19:28
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/scrollList.js
+ */
+var _default = {
   // scrollList
   scrollList: {
     indicatorWidth: 50,
@@ -18681,10 +18796,13 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     indicator: true,
     indicatorColor: '#f2f2f2',
     indicatorActiveColor: '#3c9cff',
-    indicatorStyle: '' } };exports.default = _default;
+    indicatorStyle: ''
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 111 */
+/* 129 */
 /*!***********************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/search.js ***!
   \***********************************************************************************************************************************/
@@ -18692,16 +18810,22 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 17:19:45
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/search.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:19:45
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/search.js
+ */
+var _default = {
   // search
   search: {
     shape: 'round',
@@ -18710,10 +18834,14 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     clearabled: true,
     focus: false,
     showAction: true,
-    actionStyle: function actionStyle() {return {};},
+    actionStyle: function actionStyle() {
+      return {};
+    },
     actionText: '搜索',
     inputAlign: 'left',
-    inputStyle: function inputStyle() {return {};},
+    inputStyle: function inputStyle() {
+      return {};
+    },
     disabled: false,
     borderColor: 'transparent',
     searchIconColor: '#909399',
@@ -18726,10 +18854,13 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     value: '',
     maxlength: '-1',
     height: 32,
-    label: null } };exports.default = _default;
+    label: null
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 112 */
+/* 130 */
 /*!************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/section.js ***!
   \************************************************************************************************************************************/
@@ -18737,16 +18868,22 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 17:07:33
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/section.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:07:33
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/section.js
+ */
+var _default = {
   // u-section组件
   section: {
     title: '',
@@ -18758,10 +18895,13 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     subColor: '#909399',
     showLine: true,
     lineColor: '',
-    arrow: true } };exports.default = _default;
+    arrow: true
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 113 */
+/* 131 */
 /*!*************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/skeleton.js ***!
   \*************************************************************************************************************************************/
@@ -18769,16 +18909,22 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 17:20:14
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/skeleton.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:20:14
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/skeleton.js
+ */
+var _default = {
   // skeleton
   skeleton: {
     loading: true,
@@ -18791,10 +18937,13 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     titleHeight: 18,
     avatar: false,
     avatarSize: 32,
-    avatarShape: 'circle' } };exports.default = _default;
+    avatarShape: 'circle'
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 114 */
+/* 132 */
 /*!***********************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/slider.js ***!
   \***********************************************************************************************************************************/
@@ -18802,16 +18951,22 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 17:08:25
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/slider.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:08:25
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/slider.js
+ */
+var _default = {
   // slider组件
   slider: {
     value: 0,
@@ -18824,10 +18979,13 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     blockColor: '#ffffff',
     showValue: false,
     disabled: false,
-    blockStyle: function blockStyle() {} } };exports.default = _default;
+    blockStyle: function blockStyle() {}
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 115 */
+/* 133 */
 /*!**************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/statusBar.js ***!
   \**************************************************************************************************************************************/
@@ -18835,22 +18993,31 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 17:20:39
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/statusBar.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:20:39
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/statusBar.js
+ */
+var _default = {
   // statusBar
   statusBar: {
-    bgColor: 'transparent' } };exports.default = _default;
+    bgColor: 'transparent'
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 116 */
+/* 134 */
 /*!**********************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/steps.js ***!
   \**********************************************************************************************************************************/
@@ -18858,16 +19025,22 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 17:12:37
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/steps.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:12:37
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/steps.js
+ */
+var _default = {
   // steps组件
   steps: {
     direction: 'row',
@@ -18876,10 +19049,13 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     inactiveColor: '#969799',
     activeIcon: '',
     inactiveIcon: '',
-    dot: false } };exports.default = _default;
+    dot: false
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 117 */
+/* 135 */
 /*!**************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/stepsItem.js ***!
   \**************************************************************************************************************************************/
@@ -18887,25 +19063,34 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 17:12:55
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/stepsItem.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:12:55
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/stepsItem.js
+ */
+var _default = {
   // steps-item组件
   stepsItem: {
     title: '',
     desc: '',
     iconSize: 17,
-    error: false } };exports.default = _default;
+    error: false
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 118 */
+/* 136 */
 /*!***********************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/sticky.js ***!
   \***********************************************************************************************************************************/
@@ -18913,16 +19098,22 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 17:01:30
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/sticky.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:01:30
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/sticky.js
+ */
+var _default = {
   // sticky组件
   sticky: {
     offsetTop: 0,
@@ -18930,10 +19121,13 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     disabled: false,
     bgColor: 'transparent',
     zIndex: '',
-    index: '' } };exports.default = _default;
+    index: ''
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 119 */
+/* 137 */
 /*!***************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/subsection.js ***!
   \***************************************************************************************************************************************/
@@ -18941,16 +19135,22 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 17:12:20
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/subsection.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:12:20
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/subsection.js
+ */
+var _default = {
   // subsection组件
   subsection: {
     list: [],
@@ -18961,10 +19161,13 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     fontSize: 12,
     bold: true,
     bgColor: '#eeeeef',
-    keyName: 'name' } };exports.default = _default;
+    keyName: 'name'
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 120 */
+/* 138 */
 /*!****************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/swipeAction.js ***!
   \****************************************************************************************************************************************/
@@ -18972,22 +19175,31 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 17:00:42
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/swipeAction.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:00:42
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/swipeAction.js
+ */
+var _default = {
   // swipe-action组件
   swipeAction: {
-    autoClose: true } };exports.default = _default;
+    autoClose: true
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 121 */
+/* 139 */
 /*!********************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/swipeActionItem.js ***!
   \********************************************************************************************************************************************/
@@ -18995,16 +19207,22 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 17:01:13
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/swipeActionItem.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:01:13
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/swipeActionItem.js
+ */
+var _default = {
   // swipeActionItem 组件
   swipeActionItem: {
     show: false,
@@ -19013,10 +19231,13 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     threshold: 20,
     autoClose: true,
     options: [],
-    duration: 300 } };exports.default = _default;
+    duration: 300
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 122 */
+/* 140 */
 /*!***********************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/swiper.js ***!
   \***********************************************************************************************************************************/
@@ -19024,19 +19245,27 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 17:21:38
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/swiper.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:21:38
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/swiper.js
+ */
+var _default = {
   // swiper 组件
   swiper: {
-    list: function list() {return [];},
+    list: function list() {
+      return [];
+    },
     indicator: false,
     indicatorActiveColor: '#FFFFFF',
     indicatorInactiveColor: 'rgba(255, 255, 255, 0.35)',
@@ -19059,10 +19288,13 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     bgColor: '#f3f4f6',
     radius: 4,
     loading: false,
-    showTitle: false } };exports.default = _default;
+    showTitle: false
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 123 */
+/* 141 */
 /*!*********************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/swipterIndicator.js ***!
   \*********************************************************************************************************************************************/
@@ -19070,26 +19302,35 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 17:22:07
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/swiperIndicator.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:22:07
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/swiperIndicator.js
+ */
+var _default = {
   // swiperIndicator 组件
   swiperIndicator: {
     length: 0,
     current: 0,
     indicatorActiveColor: '',
     indicatorInactiveColor: '',
-    indicatorMode: 'line' } };exports.default = _default;
+    indicatorMode: 'line'
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 124 */
+/* 142 */
 /*!***********************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/switch.js ***!
   \***********************************************************************************************************************************/
@@ -19097,16 +19338,22 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 17:22:24
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/switch.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:22:24
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/switch.js
+ */
+var _default = {
   // switch
   switch: {
     loading: false,
@@ -19118,10 +19365,13 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     activeValue: true,
     inactiveValue: false,
     asyncChange: false,
-    space: 0 } };exports.default = _default;
+    space: 0
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 125 */
+/* 143 */
 /*!***********************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/tabbar.js ***!
   \***********************************************************************************************************************************/
@@ -19129,16 +19379,22 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 17:22:40
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/tabbar.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:22:40
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/tabbar.js
+ */
+var _default = {
   // tabbar
   tabbar: {
     value: null,
@@ -19148,10 +19404,13 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     activeColor: '#1989fa',
     inactiveColor: '#7d7e80',
     fixed: true,
-    placeholder: true } };exports.default = _default;
+    placeholder: true
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 126 */
+/* 144 */
 /*!***************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/tabbarItem.js ***!
   \***************************************************************************************************************************************/
@@ -19159,16 +19418,22 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 17:22:55
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/tabbarItem.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:22:55
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/tabbarItem.js
+ */
+var _default = {
   //
   tabbarItem: {
     name: null,
@@ -19176,10 +19441,13 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     badge: null,
     dot: false,
     text: '',
-    badgeStyle: 'top: 6px;right:2px;' } };exports.default = _default;
+    badgeStyle: 'top: 6px;right:2px;'
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 127 */
+/* 145 */
 /*!*********************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/tabs.js ***!
   \*********************************************************************************************************************************/
@@ -19187,39 +19455,56 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 17:23:14
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/tabs.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:23:14
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/tabs.js
+ */
+var _default = {
   //
   tabs: {
     duration: 300,
-    list: function list() {return [];},
+    list: function list() {
+      return [];
+    },
     lineColor: '#3c9cff',
-    activeStyle: function activeStyle() {return {
-        color: '#303133' };},
-
-    inactiveStyle: function inactiveStyle() {return {
-        color: '#606266' };},
-
+    activeStyle: function activeStyle() {
+      return {
+        color: '#303133'
+      };
+    },
+    inactiveStyle: function inactiveStyle() {
+      return {
+        color: '#606266'
+      };
+    },
     lineWidth: 20,
     lineHeight: 3,
     lineBgSize: 'cover',
-    itemStyle: function itemStyle() {return {
-        height: '44px' };},
-
+    itemStyle: function itemStyle() {
+      return {
+        height: '44px'
+      };
+    },
     scrollable: true,
     current: 0,
-    keyName: 'name' } };exports.default = _default;
+    keyName: 'name'
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 128 */
+/* 146 */
 /*!********************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/tag.js ***!
   \********************************************************************************************************************************/
@@ -19227,16 +19512,22 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 17:23:37
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/tag.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:23:37
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/tag.js
+ */
+var _default = {
   // tag 组件
   tag: {
     type: 'primary',
@@ -19253,10 +19544,13 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     plain: false,
     closable: false,
     show: true,
-    icon: '' } };exports.default = _default;
+    icon: ''
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 129 */
+/* 147 */
 /*!*********************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/text.js ***!
   \*********************************************************************************************************************************/
@@ -19264,16 +19558,22 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 17:23:58
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/text.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:23:58
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/text.js
+ */
+var _default = {
   // text 组件
   text: {
     type: '',
@@ -19291,17 +19591,22 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     lines: '',
     color: '#303133',
     size: 15,
-    iconStyle: function iconStyle() {return {
-        fontSize: '15px' };},
-
+    iconStyle: function iconStyle() {
+      return {
+        fontSize: '15px'
+      };
+    },
     decoration: 'none',
     margin: 0,
     lineHeight: '',
     align: 'left',
-    wordWrap: 'normal' } };exports.default = _default;
+    wordWrap: 'normal'
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 130 */
+/* 148 */
 /*!*************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/textarea.js ***!
   \*************************************************************************************************************************************/
@@ -19309,16 +19614,22 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 17:24:32
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/textarea.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:24:32
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/textarea.js
+ */
+var _default = {
   // textarea 组件
   textarea: {
     value: '',
@@ -19342,10 +19653,13 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     holdKeyboard: false,
     maxlength: 140,
     border: 'surround',
-    formatter: null } };exports.default = _default;
+    formatter: null
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 131 */
+/* 149 */
 /*!**********************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/toast.js ***!
   \**********************************************************************************************************************************/
@@ -19353,16 +19667,22 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 17:07:07
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/toast.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:07:07
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/toast.js
+ */
+var _default = {
   // toast组件
   toast: {
     zIndex: 10090,
@@ -19379,10 +19699,13 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     isTab: false,
     url: '',
     callback: null,
-    back: false } };exports.default = _default;
+    back: false
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 132 */
+/* 150 */
 /*!************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/toolbar.js ***!
   \************************************************************************************************************************************/
@@ -19390,16 +19713,22 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 17:24:55
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/toolbar.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:24:55
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/toolbar.js
+ */
+var _default = {
   // toolbar 组件
   toolbar: {
     show: true,
@@ -19407,10 +19736,13 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     confirmText: '确认',
     cancelColor: '#909193',
     confirmColor: '#3c9cff',
-    title: '' } };exports.default = _default;
+    title: ''
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 133 */
+/* 151 */
 /*!************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/tooltip.js ***!
   \************************************************************************************************************************************/
@@ -19418,16 +19750,22 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 17:25:14
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/tooltip.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:25:14
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/tooltip.js
+ */
+var _default = {
   // tooltip 组件
   tooltip: {
     text: '',
@@ -19438,12 +19776,17 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     direction: 'top',
     zIndex: 10071,
     showCopy: true,
-    buttons: function buttons() {return [];},
+    buttons: function buttons() {
+      return [];
+    },
     overlay: true,
-    showToast: true } };exports.default = _default;
+    showToast: true
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 134 */
+/* 152 */
 /*!***************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/transition.js ***!
   \***************************************************************************************************************************************/
@@ -19451,25 +19794,34 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 16:59:00
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/transition.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 16:59:00
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/transition.js
+ */
+var _default = {
   // transition动画组件的props
   transition: {
     show: false,
     mode: 'fade',
     duration: '300',
-    timingFunction: 'ease-out' } };exports.default = _default;
+    timingFunction: 'ease-out'
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 135 */
+/* 153 */
 /*!***********************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/props/upload.js ***!
   \***********************************************************************************************************************************/
@@ -19477,20 +19829,28 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /*
-                                                                                                      * @Author       : LQ
-                                                                                                      * @Description  :
-                                                                                                      * @version      : 1.0
-                                                                                                      * @Date         : 2021-08-20 16:44:21
-                                                                                                      * @LastAuthor   : LQ
-                                                                                                      * @lastTime     : 2021-08-20 17:09:50
-                                                                                                      * @FilePath     : /u-view2.0/uview-ui/libs/config/props/upload.js
-                                                                                                      */var _default =
-{
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:09:50
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/upload.js
+ */
+var _default = {
   // upload组件
   upload: {
     accept: 'image',
-    capture: function capture() {return ['album', 'camera'];},
+    capture: function capture() {
+      return ['album', 'camera'];
+    },
     compressed: true,
     camera: 'back',
     maxDuration: 60,
@@ -19502,18 +19862,25 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     disabled: false,
     imageMode: 'aspectFill',
     name: '',
-    sizeType: function sizeType() {return ['original', 'compressed'];},
+    sizeType: function sizeType() {
+      return ['original', 'compressed'];
+    },
     multiple: false,
     deletable: true,
     maxSize: Number.MAX_VALUE,
-    fileList: function fileList() {return [];},
+    fileList: function fileList() {
+      return [];
+    },
     uploadText: '',
     width: 80,
     height: 80,
-    previewImage: true } };exports.default = _default;
+    previewImage: true
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 136 */
+/* 154 */
 /*!*****************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/config/zIndex.js ***!
   \*****************************************************************************************************************************/
@@ -19521,16 +19888,21 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; // uniapp在H5中各API的z-index值如下：
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+// uniapp在H5中各API的z-index值如下：
 /**
  * actionsheet: 999
  * modal: 999
  * navigate: 998
  * tabbar: 998
  * toast: 999
- */var _default =
-
-{
+ */
+var _default = {
   toast: 10090,
   noNetwork: 10080,
   // popup包含popup，actionsheet，keyboard，picker的值
@@ -19539,10 +19911,12 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
   navbar: 980,
   topTips: 975,
   sticky: 970,
-  indexListSticky: 965 };exports.default = _default;
+  indexListSticky: 965
+};
+exports.default = _default;
 
 /***/ }),
-/* 137 */
+/* 155 */
 /*!*********************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/function/platform.js ***!
   \*********************************************************************************************************************************/
@@ -19550,178 +19924,28 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /**
-                                                                                                      * 注意：
-                                                                                                      * 此部分内容，在vue-cli模式下，需要在vue.config.js加入如下内容才有效：
-                                                                                                      * module.exports = {
-                                                                                                      *     transpileDependencies: ['uview-v2']
-                                                                                                      * }
-                                                                                                      */
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/**
+ * 注意：
+ * 此部分内容，在vue-cli模式下，需要在vue.config.js加入如下内容才有效：
+ * module.exports = {
+ *     transpileDependencies: ['uview-v2']
+ * }
+ */
 
 var platform = 'none';
-
-
-
-
-
-
 platform = 'vue2';
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 platform = 'weixin';
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-platform = 'mp';var _default =
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-platform;exports.default = _default;
+platform = 'mp';
+var _default = platform;
+exports.default = _default;
 
 /***/ }),
-/* 138 */,
-/* 139 */,
-/* 140 */,
-/* 141 */,
-/* 142 */,
-/* 143 */,
-/* 144 */,
-/* 145 */,
-/* 146 */,
-/* 147 */,
-/* 148 */,
-/* 149 */,
-/* 150 */,
-/* 151 */,
-/* 152 */
-/*!*************************************************************************************************!*\
-  !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/utils/utils.js ***!
-  \*************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.dateToStr = dateToStr;exports.traditionalized = traditionalized;exports.simplized = simplized; /**
-                                                                                                                                                                                   * date转化为hh:mm
-                                                                                                                                                                                   */
-function dateToStr(date) {
-  if (typeof date !== 'number') {
-    return '';
-  }
-  date = new Date(date);
-  var hh = date.getHours();
-  var mm = date.getMinutes();
-  if (hh < 10) {
-    hh = '0' + hh;
-  }
-  if (mm < 10) {
-    mm = '0' + mm;
-  }
-  return hh + ':' + mm;
-}
-function simpPYStr() {
-  return '啊阿埃挨哎唉哀皑癌蔼矮艾碍爱隘鞍氨安俺按暗岸胺案肮昂盎凹敖熬翱袄傲奥懊澳芭捌扒叭吧笆八疤巴拔跋靶把耙坝霸罢爸白柏百摆佰败拜稗斑班搬扳般颁板版扮拌伴瓣半办绊邦帮梆榜膀绑棒磅蚌镑傍谤苞胞包褒剥薄雹保堡饱宝抱报暴豹鲍爆杯碑悲卑北辈背贝钡倍狈备惫焙被奔苯本笨崩绷甭泵蹦迸逼鼻比鄙笔彼碧蓖蔽毕毙毖币庇痹闭敝弊必辟壁臂避陛鞭边编贬扁便变卞辨辩辫遍标彪膘表鳖憋别瘪彬斌濒滨宾摈兵冰柄丙秉饼炳病并玻菠播拨钵波博勃搏铂箔伯帛舶脖膊渤泊驳捕卜哺补埠不布步簿部怖擦猜裁材才财睬踩采彩菜蔡餐参蚕残惭惨灿苍舱仓沧藏操糙槽曹草厕策侧册测层蹭插叉茬茶查碴搽察岔差诧拆柴豺搀掺蝉馋谗缠铲产阐颤昌猖场尝常长偿肠厂敞畅唱倡超抄钞朝嘲潮巢吵炒车扯撤掣彻澈郴臣辰尘晨忱沉陈趁衬撑称城橙成呈乘程惩澄诚承逞骋秤吃痴持匙池迟弛驰耻齿侈尺赤翅斥炽充冲虫崇宠抽酬畴踌稠愁筹仇绸瞅丑臭初出橱厨躇锄雏滁除楚础储矗搐触处揣川穿椽传船喘串疮窗幢床闯创吹炊捶锤垂春椿醇唇淳纯蠢戳绰疵茨磁雌辞慈瓷词此刺赐次聪葱囱匆从丛凑粗醋簇促蹿篡窜摧崔催脆瘁粹淬翠村存寸磋撮搓措挫错搭达答瘩打大呆歹傣戴带殆代贷袋待逮怠耽担丹单郸掸胆旦氮但惮淡诞弹蛋当挡党荡档刀捣蹈倒岛祷导到稻悼道盗德得的蹬灯登等瞪凳邓堤低滴迪敌笛狄涤翟嫡抵底地蒂第帝弟递缔颠掂滇碘点典靛垫电佃甸店惦奠淀殿碉叼雕凋刁掉吊钓调跌爹碟蝶迭谍叠丁盯叮钉顶鼎锭定订丢东冬董懂动栋侗恫冻洞兜抖斗陡豆逗痘都督毒犊独读堵睹赌杜镀肚度渡妒端短锻段断缎堆兑队对墩吨蹲敦顿囤钝盾遁掇哆多夺垛躲朵跺舵剁惰堕蛾峨鹅俄额讹娥恶厄扼遏鄂饿恩而儿耳尔饵洱二贰发罚筏伐乏阀法珐藩帆番翻樊矾钒繁凡烦反返范贩犯饭泛坊芳方肪房防妨仿访纺放菲非啡飞肥匪诽吠肺废沸费芬酚吩氛分纷坟焚汾粉奋份忿愤粪丰封枫蜂峰锋风疯烽逢冯缝讽奉凤佛否夫敷肤孵扶拂辐幅氟符伏俘服浮涪福袱弗甫抚辅俯釜斧脯腑府腐赴副覆赋复傅付阜父腹负富讣附妇缚咐噶嘎该改概钙盖溉干甘杆柑竿肝赶感秆敢赣冈刚钢缸肛纲岗港杠篙皋高膏羔糕搞镐稿告哥歌搁戈鸽胳疙割革葛格蛤阁隔铬个各给根跟耕更庚羹埂耿梗工攻功恭龚供躬公宫弓巩汞拱贡共钩勾沟苟狗垢构购够辜菇咕箍估沽孤姑鼓古蛊骨谷股故顾固雇刮瓜剐寡挂褂乖拐怪棺关官冠观管馆罐惯灌贯光广逛瑰规圭硅归龟闺轨鬼诡癸桂柜跪贵刽辊滚棍锅郭国果裹过哈骸孩海氦亥害骇酣憨邯韩含涵寒函喊罕翰撼捍旱憾悍焊汗汉夯杭航壕嚎豪毫郝好耗号浩呵喝荷菏核禾和何合盒貉阂河涸赫褐鹤贺嘿黑痕很狠恨哼亨横衡恒轰哄烘虹鸿洪宏弘红喉侯猴吼厚候后呼乎忽瑚壶葫胡蝴狐糊湖弧虎唬护互沪户花哗华猾滑画划化话槐徊怀淮坏欢环桓还缓换患唤痪豢焕涣宦幻荒慌黄磺蝗簧皇凰惶煌晃幌恍谎灰挥辉徽恢蛔回毁悔慧卉惠晦贿秽会烩汇讳诲绘荤昏婚魂浑混豁活伙火获或惑霍货祸击圾基机畸稽积箕肌饥迹激讥鸡姬绩缉吉极棘辑籍集及急疾汲即嫉级挤几脊己蓟技冀季伎祭剂悸济寄寂计记既忌际继纪嘉枷夹佳家加荚颊贾甲钾假稼价架驾嫁歼监坚尖笺间煎兼肩艰奸缄茧检柬碱硷拣捡简俭剪减荐槛鉴践贱见键箭件健舰剑饯渐溅涧建僵姜将浆江疆蒋桨奖讲匠酱降蕉椒礁焦胶交郊浇骄娇嚼搅铰矫侥脚狡角饺缴绞剿教酵轿较叫窖揭接皆秸街阶截劫节茎睛晶鲸京惊精粳经井警景颈静境敬镜径痉靖竟竞净炯窘揪究纠玖韭久灸九酒厩救旧臼舅咎就疚鞠拘狙疽居驹菊局咀矩举沮聚拒据巨具距踞锯俱句惧炬剧捐鹃娟倦眷卷绢撅攫抉掘倔爵桔杰捷睫竭洁结解姐戒藉芥界借介疥诫届巾筋斤金今津襟紧锦仅谨进靳晋禁近烬浸尽劲荆兢觉决诀绝均菌钧军君峻俊竣浚郡骏喀咖卡咯开揩楷凯慨刊堪勘坎砍看康慷糠扛抗亢炕考拷烤靠坷苛柯棵磕颗科壳咳可渴克刻客课肯啃垦恳坑吭空恐孔控抠口扣寇枯哭窟苦酷库裤夸垮挎跨胯块筷侩快宽款匡筐狂框矿眶旷况亏盔岿窥葵奎魁傀馈愧溃坤昆捆困括扩廓阔垃拉喇蜡腊辣啦莱来赖蓝婪栏拦篮阑兰澜谰揽览懒缆烂滥琅榔狼廊郎朗浪捞劳牢老佬姥酪烙涝勒乐雷镭蕾磊累儡垒擂肋类泪棱楞冷厘梨犁黎篱狸离漓理李里鲤礼莉荔吏栗丽厉励砾历利傈例俐痢立粒沥隶力璃哩俩联莲连镰廉怜涟帘敛脸链恋炼练粮凉梁粱良两辆量晾亮谅撩聊僚疗燎寥辽潦了撂镣廖料列裂烈劣猎琳林磷霖临邻鳞淋凛赁吝拎玲菱零龄铃伶羚凌灵陵岭领另令溜琉榴硫馏留刘瘤流柳六龙聋咙笼窿隆垄拢陇楼娄搂篓漏陋芦卢颅庐炉掳卤虏鲁麓碌露路赂鹿潞禄录陆戮驴吕铝侣旅履屡缕虑氯律率滤绿峦挛孪滦卵乱掠略抡轮伦仑沦纶论萝螺罗逻锣箩骡裸落洛骆络妈麻玛码蚂马骂嘛吗埋买麦卖迈脉瞒馒蛮满蔓曼慢漫谩芒茫盲氓忙莽猫茅锚毛矛铆卯茂冒帽貌贸么玫枚梅酶霉煤没眉媒镁每美昧寐妹媚门闷们萌蒙檬盟锰猛梦孟眯醚靡糜迷谜弥米秘觅泌蜜密幂棉眠绵冕免勉娩缅面苗描瞄藐秒渺庙妙蔑灭民抿皿敏悯闽明螟鸣铭名命谬摸摹蘑模膜磨摩魔抹末莫墨默沫漠寞陌谋牟某拇牡亩姆母墓暮幕募慕木目睦牧穆拿哪呐钠那娜纳氖乃奶耐奈南男难囊挠脑恼闹淖呢馁内嫩能妮霓倪泥尼拟你匿腻逆溺蔫拈年碾撵捻念娘酿鸟尿捏聂孽啮镊镍涅您柠狞凝宁拧泞牛扭钮纽脓浓农弄奴努怒女暖虐疟挪懦糯诺哦欧鸥殴藕呕偶沤啪趴爬帕怕琶拍排牌徘湃派攀潘盘磐盼畔判叛乓庞旁耪胖抛咆刨炮袍跑泡呸胚培裴赔陪配佩沛喷盆砰抨烹澎彭蓬棚硼篷膨朋鹏捧碰坯砒霹批披劈琵毗啤脾疲皮匹痞僻屁譬篇偏片骗飘漂瓢票撇瞥拼频贫品聘乒坪苹萍平凭瓶评屏坡泼颇婆破魄迫粕剖扑铺仆莆葡菩蒲埔朴圃普浦谱曝瀑期欺栖戚妻七凄漆柒沏其棋奇歧畦崎脐齐旗祈祁骑起岂乞企启契砌器气迄弃汽泣讫掐洽牵扦钎铅千迁签仟谦乾黔钱钳前潜遣浅谴堑嵌欠歉枪呛腔羌墙蔷强抢橇锹敲悄桥瞧乔侨巧鞘撬翘峭俏窍切茄且怯窃钦侵亲秦琴勤芹擒禽寝沁青轻氢倾卿清擎晴氰情顷请庆琼穷秋丘邱球求囚酋泅趋区蛆曲躯屈驱渠取娶龋趣去圈颧权醛泉全痊拳犬券劝缺炔瘸却鹊榷确雀裙群然燃冉染瓤壤攘嚷让饶扰绕惹热壬仁人忍韧任认刃妊纫扔仍日戎茸蓉荣融熔溶容绒冗揉柔肉茹蠕儒孺如辱乳汝入褥软阮蕊瑞锐闰润若弱撒洒萨腮鳃塞赛三叁伞散桑嗓丧搔骚扫嫂瑟色涩森僧莎砂杀刹沙纱傻啥煞筛晒珊苫杉山删煽衫闪陕擅赡膳善汕扇缮墒伤商赏晌上尚裳梢捎稍烧芍勺韶少哨邵绍奢赊蛇舌舍赦摄射慑涉社设砷申呻伸身深娠绅神沈审婶甚肾慎渗声生甥牲升绳省盛剩胜圣师失狮施湿诗尸虱十石拾时什食蚀实识史矢使屎驶始式示士世柿事拭誓逝势是嗜噬适仕侍释饰氏市恃室视试收手首守寿授售受瘦兽蔬枢梳殊抒输叔舒淑疏书赎孰熟薯暑曙署蜀黍鼠属术述树束戍竖墅庶数漱恕刷耍摔衰甩帅栓拴霜双爽谁水睡税吮瞬顺舜说硕朔烁斯撕嘶思私司丝死肆寺嗣四伺似饲巳松耸怂颂送宋讼诵搜艘擞嗽苏酥俗素速粟僳塑溯宿诉肃酸蒜算虽隋随绥髓碎岁穗遂隧祟孙损笋蓑梭唆缩琐索锁所塌他它她塔獭挞蹋踏胎苔抬台泰酞太态汰坍摊贪瘫滩坛檀痰潭谭谈坦毯袒碳探叹炭汤塘搪堂棠膛唐糖倘躺淌趟烫掏涛滔绦萄桃逃淘陶讨套特藤腾疼誊梯剔踢锑提题蹄啼体替嚏惕涕剃屉天添填田甜恬舔腆挑条迢眺跳贴铁帖厅听烃汀廷停亭庭挺艇通桐酮瞳同铜彤童桶捅筒统痛偷投头透凸秃突图徒途涂屠土吐兔湍团推颓腿蜕褪退吞屯臀拖托脱鸵陀驮驼椭妥拓唾挖哇蛙洼娃瓦袜歪外豌弯湾玩顽丸烷完碗挽晚皖惋宛婉万腕汪王亡枉网往旺望忘妄威巍微危韦违桅围唯惟为潍维苇萎委伟伪尾纬未蔚味畏胃喂魏位渭谓尉慰卫瘟温蚊文闻纹吻稳紊问嗡翁瓮挝蜗涡窝我斡卧握沃巫呜钨乌污诬屋无芜梧吾吴毋武五捂午舞伍侮坞戊雾晤物勿务悟误昔熙析西硒矽晰嘻吸锡牺稀息希悉膝夕惜熄烯溪汐犀檄袭席习媳喜铣洗系隙戏细瞎虾匣霞辖暇峡侠狭下厦夏吓掀锨先仙鲜纤咸贤衔舷闲涎弦嫌显险现献县腺馅羡宪陷限线相厢镶香箱襄湘乡翔祥详想响享项巷橡像向象萧硝霄削哮嚣销消宵淆晓小孝校肖啸笑效楔些歇蝎鞋协挟携邪斜胁谐写械卸蟹懈泄泻谢屑薪芯锌欣辛新忻心信衅星腥猩惺兴刑型形邢行醒幸杏性姓兄凶胸匈汹雄熊休修羞朽嗅锈秀袖绣墟戌需虚嘘须徐许蓄酗叙旭序畜恤絮婿绪续轩喧宣悬旋玄选癣眩绚靴薛学穴雪血勋熏循旬询寻驯巡殉汛训讯逊迅压押鸦鸭呀丫芽牙蚜崖衙涯雅哑亚讶焉咽阉烟淹盐严研蜒岩延言颜阎炎沿奄掩眼衍演艳堰燕厌砚雁唁彦焰宴谚验殃央鸯秧杨扬佯疡羊洋阳氧仰痒养样漾邀腰妖瑶摇尧遥窑谣姚咬舀药要耀椰噎耶爷野冶也页掖业叶曳腋夜液一壹医揖铱依伊衣颐夷遗移仪胰疑沂宜姨彝椅蚁倚已乙矣以艺抑易邑屹亿役臆逸肄疫亦裔意毅忆义益溢诣议谊译异翼翌绎茵荫因殷音阴姻吟银淫寅饮尹引隐印英樱婴鹰应缨莹萤营荧蝇迎赢盈影颖硬映哟拥佣臃痈庸雍踊蛹咏泳涌永恿勇用幽优悠忧尤由邮铀犹油游酉有友右佑釉诱又幼迂淤于盂榆虞愚舆余俞逾鱼愉渝渔隅予娱雨与屿禹宇语羽玉域芋郁吁遇喻峪御愈欲狱育誉浴寓裕预豫驭鸳渊冤元垣袁原援辕园员圆猿源缘远苑愿怨院曰约越跃钥岳粤月悦阅耘云郧匀陨允运蕴酝晕韵孕匝砸杂栽哉灾宰载再在咱攒暂赞赃脏葬遭糟凿藻枣早澡蚤躁噪造皂灶燥责择则泽贼怎增憎曾赠扎喳渣札轧铡闸眨栅榨咋乍炸诈摘斋宅窄债寨瞻毡詹粘沾盏斩辗崭展蘸栈占战站湛绽樟章彰漳张掌涨杖丈帐账仗胀瘴障招昭找沼赵照罩兆肇召遮折哲蛰辙者锗蔗这浙珍斟真甄砧臻贞针侦枕疹诊震振镇阵蒸挣睁征狰争怔整拯正政帧症郑证芝枝支吱蜘知肢脂汁之织职直植殖执值侄址指止趾只旨纸志挚掷至致置帜峙制智秩稚质炙痔滞治窒中盅忠钟衷终种肿重仲众舟周州洲诌粥轴肘帚咒皱宙昼骤珠株蛛朱猪诸诛逐竹烛煮拄瞩嘱主著柱助蛀贮铸筑住注祝驻抓爪拽专砖转撰赚篆桩庄装妆撞壮状椎锥追赘坠缀谆准捉拙卓桌琢茁酌啄着灼浊兹咨资姿滋淄孜紫仔籽滓子自渍字鬃棕踪宗综总纵邹走奏揍租足卒族祖诅阻组钻纂嘴醉最罪尊遵昨左佐柞做作坐座锕嗳嫒瑷暧霭谙铵鹌媪骜鳌钯呗钣鸨龅鹎贲锛荜哔滗铋筚跸苄缏笾骠飑飙镖镳鳔傧缤槟殡膑镔髌鬓禀饽钹鹁钸骖黪恻锸侪钗冁谄谶蒇忏婵骣觇禅镡伥苌怅阊鲳砗伧谌榇碜龀枨柽铖铛饬鸱铳俦帱雠刍绌蹰钏怆缍鹑辍龊鹚苁骢枞辏撺锉鹾哒鞑骀绐殚赕瘅箪谠砀裆焘镫籴诋谛绨觌镝巅钿癫铫鲷鲽铤铥岽鸫窦渎椟牍笃黩簖怼镦炖趸铎谔垩阏轭锇锷鹗颚颛鳄诶迩铒鸸鲕钫鲂绯镄鲱偾沣凫驸绂绋赙麸鲋鳆钆赅尴擀绀戆睾诰缟锆纥镉颍亘赓绠鲠诟缑觏诂毂钴锢鸪鹄鹘鸹掴诖掼鹳鳏犷匦刿妫桧鲑鳜衮绲鲧埚呙帼椁蝈铪阚绗颉灏颢诃阖蛎黉讧荭闳鲎浒鹕骅桦铧奂缳锾鲩鳇诙荟哕浍缋珲晖诨馄阍钬镬讦诘荠叽哜骥玑觊齑矶羁虿跻霁鲚鲫郏浃铗镓蛲谏缣戋戬睑鹣笕鲣鞯绛缰挢峤鹪鲛疖颌鲒卺荩馑缙赆觐刭泾迳弪胫靓阄鸠鹫讵屦榉飓钜锔窭龃锩镌隽谲珏皲剀垲忾恺铠锴龛闶钪铐骒缂轲钶锞颔龈铿喾郐哙脍狯髋诓诳邝圹纩贶匮蒉愦聩篑阃锟鲲蛴崃徕涞濑赉睐铼癞籁岚榄斓镧褴阆锒唠崂铑铹痨鳓诔缧俪郦坜苈莅蓠呖逦骊缡枥栎轹砺锂鹂疠粝跞雳鲡鳢蔹奁潋琏殓裢裣鲢魉缭钌鹩蔺廪檩辚躏绫棂蛏鲮浏骝绺镏鹨茏泷珑栊胧砻偻蒌喽嵝镂瘘耧蝼髅垆撸噜闾泸渌栌橹轳辂辘氇胪鸬鹭舻鲈脔娈栾鸾銮囵荦猡泺椤脶镙榈褛锊呒唛嬷杩劢缦镘颡鳗麽扪焖懑钔芈谧猕祢渑腼黾缈缪闵缗谟蓦馍殁镆钼铙讷铌鲵辇鲶茑袅陧蘖嗫颟蹑苎咛聍侬哝驽钕傩讴怄瓯蹒疱辔纰罴铍谝骈缥嫔钋镤镨蕲骐绮桤碛颀颃鳍佥荨悭骞缱椠钤嫱樯戗炝锖锵镪羟跄诮谯荞缲硗跷惬锲箧锓揿鲭茕蛱巯赇虮鳅诎岖阒觑鸲诠绻辁铨阕阙悫荛娆桡饪轫嵘蝾缛铷颦蚬飒毵糁缫啬铯穑铩鲨酾讪姗骟钐鳝垧殇觞厍滠畲诜谂渖谥埘莳弑轼贳铈鲥绶摅纾闩铄厮驷缌锶鸶薮馊飕锼谡稣谇荪狲唢睃闼铊鳎钛鲐昙钽锬顸傥饧铴镗韬铽缇鹈阗粜龆鲦恸钭钍抟饨箨鼍娲腽纨绾辋诿帏闱沩涠玮韪炜鲔阌莴龌邬庑怃妩骛鹉鹜饩阋玺觋硖苋莶藓岘猃娴鹇痫蚝籼跹芗饷骧缃飨哓潇骁绡枭箫亵撷绁缬陉荥馐鸺诩顼谖铉镟谑泶鳕埙浔鲟垭娅桠氩厣赝俨兖谳恹闫酽魇餍鼹炀轺鹞鳐靥谒邺晔烨诒呓峄饴怿驿缢轶贻钇镒镱瘗舣铟瘾茔莺萦蓥撄嘤滢潆璎鹦瘿颏罂镛莸铕鱿伛俣谀谕蓣嵛饫阈妪纡觎欤钰鹆鹬龉橼鸢鼋钺郓芸恽愠纭韫殒氲瓒趱錾驵赜啧帻箦谮缯谵诏钊谪辄鹧浈缜桢轸赈祯鸩诤峥钲铮筝骘栉栀轵轾贽鸷蛳絷踬踯觯锺纣绉伫槠铢啭馔颞骓缒诼镯谘缁辎赀眦锱龇鲻偬诹驺鲰镞缵躜鳟讠谫郄勐凼坂垅垴埯埝苘荬荮莜莼菰藁揸吒吣咔咝咴噘噼嚯幞岙嵴彷徼犸狍馀馇馓馕愣憷懔丬溆滟溷漤潴澹甯纟绔绱珉枧桊桉槔橥轱轷赍肷胨飚煳煅熘愍淼砜磙眍钚钷铘铞锃锍锎锏锘锝锪锫锿镅镎镢镥镩镲稆鹋鹛鹱疬疴痖癯裥襁耢颥螨麴鲅鲆鲇鲞鲴鲺鲼鳊鳋鳘鳙鞒鞴齄';
-}
-function ftPYStr() {
-  return '啊阿埃挨哎唉哀皚癌藹矮艾礙愛隘鞍氨安俺按暗岸胺案骯昂盎凹敖熬翺襖傲奧懊澳芭捌扒叭吧笆八疤巴拔跋靶把耙壩霸罷爸白柏百擺佰敗拜稗斑班搬扳般頒板版扮拌伴瓣半辦絆邦幫梆榜膀綁棒磅蚌鎊傍謗苞胞包褒剝薄雹保堡飽寶抱報暴豹鮑爆杯碑悲卑北輩背貝鋇倍狽備憊焙被奔苯本笨崩繃甭泵蹦迸逼鼻比鄙筆彼碧蓖蔽畢斃毖幣庇痹閉敝弊必辟壁臂避陛鞭邊編貶扁便變卞辨辯辮遍標彪膘表鱉憋別癟彬斌瀕濱賓擯兵冰柄丙秉餅炳病並玻菠播撥缽波博勃搏鉑箔伯帛舶脖膊渤泊駁捕蔔哺補埠不布步簿部怖擦猜裁材才財睬踩采彩菜蔡餐參蠶殘慚慘燦蒼艙倉滄藏操糙槽曹草廁策側冊測層蹭插叉茬茶查碴搽察岔差詫拆柴豺攙摻蟬饞讒纏鏟產闡顫昌猖場嘗常長償腸廠敞暢唱倡超抄鈔朝嘲潮巢吵炒車扯撤掣徹澈郴臣辰塵晨忱沈陳趁襯撐稱城橙成呈乘程懲澄誠承逞騁秤吃癡持匙池遲弛馳恥齒侈尺赤翅斥熾充沖蟲崇寵抽酬疇躊稠愁籌仇綢瞅醜臭初出櫥廚躇鋤雛滁除楚礎儲矗搐觸處揣川穿椽傳船喘串瘡窗幢床闖創吹炊捶錘垂春椿醇唇淳純蠢戳綽疵茨磁雌辭慈瓷詞此刺賜次聰蔥囪匆從叢湊粗醋簇促躥篡竄摧崔催脆瘁粹淬翠村存寸磋撮搓措挫錯搭達答瘩打大呆歹傣戴帶殆代貸袋待逮怠耽擔丹單鄲撣膽旦氮但憚淡誕彈蛋當擋黨蕩檔刀搗蹈倒島禱導到稻悼道盜德得的蹬燈登等瞪凳鄧堤低滴迪敵笛狄滌翟嫡抵底地蒂第帝弟遞締顛掂滇碘點典靛墊電佃甸店惦奠澱殿碉叼雕雕刁掉吊釣調跌爹碟蝶叠諜疊丁盯叮釘頂鼎錠定訂丟東冬董懂動棟侗恫凍洞兜抖鬥陡豆逗痘都督毒犢獨讀堵睹賭杜鍍肚度渡妒端短鍛段斷緞堆兌隊對墩噸蹲敦頓囤鈍盾遁掇哆多奪垛躲朵跺舵剁惰墮蛾峨鵝俄額訛娥惡厄扼遏鄂餓恩而兒耳爾餌洱二貳發罰筏伐乏閥法琺藩帆番翻樊礬釩繁凡煩反返範販犯飯泛坊芳方肪房防妨仿訪紡放菲非啡飛肥匪誹吠肺廢沸費芬酚吩氛分紛墳焚汾粉奮份忿憤糞豐封楓蜂峰鋒風瘋烽逢馮縫諷奉鳳佛否夫敷膚孵扶拂輻幅氟符伏俘服浮涪福袱弗甫撫輔俯釜斧脯腑府腐赴副覆賦復傅付阜父腹負富訃附婦縛咐噶嘎該改概鈣蓋溉幹甘桿柑竿肝趕感稈敢贛岡剛鋼缸肛綱崗港杠篙臯高膏羔糕搞鎬稿告哥歌擱戈鴿胳疙割革葛格蛤閣隔鉻個各給根跟耕更庚羹埂耿梗工攻功恭龔供躬公宮弓鞏汞拱貢共鉤勾溝茍狗垢構購夠辜菇咕箍估沽孤姑鼓古蠱骨谷股故顧固雇刮瓜剮寡掛褂乖拐怪棺關官冠觀管館罐慣灌貫光廣逛瑰規圭矽歸龜閨軌鬼詭癸桂櫃跪貴劊輥滾棍鍋郭國果裹過哈骸孩海氦亥害駭酣憨邯韓含涵寒函喊罕翰撼捍旱憾悍焊汗漢夯杭航壕嚎豪毫郝好耗號浩呵喝荷菏核禾和何合盒貉閡河涸赫褐鶴賀嘿黑痕很狠恨哼亨橫衡恒轟哄烘虹鴻洪宏弘紅喉侯猴吼厚候後呼乎忽瑚壺葫胡蝴狐糊湖弧虎唬護互滬戶花嘩華猾滑畫劃化話槐徊懷淮壞歡環桓還緩換患喚瘓豢煥渙宦幻荒慌黃磺蝗簧皇凰惶煌晃幌恍謊灰揮輝徽恢蛔回毀悔慧卉惠晦賄穢會燴匯諱誨繪葷昏婚魂渾混豁活夥火獲或惑霍貨禍擊圾基機畸稽積箕肌饑跡激譏雞姬績緝吉極棘輯籍集及急疾汲即嫉級擠幾脊己薊技冀季伎祭劑悸濟寄寂計記既忌際繼紀嘉枷夾佳家加莢頰賈甲鉀假稼價架駕嫁殲監堅尖箋間煎兼肩艱奸緘繭檢柬堿鹼揀撿簡儉剪減薦檻鑒踐賤見鍵箭件健艦劍餞漸濺澗建僵姜將漿江疆蔣槳獎講匠醬降蕉椒礁焦膠交郊澆驕嬌嚼攪鉸矯僥腳狡角餃繳絞剿教酵轎較叫窖揭接皆稭街階截劫節莖睛晶鯨京驚精粳經井警景頸靜境敬鏡徑痙靖竟競凈炯窘揪究糾玖韭久灸九酒廄救舊臼舅咎就疚鞠拘狙疽居駒菊局咀矩舉沮聚拒據巨具距踞鋸俱句懼炬劇捐鵑娟倦眷卷絹撅攫抉掘倔爵桔傑捷睫竭潔結解姐戒藉芥界借介疥誡屆巾筋斤金今津襟緊錦僅謹進靳晉禁近燼浸盡勁荊兢覺決訣絕均菌鈞軍君峻俊竣浚郡駿喀咖卡咯開揩楷凱慨刊堪勘坎砍看康慷糠扛抗亢炕考拷烤靠坷苛柯棵磕顆科殼咳可渴克刻客課肯啃墾懇坑吭空恐孔控摳口扣寇枯哭窟苦酷庫褲誇垮挎跨胯塊筷儈快寬款匡筐狂框礦眶曠況虧盔巋窺葵奎魁傀饋愧潰坤昆捆困括擴廓闊垃拉喇蠟臘辣啦萊來賴藍婪欄攔籃闌蘭瀾讕攬覽懶纜爛濫瑯榔狼廊郎朗浪撈勞牢老佬姥酪烙澇勒樂雷鐳蕾磊累儡壘擂肋類淚棱楞冷厘梨犁黎籬貍離漓理李裏鯉禮莉荔吏栗麗厲勵礫歷利傈例俐痢立粒瀝隸力璃哩倆聯蓮連鐮廉憐漣簾斂臉鏈戀煉練糧涼梁粱良兩輛量晾亮諒撩聊僚療燎寥遼潦了撂鐐廖料列裂烈劣獵琳林磷霖臨鄰鱗淋凜賃吝拎玲菱零齡鈴伶羚淩靈陵嶺領另令溜琉榴硫餾留劉瘤流柳六龍聾嚨籠窿隆壟攏隴樓婁摟簍漏陋蘆盧顱廬爐擄鹵虜魯麓碌露路賂鹿潞祿錄陸戮驢呂鋁侶旅履屢縷慮氯律率濾綠巒攣孿灤卵亂掠略掄輪倫侖淪綸論蘿螺羅邏鑼籮騾裸落洛駱絡媽麻瑪碼螞馬罵嘛嗎埋買麥賣邁脈瞞饅蠻滿蔓曼慢漫謾芒茫盲氓忙莽貓茅錨毛矛鉚卯茂冒帽貌貿麽玫枚梅酶黴煤沒眉媒鎂每美昧寐妹媚門悶們萌蒙檬盟錳猛夢孟瞇醚靡糜迷謎彌米秘覓泌蜜密冪棉眠綿冕免勉娩緬面苗描瞄藐秒渺廟妙蔑滅民抿皿敏憫閩明螟鳴銘名命謬摸摹蘑模膜磨摩魔抹末莫墨默沫漠寞陌謀牟某拇牡畝姆母墓暮幕募慕木目睦牧穆拿哪吶鈉那娜納氖乃奶耐奈南男難囊撓腦惱鬧淖呢餒內嫩能妮霓倪泥尼擬妳匿膩逆溺蔫拈年碾攆撚念娘釀鳥尿捏聶孽嚙鑷鎳涅您檸獰凝寧擰濘牛扭鈕紐膿濃農弄奴努怒女暖虐瘧挪懦糯諾哦歐鷗毆藕嘔偶漚啪趴爬帕怕琶拍排牌徘湃派攀潘盤磐盼畔判叛乓龐旁耪胖拋咆刨炮袍跑泡呸胚培裴賠陪配佩沛噴盆砰抨烹澎彭蓬棚硼篷膨朋鵬捧碰坯砒霹批披劈琵毗啤脾疲皮匹痞僻屁譬篇偏片騙飄漂瓢票撇瞥拼頻貧品聘乒坪蘋萍平憑瓶評屏坡潑頗婆破魄迫粕剖撲鋪仆莆葡菩蒲埔樸圃普浦譜曝瀑期欺棲戚妻七淒漆柒沏其棋奇歧畦崎臍齊旗祈祁騎起豈乞企啟契砌器氣迄棄汽泣訖掐洽牽扡釬鉛千遷簽仟謙乾黔錢鉗前潛遣淺譴塹嵌欠歉槍嗆腔羌墻薔強搶橇鍬敲悄橋瞧喬僑巧鞘撬翹峭俏竅切茄且怯竊欽侵親秦琴勤芹擒禽寢沁青輕氫傾卿清擎晴氰情頃請慶瓊窮秋丘邱球求囚酋泅趨區蛆曲軀屈驅渠取娶齲趣去圈顴權醛泉全痊拳犬券勸缺炔瘸卻鵲榷確雀裙群然燃冉染瓤壤攘嚷讓饒擾繞惹熱壬仁人忍韌任認刃妊紉扔仍日戎茸蓉榮融熔溶容絨冗揉柔肉茹蠕儒孺如辱乳汝入褥軟阮蕊瑞銳閏潤若弱撒灑薩腮鰓塞賽三三傘散桑嗓喪搔騷掃嫂瑟色澀森僧莎砂殺剎沙紗傻啥煞篩曬珊苫杉山刪煽衫閃陜擅贍膳善汕扇繕墑傷商賞晌上尚裳梢捎稍燒芍勺韶少哨邵紹奢賒蛇舌舍赦攝射懾涉社設砷申呻伸身深娠紳神沈審嬸甚腎慎滲聲生甥牲升繩省盛剩勝聖師失獅施濕詩屍虱十石拾時什食蝕實識史矢使屎駛始式示士世柿事拭誓逝勢是嗜噬適仕侍釋飾氏市恃室視試收手首守壽授售受瘦獸蔬樞梳殊抒輸叔舒淑疏書贖孰熟薯暑曙署蜀黍鼠屬術述樹束戍豎墅庶數漱恕刷耍摔衰甩帥栓拴霜雙爽誰水睡稅吮瞬順舜說碩朔爍斯撕嘶思私司絲死肆寺嗣四伺似飼巳松聳慫頌送宋訟誦搜艘擻嗽蘇酥俗素速粟僳塑溯宿訴肅酸蒜算雖隋隨綏髓碎歲穗遂隧祟孫損筍蓑梭唆縮瑣索鎖所塌他它她塔獺撻蹋踏胎苔擡臺泰酞太態汰坍攤貪癱灘壇檀痰潭譚談坦毯袒碳探嘆炭湯塘搪堂棠膛唐糖倘躺淌趟燙掏濤滔絳萄桃逃淘陶討套特藤騰疼謄梯剔踢銻提題蹄啼體替嚏惕涕剃屜天添填田甜恬舔腆挑條迢眺跳貼鐵帖廳聽烴汀廷停亭庭挺艇通桐酮瞳同銅彤童桶捅筒統痛偷投頭透凸禿突圖徒途塗屠土吐兔湍團推頹腿蛻褪退吞屯臀拖托脫鴕陀馱駝橢妥拓唾挖哇蛙窪娃瓦襪歪外豌彎灣玩頑丸烷完碗挽晚皖惋宛婉萬腕汪王亡枉網往旺望忘妄威巍微危韋違桅圍唯惟為濰維葦萎委偉偽尾緯未蔚味畏胃餵魏位渭謂尉慰衛瘟溫蚊文聞紋吻穩紊問嗡翁甕撾蝸渦窩我斡臥握沃巫嗚鎢烏汙誣屋無蕪梧吾吳毋武五捂午舞伍侮塢戊霧晤物勿務悟誤昔熙析西硒矽晰嘻吸錫犧稀息希悉膝夕惜熄烯溪汐犀檄襲席習媳喜銑洗系隙戲細瞎蝦匣霞轄暇峽俠狹下廈夏嚇掀鍁先仙鮮纖鹹賢銜舷閑涎弦嫌顯險現獻縣腺餡羨憲陷限線相廂鑲香箱襄湘鄉翔祥詳想響享項巷橡像向象蕭硝霄削哮囂銷消宵淆曉小孝校肖嘯笑效楔些歇蠍鞋協挾攜邪斜脅諧寫械卸蟹懈泄瀉謝屑薪芯鋅欣辛新忻心信釁星腥猩惺興刑型形邢行醒幸杏性姓兄兇胸匈洶雄熊休修羞朽嗅銹秀袖繡墟戌需虛噓須徐許蓄酗敘旭序畜恤絮婿緒續軒喧宣懸旋玄選癬眩絢靴薛學穴雪血勛熏循旬詢尋馴巡殉汛訓訊遜迅壓押鴉鴨呀丫芽牙蚜崖衙涯雅啞亞訝焉咽閹煙淹鹽嚴研蜒巖延言顏閻炎沿奄掩眼衍演艷堰燕厭硯雁唁彥焰宴諺驗殃央鴦秧楊揚佯瘍羊洋陽氧仰癢養樣漾邀腰妖瑤搖堯遙窯謠姚咬舀藥要耀椰噎耶爺野冶也頁掖業葉曳腋夜液壹壹醫揖銥依伊衣頤夷遺移儀胰疑沂宜姨彜椅蟻倚已乙矣以藝抑易邑屹億役臆逸肄疫亦裔意毅憶義益溢詣議誼譯異翼翌繹茵蔭因殷音陰姻吟銀淫寅飲尹引隱印英櫻嬰鷹應纓瑩螢營熒蠅迎贏盈影穎硬映喲擁傭臃癰庸雍踴蛹詠泳湧永恿勇用幽優悠憂尤由郵鈾猶油遊酉有友右佑釉誘又幼迂淤於盂榆虞愚輿余俞逾魚愉渝漁隅予娛雨與嶼禹宇語羽玉域芋郁籲遇喻峪禦愈欲獄育譽浴寓裕預豫馭鴛淵冤元垣袁原援轅園員圓猿源緣遠苑願怨院曰約越躍鑰嶽粵月悅閱耘雲鄖勻隕允運蘊醞暈韻孕匝砸雜栽哉災宰載再在咱攢暫贊贓臟葬遭糟鑿藻棗早澡蚤躁噪造皂竈燥責擇則澤賊怎增憎曾贈紮喳渣劄軋鍘閘眨柵榨咋乍炸詐摘齋宅窄債寨瞻氈詹粘沾盞斬輾嶄展蘸棧占戰站湛綻樟章彰漳張掌漲杖丈帳賬仗脹瘴障招昭找沼趙照罩兆肇召遮折哲蟄轍者鍺蔗這浙珍斟真甄砧臻貞針偵枕疹診震振鎮陣蒸掙睜征猙爭怔整拯正政幀癥鄭證芝枝支吱蜘知肢脂汁之織職直植殖執值侄址指止趾只旨紙誌摯擲至致置幟峙制智秩稚質炙痔滯治窒中盅忠鐘衷終種腫重仲眾舟周州洲謅粥軸肘帚咒皺宙晝驟珠株蛛朱豬諸誅逐竹燭煮拄矚囑主著柱助蛀貯鑄築住註祝駐抓爪拽專磚轉撰賺篆樁莊裝妝撞壯狀椎錐追贅墜綴諄準捉拙卓桌琢茁酌啄著灼濁茲咨資姿滋淄孜紫仔籽滓子自漬字鬃棕蹤宗綜總縱鄒走奏揍租足卒族祖詛阻組鉆纂嘴醉最罪尊遵昨左佐柞做作坐座錒噯嬡璦曖靄諳銨鵪媼驁鰲鈀唄鈑鴇齙鵯賁錛蓽嗶潷鉍篳蹕芐緶籩驃颮飆鏢鑣鰾儐繽檳殯臏鑌髕鬢稟餑鈸鵓鈽驂黲惻鍤儕釵囅諂讖蕆懺嬋驏覘禪鐔倀萇悵閶鯧硨傖諶櫬磣齔棖檉鋮鐺飭鴟銃儔幬讎芻絀躕釧愴綞鶉輟齪鶿蓯驄樅輳攛銼鹺噠韃駘紿殫賧癉簞讜碭襠燾鐙糴詆諦綈覿鏑巔鈿癲銚鯛鰈鋌銩崠鶇竇瀆櫝牘篤黷籪懟鐓燉躉鐸諤堊閼軛鋨鍔鶚顎顓鱷誒邇鉺鴯鮞鈁魴緋鐨鯡僨灃鳧駙紱紼賻麩鮒鰒釓賅尷搟紺戇睪誥縞鋯紇鎘潁亙賡綆鯁詬緱覯詁轂鈷錮鴣鵠鶻鴰摑詿摜鸛鰥獷匭劌媯檜鮭鱖袞緄鯀堝咼幗槨蟈鉿闞絎頡灝顥訶闔蠣黌訌葒閎鱟滸鶘驊樺鏵奐繯鍰鯇鰉詼薈噦澮繢琿暉諢餛閽鈥鑊訐詰薺嘰嚌驥璣覬齏磯羈蠆躋霽鱭鯽郟浹鋏鎵蟯諫縑戔戩瞼鶼筧鰹韉絳韁撟嶠鷦鮫癤頜鮚巹藎饉縉贐覲剄涇逕弳脛靚鬮鳩鷲詎屨櫸颶鉅鋦窶齟錈鐫雋譎玨皸剴塏愾愷鎧鍇龕閌鈧銬騍緙軻鈳錁頷齦鏗嚳鄶噲膾獪髖誆誑鄺壙纊貺匱蕢憒聵簣閫錕鯤蠐崍徠淶瀨賚睞錸癩籟嵐欖斕鑭襤閬鋃嘮嶗銠鐒癆鰳誄縲儷酈壢藶蒞蘺嚦邐驪縭櫪櫟轢礪鋰鸝癘糲躒靂鱺鱧蘞奩瀲璉殮褳襝鰱魎繚釕鷯藺廩檁轔躪綾欞蟶鯪瀏騮綹鎦鷚蘢瀧瓏櫳朧礱僂蔞嘍嶁鏤瘺耬螻髏壚擼嚕閭瀘淥櫨櫓轤輅轆氌臚鸕鷺艫鱸臠孌欒鸞鑾圇犖玀濼欏腡鏍櫚褸鋝嘸嘜嬤榪勱縵鏝顙鰻麼捫燜懣鍆羋謐獼禰澠靦黽緲繆閔緡謨驀饃歿鏌鉬鐃訥鈮鯢輦鯰蔦裊隉蘗囁顢躡苧嚀聹儂噥駑釹儺謳慪甌蹣皰轡紕羆鈹諞駢縹嬪釙鏷鐠蘄騏綺榿磧頎頏鰭僉蕁慳騫繾槧鈐嬙檣戧熗錆鏘鏹羥蹌誚譙蕎繰磽蹺愜鍥篋鋟撳鯖煢蛺巰賕蟣鰍詘嶇闃覷鴝詮綣輇銓闋闕愨蕘嬈橈飪軔嶸蠑縟銣顰蜆颯毿糝繅嗇銫穡鎩鯊釃訕姍騸釤鱔坰殤觴厙灄畬詵諗瀋謚塒蒔弒軾貰鈰鰣綬攄紓閂鑠廝駟緦鍶鷥藪餿颼鎪謖穌誶蓀猻嗩脧闥鉈鰨鈦鮐曇鉭錟頇儻餳鐋鏜韜鋱緹鵜闐糶齠鰷慟鈄釷摶飩籜鼉媧膃紈綰輞諉幃闈溈潿瑋韙煒鮪閿萵齷鄔廡憮嫵騖鵡鶩餼鬩璽覡硤莧薟蘚峴獫嫻鷴癇蠔秈躚薌餉驤緗饗嘵瀟驍綃梟簫褻擷紲纈陘滎饈鵂詡頊諼鉉鏇謔澩鱈塤潯鱘埡婭椏氬厴贗儼兗讞懨閆釅魘饜鼴煬軺鷂鰩靨謁鄴曄燁詒囈嶧飴懌驛縊軼貽釔鎰鐿瘞艤銦癮塋鶯縈鎣攖嚶瀅瀠瓔鸚癭頦罌鏞蕕銪魷傴俁諛諭蕷崳飫閾嫗紆覦歟鈺鵒鷸齬櫞鳶黿鉞鄆蕓惲慍紜韞殞氳瓚趲鏨駔賾嘖幘簀譖繒譫詔釗謫輒鷓湞縝楨軫賑禎鴆諍崢鉦錚箏騭櫛梔軹輊贄鷙螄縶躓躑觶鍾紂縐佇櫧銖囀饌顳騅縋諑鐲諮緇輜貲眥錙齜鯔傯諏騶鯫鏃纘躦鱒訁譾郤猛氹阪壟堖垵墊檾蕒葤蓧蒓菇槁摣咤唚哢噝噅撅劈謔襆嶴脊仿僥獁麅餘餷饊饢楞怵懍爿漵灩混濫瀦淡寧糸絝緔瑉梘棬案橰櫫軲軤賫膁腖飈糊煆溜湣渺碸滾瞘鈈鉕鋣銱鋥鋶鐦鐧鍩鍀鍃錇鎄鎇鎿鐝鑥鑹鑔穭鶓鶥鸌癧屙瘂臒襇繈耮顬蟎麯鮁鮃鮎鯗鯝鯴鱝鯿鰠鰵鱅鞽韝齇';
-}
-function qqPYStr()
-{
-  return '娿婀埃挨餀呃哀皑癌蔼婑銰碍嬡隘鞍氨鮟唵洝暗岸胺案肮昻盎凹獓熬翱仸謸奧襖奧妑捌朳朳妑笆仈疤妑菝柭靶妑耙坝覇罢妑皛柏咟擺佰敗湃稗癍癍搬扳瘢頒闆蝂汾絆柈瓣柈刅绊綁幇梆徬嫎垹蜯嫎蚌镑徬谤苞菢笣褒剝薄雹湺堡怉寶砲蕔懪豹鲍嚗柸碑蕜萆苝輩揹赑钡俻狈備惫焙被渀苯夲苯镚绷甭泵嘣逬腷嬶仳啚毣彼碧蓖幣滭斃毖币庇痹閉獙弊怭澼壁臂鐴陛鞭笾揙貶碥楩變卞辧辮辮猵摽滮鏢錶鳖憋莂癟彬斌濒璸濱摈娦栤窉眪秉饼炳疒並箥菠譒妭钵菠博勃搏铂箔伯帛舶脖膊渤泊訤峬卜誧卟埠芣鈽荹簿蔀怖攃猜裁財財財棌棌采埰婇蔡爘傪蛬殘慙參灿芲舱仺獊蔵懆鐰槽蓸愺厠憡側冊恻層竲揷紁茬嗏楂楂搽镲岔槎诧拆枈豺搀傪蝉镵谗瀍铲浐闡顫誯猖畼甞瑺萇偿肠廠敞畅晿倡趫莏鈔謿謿謿漅訬炒車扯徹掣沏瞮郴烥宸尘曟忱冗陳趁衬撐稱峸橙荿珵塖珵懲僜諴承浧骋秤阣痴歭匙肔呎肔肔恥歯侈呎哧趐斥炽茺沖蟲漴寵菗絒帱帱婤僽薵仇皗瞅忸溴初炪廚廚躇鋤雛蒢篨椘绌储矗搐触處遄巛瑏椽伝船遄賗疮囱幢床闖創欥炊腄腄箠舂椿錞脣錞蒓蠢戥焯疵垐濨雌辭濨瓷詞泚剌賜佽聪茐囱茐苁苁凑粗齰簇娖蹿篡窜凗慛慛脆瘁濢濢濢籿洊籿磋撮髊措挫措溚垯荅瘩咑汏槑歹傣瀻帶殆笩贷袋待曃怠耽泹冄啴郸掸狚狚氮泹惮惔诞弹疍當澢黨蕩澢叨搗稲箌島祷导菿稲悼檤盜徳嘚哋簦燈憕等簦凳郰諟彽嘀廸敵廸狄涤翟嫡抵疧哋渧苐渧弚递缔颠掂滇碘點敟靛垫電佃甸扂惦奠淀殿淍汈鵰蜩刁鋽铞銱蜩瓞嗲渫渫迭媟疉玎饤汀町嵿鼎锭萣忊丟崬笗蓳慬憅崬侗恫岽狪兠鬦乧跿荳浢哣嘟督毐渎獨渎陼睹帾荰镀肚喥喥妒鍴短葮葮斷葮碓兌隊怼墩沌壿敦頓囤沌盾遁掇哆哆奪垛躱朶跺舵剁媠憜睋睋鹅皒额讹皒悪苊扼遏鄂皒慁洏ル洱尒聶洱②贰潑藅筏浌疺阀琺珐藩汎畨飜樊矾钒瀿汎煩反返笵贩氾粄疺汸淓汸肪房汸妨汸汸汸倣婔悱啡飛萉厞诽吠腓廢沸曊棼酚玢氛汾妢墳焚汾帉奮妢忿濆粪仹崶猦蜂峯峯颩瘋烽漨溤漨讽唪鳯仏娝玞敷膚孵荴拂辐諨氟苻茯俘棴捊涪湢袱弗甫抚辅椨釜釡脯腑椨腐赴諨覆賦復傅苻阜父腹萯冨讣胕妇缚咐噶嗄姟妀漑鈣葢漑迀苷杆柑芉肝迀憾秆噉赣罓碙鋼矼釭罁罓港釭禞皋滈膏餻溔鎬鎬鎬哠滒戨擱戈鸽胳疙剨愅噶咯蛤阁隔铬個茖给艮茛畊浭菮羹埂耿梗笁糼糼塨龚栱匑厷営弖巩汞珙貢珙溝芶芶苟豞垢媾媾夠辜菇咕箍诂钴箛菇鼔咕蛊嗗唂骰诂顧凅雇剮呱剮寡啩啩乖枴怪菅関菅蒄觀涫菅潅遦潅遦洸広迋瑰規圭硅歸亀閨匦媿詭癸蓕匱蛫貴刽辊蔉輥煱漷國淉裹過铪骸陔嗨氦亥嗐骇酣憨邯韓浛凾寒凾諴癷翰撼捍猂憾悍猂汙漢夯忼航壕嚎濠毫郝恏秏呺滘哬曷嗬菏劾秝啝哬匼盉貉阂菏涸赫褐鹤哿潶嫼痕佷哏悢涥悙橫蘅恆轟晎烘渱鴻葓宖宖葒糇糇糇犼厚糇後苸苸唿瑚壺煳箶箶狐煳煳弧唬唬戶沍戶戶埖蕐澕磆磆畵劃囮話槐佪懷准壞歡寰桓還緩換漶喚痪豢焕涣宦抝巟巟曂磺蝗簧瑝瑝瑝瑝愰縨恍巟洃媈媈幑恢蛔冋毇珻慧卉惠珻贿秽浍烩匯讳诲浍荤涽殙魂渾婫豁萿钬焱镬戓惑靃貨禍击圾樭僟畸稽積箕肌饥迹噭讥鶏姬绩缉咭极棘辑籍潗彶喼疾汲旣嫉级哜凢脊己蓟技冀悸伎祭剂悸哜寄寂計汜旣忌漈继汜嘉枷夾佳傢咖荚颊贾曱钾徦糘價泇駕糘姧盬堅尖笺簡煎凲肩艰奷缄茧撿柬碱硷拣撿彅倹彅諴薦槛鉴践濺見楗箭件揵舰劍饯渐溅涧踺壃葁將槳茳彊蔣桨奨講匠醬夅蕉椒礁潐烄茭郊浇嬌嬌嚼搅铰矫侥腳烄角饺儌烄剿嘋酵轿珓嘂窖揭帹湝秸街阶截劫兯莖聙瞐鯨倞驚棈粳經丼檠憬頸靜璄擏傹徑痉靖獍競凈泂僒啾究糾玖韭玖灸勼氿厩慦舊臼舅咎僦咎鞠佝狙疽劇驹匊挶咀怇舉沮藂岠琚姖倶岠踞涺倶呴惧岠涺涓鵑涓惓眷捲涓瘚攫決崛崛嚼桔傑啑睫竭洁結解姐悈藉芥鎅徣夰疥诫屆凧荕釿唫妗珒噤緊婂僅殣琎靳晉噤菦烬锓浕勁荊兢覺吷吷蕝汮箘呁軍焄浚浚浚浚郡浚喀咖鉲咯閞揩揩剀慨刋堪勘坎歃看嫝嵻嵻摃忼囥忼栲洘栲靠坷岢柯錁溘錁萪涜嗑妸渇尅尅愙錁肻肻恳垦妔妔涳恐芤啌摳囗釦簆喖哭崫楛酷厙褲洿垮挎跨胯赽筷侩赽寬窾匡筺誑框纩洭纩況扝盔岿窺葵喹魁傀潰隗潰堒崐涃涃葀拡霩闊柆菈喇臘臘辣菈莱唻攋藍漤孄拦藍阑蘭瀾谰灠灠攋灠灡嚂哴蓈哴蓢蓢蓢烺崂崂窂荖佬粩絡絡崂嘞泺檑檑檑藞蔂儡垒檑叻類汨棱楞唥厘悡犁黎篱狸蓠漓理李里鲤礼莉荔吏栗婯疠励砾呖悡傈唎俐痢竝粒沥隶劦璃哩唡聅嗹涟镰廉憐涟帘潋臉嗹戀煉煉悢涼樑粱悢倆唡糧涼煷涼嫽窷獠療獠寥辽潦孒撂镣漻料烮煭烮挘獵啉啉潾霖臨鄰潾啉凛賃悋柃玪夌蕶齡玪伶玪夌靈夌玪領叧泠媹琉媹硫馏畱嚠媹蓅栁陸瀧聾茏茏窿湰泷泷茏溇溇嵝溇屚陋廬盧颅廬爐掳卤虏噜麓碌蕗蕗赂蔍潞禄淥陸戮馿焒焒佀膂履屢缕慮氯侓卛慮淥欒孌孿滦卵亂稤畧囵囵囵仑囵纶囵囉螺囉羅囉儸骡裸落詻詻絡媽嫲犸犸犸骉罵嫲嬤埋荬麥賣邁霡慲獌蠻慲嫚嫚嫚嫚谩笀汒吂氓杧漭貓罞锚毝罞铆茆茂萺萺邈貿庅坆枚烸酶苺湈莈葿媒镁烸羙昧寐妺媚閄悶們萠懞檬擝锰掹夢掹侎醚靡糜洣洣弥洣秘觅泌滵滵幂婂眠婂冕凂勉娩缅媔媌媌媌邈仯緲庿仯篾搣姄抿皿勄悯閩眀螟嘄佲洺掵繆嗼摹嚤嗼嗼嚤嚤嚤沬沬嗼嚜默沬嗼寞帞湈哞湈拇牡畝姆毋募暮募募慕朩朩睦牧穆嗱哪妠妠哪哪妠氖釢艿恧柰遖莮難灢撓悩悩閙淖迡浽禸嫰能妮霓淣狔胒抳沵嫟膩屰溺蔫秥姩碾撵捻淰娘酿茑杘涅嗫糵啮嗫镍涅您柠狞凝苧拧泞犇沑妞狃哝哝哝挵伮怓伮囡煖疟疟挪穤穤喏呃瓯瓯瓯耦嘔耦沤啪汃瓟啪啪琶啪棑簰棑湃哌襻瀋盤磐昐溿叛判乓厐臱耪眫拋垉铇垉垉垉垉怌胚掊裴婄婄蓜姵沛濆湓泙抨烹澎憉莑堋硼篷膨萠鵬唪湴坯砒噼纰怶噼琵毗啤裨疲怶苉痞僻庇譬萹媥爿騙彯慓瓢嘌潎潎拚頻貧闆娉乒岼泙泙岼憑甁评屛岥秡櫇嘙岥魄廹粕剖圤舗圤莆匍箁蒲逋圤圃普浦鐠曝鑤剘剘栖嘁悽⑦凄漆柒沏娸諆渏忮畦崎脐斉旗祈祁騏起豈阣佱晵契砌噐氣迄棄汽淇讫拤洽撁扦钎鉛芉迁簽仟嗛墘黔錢钳湔濳遣淺谴堑嵌芡嗛熗濸腔羌嫱嫱強熗橇锹毃佾喬趭喬喬巧鞘毳趬峭佾竅苆苆苴愜苆钦埐儭蓁噖懄芹檎噙寑沁圊輕氢傾卿凊擎啨氰凊頃埥庆琼窮偢坵邱浗浗囚媨泅趋岖蛆浀軀屈駆渠掫婜龋趣厾圜颧權醛葲洤痊拳吠券勧蒛炔瘸卻鹊榷確雀峮羣嘫嘫姌媣瓤壤攘孃讓隢擾隢惹慹壬芢亾涊韧姙認刄妊纫扔仍ㄖ戎茸嫆荣瀜嫆嫆嫆絨冗渘渘禸筎蠕濡孺洳媷乳肗叺褥軟朊惢瑞銳潤潤婼弜潵灑蕯腮鳃噻噻彡叁傘潵鎟鎟喪搔騒掃溲瑟脃澀潹僧莏唦摋閷乷纱傻倽繺篩曬姍苫杉屾剼煽釤閁陝擅赡膳僐訕傓缮墒傷啇賞晌仩尙裳哨哨哨燒芍汋韶仯哨卲袑奢赊虵舙舎赦摂射慑渉涻蔎砷妽呻訷裑堔娠訷鉮瀋谉嬸卙腎慎椮殸泩甥狌圱繩渻墭乗夝聖溮妷浉湤濕詩迉虱拾坧湁溡什喰蚀實識史矢使屍馶始鉽沶仕迣枾倳拭誓迣勢湜嗜噬适仕侍释飾氏巿恃厔視鉽荍掱渞垨壽涭售辤痩獣蔬枢梳姝杼瀭埱忬蔋疏書赎孰孰薯濐曙署蜀黍癙屬朮沭樹娕戍竪墅庶薮漱恕唰耍摔缞甩帥拴拴灀叒摤誰渁腄挩吮橓順橓説碩朔爍凘凘凘偲俬呞噝屍肆峙嗣④伺姒饲巳菘聳怂頌鎹浨讼誦溲艘擞嗽蘇酥俗嫊趚粟僳愬溯蹜訴歗酸祘匴虽陏隨浽髓誶嵗穗嬘隧祟孫損笋蓑逡逡縮鎖鎍鎻葰禢彵咜咜嗒獭挞蹋沓胎苔孡珆溙酞忲忲呔坍摊貪瘫滩墵檀痰憛谭談钽毯袒湠探嘆湠饧溏搪漟橖膛瑭溏倘躺淌趟烫匋濤瑫绦匋洮洮匋匋討套特駦駦庝誊珶剔踢锑諟趧渧渧軆櫕嚏惕珶珶屟兲婖瑱甶甛恬婖睓狣條迢眺朓萜鉄萜廰厛烃汀侹渟渟侹侹艇嗵秱酮瞳哃恫浵僮硧硧茼統痌偸投頭透凸禿湥圖徙蒤凃廜汢汢兎湍團蓷颓蹆蜕蹆蹆昋屯臀柂仛脫袉拕駞袉椭鋖沰唾挖哇蛙哇哇咓襪歪迯豌塆塆琓顽汍烷唍涴梚脕皖惋宛啘萭腕忹迋匄忹蛧暀忹朢莣妄媙蘶嶶佹韦違桅圍惟惟潙潍惟苇崣逶偉沩屗纬沬墛菋嵔媦嵔蘶莅渭媦墛墛衞瘟溫螡妏聞鈫沕穏紊問滃暡瓮挝窩煱窉莪斡臥楃沃莁嗚钨烏汚莁偓嘸蕪梧圄呉毋娬伍圄吘橆⑤侮坞戊霚晤粅匢務圄誤厝凞唽覀硒矽晰嘻扱唶犠浠息唏悉膝汐厝熄烯渓汐犀檄袭席習媳禧铣冼係隙戱細磍虾匣葭轄叚浹浹浹芐厦嗄圷锨锨姺佡鮮汘咸賢銜舷娴涎妶溓显険哯獻縣腺陥羨宪陥限線楿厢镶萫葙襄湘芗翔祥詳想姠啍頙巷潒潒姠潒簘硝霄萷涍嚣销消宵淆哓尒涍校肖啸笑效楔些歇蝎嚡拹挾携峫斜脅喈冩悈啣蟹澥绁瀉塮屑蕲芯锌俽厗噺忻杺信衅暒睲睲瑆興鉶侀形郉垳瑆圉莕悻狌兇兇洶匈汹雄熋咻俢饈朽溴琇莠袖绣歔戌濡歔歔湏俆汻蓄酗溆旮垿畜恤絮胥緒續蓒媗媗悬嫙玆選癣妶絢靴薛敩泬膤洫勛熏揗洵咰浔紃廵咰卂訓卂遜卂壓呷鴉鴨吖吖厊厊蚜崖衙涯蕥啞亞冴漹咽阉煙殗鹽嚴妍蜒啱娫訁顔閻烾沿奄殗眼衍湮滟堰嬿厭砚雁唁彦熖匽谚験殃姎鴦秧昜婸佯疡咩樣陽氧卬癢養樣羕撽崾岆愮愮尧滛窰愮烑吆舀葯婹耀倻噎倻爺嘢冶竾頁掖鄴旪曳腋液液①壹悘揖铱畩吚扆颐夷遗簃儀胰寲沂宜侇彝掎蚁掎巳乁矣姒兿抑昜邑屹億役臆逸肄疫洂裔嬑藙忆義谥溢诣议谊譯異翼翌绎筃荫洇殷堷隂絪荶檭婬夤飮吚吲陻茚渶璎璎鹰應缨瑩萤營荧蝇迊赢盁影颕哽眏喲砽砽臃痈滽澭踊蛹怺怺悀怺恿湧鼡豳沋滺沋尤甴邮铀沋怞遊酉洧伖祐祐釉诱叒孧扜菸纡盂榆虞愚舆悇揄揄渔揄揄渔隅予娯雨玙屿禹荢娪羽砡域芋喐吁喁喻峪御匬慾獄唷謍浴寓裕預豫驭鴛棩寃沅垣媴厡瑗辕圎園園猿羱緣逺夗蒝葾阮曰箹樾跞钥捳粵仴哾閱秐囩郧枃殒狁運藴酝暈韻夃匝咂卆酨酨災宰酨侢茬洎瓒暫瓒賍賍髒蹧蹧凿藻栆皁璪蚤璪璪慥唣灶璪嫧萚荝澤賊怎熷璔嶒熷紥喳碴札轧铡閘喳栅搾咋咋怍怍擿斋宅搾債寨瞻毡詹秥跕盏斬辗崭蹍蘸棧颭戰跕偡綻樟嶂彰漳張礃涨粀扙賬账扙胀瘴障妱昭找沼趙燳罩狣肇佋嗻菥悊蛰辙鍺锗蔗適淅沴斟嫃甄砧臻浈針浈忱疹沴震桭鎮俥篜諍諍姃狰踭姃整拯囸炡帧症鄭姃芷汥伎汥倁倁汥脂汥と枳轵矗淔殖秇惪侄歮栺圵趾呮旨衹梽挚掷臸臸置帜峙淛潪秩雉質炙痔滞菭窒狆盅筗妕衷蔠種妕偅仲衆洀淍詶詶诌粥轴肘帚咒皺宙昼骤咮株咮咮蕏渚诛豩艸烛煑拄瞩瞩炷著炷莇蛀贮铸茿炷炷柷驻抓爪跩抟磚啭撰賺篆桩圧裝妝獞匨匨椎锥搥赘墜綴谆痽浞炪婥棹琢茁酌啄着灼浊兹恣粢恣稵淄孜橴仔籽滓ふ洎渍牸鬃琮琮崈琮縂枞邹趉楱楱蒩娖卒蔟袓蒩蒩蒩鑽纂觜酔朂嶵澊噂葃咗佐柞莋莋唑蓙錒噯嬡璦曖靄諳銨鵪媼驁鰲鈀唄鈑鴇齙鵯賁錛蓽嗶潷鉍篳蹕芐緶籩驃颮飆鏢鑣鰾儐繽檳殯臏鑌髕鬢稟餑鈸鵓鈽驂黲惻鍤儕釵囅諂讖蕆懺嬋驏覘禪鐔倀萇悵閶鯧硨傖諶櫬磣齔棖檉鋮鐺飭鴟銃儔幬讎芻絀躕釧愴綞鶉輟齪鶿蓯驄樅輳攛銼鹺噠韃駘紿殫賧癉簞讜碭襠燾鐙糴詆諦綈覿鏑巔鈿癲銚鯛鰈鋌銩崠鶇竇瀆櫝牘篤黷籪懟鐓燉躉鐸諤堊閼軛鋨鍔鶚顎顓鱷誒邇鉺鴯鮞鈁魴緋鐨鯡僨灃鳧駙紱紼賻麩鮒鰒釓賅尷搟紺戇睪誥縞鋯紇鎘潁亙賡綆鯁詬緱覯詁轂鈷錮鴣鵠鶻鴰摑詿摜鸛鰥獷匭劌媯檜鮭鱖袞緄鯀堝咼幗槨蟈鉿闞絎頡灝顥訶闔蠣黌訌葒閎鱟滸鶘驊樺鏵奐繯鍰鯇鰉詼薈噦澮繢琿暉諢餛閽鈥鑊訐詰薺嘰嚌驥璣覬齏磯羈蠆躋霽鱭鯽郟浹鋏鎵蟯諫縑戔戩瞼鶼筧鰹韉絳韁撟嶠鷦鮫癤頜鮚巹藎饉縉贐覲剄涇逕弳脛靚鬮鳩鷲詎屨櫸颶鉅鋦窶齟錈鐫雋譎玨皸剴塏愾愷鎧鍇龕閌鈧銬騍緙軻鈳錁頷齦鏗嚳鄶噲膾獪髖誆誑鄺壙纊貺匱蕢憒聵簣閫錕鯤蠐崍徠淶瀨賚睞錸癩籟嵐欖斕鑭襤閬鋃嘮嶗銠鐒癆鰳誄縲儷酈壢藶蒞蘺嚦邐驪縭櫪櫟轢礪鋰鸝癘糲躒靂鱺鱧蘞奩瀲璉殮褳襝鰱魎繚釕鷯藺廩檁轔躪綾欞蟶鯪瀏騮綹鎦鷚蘢瀧瓏櫳朧礱僂蔞嘍嶁鏤瘺耬螻髏壚擼嚕閭瀘淥櫨櫓轤輅轆氌臚鸕鷺艫鱸臠孌欒鸞鑾圇犖玀濼欏腡鏍櫚褸鋝嘸嘜嬤榪勱縵鏝顙鰻麼捫燜懣鍆羋謐獼禰澠靦黽緲繆閔緡謨驀饃歿鏌鉬鐃訥鈮鯢輦鯰蔦裊隉蘗囁顢躡苧嚀聹儂噥駑釹儺謳慪甌蹣皰轡紕羆鈹諞駢縹嬪釙鏷鐠蘄騏綺榿磧頎頏鰭僉蕁慳騫繾槧鈐嬙檣戧熗錆鏘鏹羥蹌誚譙蕎繰磽蹺愜鍥篋鋟撳鯖煢蛺巰賕蟣鰍詘嶇闃覷鴝詮綣輇銓闋闕愨蕘嬈橈飪軔嶸蠑縟銣顰蜆颯毿糝繅嗇銫穡鎩鯊釃訕姍騸釤鱔坰殤觴厙灄畬詵諗瀋謚塒蒔弒軾貰鈰鰣綬攄紓閂鑠廝駟緦鍶鷥藪餿颼鎪謖穌誶蓀猻嗩脧闥鉈鰨鈦鮐曇鉭錟頇儻餳鐋鏜韜鋱緹鵜闐糶齠鰷慟鈄釷摶飩籜鼉媧膃紈綰輞諉幃闈溈潿瑋韙煒鮪閿萵齷鄔廡憮嫵騖鵡鶩餼鬩璽覡硤莧薟蘚峴獫嫻鷴癇蠔秈躚薌餉驤緗饗嘵瀟驍綃梟簫褻擷紲纈陘滎饈鵂詡頊諼鉉鏇謔澩鱈塤潯鱘埡婭椏氬厴贗儼兗讞懨閆釅魘饜鼴煬軺鷂鰩靨謁鄴曄燁詒囈嶧飴懌驛縊軼貽釔鎰鐿瘞艤銦癮塋鶯縈鎣攖嚶瀅瀠瓔鸚癭頦罌鏞蕕銪魷傴俁諛諭蕷崳飫閾嫗紆覦歟鈺鵒鷸齬櫞鳶黿鉞鄆蕓惲慍紜韞殞氳瓚趲鏨駔賾嘖幘簀譖繒譫詔釗謫輒鷓湞縝楨軫賑禎鴆諍崢鉦錚箏騭櫛梔軹輊贄鷙螄縶躓躑觶鍾紂縐佇櫧銖囀饌顳騅縋諑鐲諮緇輜貲眥錙齜鯔傯諏騶鯫鏃纘躦鱒訁譾郤猛氹阪壟堖垵墊檾蕒葤蓧蒓菇槁摣咤唚哢噝噅撅劈謔襆嶴脊仿僥獁麅餘餷饊饢楞怵懍爿漵灩混濫瀦淡寧糸絝緔瑉梘棬案橰櫫軲軤賫膁腖飈糊煆溜湣渺碸滾瞘鈈鉕鋣銱鋥鋶鐦鐧鍩鍀鍃錇鎄鎇鎿鐝鑥鑹鑔穭鶓鶥鸌癧屙瘂臒襇繈耮顬蟎麯鮁鮃鮎鯗鯝鯴鱝鯿鰠鰵鱅鞽韝齇';
-}
-function traditionalized(cc) {
-  var str = '';
-  if (cc) {
-    for (var i = 0; i < cc.length; i++) {
-      if (simpPYStr().indexOf(cc.charAt(i)) != -1)
-      str += ftPYStr().charAt(simpPYStr().indexOf(cc.charAt(i)));else
-      if (qqPYStr().indexOf(cc.charAt(i)) != -1)
-      str += ftPYStr().charAt(qqPYStr().indexOf(cc.charAt(i)));else
-
-      str += cc.charAt(i);
-    }
-  }
-  return str;
-}
-function simplized(cc) {
-  var str = '';
-  if (cc) {
-    for (var i = 0; i < cc.length; i++) {
-      if (ftPYStr().indexOf(cc.charAt(i)) != -1)
-      str += simpPYStr().charAt(ftPYStr().indexOf(cc.charAt(i)));else
-      if (qqPYStr().indexOf(cc.charAt(i)) != -1)
-      str += simpPYStr().charAt(qqPYStr().indexOf(cc.charAt(i)));else
-
-      str += cc.charAt(i);
-    }
-  }
-  return str;
-}
-function qqlized(cc) {
-  var str = '';
-  for (var i = 0; i < cc.length; i++) {
-    if (ftPYStr().indexOf(cc.charAt(i)) != -1)
-    str += qqPYStr().charAt(ftPYStr().indexOf(cc.charAt(i)));else
-    if (simpPYStr().indexOf(cc.charAt(i)) != -1)
-    str += qqPYStr().charAt(simpPYStr().indexOf(cc.charAt(i)));else
-
-    str += cc.charAt(i);
-  }
-  return str;
-}
-
-/***/ }),
-/* 153 */,
-/* 154 */,
-/* 155 */,
 /* 156 */,
 /* 157 */,
 /* 158 */,
@@ -19736,8 +19960,82 @@ function qqlized(cc) {
 /* 167 */,
 /* 168 */,
 /* 169 */,
-/* 170 */,
-/* 171 */,
+/* 170 */
+/*!********************************************************************************************************!*\
+  !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/pages/read/battery.js ***!
+  \********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var getBattery = function getBattery(callback) {
+  uni.getSystemInfo({
+    success: function success(res) {
+      wx.getBatteryInfoSync({
+        success: function success(ret) {
+          callback(ret.level);
+          console.log('是否正在充电：', res.isCharging);
+        }
+      });
+    }
+  });
+};
+var _default = {
+  getBattery: getBattery
+};
+exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+/* 171 */
+/*!***********************************************************************************************************!*\
+  !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/pages/read/brightness.js ***!
+  \***********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var Brightness = null;
+var getBrigthness = function getBrigthness(callbck) {
+  uni.getScreenBrightness({
+    success: function success(res) {
+      Brightness = res.value;
+      callbck(res.value * 100);
+    }
+  });
+};
+var setBrigthness = function setBrigthness(data, type, callbck) {
+  uni.setScreenBrightness({
+    value: type ? Brightness : data / 100,
+    success: function success(res) {
+      if (type) {
+        callbck(Brightness * 100);
+      } else {
+        callbck(data);
+      }
+    }
+  });
+};
+var _default = {
+  getBrigthness: getBrigthness,
+  setBrigthness: setBrigthness
+};
+exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
 /* 172 */,
 /* 173 */,
 /* 174 */,
@@ -19772,38 +20070,7 @@ function qqlized(cc) {
 /* 203 */,
 /* 204 */,
 /* 205 */,
-/* 206 */
-/*!*********************************************************************************************************************************!*\
-  !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/components/u-gap/props.js ***!
-  \*********************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
-  props: {
-    // 背景颜色（默认transparent）
-    bgColor: {
-      type: String,
-      default: uni.$u.props.gap.bgColor },
-
-    // 分割槽高度，单位px（默认30）
-    height: {
-      type: [String, Number],
-      default: uni.$u.props.gap.height },
-
-    // 与上一个组件的距离
-    marginTop: {
-      type: [String, Number],
-      default: uni.$u.props.gap.marginTop },
-
-    // 与下一个组件的距离
-    marginBottom: {
-      type: [String, Number],
-      default: uni.$u.props.gap.marginBottom } } };exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
-
-/***/ }),
+/* 206 */,
 /* 207 */,
 /* 208 */,
 /* 209 */,
@@ -19811,78 +20078,7 @@ function qqlized(cc) {
 /* 211 */,
 /* 212 */,
 /* 213 */,
-/* 214 */
-/*!**********************************************************************************************************************************!*\
-  !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/components/u-tabs/props.js ***!
-  \**********************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
-  props: {
-    // 滑块的移动过渡时间，单位ms
-    duration: {
-      type: Number,
-      default: uni.$u.props.tabs.duration },
-
-    // tabs标签数组
-    list: {
-      type: Array,
-      default: uni.$u.props.tabs.list },
-
-    // 滑块颜色
-    lineColor: {
-      type: String,
-      default: uni.$u.props.tabs.lineColor },
-
-    // 菜单选择中时的样式
-    activeStyle: {
-      type: [String, Object],
-      default: uni.$u.props.tabs.activeStyle },
-
-    // 菜单非选中时的样式
-    inactiveStyle: {
-      type: [String, Object],
-      default: uni.$u.props.tabs.inactiveStyle },
-
-    // 滑块长度
-    lineWidth: {
-      type: [String, Number],
-      default: uni.$u.props.tabs.lineWidth },
-
-    // 滑块高度
-    lineHeight: {
-      type: [String, Number],
-      default: uni.$u.props.tabs.lineHeight },
-
-    // 滑块背景显示大小，当滑块背景设置为图片时使用
-    lineBgSize: {
-      type: String,
-      default: uni.$u.props.tabs.lineBgSize },
-
-    // 菜单item的样式
-    itemStyle: {
-      type: [String, Object],
-      default: uni.$u.props.tabs.itemStyle },
-
-    // 菜单是否可滚动
-    scrollable: {
-      type: Boolean,
-      default: uni.$u.props.tabs.scrollable },
-
-    // 当前选中标签的索引
-    current: {
-      type: [Number, String],
-      default: uni.$u.props.tabs.current },
-
-    // 默认读取的键名
-    keyName: {
-      type: String,
-      default: uni.$u.props.tabs.keyName } } };exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
-
-/***/ }),
+/* 214 */,
 /* 215 */,
 /* 216 */,
 /* 217 */,
@@ -19890,7 +20086,148 @@ function qqlized(cc) {
 /* 219 */,
 /* 220 */,
 /* 221 */,
-/* 222 */
+/* 222 */,
+/* 223 */,
+/* 224 */,
+/* 225 */
+/*!*********************************************************************************************************************************!*\
+  !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/components/u-gap/props.js ***!
+  \*********************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
+  props: {
+    // 背景颜色（默认transparent）
+    bgColor: {
+      type: String,
+      default: uni.$u.props.gap.bgColor
+    },
+    // 分割槽高度，单位px（默认30）
+    height: {
+      type: [String, Number],
+      default: uni.$u.props.gap.height
+    },
+    // 与上一个组件的距离
+    marginTop: {
+      type: [String, Number],
+      default: uni.$u.props.gap.marginTop
+    },
+    // 与下一个组件的距离
+    marginBottom: {
+      type: [String, Number],
+      default: uni.$u.props.gap.marginBottom
+    }
+  }
+};
+exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+/* 226 */,
+/* 227 */,
+/* 228 */,
+/* 229 */,
+/* 230 */,
+/* 231 */,
+/* 232 */,
+/* 233 */
+/*!**********************************************************************************************************************************!*\
+  !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/components/u-tabs/props.js ***!
+  \**********************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
+  props: {
+    // 滑块的移动过渡时间，单位ms
+    duration: {
+      type: Number,
+      default: uni.$u.props.tabs.duration
+    },
+    // tabs标签数组
+    list: {
+      type: Array,
+      default: uni.$u.props.tabs.list
+    },
+    // 滑块颜色
+    lineColor: {
+      type: String,
+      default: uni.$u.props.tabs.lineColor
+    },
+    // 菜单选择中时的样式
+    activeStyle: {
+      type: [String, Object],
+      default: uni.$u.props.tabs.activeStyle
+    },
+    // 菜单非选中时的样式
+    inactiveStyle: {
+      type: [String, Object],
+      default: uni.$u.props.tabs.inactiveStyle
+    },
+    // 滑块长度
+    lineWidth: {
+      type: [String, Number],
+      default: uni.$u.props.tabs.lineWidth
+    },
+    // 滑块高度
+    lineHeight: {
+      type: [String, Number],
+      default: uni.$u.props.tabs.lineHeight
+    },
+    // 滑块背景显示大小，当滑块背景设置为图片时使用
+    lineBgSize: {
+      type: String,
+      default: uni.$u.props.tabs.lineBgSize
+    },
+    // 菜单item的样式
+    itemStyle: {
+      type: [String, Object],
+      default: uni.$u.props.tabs.itemStyle
+    },
+    // 菜单是否可滚动
+    scrollable: {
+      type: Boolean,
+      default: uni.$u.props.tabs.scrollable
+    },
+    // 当前选中标签的索引
+    current: {
+      type: [Number, String],
+      default: uni.$u.props.tabs.current
+    },
+    // 默认读取的键名
+    keyName: {
+      type: String,
+      default: uni.$u.props.tabs.keyName
+    }
+  }
+};
+exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+/* 234 */,
+/* 235 */,
+/* 236 */,
+/* 237 */,
+/* 238 */,
+/* 239 */,
+/* 240 */,
+/* 241 */
 /*!**********************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/components/u-icon/icons.js ***!
   \**********************************************************************************************************************************/
@@ -19898,7 +20235,13 @@ function qqlized(cc) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
   'uicon-level': "\uE693",
   'uicon-column-line': "\uE68E",
   'uicon-checkbox-mark': "\uE807",
@@ -20110,10 +20453,12 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
   'uicon-man-delete': "\uE61A",
   'uicon-man-delete-fill': "\uE66A",
   'uicon-zh': "\uE70A",
-  'uicon-en': "\uE692" };exports.default = _default;
+  'uicon-en': "\uE692"
+};
+exports.default = _default;
 
 /***/ }),
-/* 223 */
+/* 242 */
 /*!**********************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/components/u-icon/props.js ***!
   \**********************************************************************************************************************************/
@@ -20121,103 +20466,113 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
   props: {
     // 图标类名
     name: {
       type: String,
-      default: uni.$u.props.icon.name },
-
+      default: uni.$u.props.icon.name
+    },
     // 图标颜色，可接受主题色
     color: {
       type: String,
-      default: uni.$u.props.icon.color },
-
+      default: uni.$u.props.icon.color
+    },
     // 字体大小，单位px
     size: {
       type: [String, Number],
-      default: uni.$u.props.icon.size },
-
+      default: uni.$u.props.icon.size
+    },
     // 是否显示粗体
     bold: {
       type: Boolean,
-      default: uni.$u.props.icon.bold },
-
+      default: uni.$u.props.icon.bold
+    },
     // 点击图标的时候传递事件出去的index（用于区分点击了哪一个）
     index: {
       type: [String, Number],
-      default: uni.$u.props.icon.index },
-
+      default: uni.$u.props.icon.index
+    },
     // 触摸图标时的类名
     hoverClass: {
       type: String,
-      default: uni.$u.props.icon.hoverClass },
-
+      default: uni.$u.props.icon.hoverClass
+    },
     // 自定义扩展前缀，方便用户扩展自己的图标库
     customPrefix: {
       type: String,
-      default: uni.$u.props.icon.customPrefix },
-
+      default: uni.$u.props.icon.customPrefix
+    },
     // 图标右边或者下面的文字
     label: {
       type: [String, Number],
-      default: uni.$u.props.icon.label },
-
+      default: uni.$u.props.icon.label
+    },
     // label的位置，只能右边或者下边
     labelPos: {
       type: String,
-      default: uni.$u.props.icon.labelPos },
-
+      default: uni.$u.props.icon.labelPos
+    },
     // label的大小
     labelSize: {
       type: [String, Number],
-      default: uni.$u.props.icon.labelSize },
-
+      default: uni.$u.props.icon.labelSize
+    },
     // label的颜色
     labelColor: {
       type: String,
-      default: uni.$u.props.icon.labelColor },
-
+      default: uni.$u.props.icon.labelColor
+    },
     // label与图标的距离
     space: {
       type: [String, Number],
-      default: uni.$u.props.icon.space },
-
+      default: uni.$u.props.icon.space
+    },
     // 图片的mode
     imgMode: {
       type: String,
-      default: uni.$u.props.icon.imgMode },
-
+      default: uni.$u.props.icon.imgMode
+    },
     // 用于显示图片小图标时，图片的宽度
     width: {
       type: [String, Number],
-      default: uni.$u.props.icon.width },
-
+      default: uni.$u.props.icon.width
+    },
     // 用于显示图片小图标时，图片的高度
     height: {
       type: [String, Number],
-      default: uni.$u.props.icon.height },
-
+      default: uni.$u.props.icon.height
+    },
     // 用于解决某些情况下，让图标垂直居中的用途
     top: {
       type: [String, Number],
-      default: uni.$u.props.icon.top },
-
+      default: uni.$u.props.icon.top
+    },
     // 是否阻止事件传播
     stop: {
       type: Boolean,
-      default: uni.$u.props.icon.stop } } };exports.default = _default;
+      default: uni.$u.props.icon.stop
+    }
+  }
+};
+exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 224 */,
-/* 225 */,
-/* 226 */,
-/* 227 */,
-/* 228 */,
-/* 229 */,
-/* 230 */,
-/* 231 */
+/* 243 */,
+/* 244 */,
+/* 245 */,
+/* 246 */,
+/* 247 */,
+/* 248 */,
+/* 249 */,
+/* 250 */
 /*!**********************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/components/u-text/props.js ***!
   \**********************************************************************************************************************************/
@@ -20225,122 +20580,132 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
   props: {
     // 主题颜色
     type: {
       type: String,
-      default: uni.$u.props.text.type },
-
+      default: uni.$u.props.text.type
+    },
     // 是否显示
     show: {
       type: Boolean,
-      default: uni.$u.props.text.show },
-
+      default: uni.$u.props.text.show
+    },
     // 显示的值
     text: {
       type: [String, Number],
-      default: uni.$u.props.text.text },
-
+      default: uni.$u.props.text.text
+    },
     // 前置图标
     prefixIcon: {
       type: String,
-      default: uni.$u.props.text.prefixIcon },
-
+      default: uni.$u.props.text.prefixIcon
+    },
     // 后置图标
     suffixIcon: {
       type: String,
-      default: uni.$u.props.text.suffixIcon },
-
+      default: uni.$u.props.text.suffixIcon
+    },
     // 文本处理的匹配模式
     // text-普通文本，price-价格，phone-手机号，name-姓名，date-日期，link-超链接
     mode: {
       type: String,
-      default: uni.$u.props.text.mode },
-
+      default: uni.$u.props.text.mode
+    },
     // mode=link下，配置的链接
     href: {
       type: String,
-      default: uni.$u.props.text.href },
-
+      default: uni.$u.props.text.href
+    },
     // 格式化规则
     format: {
       type: [String, Function],
-      default: uni.$u.props.text.format },
-
+      default: uni.$u.props.text.format
+    },
     // mode=phone时，点击文本是否拨打电话
     call: {
       type: Boolean,
-      default: uni.$u.props.text.call },
-
+      default: uni.$u.props.text.call
+    },
     // 小程序的打开方式
     openType: {
       type: String,
-      default: uni.$u.props.text.openType },
-
+      default: uni.$u.props.text.openType
+    },
     // 是否粗体，默认normal
     bold: {
       type: Boolean,
-      default: uni.$u.props.text.bold },
-
+      default: uni.$u.props.text.bold
+    },
     // 是否块状
     block: {
       type: Boolean,
-      default: uni.$u.props.text.block },
-
+      default: uni.$u.props.text.block
+    },
     // 文本显示的行数，如果设置，超出此行数，将会显示省略号
     lines: {
       type: [String, Number],
-      default: uni.$u.props.text.lines },
-
+      default: uni.$u.props.text.lines
+    },
     // 文本颜色
     color: {
       type: String,
-      default: uni.$u.props.text.color },
-
+      default: uni.$u.props.text.color
+    },
     // 字体大小
     size: {
       type: [String, Number],
-      default: uni.$u.props.text.size },
-
+      default: uni.$u.props.text.size
+    },
     // 图标的样式
     iconStyle: {
       type: [Object, String],
-      default: uni.$u.props.text.iconStyle },
-
+      default: uni.$u.props.text.iconStyle
+    },
     // 文字装饰，下划线，中划线等，可选值 none|underline|line-through
     decoration: {
       tepe: String,
-      default: uni.$u.props.text.decoration },
-
+      default: uni.$u.props.text.decoration
+    },
     // 外边距，对象、字符串，数值形式均可
     margin: {
       type: [Object, String, Number],
-      default: uni.$u.props.text.margin },
-
+      default: uni.$u.props.text.margin
+    },
     // 文本行高
     lineHeight: {
       type: [String, Number],
-      default: uni.$u.props.text.lineHeight },
-
+      default: uni.$u.props.text.lineHeight
+    },
     // 文本对齐方式，可选值left|center|right
     align: {
       type: String,
-      default: uni.$u.props.text.align },
-
+      default: uni.$u.props.text.align
+    },
     // 文字换行，可选值break-word|normal|anywhere
     wordWrap: {
       type: String,
-      default: uni.$u.props.text.wordWrap } } };exports.default = _default;
+      default: uni.$u.props.text.wordWrap
+    }
+  }
+};
+exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 232 */,
-/* 233 */,
-/* 234 */,
-/* 235 */,
-/* 236 */,
-/* 237 */
+/* 251 */,
+/* 252 */,
+/* 253 */,
+/* 254 */,
+/* 255 */,
+/* 256 */
 /*!**********************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/components/u-cell/props.js ***!
   \**********************************************************************************************************************************/
@@ -20348,124 +20713,134 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default2 = {
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default2 = {
   props: {
     // 标题
     title: {
       type: [String, Number],
-      default: uni.$u.props.cell.title },
-
+      default: uni.$u.props.cell.title
+    },
     // 标题下方的描述信息
     label: {
       type: [String, Number],
-      default: uni.$u.props.cell.label },
-
+      default: uni.$u.props.cell.label
+    },
     // 右侧的内容
     value: {
       type: [String, Number],
-      default: uni.$u.props.cell.value },
-
+      default: uni.$u.props.cell.value
+    },
     // 左侧图标名称，或者图片链接(本地文件建议使用绝对地址)
     icon: {
       type: String,
-      default: uni.$u.props.cell.icon },
-
+      default: uni.$u.props.cell.icon
+    },
     // 是否禁用cell
     disabled: {
       type: Boolean,
-      default: uni.$u.props.cell.disabled },
-
+      default: uni.$u.props.cell.disabled
+    },
     // 是否显示下边框
     border: {
       type: Boolean,
-      default: uni.$u.props.cell.border },
-
+      default: uni.$u.props.cell.border
+    },
     // 内容是否垂直居中(主要是针对右侧的value部分)
     center: {
       type: Boolean,
-      default: uni.$u.props.cell.center },
-
+      default: uni.$u.props.cell.center
+    },
     // 点击后跳转的URL地址
     url: {
       type: String,
-      default: uni.$u.props.cell.url },
-
+      default: uni.$u.props.cell.url
+    },
     // 链接跳转的方式，内部使用的是uView封装的route方法，可能会进行拦截操作
     linkType: {
       type: String,
-      default: uni.$u.props.cell.linkType },
-
+      default: uni.$u.props.cell.linkType
+    },
     // 是否开启点击反馈(表现为点击时加上灰色背景)
     clickable: {
       type: Boolean,
-      default: uni.$u.props.cell.clickable },
-
+      default: uni.$u.props.cell.clickable
+    },
     // 是否展示右侧箭头并开启点击反馈
     isLink: {
       type: Boolean,
-      default: uni.$u.props.cell.isLink },
-
+      default: uni.$u.props.cell.isLink
+    },
     // 是否显示表单状态下的必填星号(此组件可能会内嵌入input组件)
     required: {
       type: Boolean,
-      default: uni.$u.props.cell.required },
-
+      default: uni.$u.props.cell.required
+    },
     // 右侧的图标箭头
     rightIcon: {
       type: String,
-      default: uni.$u.props.cell.rightIcon },
-
+      default: uni.$u.props.cell.rightIcon
+    },
     // 右侧箭头的方向，可选值为：left，up，down
     arrowDirection: {
       type: String,
-      default: uni.$u.props.cell.arrowDirection },
-
+      default: uni.$u.props.cell.arrowDirection
+    },
     // 左侧图标样式
     iconStyle: {
       type: [Object, String],
       default: function _default() {
         return uni.$u.props.cell.iconStyle;
-      } },
-
+      }
+    },
     // 右侧箭头图标的样式
     rightIconStyle: {
       type: [Object, String],
       default: function _default() {
         return uni.$u.props.cell.rightIconStyle;
-      } },
-
+      }
+    },
     // 标题的样式
     titleStyle: {
       type: [Object, String],
       default: function _default() {
         return uni.$u.props.cell.titleStyle;
-      } },
-
+      }
+    },
     // 单位元的大小，可选值为large
     size: {
       type: String,
-      default: uni.$u.props.cell.size },
-
+      default: uni.$u.props.cell.size
+    },
     // 点击cell是否阻止事件传播
     stop: {
       type: Boolean,
-      default: uni.$u.props.cell.stop },
-
+      default: uni.$u.props.cell.stop
+    },
     // 标识符，cell被点击时返回
     name: {
       type: [Number, String],
-      default: uni.$u.props.cell.name } } };exports.default = _default2;
+      default: uni.$u.props.cell.name
+    }
+  }
+};
+exports.default = _default2;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 238 */,
-/* 239 */,
-/* 240 */,
-/* 241 */,
-/* 242 */,
-/* 243 */,
-/* 244 */,
-/* 245 */
+/* 257 */,
+/* 258 */,
+/* 259 */,
+/* 260 */,
+/* 261 */,
+/* 262 */,
+/* 263 */,
+/* 264 */
 /*!**************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/components/u-back-top/props.js ***!
   \**************************************************************************************************************************************/
@@ -20473,68 +20848,78 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
   props: {
     // 返回顶部的形状，circle-圆形，square-方形
     mode: {
       type: String,
-      default: uni.$u.props.backtop.mode },
-
+      default: uni.$u.props.backtop.mode
+    },
     // 自定义图标
     icon: {
       type: String,
-      default: uni.$u.props.backtop.icon },
-
+      default: uni.$u.props.backtop.icon
+    },
     // 提示文字
     text: {
       type: String,
-      default: uni.$u.props.backtop.text },
-
+      default: uni.$u.props.backtop.text
+    },
     // 返回顶部滚动时间
     duration: {
       type: [String, Number],
-      default: uni.$u.props.backtop.duration },
-
+      default: uni.$u.props.backtop.duration
+    },
     // 滚动距离
     scrollTop: {
       type: [String, Number],
-      default: uni.$u.props.backtop.scrollTop },
-
+      default: uni.$u.props.backtop.scrollTop
+    },
     // 距离顶部多少距离显示，单位px
     top: {
       type: [String, Number],
-      default: uni.$u.props.backtop.top },
-
+      default: uni.$u.props.backtop.top
+    },
     // 返回顶部按钮到底部的距离，单位px
     bottom: {
       type: [String, Number],
-      default: uni.$u.props.backtop.bottom },
-
+      default: uni.$u.props.backtop.bottom
+    },
     // 返回顶部按钮到右边的距离，单位px
     right: {
       type: [String, Number],
-      default: uni.$u.props.backtop.right },
-
+      default: uni.$u.props.backtop.right
+    },
     // 层级
     zIndex: {
       type: [String, Number],
-      default: uni.$u.props.backtop.zIndex },
-
+      default: uni.$u.props.backtop.zIndex
+    },
     // 图标的样式，对象形式
     iconStyle: {
       type: Object,
-      default: uni.$u.props.backtop.iconStyle } } };exports.default = _default;
+      default: uni.$u.props.backtop.iconStyle
+    }
+  }
+};
+exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 246 */,
-/* 247 */,
-/* 248 */,
-/* 249 */,
-/* 250 */,
-/* 251 */,
-/* 252 */,
-/* 253 */
+/* 265 */,
+/* 266 */,
+/* 267 */,
+/* 268 */,
+/* 269 */,
+/* 270 */,
+/* 271 */,
+/* 272 */
 /*!***********************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/components/ls-skeleton/util/index.js ***!
   \***********************************************************************************************************************/
@@ -20542,12 +20927,19 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.getElCountsAndLayout = getElCountsAndLayout;exports.getElCounts = getElCounts;function getElCountsAndLayout(clas) {
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getElCounts = getElCounts;
+exports.getElCountsAndLayout = getElCountsAndLayout;
+function getElCountsAndLayout(clas) {
   var elements = {
     // flex左右布局中，给本身没有宽度属性的元素父级添加flex:1
     clas: clas.indexOf('circle') > -1 || clas.indexOf('square') > -1 ? '' : 'ls_flex-sub',
-    eles: [] };
-
+    eles: []
+  };
   if (clas.indexOf('*') > -1) {
     var group = clas.split("*");
     for (var i = 0, len = Number.parseInt(group[1]); i < len; i++) {
@@ -20561,12 +20953,11 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.getElCount
   } else {
     elements.eles.push({
       clas: 'ls_' + clas,
-      type: 'skeleton' });
-
+      type: 'skeleton'
+    });
   }
   return elements;
 }
-
 function getElCounts(clas) {
   var elements = [];
   if (clas.indexOf('*') > -1) {
@@ -20574,46 +20965,32 @@ function getElCounts(clas) {
     for (var i = 0, len = Number.parseInt(group[1]); i < len; i++) {
       elements.push({
         clas: 'ls_' + group[0],
-        type: 'skeleton' });
-
+        type: 'skeleton'
+      });
     }
   } else if (clas == 'line' || clas == 'line-sm' || clas == 'line-lg' || clas == 'card' || clas == 'card-sm' || clas == 'card-lg' || clas == 'circle' || clas == 'circle-sm' || clas == 'circle-lg' || clas == 'square' || clas == 'square-sm' || clas == 'square-lg') {
     elements.push({
       clas: 'ls_' + clas,
-      type: 'skeleton' });
-
+      type: 'skeleton'
+    });
   } else {
     elements.push({
       clas: '',
-      type: clas });
-
+      type: clas
+    });
   }
   return elements;
 }
 
 /***/ }),
-/* 254 */,
-/* 255 */,
-/* 256 */,
-/* 257 */,
-/* 258 */,
-/* 259 */,
-/* 260 */,
-/* 261 */,
-/* 262 */,
-/* 263 */,
-/* 264 */,
-/* 265 */,
-/* 266 */,
-/* 267 */,
-/* 268 */,
-/* 269 */,
-/* 270 */,
-/* 271 */,
-/* 272 */,
 /* 273 */,
 /* 274 */,
-/* 275 */
+/* 275 */,
+/* 276 */,
+/* 277 */,
+/* 278 */,
+/* 279 */,
+/* 280 */
 /*!*********************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/components/u-tag/props.js ***!
   \*********************************************************************************************************************************/
@@ -20621,58 +20998,64 @@ function getElCounts(clas) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
   props: {
     // 标签类型info、primary、success、warning、error
     type: {
       type: String,
-      default: uni.$u.props.tag.type },
-
+      default: uni.$u.props.tag.type
+    },
     // 不可用
     disabled: {
       type: [Boolean, String],
-      default: uni.$u.props.tag.disabled },
-
+      default: uni.$u.props.tag.disabled
+    },
     // 标签的大小，large，medium，mini
     size: {
       type: String,
-      default: uni.$u.props.tag.size },
-
+      default: uni.$u.props.tag.size
+    },
     // tag的形状，circle（两边半圆形）, square（方形，带圆角）
     shape: {
       type: String,
-      default: uni.$u.props.tag.shape },
-
+      default: uni.$u.props.tag.shape
+    },
     // 标签文字
     text: {
       type: [String, Number],
-      default: uni.$u.props.tag.text },
-
+      default: uni.$u.props.tag.text
+    },
     // 背景颜色，默认为空字符串，即不处理
     bgColor: {
       type: String,
-      default: uni.$u.props.tag.bgColor },
-
+      default: uni.$u.props.tag.bgColor
+    },
     // 标签字体颜色，默认为空字符串，即不处理
     color: {
       type: String,
-      default: uni.$u.props.tag.color },
-
+      default: uni.$u.props.tag.color
+    },
     // 标签的边框颜色
     borderColor: {
       type: String,
-      default: uni.$u.props.tag.borderColor },
-
+      default: uni.$u.props.tag.borderColor
+    },
     // 关闭按钮图标的颜色
     closeColor: {
       type: String,
-      default: uni.$u.props.tag.closeColor },
-
+      default: uni.$u.props.tag.closeColor
+    },
     // 点击时返回的索引值，用于区分例遍的数组哪个元素被点击了
     name: {
       type: [String, Number],
-      default: uni.$u.props.tag.name },
-
+      default: uni.$u.props.tag.name
+    },
     // // 模式选择，dark|light|plain
     // mode: {
     // 	type: String,
@@ -20681,38 +21064,42 @@ function getElCounts(clas) {
     // 镂空时是否填充背景色
     plainFill: {
       type: Boolean,
-      default: uni.$u.props.tag.plainFill },
-
+      default: uni.$u.props.tag.plainFill
+    },
     // 是否镂空
     plain: {
       type: Boolean,
-      default: uni.$u.props.tag.plain },
-
+      default: uni.$u.props.tag.plain
+    },
     // 是否可关闭
     closable: {
       type: Boolean,
-      default: uni.$u.props.tag.closable },
-
+      default: uni.$u.props.tag.closable
+    },
     // 是否显示
     show: {
       type: Boolean,
-      default: uni.$u.props.tag.show },
-
+      default: uni.$u.props.tag.show
+    },
     // 内置图标，或绝对路径的图片
     icon: {
       type: String,
-      default: uni.$u.props.tag.icon } } };exports.default = _default;
+      default: uni.$u.props.tag.icon
+    }
+  }
+};
+exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 276 */,
-/* 277 */,
-/* 278 */,
-/* 279 */,
-/* 280 */,
 /* 281 */,
 /* 282 */,
-/* 283 */
+/* 283 */,
+/* 284 */,
+/* 285 */,
+/* 286 */,
+/* 287 */,
+/* 288 */
 /*!***********************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/components/u-modal/props.js ***!
   \***********************************************************************************************************************************/
@@ -20720,95 +21107,100 @@ function getElCounts(clas) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
   props: {
     // 是否展示modal
     show: {
       type: Boolean,
-      default: uni.$u.props.modal.show },
-
+      default: uni.$u.props.modal.show
+    },
     // 标题
     title: {
       type: [String],
-      default: uni.$u.props.modal.title },
-
+      default: uni.$u.props.modal.title
+    },
     // 弹窗内容
     content: {
       type: String,
-      default: uni.$u.props.modal.content },
-
+      default: uni.$u.props.modal.content
+    },
     // 确认文案
     confirmText: {
       type: String,
-      default: uni.$u.props.modal.confirmText },
-
+      default: uni.$u.props.modal.confirmText
+    },
     // 取消文案
     cancelText: {
       type: String,
-      default: uni.$u.props.modal.cancelText },
-
+      default: uni.$u.props.modal.cancelText
+    },
     // 是否显示确认按钮
     showConfirmButton: {
       type: Boolean,
-      default: uni.$u.props.modal.showConfirmButton },
-
+      default: uni.$u.props.modal.showConfirmButton
+    },
     // 是否显示取消按钮
     showCancelButton: {
       type: Boolean,
-      default: uni.$u.props.modal.showCancelButton },
-
+      default: uni.$u.props.modal.showCancelButton
+    },
     // 确认按钮颜色
     confirmColor: {
       type: String,
-      default: uni.$u.props.modal.confirmColor },
-
+      default: uni.$u.props.modal.confirmColor
+    },
     // 取消文字颜色
     cancelColor: {
       type: String,
-      default: uni.$u.props.modal.cancelColor },
-
+      default: uni.$u.props.modal.cancelColor
+    },
     // 对调确认和取消的位置
     buttonReverse: {
       type: Boolean,
-      default: uni.$u.props.modal.buttonReverse },
-
+      default: uni.$u.props.modal.buttonReverse
+    },
     // 是否开启缩放效果
     zoom: {
       type: Boolean,
-      default: uni.$u.props.modal.zoom },
-
+      default: uni.$u.props.modal.zoom
+    },
     // 是否异步关闭，只对确定按钮有效
     asyncClose: {
       type: Boolean,
-      default: uni.$u.props.modal.asyncClose },
-
+      default: uni.$u.props.modal.asyncClose
+    },
     // 是否允许点击遮罩关闭modal
     closeOnClickOverlay: {
       type: Boolean,
-      default: uni.$u.props.modal.closeOnClickOverlay },
-
+      default: uni.$u.props.modal.closeOnClickOverlay
+    },
     // 给一个负的margin-top，往上偏移，避免和键盘重合的情况
     negativeTop: {
       type: [String, Number],
-      default: uni.$u.props.modal.negativeTop },
-
+      default: uni.$u.props.modal.negativeTop
+    },
     // modal宽度，不支持百分比，可以数值，px，rpx单位
     width: {
       type: [String, Number],
-      default: uni.$u.props.modal.width },
-
+      default: uni.$u.props.modal.width
+    },
     // 确认按钮的样式，circle-圆形，square-方形，如设置，将不会显示取消按钮
     confirmButtonShape: {
       type: String,
-      default: uni.$u.props.modal.confirmButtonShape } } };exports.default = _default;
+      default: uni.$u.props.modal.confirmButtonShape
+    }
+  }
+};
+exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 284 */,
-/* 285 */,
-/* 286 */,
-/* 287 */,
-/* 288 */,
 /* 289 */,
 /* 290 */,
 /* 291 */,
@@ -20818,7 +21210,12 @@ function getElCounts(clas) {
 /* 295 */,
 /* 296 */,
 /* 297 */,
-/* 298 */
+/* 298 */,
+/* 299 */,
+/* 300 */,
+/* 301 */,
+/* 302 */,
+/* 303 */
 /*!***********************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/components/u-popup/props.js ***!
   \***********************************************************************************************************************************/
@@ -20826,93 +21223,103 @@ function getElCounts(clas) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
   props: {
     // 是否展示弹窗
     show: {
       type: Boolean,
-      default: uni.$u.props.popup.show },
-
+      default: uni.$u.props.popup.show
+    },
     // 是否显示遮罩
     overlay: {
       type: Boolean,
-      default: uni.$u.props.popup.overlay },
-
+      default: uni.$u.props.popup.overlay
+    },
     // 弹出的方向，可选值为 top bottom right left center
     mode: {
       type: String,
-      default: uni.$u.props.popup.mode },
-
+      default: uni.$u.props.popup.mode
+    },
     // 动画时长，单位ms
     duration: {
       type: [String, Number],
-      default: uni.$u.props.popup.duration },
-
+      default: uni.$u.props.popup.duration
+    },
     // 是否显示关闭图标
     closeable: {
       type: Boolean,
-      default: uni.$u.props.popup.closeable },
-
+      default: uni.$u.props.popup.closeable
+    },
     // 自定义遮罩的样式
     overlayStyle: {
       type: [Object, String],
-      default: uni.$u.props.popup.overlayStyle },
-
+      default: uni.$u.props.popup.overlayStyle
+    },
     // 点击遮罩是否关闭弹窗
     closeOnClickOverlay: {
       type: Boolean,
-      default: uni.$u.props.popup.closeOnClickOverlay },
-
+      default: uni.$u.props.popup.closeOnClickOverlay
+    },
     // 层级
     zIndex: {
       type: [String, Number],
-      default: uni.$u.props.popup.zIndex },
-
+      default: uni.$u.props.popup.zIndex
+    },
     // 是否为iPhoneX留出底部安全距离
     safeAreaInsetBottom: {
       type: Boolean,
-      default: uni.$u.props.popup.safeAreaInsetBottom },
-
+      default: uni.$u.props.popup.safeAreaInsetBottom
+    },
     // 是否留出顶部安全距离（状态栏高度）
     safeAreaInsetTop: {
       type: Boolean,
-      default: uni.$u.props.popup.safeAreaInsetTop },
-
+      default: uni.$u.props.popup.safeAreaInsetTop
+    },
     // 自定义关闭图标位置，top-left为左上角，top-right为右上角，bottom-left为左下角，bottom-right为右下角
     closeIconPos: {
       type: String,
-      default: uni.$u.props.popup.closeIconPos },
-
+      default: uni.$u.props.popup.closeIconPos
+    },
     // 是否显示圆角
     round: {
       type: [Boolean, String, Number],
-      default: uni.$u.props.popup.round },
-
+      default: uni.$u.props.popup.round
+    },
     // mode=center，也即中部弹出时，是否使用缩放模式
     zoom: {
       type: Boolean,
-      default: uni.$u.props.popup.zoom },
-
+      default: uni.$u.props.popup.zoom
+    },
     // 弹窗背景色，设置为transparent可去除白色背景
     bgColor: {
       type: String,
-      default: uni.$u.props.popup.bgColor },
-
+      default: uni.$u.props.popup.bgColor
+    },
     // 遮罩的透明度，0-1之间
     overlayOpacity: {
       type: [Number, String],
-      default: uni.$u.props.popup.overlayOpacity } } };exports.default = _default;
+      default: uni.$u.props.popup.overlayOpacity
+    }
+  }
+};
+exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 299 */,
-/* 300 */,
-/* 301 */,
-/* 302 */,
-/* 303 */,
 /* 304 */,
 /* 305 */,
-/* 306 */
+/* 306 */,
+/* 307 */,
+/* 308 */,
+/* 309 */,
+/* 310 */,
+/* 311 */
 /*!********************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/components/u-checkbox-group/props.js ***!
   \********************************************************************************************************************************************/
@@ -20920,95 +21327,103 @@ function getElCounts(clas) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
   props: {
     // 标识符
     name: {
       type: String,
-      default: uni.$u.props.checkboxGroup.name },
-
+      default: uni.$u.props.checkboxGroup.name
+    },
     // 绑定的值
     value: {
       type: Array,
-      default: uni.$u.props.checkboxGroup.value },
-
+      default: uni.$u.props.checkboxGroup.value
+    },
     // 形状，circle-圆形，square-方形
     shape: {
       type: String,
-      default: uni.$u.props.checkboxGroup.shape },
-
+      default: uni.$u.props.checkboxGroup.shape
+    },
     // 是否禁用全部checkbox
     disabled: {
       type: Boolean,
-      default: uni.$u.props.checkboxGroup.disabled },
-
-
+      default: uni.$u.props.checkboxGroup.disabled
+    },
     // 选中状态下的颜色，如设置此值，将会覆盖parent的activeColor值
     activeColor: {
       type: String,
-      default: uni.$u.props.checkboxGroup.activeColor },
-
+      default: uni.$u.props.checkboxGroup.activeColor
+    },
     // 未选中的颜色
     inactiveColor: {
       type: String,
-      default: uni.$u.props.checkboxGroup.inactiveColor },
-
-
+      default: uni.$u.props.checkboxGroup.inactiveColor
+    },
     // 整个组件的尺寸，默认px
     size: {
       type: [String, Number],
-      default: uni.$u.props.checkboxGroup.size },
-
+      default: uni.$u.props.checkboxGroup.size
+    },
     // 布局方式，row-横向，column-纵向
     placement: {
       type: String,
-      default: uni.$u.props.checkboxGroup.placement },
-
+      default: uni.$u.props.checkboxGroup.placement
+    },
     // label的字体大小，px单位
     labelSize: {
       type: [String, Number],
-      default: uni.$u.props.checkboxGroup.labelSize },
-
+      default: uni.$u.props.checkboxGroup.labelSize
+    },
     // label的字体颜色
     labelColor: {
       type: [String],
-      default: uni.$u.props.checkboxGroup.labelColor },
-
+      default: uni.$u.props.checkboxGroup.labelColor
+    },
     // 是否禁止点击文本操作
     labelDisabled: {
       type: Boolean,
-      default: uni.$u.props.checkboxGroup.labelDisabled },
-
+      default: uni.$u.props.checkboxGroup.labelDisabled
+    },
     // 图标颜色
     iconColor: {
       type: String,
-      default: uni.$u.props.checkboxGroup.iconColor },
-
+      default: uni.$u.props.checkboxGroup.iconColor
+    },
     // 图标的大小，单位px
     iconSize: {
       type: [String, Number],
-      default: uni.$u.props.checkboxGroup.iconSize },
-
+      default: uni.$u.props.checkboxGroup.iconSize
+    },
     // 勾选图标的对齐方式，left-左边，right-右边
     iconPlacement: {
       type: String,
-      default: uni.$u.props.checkboxGroup.iconPlacement },
-
+      default: uni.$u.props.checkboxGroup.iconPlacement
+    },
     // 竖向配列时，是否显示下划线
     borderBottom: {
       type: Boolean,
-      default: uni.$u.props.checkboxGroup.borderBottom } } };exports.default = _default;
+      default: uni.$u.props.checkboxGroup.borderBottom
+    }
+  }
+};
+exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 307 */,
-/* 308 */,
-/* 309 */,
-/* 310 */,
-/* 311 */,
 /* 312 */,
 /* 313 */,
-/* 314 */
+/* 314 */,
+/* 315 */,
+/* 316 */,
+/* 317 */,
+/* 318 */,
+/* 319 */
 /*!**************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/components/u-checkbox/props.js ***!
   \**************************************************************************************************************************************/
@@ -21016,83 +21431,93 @@ function getElCounts(clas) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
   props: {
     // checkbox的名称
     name: {
       type: [String, Number, Boolean],
-      default: uni.$u.props.checkbox.name },
-
+      default: uni.$u.props.checkbox.name
+    },
     // 形状，square为方形，circle为圆型
     shape: {
       type: String,
-      default: uni.$u.props.checkbox.shape },
-
+      default: uni.$u.props.checkbox.shape
+    },
     // 整体的大小
     size: {
       type: [String, Number],
-      default: uni.$u.props.checkbox.size },
-
+      default: uni.$u.props.checkbox.size
+    },
     // 是否默认选中
     checked: {
       type: Boolean,
-      default: uni.$u.props.checkbox.checked },
-
+      default: uni.$u.props.checkbox.checked
+    },
     // 是否禁用
     disabled: {
       type: [String, Boolean],
-      default: uni.$u.props.checkbox.disabled },
-
+      default: uni.$u.props.checkbox.disabled
+    },
     // 选中状态下的颜色，如设置此值，将会覆盖parent的activeColor值
     activeColor: {
       type: String,
-      default: uni.$u.props.checkbox.activeColor },
-
+      default: uni.$u.props.checkbox.activeColor
+    },
     // 未选中的颜色
     inactiveColor: {
       type: String,
-      default: uni.$u.props.checkbox.inactiveColor },
-
+      default: uni.$u.props.checkbox.inactiveColor
+    },
     // 图标的大小，单位px
     iconSize: {
       type: [String, Number],
-      default: uni.$u.props.checkbox.iconSize },
-
+      default: uni.$u.props.checkbox.iconSize
+    },
     // 图标颜色
     iconColor: {
       type: String,
-      default: uni.$u.props.checkbox.iconColor },
-
+      default: uni.$u.props.checkbox.iconColor
+    },
     // label提示文字，因为nvue下，直接slot进来的文字，由于特殊的结构，无法修改样式
     label: {
       type: [String, Number],
-      default: uni.$u.props.checkbox.label },
-
+      default: uni.$u.props.checkbox.label
+    },
     // label的字体大小，px单位
     labelSize: {
       type: [String, Number],
-      default: uni.$u.props.checkbox.labelSize },
-
+      default: uni.$u.props.checkbox.labelSize
+    },
     // label的颜色
     labelColor: {
       type: String,
-      default: uni.$u.props.checkbox.labelColor },
-
+      default: uni.$u.props.checkbox.labelColor
+    },
     // 是否禁止点击提示语选中复选框
     labelDisabled: {
       type: [String, Boolean],
-      default: uni.$u.props.checkbox.labelDisabled } } };exports.default = _default;
+      default: uni.$u.props.checkbox.labelDisabled
+    }
+  }
+};
+exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 315 */,
-/* 316 */,
-/* 317 */,
-/* 318 */,
-/* 319 */,
 /* 320 */,
 /* 321 */,
-/* 322 */
+/* 322 */,
+/* 323 */,
+/* 324 */,
+/* 325 */,
+/* 326 */,
+/* 327 */
 /*!**********************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/components/u-list/props.js ***!
   \**********************************************************************************************************************************/
@@ -21100,91 +21525,99 @@ function getElCounts(clas) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
   props: {
     // 控制是否出现滚动条，仅nvue有效
     showScrollbar: {
       type: Boolean,
-      default: uni.$u.props.list.showScrollbar },
-
+      default: uni.$u.props.list.showScrollbar
+    },
     // 距底部多少时触发scrolltolower事件
     lowerThreshold: {
       type: [String, Number],
-      default: uni.$u.props.list.lowerThreshold },
-
+      default: uni.$u.props.list.lowerThreshold
+    },
     // 距顶部多少时触发scrolltoupper事件，非nvue有效
     upperThreshold: {
       type: [String, Number],
-      default: uni.$u.props.list.upperThreshold },
-
+      default: uni.$u.props.list.upperThreshold
+    },
     // 设置竖向滚动条位置
     scrollTop: {
       type: [String, Number],
-      default: uni.$u.props.list.scrollTop },
-
+      default: uni.$u.props.list.scrollTop
+    },
     // 控制 onscroll 事件触发的频率，仅nvue有效
     offsetAccuracy: {
       type: [String, Number],
-      default: uni.$u.props.list.offsetAccuracy },
-
+      default: uni.$u.props.list.offsetAccuracy
+    },
     // 启用 flexbox 布局。开启后，当前节点声明了display: flex就会成为flex container，并作用于其孩子节点，仅微信小程序有效
     enableFlex: {
       type: Boolean,
-      default: uni.$u.props.list.enableFlex },
-
+      default: uni.$u.props.list.enableFlex
+    },
     // 是否按分页模式显示List，默认值false
     pagingEnabled: {
       type: Boolean,
-      default: uni.$u.props.list.pagingEnabled },
-
+      default: uni.$u.props.list.pagingEnabled
+    },
     // 是否允许List滚动
     scrollable: {
       type: Boolean,
-      default: uni.$u.props.list.scrollable },
-
+      default: uni.$u.props.list.scrollable
+    },
     // 值应为某子元素id（id不能以数字开头）
     scrollIntoView: {
       type: String,
-      default: uni.$u.props.list.scrollIntoView },
-
+      default: uni.$u.props.list.scrollIntoView
+    },
     // 在设置滚动条位置时使用动画过渡
     scrollWithAnimation: {
       type: Boolean,
-      default: uni.$u.props.list.scrollWithAnimation },
-
+      default: uni.$u.props.list.scrollWithAnimation
+    },
     // iOS点击顶部状态栏、安卓双击标题栏时，滚动条返回顶部，只对微信小程序有效
     enableBackToTop: {
       type: Boolean,
-      default: uni.$u.props.list.enableBackToTop },
-
+      default: uni.$u.props.list.enableBackToTop
+    },
     // 列表的高度
     height: {
       type: [String, Number],
-      default: uni.$u.props.list.height },
-
+      default: uni.$u.props.list.height
+    },
     // 列表宽度
     width: {
       type: [String, Number],
-      default: uni.$u.props.list.width },
-
+      default: uni.$u.props.list.width
+    },
     // 列表前后预渲染的屏数，1代表一个屏幕的高度，1.5代表1个半屏幕高度
     preLoadScreen: {
       type: [String, Number],
-      default: uni.$u.props.list.preLoadScreen }
-
+      default: uni.$u.props.list.preLoadScreen
+    }
     // vue下，是否开启虚拟列表
-  } };exports.default = _default;
+  }
+};
+exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 323 */,
-/* 324 */,
-/* 325 */,
-/* 326 */,
-/* 327 */,
 /* 328 */,
 /* 329 */,
-/* 330 */
+/* 330 */,
+/* 331 */,
+/* 332 */,
+/* 333 */,
+/* 334 */,
+/* 335 */
 /*!***************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/components/u-list-item/props.js ***!
   \***************************************************************************************************************************************/
@@ -21192,23 +21625,33 @@ function getElCounts(clas) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
   props: {
     // 用于滚动到指定item
     anchor: {
       type: [String, Number],
-      default: uni.$u.props.listItem.anchor } } };exports.default = _default;
+      default: uni.$u.props.listItem.anchor
+    }
+  }
+};
+exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 331 */,
-/* 332 */,
-/* 333 */,
-/* 334 */,
-/* 335 */,
 /* 336 */,
 /* 337 */,
-/* 338 */
+/* 338 */,
+/* 339 */,
+/* 340 */,
+/* 341 */,
+/* 342 */,
+/* 343 */
 /*!************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/components/u-avatar/props.js ***!
   \************************************************************************************************************************************/
@@ -21216,68 +21659,74 @@ function getElCounts(clas) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
   props: {
     // 头像图片路径(不能为相对路径)
     src: {
       type: String,
-      default: uni.$u.props.avatar.src },
-
+      default: uni.$u.props.avatar.src
+    },
     // 头像形状，circle-圆形，square-方形
     shape: {
       type: String,
-      default: uni.$u.props.avatar.shape },
-
+      default: uni.$u.props.avatar.shape
+    },
     // 头像尺寸
     size: {
       type: [String, Number],
-      default: uni.$u.props.avatar.size },
-
+      default: uni.$u.props.avatar.size
+    },
     // 裁剪模式
     mode: {
       type: String,
-      default: uni.$u.props.avatar.mode },
-
+      default: uni.$u.props.avatar.mode
+    },
     // 显示的文字
     text: {
       type: String,
-      default: uni.$u.props.avatar.text },
-
+      default: uni.$u.props.avatar.text
+    },
     // 背景色
     bgColor: {
       type: String,
-      default: uni.$u.props.avatar.bgColor },
-
+      default: uni.$u.props.avatar.bgColor
+    },
     // 文字颜色
     color: {
       type: String,
-      default: uni.$u.props.avatar.color },
-
+      default: uni.$u.props.avatar.color
+    },
     // 文字大小
     fontSize: {
       type: [String, Number],
-      default: uni.$u.props.avatar.fontSize },
-
+      default: uni.$u.props.avatar.fontSize
+    },
     // 显示的图标
     icon: {
       type: String,
-      default: uni.$u.props.avatar.icon },
-
+      default: uni.$u.props.avatar.icon
+    },
     // 显示小程序头像，只对百度，微信，QQ小程序有效
     mpAvatar: {
       type: Boolean,
-      default: uni.$u.props.avatar.mpAvatar },
-
+      default: uni.$u.props.avatar.mpAvatar
+    },
     // 是否使用随机背景色
     randomBgColor: {
       type: Boolean,
-      default: uni.$u.props.avatar.randomBgColor },
-
+      default: uni.$u.props.avatar.randomBgColor
+    },
     // 加载失败的默认头像(组件有内置默认图片)
     defaultUrl: {
       type: String,
-      default: uni.$u.props.avatar.defaultUrl },
-
+      default: uni.$u.props.avatar.defaultUrl
+    },
     // 如果配置了randomBgColor为true，且配置了此值，则从默认的背景色数组中取出对应索引的颜色值，取值0-19之间
     colorIndex: {
       type: [String, Number],
@@ -21285,23 +21734,27 @@ function getElCounts(clas) {
       validator: function validator(n) {
         return uni.$u.test.range(n, [0, 19]) || n === '';
       },
-      default: uni.$u.props.avatar.colorIndex },
-
+      default: uni.$u.props.avatar.colorIndex
+    },
     // 组件标识符
     name: {
       type: String,
-      default: uni.$u.props.avatar.name } } };exports.default = _default;
+      default: uni.$u.props.avatar.name
+    }
+  }
+};
+exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 339 */,
-/* 340 */,
-/* 341 */,
-/* 342 */,
-/* 343 */,
 /* 344 */,
 /* 345 */,
-/* 346 */
+/* 346 */,
+/* 347 */,
+/* 348 */,
+/* 349 */,
+/* 350 */,
+/* 351 */
 /*!************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/components/u-sticky/props.js ***!
   \************************************************************************************************************************************/
@@ -21309,54 +21762,58 @@ function getElCounts(clas) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
   props: {
     // 吸顶容器到顶部某个距离的时候，进行吸顶，在H5平台，NavigationBar为44px
     offsetTop: {
       type: [String, Number],
-      default: uni.$u.props.sticky.offsetTop },
-
+      default: uni.$u.props.sticky.offsetTop
+    },
     // 自定义导航栏的高度
     customNavHeight: {
       type: [String, Number],
-
-
-
-
-
-      default: uni.$u.props.sticky.customNavHeight },
-
-
+      default: uni.$u.props.sticky.customNavHeight
+    },
     // 是否开启吸顶功能
     disabled: {
       type: Boolean,
-      default: uni.$u.props.sticky.disabled },
-
+      default: uni.$u.props.sticky.disabled
+    },
     // 吸顶区域的背景颜色
     bgColor: {
       type: String,
-      default: uni.$u.props.sticky.bgColor },
-
+      default: uni.$u.props.sticky.bgColor
+    },
     // z-index值
     zIndex: {
       type: [String, Number],
-      default: uni.$u.props.sticky.zIndex },
-
+      default: uni.$u.props.sticky.zIndex
+    },
     // 列表中的索引值
     index: {
       type: [String, Number],
-      default: uni.$u.props.sticky.index } } };exports.default = _default;
+      default: uni.$u.props.sticky.index
+    }
+  }
+};
+exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 347 */,
-/* 348 */,
-/* 349 */,
-/* 350 */,
-/* 351 */,
 /* 352 */,
 /* 353 */,
-/* 354 */
+/* 354 */,
+/* 355 */,
+/* 356 */,
+/* 357 */,
+/* 358 */,
+/* 359 */
 /*!**************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/components/u-skeleton/props.js ***!
   \**************************************************************************************************************************************/
@@ -21364,73 +21821,83 @@ function getElCounts(clas) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
   props: {
     // 是否展示骨架组件
     loading: {
       type: Boolean,
-      default: uni.$u.props.skeleton.loading },
-
+      default: uni.$u.props.skeleton.loading
+    },
     // 是否开启动画效果
     animate: {
       type: Boolean,
-      default: uni.$u.props.skeleton.animate },
-
+      default: uni.$u.props.skeleton.animate
+    },
     // 段落占位图行数
     rows: {
       type: [String, Number],
-      default: uni.$u.props.skeleton.rows },
-
+      default: uni.$u.props.skeleton.rows
+    },
     // 段落占位图的宽度
     rowsWidth: {
       type: [String, Number, Array],
-      default: uni.$u.props.skeleton.rowsWidth },
-
+      default: uni.$u.props.skeleton.rowsWidth
+    },
     // 段落占位图的高度
     rowsHeight: {
       type: [String, Number, Array],
-      default: uni.$u.props.skeleton.rowsHeight },
-
+      default: uni.$u.props.skeleton.rowsHeight
+    },
     // 是否展示标题占位图
     title: {
       type: Boolean,
-      default: uni.$u.props.skeleton.title },
-
+      default: uni.$u.props.skeleton.title
+    },
     // 段落标题的宽度
     titleWidth: {
       type: [String, Number],
-      default: uni.$u.props.skeleton.titleWidth },
-
+      default: uni.$u.props.skeleton.titleWidth
+    },
     // 段落标题的高度
     titleHeight: {
       type: [String, Number],
-      default: uni.$u.props.skeleton.titleHeight },
-
+      default: uni.$u.props.skeleton.titleHeight
+    },
     // 是否展示头像占位图
     avatar: {
       type: Boolean,
-      default: uni.$u.props.skeleton.avatar },
-
+      default: uni.$u.props.skeleton.avatar
+    },
     // 头像占位图大小
     avatarSize: {
       type: [String, Number],
-      default: uni.$u.props.skeleton.avatarSize },
-
+      default: uni.$u.props.skeleton.avatarSize
+    },
     // 头像占位图的形状，circle-圆形，square-方形
     avatarShape: {
       type: String,
-      default: uni.$u.props.skeleton.avatarShape } } };exports.default = _default;
+      default: uni.$u.props.skeleton.avatarShape
+    }
+  }
+};
+exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 355 */,
-/* 356 */,
-/* 357 */,
-/* 358 */,
-/* 359 */,
 /* 360 */,
 /* 361 */,
-/* 362 */
+/* 362 */,
+/* 363 */,
+/* 364 */,
+/* 365 */,
+/* 366 */,
+/* 367 */
 /*!************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/components/u-search/props.js ***!
   \************************************************************************************************************************************/
@@ -21438,132 +21905,142 @@ function getElCounts(clas) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
   props: {
     // 搜索框形状，round-圆形，square-方形
     shape: {
       type: String,
-      default: uni.$u.props.search.shape },
-
+      default: uni.$u.props.search.shape
+    },
     // 搜索框背景色，默认值#f2f2f2
     bgColor: {
       type: String,
-      default: uni.$u.props.search.bgColor },
-
+      default: uni.$u.props.search.bgColor
+    },
     // 占位提示文字
     placeholder: {
       type: String,
-      default: uni.$u.props.search.placeholder },
-
+      default: uni.$u.props.search.placeholder
+    },
     // 是否启用清除控件
     clearabled: {
       type: Boolean,
-      default: uni.$u.props.search.clearabled },
-
+      default: uni.$u.props.search.clearabled
+    },
     // 是否自动聚焦
     focus: {
       type: Boolean,
-      default: uni.$u.props.search.focus },
-
+      default: uni.$u.props.search.focus
+    },
     // 是否在搜索框右侧显示取消按钮
     showAction: {
       type: Boolean,
-      default: uni.$u.props.search.showAction },
-
+      default: uni.$u.props.search.showAction
+    },
     // 右边控件的样式
     actionStyle: {
       type: Object,
-      default: uni.$u.props.search.actionStyle },
-
+      default: uni.$u.props.search.actionStyle
+    },
     // 取消按钮文字
     actionText: {
       type: String,
-      default: uni.$u.props.search.actionText },
-
+      default: uni.$u.props.search.actionText
+    },
     // 输入框内容对齐方式，可选值为 left|center|right
     inputAlign: {
       type: String,
-      default: uni.$u.props.search.inputAlign },
-
+      default: uni.$u.props.search.inputAlign
+    },
     // input输入框的样式，可以定义文字颜色，大小等，对象形式
     inputStyle: {
       type: Object,
-      default: uni.$u.props.search.inputStyle },
-
+      default: uni.$u.props.search.inputStyle
+    },
     // 是否启用输入框
     disabled: {
       type: Boolean,
-      default: uni.$u.props.search.disabled },
-
+      default: uni.$u.props.search.disabled
+    },
     // 边框颜色
     borderColor: {
       type: String,
-      default: uni.$u.props.search.borderColor },
-
+      default: uni.$u.props.search.borderColor
+    },
     // 搜索图标的颜色，默认同输入框字体颜色
     searchIconColor: {
       type: String,
-      default: uni.$u.props.search.searchIconColor },
-
+      default: uni.$u.props.search.searchIconColor
+    },
     // 输入框字体颜色
     color: {
       type: String,
-      default: uni.$u.props.search.color },
-
+      default: uni.$u.props.search.color
+    },
     // placeholder的颜色
     placeholderColor: {
       type: String,
-      default: uni.$u.props.search.placeholderColor },
-
+      default: uni.$u.props.search.placeholderColor
+    },
     // 左边输入框的图标，可以为uView图标名称或图片路径
     searchIcon: {
       type: String,
-      default: uni.$u.props.search.searchIcon },
-
+      default: uni.$u.props.search.searchIcon
+    },
     searchIconSize: {
       type: [Number, String],
-      default: uni.$u.props.search.searchIconSize },
-
+      default: uni.$u.props.search.searchIconSize
+    },
     // 组件与其他上下左右元素之间的距离，带单位的字符串形式，如"30px"、"30px 20px"等写法
     margin: {
       type: String,
-      default: uni.$u.props.search.margin },
-
+      default: uni.$u.props.search.margin
+    },
     // 开启showAction时，是否在input获取焦点时才显示
     animation: {
       type: Boolean,
-      default: uni.$u.props.search.animation },
-
+      default: uni.$u.props.search.animation
+    },
     // 输入框的初始化内容
     value: {
       type: String,
-      default: uni.$u.props.search.value },
-
+      default: uni.$u.props.search.value
+    },
     // 输入框最大能输入的长度，-1为不限制长度(来自uniapp文档)
     maxlength: {
       type: [String, Number],
-      default: uni.$u.props.search.maxlength },
-
+      default: uni.$u.props.search.maxlength
+    },
     // 搜索框高度，单位px
     height: {
       type: [String, Number],
-      default: uni.$u.props.search.height },
-
+      default: uni.$u.props.search.height
+    },
     // 搜索框左侧文本
     label: {
       type: [String, Number, null],
-      default: uni.$u.props.search.label } } };exports.default = _default;
+      default: uni.$u.props.search.label
+    }
+  }
+};
+exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 363 */,
-/* 364 */,
-/* 365 */,
-/* 366 */,
-/* 367 */,
 /* 368 */,
 /* 369 */,
-/* 370 */
+/* 370 */,
+/* 371 */,
+/* 372 */,
+/* 373 */,
+/* 374 */,
+/* 375 */
 /*!***********************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/components/u-badge/props.js ***!
   \***********************************************************************************************************************************/
@@ -21571,86 +22048,96 @@ function getElCounts(clas) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
   props: {
     // 是否显示圆点
     isDot: {
       type: Boolean,
-      default: uni.$u.props.badge.isDot },
-
+      default: uni.$u.props.badge.isDot
+    },
     // 显示的内容
     value: {
       type: [Number, String],
-      default: uni.$u.props.badge.value },
-
+      default: uni.$u.props.badge.value
+    },
     // 是否显示
     show: {
       type: Boolean,
-      default: uni.$u.props.badge.show },
-
+      default: uni.$u.props.badge.show
+    },
     // 最大值，超过最大值会显示 '{max}+'
     max: {
       type: [Number, String],
-      default: uni.$u.props.badge.max },
-
+      default: uni.$u.props.badge.max
+    },
     // 主题类型，error|warning|success|primary
     type: {
       type: String,
-      default: uni.$u.props.badge.type },
-
+      default: uni.$u.props.badge.type
+    },
     // 当数值为 0 时，是否展示 Badge
     showZero: {
       type: Boolean,
-      default: uni.$u.props.badge.showZero },
-
+      default: uni.$u.props.badge.showZero
+    },
     // 背景颜色，优先级比type高，如设置，type参数会失效
     bgColor: {
       type: [String, null],
-      default: uni.$u.props.badge.bgColor },
-
+      default: uni.$u.props.badge.bgColor
+    },
     // 字体颜色
     color: {
       type: [String, null],
-      default: uni.$u.props.badge.color },
-
+      default: uni.$u.props.badge.color
+    },
     // 徽标形状，circle-四角均为圆角，horn-左下角为直角
     shape: {
       type: String,
-      default: uni.$u.props.badge.shape },
-
+      default: uni.$u.props.badge.shape
+    },
     // 设置数字的显示方式，overflow|ellipsis|limit
     // overflow会根据max字段判断，超出显示`${max}+`
     // ellipsis会根据max判断，超出显示`${max}...`
     // limit会依据1000作为判断条件，超出1000，显示`${value/1000}K`，比如2.2k、3.34w，最多保留2位小数
     numberType: {
       type: String,
-      default: uni.$u.props.badge.numberType },
-
+      default: uni.$u.props.badge.numberType
+    },
     // 设置badge的位置偏移，格式为 [x, y]，也即设置的为top和right的值，absolute为true时有效
     offset: {
       type: Array,
-      default: uni.$u.props.badge.offset },
-
+      default: uni.$u.props.badge.offset
+    },
     // 是否反转背景和字体颜色
     inverted: {
       type: Boolean,
-      default: uni.$u.props.badge.inverted },
-
+      default: uni.$u.props.badge.inverted
+    },
     // 是否绝对定位
     absolute: {
       type: Boolean,
-      default: uni.$u.props.badge.absolute } } };exports.default = _default;
+      default: uni.$u.props.badge.absolute
+    }
+  }
+};
+exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 371 */,
-/* 372 */,
-/* 373 */,
-/* 374 */,
-/* 375 */,
 /* 376 */,
 /* 377 */,
-/* 378 */
+/* 378 */,
+/* 379 */,
+/* 380 */,
+/* 381 */,
+/* 382 */,
+/* 383 */
 /*!**********************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/components/u-text/value.js ***!
   \**********************************************************************************************************************************/
@@ -21658,16 +22145,20 @@ function getElCounts(clas) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
   computed: {
     // 经处理后需要显示的值
-    value: function value() {var
-
-      text =
-
-
-
-      this.text,mode = this.mode,format = this.format,href = this.href;
+    value: function value() {
+      var text = this.text,
+        mode = this.mode,
+        format = this.format,
+        href = this.href;
       // 价格类型
       if (mode === 'price') {
         // 如果text不为金额进行提示
@@ -21681,49 +22172,56 @@ function getElCounts(clas) {
         }
         // 如果format非正则，非函数，则使用默认的金额格式化方法进行操作
         return uni.$u.priceFormat(text, 2);
-      }if (mode === 'date') {
+      }
+      if (mode === 'date') {
         // 判断是否合法的日期或者时间戳
         !uni.$u.test.date(text) && uni.$u.error('日期模式下，text参数需要为日期或时间戳格式');
         // 进行格式化，判断用户传入的format参数为正则，或者函数，如果没有传入format，则使用默认的格式化处理
         if (uni.$u.test.func(format)) {
           // 如果用户传入的是函数，使用函数格式化
           return format(text);
-        }if (format) {
+        }
+        if (format) {
           // 如果format非正则，非函数，则使用默认的时间格式化方法进行操作
           return uni.$u.timeFormat(text, format);
         }
         // 如果没有设置format，则设置为默认的时间格式化形式
         return uni.$u.timeFormat(text, 'yyyy-mm-dd');
-      }if (mode === 'phone') {
+      }
+      if (mode === 'phone') {
         // 判断是否合法的手机号
         // !uni.$u.test.mobile(text) && uni.$u.error('手机号模式下，text参数需要为手机号码格式')
         if (uni.$u.test.func(format)) {
           // 如果用户传入的是函数，使用函数格式化
           return format(text);
-        }if (format === 'encrypt') {
+        }
+        if (format === 'encrypt') {
           // 如果format为encrypt，则将手机号进行星号加密处理
           return "".concat(text.substr(0, 3), "****").concat(text.substr(7));
         }
         return text;
-      }if (mode === 'name') {
+      }
+      if (mode === 'name') {
         // 判断是否合法的字符粗
         !(typeof text === 'string') && uni.$u.error('姓名模式下，text参数需要为字符串格式');
         if (uni.$u.test.func(format)) {
           // 如果用户传入的是函数，使用函数格式化
           return format(text);
-        }if (format === 'encrypt') {
+        }
+        if (format === 'encrypt') {
           // 如果format为encrypt，则将姓名进行星号加密处理
           return this.formatName(text);
         }
         return text;
-      }if (mode === 'link') {
+      }
+      if (mode === 'link') {
         // 判断是否合法的字符粗
         !uni.$u.test.url(href) && uni.$u.error('超链接模式下，href参数需要为URL格式');
         return text;
       }
       return text;
-    } },
-
+    }
+  },
   methods: {
     // 默认的姓名脱敏规则
     formatName: function formatName(name) {
@@ -21740,11 +22238,14 @@ function getElCounts(clas) {
         value = name;
       }
       return value;
-    } } };exports.default = _default;
+    }
+  }
+};
+exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 379 */
+/* 384 */
 /*!****************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/mixin/button.js ***!
   \****************************************************************************************************************************/
@@ -21752,7 +22253,13 @@ function getElCounts(clas) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
   props: {
     lang: String,
     sessionFrom: String,
@@ -21762,10 +22269,13 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     showMessageCard: Boolean,
     appParameter: String,
     formType: String,
-    openType: String } };exports.default = _default;
+    openType: String
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 380 */
+/* 385 */
 /*!******************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/libs/mixin/openType.js ***!
   \******************************************************************************************************************************/
@@ -21773,10 +22283,16 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
-  props: {
-    openType: String },
 
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
+  props: {
+    openType: String
+  },
   methods: {
     onGetUserInfo: function onGetUserInfo(event) {
       this.$emit('getuserinfo', event.detail);
@@ -21795,17 +22311,20 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     },
     onOpenSetting: function onOpenSetting(event) {
       this.$emit('opensetting', event.detail);
-    } } };exports.default = _default;
+    }
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 381 */,
-/* 382 */,
-/* 383 */,
-/* 384 */,
-/* 385 */,
 /* 386 */,
 /* 387 */,
-/* 388 */
+/* 388 */,
+/* 389 */,
+/* 390 */,
+/* 391 */,
+/* 392 */,
+/* 393 */
 /*!**********************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/components/u-line/props.js ***!
   \**********************************************************************************************************************************/
@@ -21813,47 +22332,57 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
   props: {
     color: {
       type: String,
-      default: uni.$u.props.line.color },
-
+      default: uni.$u.props.line.color
+    },
     // 长度，竖向时表现为高度，横向时表现为长度，可以为百分比，带px单位的值等
     length: {
       type: [String, Number],
-      default: uni.$u.props.line.length },
-
+      default: uni.$u.props.line.length
+    },
     // 线条方向，col-竖向，row-横向
     direction: {
       type: String,
-      default: uni.$u.props.line.direction },
-
+      default: uni.$u.props.line.direction
+    },
     // 是否显示细边框
     hairline: {
       type: Boolean,
-      default: uni.$u.props.line.hairline },
-
+      default: uni.$u.props.line.hairline
+    },
     // 线条与上下左右元素的间距，字符串形式，如"30px"、"20px 30px"
     margin: {
       type: [String, Number],
-      default: uni.$u.props.line.margin },
-
+      default: uni.$u.props.line.margin
+    },
     // 是否虚线，true-虚线，false-实线
     dashed: {
       type: Boolean,
-      default: uni.$u.props.line.dashed } } };exports.default = _default;
+      default: uni.$u.props.line.dashed
+    }
+  }
+};
+exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 389 */,
-/* 390 */,
-/* 391 */,
-/* 392 */,
-/* 393 */,
 /* 394 */,
 /* 395 */,
-/* 396 */
+/* 396 */,
+/* 397 */,
+/* 398 */,
+/* 399 */,
+/* 400 */,
+/* 401 */
 /*!****************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/components/u-transition/props.js ***!
   \****************************************************************************************************************************************/
@@ -21861,31 +22390,41 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
   props: {
     // 是否展示组件
     show: {
       type: Boolean,
-      default: uni.$u.props.transition.show },
-
+      default: uni.$u.props.transition.show
+    },
     // 使用的动画模式
     mode: {
       type: String,
-      default: uni.$u.props.transition.mode },
-
+      default: uni.$u.props.transition.mode
+    },
     // 动画的执行时间，单位ms
     duration: {
       type: [String, Number],
-      default: uni.$u.props.transition.duration },
-
+      default: uni.$u.props.transition.duration
+    },
     // 使用的动画过渡函数
     timingFunction: {
       type: String,
-      default: uni.$u.props.transition.timingFunction } } };exports.default = _default;
+      default: uni.$u.props.transition.timingFunction
+    }
+  }
+};
+exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 397 */
+/* 402 */
 /*!*********************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/components/u-transition/transition.js ***!
   \*********************************************************************************************************************************************/
@@ -21893,37 +22432,40 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 36));
 
 
-var _nvueAniMap = _interopRequireDefault(__webpack_require__(/*! ./nvue.ani-map.js */ 398));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};} // 定义一个一定时间后自动成功的promise，让调用nextTick方法处，进入下一个then方法
-var nextTick = function nextTick() {return new Promise(function (resolve) {return setTimeout(resolve, 1000 / 50);});}; // nvue动画模块实现细节抽离在外部文件
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 3);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _nvueAniMap = _interopRequireDefault(__webpack_require__(/*! ./nvue.ani-map.js */ 403));
+// 定义一个一定时间后自动成功的promise，让调用nextTick方法处，进入下一个then方法
+var nextTick = function nextTick() {
+  return new Promise(function (resolve) {
+    return setTimeout(resolve, 1000 / 50);
+  });
+};
+// nvue动画模块实现细节抽离在外部文件
 
 // 定义类名，通过给元素动态切换类名，赋予元素一定的css动画样式
-var getClassNames = function getClassNames(name) {return {
+var getClassNames = function getClassNames(name) {
+  return {
     enter: "u-".concat(name, "-enter u-").concat(name, "-enter-active"),
     'enter-to': "u-".concat(name, "-enter-to u-").concat(name, "-enter-active"),
     leave: "u-".concat(name, "-leave u-").concat(name, "-leave-active"),
-    'leave-to': "u-".concat(name, "-leave-to u-").concat(name, "-leave-active") };};var _default =
-
-
-
-
-
-
-
-
-
-
-{
+    'leave-to': "u-".concat(name, "-leave-to u-").concat(name, "-leave-active")
+  };
+};
+var _default = {
   methods: {
     // 组件被点击发出事件
     clickHandler: function clickHandler() {
       this.$emit('click');
     },
-
     // vue版本的组件进场处理
-    vueEnter: function vueEnter() {var _this = this;
+    vueEnter: function vueEnter() {
+      var _this = this;
       // 动画进入时的类名
       var classNames = getClassNames(this.mode);
       // 定义状态和发出动画进入前事件
@@ -21932,21 +22474,19 @@ var getClassNames = function getClassNames(name) {return {
       this.inited = true;
       this.display = true;
       this.classes = classNames.enter;
-      this.$nextTick( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
-
-
-
-                // 标识动画尚未结束
-                _this.$emit('enter');
-                _this.transitionEnded = false;
-                // 组件动画进入后触发的事件
-                _this.$emit('afterEnter');
-                // 赋予组件enter-to类名
-                _this.classes = classNames['enter-to'];case 4:case "end":return _context.stop();}}}, _callee);})));
-
+      this.$nextTick(async function () {
+        // 标识动画尚未结束
+        _this.$emit('enter');
+        _this.transitionEnded = false;
+        // 组件动画进入后触发的事件
+        _this.$emit('afterEnter');
+        // 赋予组件enter-to类名
+        _this.classes = classNames['enter-to'];
+      });
     },
     // 动画离场处理
-    vueLeave: function vueLeave() {var _this2 = this;
+    vueLeave: function vueLeave() {
+      var _this2 = this;
       // 如果不是展示状态，无需执行逻辑
       if (!this.display) return;
       var classNames = getClassNames(this.mode);
@@ -21955,7 +22495,6 @@ var getClassNames = function getClassNames(name) {return {
       this.$emit('beforeLeave');
       // 获得类名
       this.classes = classNames.leave;
-
       this.$nextTick(function () {
         // 动画正在离场的状态
         _this2.transitionEnded = false;
@@ -21965,77 +22504,6 @@ var getClassNames = function getClassNames(name) {return {
         _this2.classes = classNames['leave-to'];
       });
     },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     // 完成过渡后触发
     onTransitionEnd: function onTransitionEnd() {
       // 如果已经是结束的状态，无需再处理
@@ -22047,10 +22515,13 @@ var getClassNames = function getClassNames(name) {return {
         this.display = false;
         this.inited = false;
       }
-    } } };exports.default = _default;
+    }
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 398 */
+/* 403 */
 /*!***********************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/components/u-transition/nvue.ani-map.js ***!
   \***********************************************************************************************************************************************/
@@ -22058,82 +22529,199 @@ var getClassNames = function getClassNames(name) {return {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
   fade: {
-    enter: { opacity: 0 },
-    'enter-to': { opacity: 1 },
-    leave: { opacity: 1 },
-    'leave-to': { opacity: 0 } },
-
+    enter: {
+      opacity: 0
+    },
+    'enter-to': {
+      opacity: 1
+    },
+    leave: {
+      opacity: 1
+    },
+    'leave-to': {
+      opacity: 0
+    }
+  },
   'fade-up': {
-    enter: { opacity: 0, transform: 'translateY(100%)' },
-    'enter-to': { opacity: 1, transform: 'translateY(0)' },
-    leave: { opacity: 1, transform: 'translateY(0)' },
-    'leave-to': { opacity: 0, transform: 'translateY(100%)' } },
-
+    enter: {
+      opacity: 0,
+      transform: 'translateY(100%)'
+    },
+    'enter-to': {
+      opacity: 1,
+      transform: 'translateY(0)'
+    },
+    leave: {
+      opacity: 1,
+      transform: 'translateY(0)'
+    },
+    'leave-to': {
+      opacity: 0,
+      transform: 'translateY(100%)'
+    }
+  },
   'fade-down': {
-    enter: { opacity: 0, transform: 'translateY(-100%)' },
-    'enter-to': { opacity: 1, transform: 'translateY(0)' },
-    leave: { opacity: 1, transform: 'translateY(0)' },
-    'leave-to': { opacity: 0, transform: 'translateY(-100%)' } },
-
+    enter: {
+      opacity: 0,
+      transform: 'translateY(-100%)'
+    },
+    'enter-to': {
+      opacity: 1,
+      transform: 'translateY(0)'
+    },
+    leave: {
+      opacity: 1,
+      transform: 'translateY(0)'
+    },
+    'leave-to': {
+      opacity: 0,
+      transform: 'translateY(-100%)'
+    }
+  },
   'fade-left': {
-    enter: { opacity: 0, transform: 'translateX(-100%)' },
-    'enter-to': { opacity: 1, transform: 'translateY(0)' },
-    leave: { opacity: 1, transform: 'translateY(0)' },
-    'leave-to': { opacity: 0, transform: 'translateX(-100%)' } },
-
+    enter: {
+      opacity: 0,
+      transform: 'translateX(-100%)'
+    },
+    'enter-to': {
+      opacity: 1,
+      transform: 'translateY(0)'
+    },
+    leave: {
+      opacity: 1,
+      transform: 'translateY(0)'
+    },
+    'leave-to': {
+      opacity: 0,
+      transform: 'translateX(-100%)'
+    }
+  },
   'fade-right': {
-    enter: { opacity: 0, transform: 'translateX(100%)' },
-    'enter-to': { opacity: 1, transform: 'translateY(0)' },
-    leave: { opacity: 1, transform: 'translateY(0)' },
-    'leave-to': { opacity: 0, transform: 'translateX(100%)' } },
-
+    enter: {
+      opacity: 0,
+      transform: 'translateX(100%)'
+    },
+    'enter-to': {
+      opacity: 1,
+      transform: 'translateY(0)'
+    },
+    leave: {
+      opacity: 1,
+      transform: 'translateY(0)'
+    },
+    'leave-to': {
+      opacity: 0,
+      transform: 'translateX(100%)'
+    }
+  },
   'slide-up': {
-    enter: { transform: 'translateY(100%)' },
-    'enter-to': { transform: 'translateY(0)' },
-    leave: { transform: 'translateY(0)' },
-    'leave-to': { transform: 'translateY(100%)' } },
-
+    enter: {
+      transform: 'translateY(100%)'
+    },
+    'enter-to': {
+      transform: 'translateY(0)'
+    },
+    leave: {
+      transform: 'translateY(0)'
+    },
+    'leave-to': {
+      transform: 'translateY(100%)'
+    }
+  },
   'slide-down': {
-    enter: { transform: 'translateY(-100%)' },
-    'enter-to': { transform: 'translateY(0)' },
-    leave: { transform: 'translateY(0)' },
-    'leave-to': { transform: 'translateY(-100%)' } },
-
+    enter: {
+      transform: 'translateY(-100%)'
+    },
+    'enter-to': {
+      transform: 'translateY(0)'
+    },
+    leave: {
+      transform: 'translateY(0)'
+    },
+    'leave-to': {
+      transform: 'translateY(-100%)'
+    }
+  },
   'slide-left': {
-    enter: { transform: 'translateX(-100%)' },
-    'enter-to': { transform: 'translateY(0)' },
-    leave: { transform: 'translateY(0)' },
-    'leave-to': { transform: 'translateX(-100%)' } },
-
+    enter: {
+      transform: 'translateX(-100%)'
+    },
+    'enter-to': {
+      transform: 'translateY(0)'
+    },
+    leave: {
+      transform: 'translateY(0)'
+    },
+    'leave-to': {
+      transform: 'translateX(-100%)'
+    }
+  },
   'slide-right': {
-    enter: { transform: 'translateX(100%)' },
-    'enter-to': { transform: 'translateY(0)' },
-    leave: { transform: 'translateY(0)' },
-    'leave-to': { transform: 'translateX(100%)' } },
-
+    enter: {
+      transform: 'translateX(100%)'
+    },
+    'enter-to': {
+      transform: 'translateY(0)'
+    },
+    leave: {
+      transform: 'translateY(0)'
+    },
+    'leave-to': {
+      transform: 'translateX(100%)'
+    }
+  },
   zoom: {
-    enter: { transform: 'scale(0.95)' },
-    'enter-to': { transform: 'scale(1)' },
-    leave: { transform: 'scale(1)' },
-    'leave-to': { transform: 'scale(0.95)' } },
-
+    enter: {
+      transform: 'scale(0.95)'
+    },
+    'enter-to': {
+      transform: 'scale(1)'
+    },
+    leave: {
+      transform: 'scale(1)'
+    },
+    'leave-to': {
+      transform: 'scale(0.95)'
+    }
+  },
   'fade-zoom': {
-    enter: { opacity: 0, transform: 'scale(0.95)' },
-    'enter-to': { opacity: 1, transform: 'scale(1)' },
-    leave: { opacity: 1, transform: 'scale(1)' },
-    'leave-to': { opacity: 0, transform: 'scale(0.95)' } } };exports.default = _default;
+    enter: {
+      opacity: 0,
+      transform: 'scale(0.95)'
+    },
+    'enter-to': {
+      opacity: 1,
+      transform: 'scale(1)'
+    },
+    leave: {
+      opacity: 1,
+      transform: 'scale(1)'
+    },
+    'leave-to': {
+      opacity: 0,
+      transform: 'scale(0.95)'
+    }
+  }
+};
+exports.default = _default;
 
 /***/ }),
-/* 399 */,
-/* 400 */,
-/* 401 */,
-/* 402 */,
-/* 403 */,
 /* 404 */,
 /* 405 */,
-/* 406 */
+/* 406 */,
+/* 407 */,
+/* 408 */,
+/* 409 */,
+/* 410 */,
+/* 411 */
 /*!******************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/components/u-loading-icon/props.js ***!
   \******************************************************************************************************************************************/
@@ -22141,73 +22729,83 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
   props: {
     // 是否显示组件
     show: {
       type: Boolean,
-      default: uni.$u.props.loadingIcon.show },
-
+      default: uni.$u.props.loadingIcon.show
+    },
     // 颜色
     color: {
       type: String,
-      default: uni.$u.props.loadingIcon.color },
-
+      default: uni.$u.props.loadingIcon.color
+    },
     // 提示文字颜色
     textColor: {
       type: String,
-      default: uni.$u.props.loadingIcon.textColor },
-
+      default: uni.$u.props.loadingIcon.textColor
+    },
     // 文字和图标是否垂直排列
     vertical: {
       type: Boolean,
-      default: uni.$u.props.loadingIcon.vertical },
-
+      default: uni.$u.props.loadingIcon.vertical
+    },
     // 模式选择，circle-圆形，spinner-花朵形，semicircle-半圆形
     mode: {
       type: String,
-      default: uni.$u.props.loadingIcon.mode },
-
+      default: uni.$u.props.loadingIcon.mode
+    },
     // 图标大小，单位默认px
     size: {
       type: [String, Number],
-      default: uni.$u.props.loadingIcon.size },
-
+      default: uni.$u.props.loadingIcon.size
+    },
     // 文字大小
     textSize: {
       type: [String, Number],
-      default: uni.$u.props.loadingIcon.textSize },
-
+      default: uni.$u.props.loadingIcon.textSize
+    },
     // 文字内容
     text: {
       type: [String, Number],
-      default: uni.$u.props.loadingIcon.text },
-
+      default: uni.$u.props.loadingIcon.text
+    },
     // 动画模式
     timingFunction: {
       type: String,
-      default: uni.$u.props.loadingIcon.timingFunction },
-
+      default: uni.$u.props.loadingIcon.timingFunction
+    },
     // 动画执行周期时间
     duration: {
       type: [String, Number],
-      default: uni.$u.props.loadingIcon.duration },
-
+      default: uni.$u.props.loadingIcon.duration
+    },
     // mode=circle时的暗边颜色
     inactiveColor: {
       type: String,
-      default: uni.$u.props.loadingIcon.inactiveColor } } };exports.default = _default;
+      default: uni.$u.props.loadingIcon.inactiveColor
+    }
+  }
+};
+exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 407 */,
-/* 408 */,
-/* 409 */,
-/* 410 */,
-/* 411 */,
 /* 412 */,
 /* 413 */,
-/* 414 */
+/* 414 */,
+/* 415 */,
+/* 416 */,
+/* 417 */,
+/* 418 */,
+/* 419 */
 /*!*************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/components/u-overlay/props.js ***!
   \*************************************************************************************************************************************/
@@ -22215,38 +22813,48 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
   props: {
     // 是否显示遮罩
     show: {
       type: Boolean,
-      default: uni.$u.props.overlay.show },
-
+      default: uni.$u.props.overlay.show
+    },
     // 层级z-index
     zIndex: {
       type: [String, Number],
-      default: uni.$u.props.overlay.zIndex },
-
+      default: uni.$u.props.overlay.zIndex
+    },
     // 遮罩的过渡时间，单位为ms
     duration: {
       type: [String, Number],
-      default: uni.$u.props.overlay.duration },
-
+      default: uni.$u.props.overlay.duration
+    },
     // 不透明度值，当做rgba的第四个参数
     opacity: {
       type: [String, Number],
-      default: uni.$u.props.overlay.opacity } } };exports.default = _default;
+      default: uni.$u.props.overlay.opacity
+    }
+  }
+};
+exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 415 */,
-/* 416 */,
-/* 417 */,
-/* 418 */,
-/* 419 */,
 /* 420 */,
 /* 421 */,
-/* 422 */
+/* 422 */,
+/* 423 */,
+/* 424 */,
+/* 425 */,
+/* 426 */,
+/* 427 */
 /*!****************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/components/u-status-bar/props.js ***!
   \****************************************************************************************************************************************/
@@ -22254,22 +22862,32 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
   props: {
     bgColor: {
       type: String,
-      default: uni.$u.props.statusBar.bgColor } } };exports.default = _default;
+      default: uni.$u.props.statusBar.bgColor
+    }
+  }
+};
+exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 423 */,
-/* 424 */,
-/* 425 */,
-/* 426 */,
-/* 427 */,
 /* 428 */,
 /* 429 */,
-/* 430 */
+/* 430 */,
+/* 431 */,
+/* 432 */,
+/* 433 */,
+/* 434 */,
+/* 435 */
 /*!*****************************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/components/u-safe-bottom/props.js ***!
   \*****************************************************************************************************************************************/
@@ -22277,18 +22895,26 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
-  props: {} };exports.default = _default;
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
+  props: {}
+};
+exports.default = _default;
 
 /***/ }),
-/* 431 */,
-/* 432 */,
-/* 433 */,
-/* 434 */,
-/* 435 */,
 /* 436 */,
 /* 437 */,
-/* 438 */
+/* 438 */,
+/* 439 */,
+/* 440 */,
+/* 441 */,
+/* 442 */,
+/* 443 */
 /*!**********************************************************************************************************************************!*\
   !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/uni_modules/uview-ui/components/u-link/props.js ***!
   \**********************************************************************************************************************************/
@@ -22296,42 +22922,119 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
   props: {
     // 文字颜色
     color: {
       type: String,
-      default: uni.$u.props.link.color },
-
+      default: uni.$u.props.link.color
+    },
     // 字体大小，单位px
     fontSize: {
       type: [String, Number],
-      default: uni.$u.props.link.fontSize },
-
+      default: uni.$u.props.link.fontSize
+    },
     // 是否显示下划线
     underLine: {
       type: Boolean,
-      default: uni.$u.props.link.underLine },
-
+      default: uni.$u.props.link.underLine
+    },
     // 要跳转的链接
     href: {
       type: String,
-      default: uni.$u.props.link.href },
-
+      default: uni.$u.props.link.href
+    },
     // 小程序中复制到粘贴板的提示语
     mpTips: {
       type: String,
-      default: uni.$u.props.link.mpTips },
-
+      default: uni.$u.props.link.mpTips
+    },
     // 下划线颜色
     lineColor: {
       type: String,
-      default: uni.$u.props.link.lineColor },
-
+      default: uni.$u.props.link.lineColor
+    },
     // 超链接的问题，不使用slot形式传入，是因为nvue下无法修改颜色
     text: {
       type: String,
-      default: uni.$u.props.link.text } } };exports.default = _default;
+      default: uni.$u.props.link.text
+    }
+  }
+};
+exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+/* 444 */,
+/* 445 */,
+/* 446 */,
+/* 447 */
+/*!***************************************************************************************************!*\
+  !*** C:/Users/33443/Desktop/Graduate/Project file/Novel-app-user/Novel-app-user/commons/utils.js ***!
+  \***************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var install = function install(Vue, vm) {
+  var getMobileInfo = function getMobileInfo() {
+    // 胶囊按钮信息
+    var menuButtonInfo = uni.getMenuButtonBoundingClientRect();
+    // 手机信息
+    var mobileInfo = uni.getSystemInfoSync();
+    /* 注
+     * screenHeight是指手机屏的高度：对应图中1
+     * windowHeight是指页面可用高度
+     * 图中导航栏是自定义的，windowHeight = screenHeight - tabbar高度：对应图中2
+     * 若导航栏不是自定义的，则windowHeight = screenHeight- tabbar高度 - 导航栏高度
+     * 如页面没有tabbar， 则windowHeight = screenHeight- 导航栏高度
+     */
+    // 按钮与手机状态栏之间的间隙： 对应图中3
+    var menuButtonMaginTopBottom = menuButtonInfo.top - mobileInfo.statusBarHeight;
+    // 按钮的border
+    var border = 1;
+    // 包含分享按钮的容器高度：图中蓝色区域部分
+    var menuButtonContainerHeight = menuButtonInfo.height + border * 2 + menuButtonMaginTopBottom * 2;
+    //页面头的高度（包含手机状态栏）：图中绿色区域+蓝色区域部分
+    var pageHeaderHeight = mobileInfo.statusBarHeight + menuButtonContainerHeight;
+    return {
+      // 按钮右侧距离手机屏右侧距离，图中用于设置自定义导航栏的宽；这里注意menuButtonInfo.right是指按钮右边界距离手机屏左侧的位置
+      a: '按钮右侧距离手机屏右侧距离',
+      menuButtonRight: mobileInfo.windowWidth - menuButtonInfo.right,
+      // 按钮左侧距离手机屏左侧距离
+      menuButtonLeft: '按钮左侧距离手机屏左侧距离' + menuButtonInfo.left,
+      // 按钮宽
+      b: '按钮宽',
+      menuButtonWidth: menuButtonInfo.width,
+      // 屏幕宽
+      windowWidth: mobileInfo.windowWidth,
+      // 高度相关
+      statusBarHeight: mobileInfo.statusBarHeight,
+      menuButtonContainerHeight: menuButtonContainerHeight,
+      pageHeaderHeight: pageHeaderHeight,
+      windowHeightWhennoBar: mobileInfo.screenHeight - pageHeaderHeight
+    };
+  };
+  vm.$u.utils = {
+    getMobileInfo: getMobileInfo
+  };
+};
+var _default = {
+  install: install
+};
+exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ })

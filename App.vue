@@ -24,6 +24,12 @@
 			      // #endif
 			    }
 			  })
+			  uni.getSystemInfo({
+			  	success(res) {
+			  		Vue.prototype.winWidth=res.screenWidth
+			  		Vue.prototype.winHeight=res.screenHeight
+			  	}
+			  })
 		},
 		onShow: function() {
 		},
@@ -36,7 +42,9 @@
 	@import "colorui/main.css";
 	@import "colorui/icon.css";
 	@import "/uni_modules/uview-ui/index.scss";
-	
+	/*每个页面公共css */
+	@import url("./static/css/animate.min.css");
+	@import url("./static/css/iconfont.css");
 	/*每个页面公共css */
 	
 	@font-face {

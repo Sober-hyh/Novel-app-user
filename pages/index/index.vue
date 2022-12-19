@@ -79,11 +79,8 @@
 									<view class="flex" style="width: 100%;">
 										<span class="cuIcon-hotfill" :class="[item1+1<=3 && item==0 ? 'hotr':'hotw']">
 										</span>
-
 										<u--text :lines="2" :size="13" :bold="true" text="我用十年青春,赴你最后之约"></u--text>
-
 									</view>
-									
 									<view class="text-sm padding-top-xs smhot padding-left-sm">
 										9999万阅读/热度
 									</view>
@@ -150,10 +147,7 @@
 						<img src="https://p3-tt.byteimg.com/img/pgc-image/4a43885803954ec1b49550bd1327050f~180x234.jpg" alt="">
 						<div class="ws">
 							<view class="onetext">
-
 								<u--text :lines="2" :size="15"  text="我用十年青春,赴你最后之约.我用十年青春,赴你最后之约"></u--text>
-
-		
 								<text style="color: #b1b1b1;font-weight: 600;" class="padding-bottom-xs">111人在读</text>
 							</view>
 						</div>
@@ -266,6 +260,7 @@
 		},
 		onLoad() {
 			_this = this;
+			console.log(uni.$u.utils.getMobileInfo())
 			console.log('刷新')
 			 let menuButtonInfo = uni.getMenuButtonBoundingClientRect()
 			 _this.ttop = menuButtonInfo.top - menuButtonInfo.height
@@ -314,6 +309,9 @@
 			//点击书本
 			clibook(i){
 				console.log(i)
+				uni.navigateTo({
+					url: '/pages/read/read'
+				})
 			},
 			//点击tag标签
 			clitag(item){

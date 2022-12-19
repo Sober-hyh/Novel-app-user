@@ -1,2304 +1,1523 @@
-
-<!-- 搜‘根据需要更改’，需要根据实际项目更改的已经列出来了 -->
-<!-- 重要事项：
-	1.由于阅读页截取整行的需要，请确保文本格式和本插件中的text变量所示一致，即：！！！每一行的高度要一致！！！
-	  如果要加内容，例如每一章开头加上章节名:'<h1>章节名</h1>',请确保所加的内容是单行高度的整数倍！！
-	2.‘仅用于计算’的样式必须和阅读页样式一致，不然显示会有问题,
-	3.字体必须是偶数，否则1.5倍行距的时候会无法截取到整行
- -->
-
 <template>
-	<view style="height: 100%;">
-		
-		<!-- 仅用于计算（结构和样式请和阅读页一致） -->
-		<view class="container hidden">
-			<view class="chapter">
-				章节名
-			</view>
-			<view id="content" class="content">
-				<view class="inner-box" :style="{height: `${innerHeight}px`}">
-					<view class="book-inner" id="preChapter" v-html="preChapter.text"
-						:style="{fontSize: `${fontSize}px`, lineHeight: `${lineHeight*fontSize}px`}"
-					>
-					</view>
-				</view>
-			</view>
-			<view class="bottom-bar">
-				显示电量、页码
+	<view class="page" :style="{height:winHeight+'px'}">
+		<view class='head animated slideInDown fast' :style="{'background-color':night?otherBg.bg[1]:otherBg.bg[0]}"
+			v-if="toggle">
+			<view class="left" @tap="pageBack">
+				<text class="iconfont icon-shouye1"
+					:style="{color:night?otherBg.font[1].title:otherBg.font[0].title}"></text>
 			</view>
 		</view>
-		
-		<view class="container hidden">
-			<view class="chapter">
-				章节名
-			</view>
-			<view class="content">
-				<view class="inner-box" :style="{height: `${innerHeight}px`}">
-					<view class="book-inner" id="curChapter" v-html="curChapter.text"
-						:style="{fontSize: `${fontSize}px`, lineHeight: `${lineHeight*fontSize}px`}"
-					>
-					</view>
+
+		<image :src="pageImg" mode="aspectFill" class="page-img" :style="{height:winHeight+'px'}" v-if="pageImg">
+		</image>
+		<view id='html'>
+			<view class='content' :style="{'color':colorList[pageColorIndex]}">
+				<view class="title"
+					:style="{'font-size':(fontSize*1.6)+'px','line-height':(lineHeightList[lineHeightIndex])+'px','margin-bottom':lineHeightList[lineHeightIndex]+'px'}">
+					{{detail.data[read].sub}}
 				</view>
-			</view>
-			<view class="bottom-bar">
-				显示电量、页码
+				<view class="p" v-html='detail.data[read].content'
+					:style="{'font-size':fontSize+'px','line-height':lineHeightList[lineHeightIndex]+'px'}"></view>
 			</view>
 		</view>
-		
-		<view class="container hidden">
-			<view class="chapter">
-				章节名
-			</view>
-			<view class="content">
-				<view class="inner-box" :style="{height: `${innerHeight}px`}">
-					<view class="book-inner" id="nextChapter" v-html="nextChapter.text"
-						:style="{fontSize: `${fontSize}px`, lineHeight: `${lineHeight*fontSize}px`}"
-					>
-					</view>
+		<view class='html-content' :style="{'background-color':pageColorList[pageColorIndex]}" v-if="pageType==0">
+			<view class='tops' :style="{width:width+'px'}">
+				<view class="left">
+					<span :style="{'color':otherList[pageColorIndex]}">{{detail.data[read].sub}}</span>
 				</view>
 			</view>
-			<view class="bottom-bar">
-				显示电量、页码
-			</view>
-		</view>
-		
-		<!-- ************************** -->
-		<!--     根据需要更改（封面）     -->
-		<!-- ************************** -->
-		<!-- 封面 -->
-		<view class="cover container" :class="{container0: background === 1, container1: background === 2}"
-			:style="{zIndex: 201, transform: `translate${cover.pageTranslate[turnType]}`, transition: `transform ${showAnimation?turnPageTime:0}s`,
-			boxShadow:showShadow&&turnType===0?'0 0 10px 0 rgba(0,0,0,.4)':''}"
-			@touchstart="coverTouchStart" @touchend="coverTouchEnd" @touchmove="coverTouchMove" @touchcancel="coverTouchcancel"
-		>
-			<image>
-				
-			</image>
-			<view>
-				我是封面
-			</view>
-		</view>
-		<!-- ************************** -->
-		<!--****************************-->
-		<!-- ************************** -->
-		
-		
-		<!-- 阅读页（结构和样式请和仅用于计算元素一致） -->
-		<!-- 上一页 -->
-		<view class="container" :class="{container0: background === 1, container1: background === 2}"
-			:style="{zIndex: 102, transform: `translate${prePage.pageTranslate[turnType]}`, transition: `transform ${showAnimation?turnPageTime:0}s`,
-			boxShadow:showShadow&&turnType===0?'0 0 10px 0 rgba(0,0,0,.4)':''}"
-		>
-			<!-- 章节名 -->
-			<view class="chapter">
-				{{prePage.chapterName}}
-			</view>
-			
-			<!-- 外层class="content"用于计算阅读部分的高度 -->
-			<view class="content">
-				<!-- 内层class="inner-box"利用innerHeight将内容截取至整行，防止文字不完整的情况出现 -->
-				<view class="inner-box" :style="{height: `${innerHeight}px`}" v-if="prePage.canRead">  <!-- prePage.canRead是否能阅读，不能需要付费 -->
-					<!-- 最里层class="book-inner"的用于获取文本总高度，计算总页数，注意不可以overflow:hidden -->
-					<view class="book-inner" v-html="prePage.text"
-						:style="{fontSize: `${fontSize}px`, lineHeight: `${lineHeight*fontSize}px`,color: `${colorList[background - 1]}`,
-						transform: `translateY(-${prePage.pageNum*innerHeight}px)`}"
-					>
-					</view>
-				</view>
-				<view style="display:flex;flex-flow: column;justify-content: center;align-items: center;height: 100%;"
-				 v-else>
-					付费章节
-					<view style="padding: 5px 15px;background-color: #eee;">去购买</view>
-				</view>
-				
-			</view>
-			<view class="bottom-bar">
-				<!-- 时间 -->
-				<view>
-					{{systemTimeStr}}
-				</view>
-				<!-- 页码 -->
-				<view>
-					{{prePage.pageNum + 1}}/{{prePage.totalPage}}
-				</view>
-				<!-- 电量 -->
-				<view>
-					<battery :level="batteryLevel" :charging="batteryState === 2"></battery>
-				</view>
-			</view>
-			
-		</view>
-		
-		<!-- 本页 -->
-		<view class="container" :class="{container0: background === 1, container1: background === 2}"
-			:style="{zIndex: 101, transform: `translate${curPage.pageTranslate[turnType]}`, transition: `transform ${showAnimation?turnPageTime:0}s`,
-			boxShadow:showShadow&&turnType===0?'0 0 10px 0 rgba(0,0,0,.4)':''}"
-			@touchstart="touchStart" @touchend="touchEnd" @touchmove="touchMove" @touchcancel="touchcancel"
-		>
-			<!-- 章节名 -->
-			<view class="chapter">
-				{{curPage.chapterName}}
-			</view>
-			<view class="content">
-				<view class="inner-box" :style="{height: `${innerHeight}px`}" v-if="curPage.canRead">
-					<view class="book-inner" v-html="curPage.text"
-						:style="{fontSize: `${fontSize}px`, lineHeight: `${lineHeight*fontSize}px`,color: `${colorList[background - 1]}`,
-						transform: `translateY(-${curPage.pageNum*innerHeight}px)`}"
-					>
-					</view>
-				</view>
-				<view style="display:flex;flex-flow: column;justify-content: center;align-items: center;height: 100%;"
-				 v-else>
-					付费章节
-					<view style="padding: 5px 15px;background-color: #eee;" @touchstart.stop @touchmove.stop @touchend.stop="buyBook">去购买</view>
-				</view>
-				
-			</view>
-			<view class="bottom-bar">
-				<!-- 时间 -->
-				<view>
-					{{systemTimeStr}}
-				</view>
-				<!-- 页码 -->
-				<view>
-					{{curPage.pageNum + 1}}/{{curPage.totalPage}}
-				</view>
-				<!-- 电量 -->
-				<view>
-					<battery :level="batteryLevel" :charging="batteryState === 2"></battery>
-				</view>
-			</view>
-			
-		</view>
-		
-		<!-- 下一页 -->
-		<view class="container" :class="{container0: background === 1, container1: background === 2}"
-			:style="{zIndex: 100, transform: `translate${nextPage.pageTranslate[turnType]}`,transition: `transform ${showAnimation?turnPageTime:0}s`,
-			boxShadow:showShadow&&turnType===0?'0 0 10px 0 rgba(0,0,0,.4)':''}"
-		>
-			<!-- 章节名 -->
-			<view class="chapter">
-				{{nextPage.chapterName}}
-			</view>
-			<view class="content">
-				<view class="inner-box" :style="{height: `${innerHeight}px`}" v-if="nextPage.canRead">
-					<view class="book-inner" v-html="nextPage.text"
-						:style="{fontSize: `${fontSize}px`, lineHeight: `${lineHeight*fontSize}px`,color: `${colorList[background - 1]}`,
-						transform: `translateY(-${nextPage.pageNum*innerHeight}px)`}"
-					>
-					</view>
-				</view>
-				<view style="display:flex;flex-flow: column;justify-content: center;align-items: center;height: 100%;"
-				 v-else>
-					付费章节
-					<view style="padding: 5px 15px;background-color: #eee;">去购买</view>
-				</view>
-				
-			</view>
-			<view class="bottom-bar">
-				<!-- 时间 -->
-				<view>
-					{{systemTimeStr}}
-				</view>
-				<!-- 页码 -->
-				<view>
-					{{nextPage.pageNum + 1}}/{{nextPage.totalPage}}
-				</view>
-				<!-- 电量 -->
-				<view>
-					<battery :level="batteryLevel" :charging="batteryState === 2"></battery>
-				</view>
-			</view>
-			
-		</view>
-		
-		<!-- 菜单层 -->
-		<view class="menu" :style="{height: `100%`, width: `${windowWidth}px`}" 
-		v-if="menuShow" @touchend="closeMenu">
-			<!-- 菜单层包含返回按钮的上半部分 -->
-			<view class="menu-top" :style="{height: `${statusBarHeight + 40}px`, top: itemShow ? 0 : `-100%`}" @touchend.stop>
-				<view :style="{height: `${statusBarHeight}px`}"></view>
-				<view class="head">
-					<text class="iconfont back" @click="back">&#xe71a;</text>
-					<text class="addBook">加入书架</text>
-				</view>
-			
-			</view>
-			<!-- 菜单主体 -->
-			<view class="menu-bottom" :style="{bottom: itemShow ? 0 : '-100%'}" @touchend.stop>
-				<!-- 用于显示章节进度 -->
-				<view class="show-chapter" v-if="progressTouched">{{directoryList[chapterProgress].name}}</view>
-				<view class="show-chapter" v-else>{{curChapter.chapterName}}</view>
-				
-				<!-- 章节进度条 -->
-				<view class="progress-box">
-					<text @click="goPreChapter">上一章</text>
-					<view style="flex: 1;height: 100%;padding: 8px 0;">
-						<slider :value="curChapter.chapterIndex" activeColor="#000" :block-size="20" 
-						:max="directoryList.length - 1" @changing="slideChanging" @change="slideChange"/>
-					</view>
-					<text @click="goNextChapter">下一章</text>
-				</view>
-				<view class="items-box">
-					<view class="item-box" @click="openDirectory">
-						<text class="iconfont" style="font-size: 25px;">&#xe601;</text>
-						<text style="font-size: 13px;">目录</text>
-					</view>
-					<view class="item-box" v-if="background === 2" @click="changeBackground(1)">
-						<text class="iconfont" style="font-size: 25px;">&#xe63e;</text>
-						<text style="font-size: 13px;">夜间</text>
-					</view>
-					<view class="item-box" v-if="background === 1" @click="changeBackground(2)">
-						<text class="iconfont" style="font-size: 25px;">&#xe64c;</text>
-						<text style="font-size: 13px;">日间</text>
-					</view>
-					<view class="item-box" @click="openSetting">
-						<text class="iconfont" style="font-size: 25px;">&#xe61d;</text>
-						<text style="font-size: 13px;">设置</text>
-					</view>
-					
-				</view>
-			</view>
-			
-			<view class="setting" :style="{bottom: settingShow ? 0 : `-100%`}" @touchend.stop>
-				<view class="item">
-					<view class="item-name">字号</view>
-					<view class="icon" @click="bigSize" v-if="fontSize<maxFontSize">A+</view>
-					<view class="icon" style="color: #666; border: #666 solid 1px;" v-else>A+</view>
-					<view class="icon" @click="smallSize" v-if="fontSize>minFontSize">A-</view>
-					<view class="icon" style="color: #666;border: #666 solid 1px;" v-else>A-</view>
-					<view class="icon" @click="changeFont(2)" v-if="simplified === 1">繁體</view>
-					<view class="icon" @click="changeFont(1)" v-else style="border: #FF9900 solid 1px;color: #FF9900">繁體</view>
-				</view>
-				<view class="item">
-					<view class="item-name">排版</view>
-					<view class="type-setting" :class="{active: lineHeight === 1}" @click="changeLineHeight(1)">
-						<view class="line" :class="{lineActive: lineHeight === 1}" v-for="i in 5" :key="i"></view>
-					</view>
-					<view class="type-setting" :class="{active: lineHeight === 1.5}" @click="changeLineHeight(1.5)">
-						<view class="line" :class="{lineActive: lineHeight === 1.5}" v-for="i in 4" :key="i"></view>
-					</view>
-					<view class="type-setting" :class="{active: lineHeight === 2}" @click="changeLineHeight(2)">
-						<view class="line" :class="{lineActive: lineHeight === 2}" v-for="i in 3" :key="i"></view>
-					</view>
-				</view>
-				<view class="item">
-					<view class="item-name">翻页</view>
-					<view class="icon" :class="{active: turnType === 0}" style="padding: 5px 8px;" @click="changeTurnType(0)">覆盖</view>
-					<view class="icon" :class="{active: turnType === 1}" style="padding: 5px 8px;" @click="changeTurnType(1)">左右平移</view>
-					<view class="icon" :class="{active: turnType === 2}" style="padding: 5px 8px;" @click="changeTurnType(2)">上下平移</view>
-				</view>
-				<view class="item">
-					<view class="item-name">背景</view>
-					<view class="icon" style="background: url(../../static/background1.jpg);" :class="{active: background === 1}" @click="changeBackground(1)"></view>
-					<view class="icon" style="background-color: #000;" :class="{active: background === 2}" @click="changeBackground(2)"></view>
-				</view>
-			</view>
-			
-			<!-- 目录层 -->
-			<view class="directory" :class="{container0: background === 1, container1: background === 2}" v-if="directoryShowBefore"
-			 :style="{left: directoryShow ? 0 : '-100%',color: `${colorList[background - 1]}`,boxShadow:'0 0 10px 0 rgba(0,0,0,.4)'}" @touchend.stop>
-			 
-				<view class="bookname">书名</view>
-				<!--  :size="40"——每一栏高度为40px  :scrollHeight="windowHeight - 60"——书名的高度为60px -->
-				<virtual-list :items="directoryList" :size="40" :remain="16" :active="curChapter.chapterIndex" :scrollHeight="windowHeight - 60">
-					<template v-slot="{item,active}">
-						<view class="directory-listItem" :class="{active: item.index == active}"
-						@click="goToChapter(item.index)">
-							{{item.name}}
+			<div class='center' :style="{'transform':'translateX(-'+(step*width)+'px)'}">
+				<view class='html' :style="{width:width+'px',height:height+'px'}" v-for="(item,index) in size"
+					:key='index'>
+					<view class="article"
+						:style="{width:width+'px','color':colorList[pageColorIndex],'transform': 'translateY(-'+(index*height)+'px)'}">
+						<view class="title"
+							:style="{'font-size':(fontSize*1.6)+'px','line-height':(lineHeightList[lineHeightIndex])+'px','margin-bottom':lineHeightList[lineHeightIndex]+'px'}">
+							{{detail.data[read].sub}}
 						</view>
-					</template>
-				</virtual-list>
+						<view class="p" v-html='detail.data[read].content'
+							:style="{'font-size':fontSize+'px','line-height':lineHeightList[lineHeightIndex]+'px'}">
+						</view>
+					</view>
+				</view>
+			</div>
+			<view class='bottoms' :style="{width:width+'px'}">
+				<view class="left">
+					<view class="box" :style="{'border':'1px solid '+otherList[pageColorIndex]}">
+						<view class="middle" :style="{width:percent+'%','background-color':otherList[pageColorIndex]}">
+						</view>
+						<view class="small" :style="{'background-color':otherList[pageColorIndex]}"></view>
+					</view>
+					<span :style="{'color':otherList[pageColorIndex]}">{{hour|time}}:{{second|time}}</span>
+				</view>
+				<span :style="{'color':otherList[pageColorIndex]}">{{page|num}}%</span>
+			</view>
+		</view>
+		<view class="html-content" :style="{'background-color':pageColorList[pageColorIndex]}" v-if="pageType==1">
+			<view class='tops' :style="{width:width+'px'}">
+				<view class="left">
+					<span :style="{'color':otherList[pageColorIndex]}">{{detail.data[read].sub}}</span>
+				</view>
+			</view>
+			<swiper class="center" :current="step" :disable-programmatic-animation='true' :circular='true'
+				:indicator-dots="false" :autoplay="false" :interval="3000" :duration="500">
+				<swiper-item class='html' :style="{width:width+'px',height:height+'px'}" v-for="(item,index) in size"
+					:key='index'>
+					<view class="article"
+						:style="{width:width+'px','color':colorList[pageColorIndex],'transform': 'translateY(-'+(index*height)+'px)'}">
+						<view class="title"
+							:style="{'font-size':(fontSize*1.6)+'px','line-height':(lineHeightList[lineHeightIndex])+'px','margin-bottom':lineHeightList[lineHeightIndex]+'px'}">
+							{{detail.data[read].sub}}
+						</view>
+						<view class="p" v-html='detail.data[read].content'
+							:style="{'font-size':fontSize+'px','line-height':lineHeightList[lineHeightIndex]+'px'}">
+						</view>
+					</view>
+				</swiper-item>
+			</swiper>
+			<view class='bottoms' :style="{width:width+'px'}">
+				<view class="left">
+					<view class="box" :style="{'border':'1px solid '+otherList[pageColorIndex]}">
+						<view class="middle" :style="{width:percent+'%','background-color':otherList[pageColorIndex]}">
+						</view>
+						<view class="small" :style="{'background-color':otherList[pageColorIndex]}"></view>
+					</view>
+					<span :style="{'color':otherList[pageColorIndex]}">{{hour|time}}:{{second|time}}</span>
+				</view>
+				<span :style="{'color':otherList[pageColorIndex]}">{{page|num}}%</span>
 			</view>
 		</view>
 		
+		<view class="html-content" :style="{'background-color':pageColorList[pageColorIndex]}" @tap="toggleShow" v-if="pageType==2">
+			<view class='tops' :style="{width:width+'px'}">
+				<view class="left">
+					<span :style="{'color':otherList[pageColorIndex]}">{{detail.data[read].sub}}</span>
+				</view>
+			</view>
+			<scroll-view :scroll-y="true" :scroll-top="scrollViewTop" :show-scrollbar='false'  class='center' @scrolltoupper='scrolltoupper' @scrolltolower='scrolltolower' @scroll="onScroll" :style="{height:height+'px'}">
+				<view class='html' :style="{width:width+'px'}">
+					<view class="article"
+						:style="{width:width+'px','color':colorList[pageColorIndex]}">
+						<view class="title"
+							:style="{'font-size':(fontSize*1.6)+'px','line-height':(lineHeightList[lineHeightIndex])+'px','margin-bottom':lineHeightList[lineHeightIndex]+'px'}">
+							{{detail.data[read].sub}}
+						</view>
+						<view class="p" v-html='detail.data[read].content'
+							:style="{'font-size':fontSize+'px','line-height':lineHeightList[lineHeightIndex]+'px'}">
+						</view>
+					</view>
+				</view>
+			</scroll-view>
+			<view class='bottoms' :style="{width:width+'px'}">
+				<view class="left">
+					<view class="box" :style="{'border':'1px solid '+otherList[pageColorIndex]}">
+						<view class="middle" :style="{width:percent+'%','background-color':otherList[pageColorIndex]}">
+						</view>
+						<view class="small" :style="{'background-color':otherList[pageColorIndex]}"></view>
+					</view>
+					<span :style="{'color':otherList[pageColorIndex]}">{{hour|time}}:{{second|time}}</span>
+				</view>
+				<span :style="{'color':otherList[pageColorIndex]}">{{page|num}}%</span>
+			</view>
+		</view>
+
+		<view class='act' :style="{height:winHeight+'px'}" @touchstart="touchstart" @touchmove="touchMove"
+			@touchend="touchend" v-if="pageType!=2">
+			<view class='item' @tap.stop='prev'></view>
+			<view class='center' @tap.stop="toggleShow"></view>
+			<view class='item' @tap.stop='next'></view>
+		</view>
+
+		<view class="action" :style="{height:height+'px'}" v-if="auto">
+			<view :animation="animationData" :style="{'border-left-color':night?otherBg.add[1].bg:otherBg.add[0].bg}">
+			</view>
+		</view>
+
+		<view class='footer animated slideInUp fast' :style="{'background-color':night?otherBg.bg[1]:otherBg.bg[0]}"
+			v-if="toggle">
+			<view class="tool">
+				<view class="top">
+					<text class="item" :style="{color:night?otherBg.font[1].title:otherBg.font[0].title}"
+						@tap="prevBig">上一章</text>
+					<slider class="slider" :value="sliderValue"
+						:activeColor='night?otherBg.slider[1].activeBg:otherBg.slider[0].activeBg'
+						:backgroundColor='night?otherBg.slider[1].bg:otherBg.slider[0].bg'
+						:block-color="night?otherBg.slider[1].block:otherBg.slider[0].block" :block-size='28'
+						@changing='changing' @change='sliderChange' />
+					<text class="item" :style="{color:night?otherBg.font[1].title:otherBg.font[0].title}"
+						@tap="nextBig">下一章</text>
+				</view>
+				<view class="bottom">
+					<view class="tool-item" @tap='pageBack'>
+						<text class="iconfont icon-fanhui"
+							:style="{color:night?otherBg.font[1].title:otherBg.font[0].title}"></text>
+						<text class="span" :style="{color:night?otherBg.font[1].sub:otherBg.font[0].sub}">返回</text>
+					</view>
+					<view class="tool-item" @tap='tabClick(0)'>
+						<text class="iconfont icon-mulu"
+							:style="{color:night?otherBg.font[1].title:otherBg.font[0].title}"></text>
+						<text class="span" :style="{color:night?otherBg.font[1].sub:otherBg.font[0].sub}">目录</text>
+					</view>
+					<view class="tool-item" @tap='tabClick(1)'>
+						<text class="iconfont" :class="night?'icon-rijianmoshi':'icon-yejianmoshi'"
+							:style="{color:night?otherBg.font[1].title:otherBg.font[0].title}"></text>
+						<text class="span"
+							:style="{color:night?otherBg.font[1].sub:otherBg.font[0].sub}">{{night?'日间':'夜间'}}</text>
+					</view>
+					<view class="tool-item" @tap='tabClick(2)'>
+						<text class="iconfont icon-a-3_bofangliebiao_bofang"
+							:style="{color:night?otherBg.font[1].title:otherBg.font[0].title}"></text>
+						<text class="span" :style="{color:night?otherBg.font[1].sub:otherBg.font[0].sub}">自动翻页</text>
+					</view>
+					<view class="tool-item" @tap='tabClick(3)'>
+						<text class="iconfont icon-A"
+							:style="{color:night?otherBg.font[1].title:otherBg.font[0].title}"></text>
+						<text class="span" :style="{color:night?otherBg.font[1].sub:otherBg.font[0].sub}">阅读设置</text>
+					</view>
+				</view>
+			</view>
+		</view>
+
+		<view class='footer animated slideInUp fast' :style="{'background-color':night?otherBg.bg[1]:otherBg.bg[0]}"
+			v-if="tool==3">
+			<view class='style'>
+				<!-- #ifndef H5 -->
+				<view class="style-item">
+					<view class="right brightness">
+						<view class="brightness-left"
+							:style="{'background-color':night?otherBg.slider[1].bg:otherBg.slider[0].bg}">
+							<text class="iconfont icon-liangduxiao_line"
+								:style="{'color':night?otherBg.tool[1].color:otherBg.tool[0].color}"></text>
+							<slider class="slider" :value="brightness" activeColor='rgba(0,0,0,0)'
+								backgroundColor='rgba(0,0,0,0)'
+								:block-color="night?otherBg.slider[1].block:otherBg.slider[0].block" :block-size='28'
+								@changing='brightnessChange' />
+							<text class="iconfont icon-liangduda_line"
+								:style="{'color':night?otherBg.tool[1].color:otherBg.tool[0].color}"></text>
+						</view>
+						<view class="brightness-right">
+							<checkbox-group @change="brightnessCheckBox">
+								<label>
+									<checkbox value="0" color="#853b1e" :checked="brightnessCheck" /><text
+										:style="{'color':night?otherBg.tool[1].color:otherBg.tool[0].color}">系统亮度</text>
+								</label>
+							</checkbox-group>
+						</view>
+					</view>
+				</view>
+				<!-- #endif -->
+				<view class="style-item">
+					<view class="left" :style="{color:night?otherBg.font[1].title:otherBg.font[0].title}">字号</view>
+					<view class="right font">
+						<button type="default"
+							:style="{'background-color':night?otherBg.tool[1].bg:otherBg.tool[0].bg,color:night?otherBg.tool[1].color:otherBg.tool[0].color}"
+							@tap="fontPrev">A-</button>
+						<span :style="{color:night?otherBg.tool[1].color:otherBg.tool[0].color}">{{fontSize}}</span>
+						<button type="default"
+							:style="{'background-color':night?otherBg.tool[1].bg:otherBg.tool[0].bg,color:night?otherBg.tool[1].color:otherBg.tool[0].color}"
+							@tap="fontNext">A+</button>
+					</view>
+				</view>
+				<view class="style-item">
+					<view class="left" :style="{color:night?otherBg.font[1].title:otherBg.font[0].title}">背景</view>
+					<view class="right background">
+						<view class="color" v-for="(item,index) in pageColorList" :key='index'
+							:style="{'background-color':item}" @tap='changeBgColor(index)'></view>
+					</view>
+				</view>
+				<view class="style-item">
+					<view class="left" :style="{color:night?otherBg.font[1].title:otherBg.font[0].title}">间距</view>
+					<view class="right space">
+						<button type="default" :style="{'background-color':night?otherBg.tool[1].bg:otherBg.tool[0].bg}"
+							@tap="sapce(0)">
+							<span class='span1'
+								:style="{'background-color':night?otherBg.tool[1].color:otherBg.tool[0].color}"></span>
+							<span class='span1'
+								:style="{'background-color':night?otherBg.tool[1].color:otherBg.tool[0].color}"></span>
+							<span class='span1'
+								:style="{'background-color':night?otherBg.tool[1].color:otherBg.tool[0].color}"></span>
+						</button>
+						<button type="default" :style="{'background-color':night?otherBg.tool[1].bg:otherBg.tool[0].bg}"
+							@tap="sapce(1)">
+							<span class='span2'
+								:style="{'background-color':night?otherBg.tool[1].color:otherBg.tool[0].color}"></span>
+							<span class='span2'
+								:style="{'background-color':night?otherBg.tool[1].color:otherBg.tool[0].color}"></span>
+							<span class='span2'
+								:style="{'background-color':night?otherBg.tool[1].color:otherBg.tool[0].color}"></span>
+						</button>
+						<button type="default" :style="{'background-color':night?otherBg.tool[1].bg:otherBg.tool[0].bg}"
+							@tap="sapce(2)">
+							<span class='span3'
+								:style="{'background-color':night?otherBg.tool[1].color:otherBg.tool[0].color}"></span>
+							<span class='span3'
+								:style="{'background-color':night?otherBg.tool[1].color:otherBg.tool[0].color}"></span>
+							<span class='span3'
+								:style="{'background-color':night?otherBg.tool[1].color:otherBg.tool[0].color}"></span>
+						</button>
+					</view>
+				</view>
+				<view class="style-item">
+					<view class="left" :style="{color:night?otherBg.font[1].title:otherBg.font[0].title}">翻页</view>
+					<view class="right animatebox">
+						<button type="default"
+							:style="{'background-color':night?otherBg.tool[1].bg:otherBg.tool[0].bg,color:night?otherBg.tool[1].color:otherBg.tool[0].color}"
+							@tap="animateBtn(1)">
+							左右
+						</button>
+						<button type="default"
+							:style="{'background-color':night?otherBg.tool[1].bg:otherBg.tool[0].bg,color:night?otherBg.tool[1].color:otherBg.tool[0].color}"
+							@tap="animateBtn(2)">
+							上下
+						</button>
+						<button type="default"
+							:style="{'background-color':night?otherBg.tool[1].bg:otherBg.tool[0].bg,color:night?otherBg.tool[1].color:otherBg.tool[0].color}"
+							@tap="animateBtn(0)">
+							无动画
+						</button>
+					</view>
+				</view>
+			</view>
+		</view>
+
+		<view class="menu" :style="{width:width+'px',height:winHeight+'px'}" v-if="tool===0" @tap="toggleShow">
+			<view class="box">
+				<view class="top">
+					更新至 {{detail.data[detail.data.length-1].sub}}
+				</view>
+				<text class="item" v-for="(item,index) in detail.data" :key='index'
+					@tap.stop="menuClick(index)">{{detail.data[index].sub}}</text>
+			</view>
+		</view>
+
+		<view class="auto animated slideInUp fast" :style="{'background-color':night?otherBg.bg[1]:otherBg.bg[0]}"
+			v-if="tool==2">
+			<view class="top">
+				<view class="left" :style="{color:night?otherBg.font[1].title:otherBg.font[0].title}">速度</view>
+				<view class="right">
+					<button type="default"
+						:style="{'background-color':night?otherBg.tool[1].bg:otherBg.tool[0].bg,color:night?otherBg.tool[1].color:otherBg.tool[0].color}"
+						@click="speedPrev">减速 -</button>
+					<span :style="{color:night?otherBg.tool[1].color:otherBg.tool[0].color}">{{100-speed}}</span>
+					<button type="default"
+						:style="{'background-color':night?otherBg.tool[1].bg:otherBg.tool[0].bg,color:night?otherBg.tool[1].color:otherBg.tool[0].color}"
+						@click="speedNext">加速 +</button>
+				</view>
+			</view>
+			<view class="bottom" @tap="out">
+				<text class="iconfont icon-fenxiang1"
+					:style="{color:night?otherBg.tool[1].color:otherBg.tool[0].color}"></text>
+				<text class="text" :style="{color:night?otherBg.tool[1].color:otherBg.tool[0].color}">退出自动翻页</text>
+			</view>
+		</view>
+
+		<view class="addbook animated slideInRight fast"
+			:style="{'background-color':night?otherBg.add[1].bg:otherBg.add[0].bg,color:night?otherBg.add[1].color:otherBg.add[0].color}"
+			v-if="toggle">
+			{{addStatus?'去书架':'加入书架'}}
+		</view>
+
 	</view>
 </template>
 
 <script>
-	import battery from '../../components/battery.vue'
-	import virtualList from '../../components/virtualList.vue'
-	import { traditionalized, simplized, dateToStr } from '../../utils/utils.js'
+	let _this;
+	import util from './battery.js'
+	import screen from './brightness.js'
+	let timer = null
 	export default {
-		components:{
-			battery,
-			virtualList
-		},
 		data() {
 			return {
-				bookName: '我是书名',
-				bookId: 1,
-				history: {  //本书历史记录
-					chapterIndex: 0,
-					progress: 0
+				addStatus: false,
+				pageType: 0,
+				animationData: {},
+				speed: 30,
+				auto: false,
+				night: false,
+				hour: '',
+				sliderValue: 0,
+				second: '',
+				read: 0,
+				scrollViewTop:0,
+				detail: {
+					title: '',
+					data: []
 				},
-				text:`<p>测试测试测试测试测试，测试测试，测试测试，测试测试测试测试测试，测试测试测试测试测试，测试测试测。</p><p>测试测试测试测试测试，测试测试，测试测试，测试测试测试测试测试，测试测试测试测试测试，测试测试测试测试测试，测试测试测。</p><p>测试测试测试测试测试，测试测试，测试测试，测试测试测试测试测试，测试测试测试测试测试</p><p>测试测试测试测试测试，测试测试，测试测试，测试测试测试测试测试，测试测试测试测试测试，测试测试测。</p><p>测试测试测试测试测试，测试测试，测试测试，测试测试测试测试测试，测试测试测试测试测试，测试测试测试测试测试，测试测试测。</p><p>测试测试测试测试测试，测试测试，测试测试，测试测试测试测试测试，测试测试测试测试测试</p><p>测试测试测试测试测试，测试测试，测试测试，测试测试测试测试测试，测试测试测试测试测试，测试测试测。</p><p>测试测试测试测试测试，测试测试，测试测试，测试测试测试测试测试，测试测试测试测试测试，测试测试测试测试测试，测试测试测。</p><p>测试测试测试测试测试，测试测试，测试测试，测试测试测试测试测试，测试测试测试测试测试</p><p>测试测试测试测试测试，测试测试，测试测试，测试测试测试测试测试，测试测试测试测试测试，测试测试测。</p><p>测试测试测试测试测试，测试测试，测试测试，测试测试测试测试测试，测试测试测试测试测试，测试测试测试测试测试，测试测试测。</p><p>测试测试测试测试测试，测试测试，测试测试，测试测试测试测试测试，测试测试测试测试测试</p><p>测试测试测试测试测试，测试测试，测试测试，测试测试测试测试测试，测试测试测试测试测试，测试测试测。</p><p>测试测试测试测试测试，测试测试，测试测试，测试测试测试测试测试，测试测试测试测试测试，测试测试测试测试测试，测试测试测。</p><p>测试测试测试测试测试，测试测试，测试测试，测试测试测试测试测试，测试测试测试测试测试</p><p>测试测试测试测试测试，测试测试，测试测试，测试测试测试测试测试，测试测试测试测试测试，测试测试测。</p><p>测试测试测试测试测试，测试测试，测试测试，测试测试测试测试测试，测试测试测试测试测试，测试测试测试测试测试，测试测试测。</p><p>测试测试测试测试测试，测试测试，测试测试，测试测试测试测试测试，测试测试测试测试测试</p><p>测试测试测试测试测试，测试测试，测试测试，测试测试测试测试测试，测试测试测试测试测试，测试测试测。</p><p>测试测试测试测试测试，测试测试，测试测试，测试测试测试测试测试，测试测试测试测试测试，测试测试测试测试测试，测试测试测。</p><p>测试测试测试测试测试，测试测试，测试测试，测试测试测试测试测试，测试测试测试测试测试</p><p>测试测试测试测试测试，测试测试，测试测试，测试测试测试测试测试，测试测试测试测试测试，测试测试测。</p><p>测试测试测试测试测试，测试测试，测试测试，测试测试测试测试测试，测试测试测试测试测试，测试测试测试测试测试，测试测试测。</p><p>测试测试测试测试测试，测试测试，测试测试，测试测试测试测试测试，测试测试测试测试测试</p><p>测试测试测试测试测试，测试测试，测试测试，测试测试测试测试测试，测试测试测试测试测试，测试测试测。</p><p>测试测试测试测试测试，测试测试，测试测试，测试测试测试测试测试，测试测试测试测试测试，测试测试测试测试测试，测试测试测。</p><p>测试测试测试测试测试，测试测试，测试测试，测试测试测试测试测试，测试测试测试测试测试</p><p>测试测试测试测试测试，测试测试，测试测试，测试测试测试测试测试，测试测试测试测试测试，测试测试测。</p><p>测试测试测试测试测试，测试测试，测试测试，测试测试测试测试测试，测试测试测试测试测试，测试测试测试测试测试，测试测试测。</p><p>测试测试测试测试测试，测试测试，测试测试，测试测试测试测试测试，测试测试测试测试测试</p><p>测试测试测试测试测试，测试测试，测试测试，测试测试测试测试测试，测试测试测试测试测试，测试测试测。</p><p>测试测试测试测试测试，测试测试，测试测试，测试测试测试测试测试，测试测试测试测试测试，测试测试测试测试测试，测试测试测。</p><p>测试测试测试测试测试，测试测试，测试测试，测试测试测试测试测试，测试测试测试测试测试</p><p>测试测试测试测试测试，测试测试，测试测试，测试测试测试测试测试，测试测试测试测试测试，测试测试测。</p><p>测试测试测试测试测试，测试测试，测试测试，测试测试测试测试测试，测试测试测试测试测试，测试测试测试测试测试，测试测试测。</p><p>测试测试测试测试测试，测试测试，测试测试，测试测试测试测试测试，测试测试测试测试测试</p><p>测试测试测试测试测试，测试测试，测试测试，测试测试测试测试测试，测试测试测试测试测试，测试测试测。</p><p>测试测试测试测试测试，测试测试，测试测试，测试测试测试测试测试，测试测试测试测试测试，测试测试测试测试测试，测试测试测。</p><p>测试测试测试测试测试，测试测试，测试测试，测试测试测试测试测试，测试测试测试测试测试</p><p>测试测试测试测试测试，测试测试，测试测试，测试测试测试测试测试，测试测试测试测试测试，测试测试测。</p><p>测试测试测试测试测试，测试测试，测试测试，测试测试测试测试测试，测试测试测试测试测试，测试测试测试测试测试，测试测试测。</p><p>测试测试测试测试测试，测试测试，测试测试，测试测试测试测试测试，测试测试测试测试测试</p><p>测试测试测试测试测试，测试测试，测试测试，测试测试测试测试测试，测试测试测试测试测试，测试测试测。</p><p>测试测试测试测试测试，测试测试，测试测试，测试测试测试测试测试，测试测试测试测试测试，测试测试测试测试测试，测试测试测。</p><p>测试测试测试测试测试，测试测试，测试测试，测试测试测试测试测试，测试测试测试测试测试</p><p>测试测试测试测试测试，测试测试，测试测试，测试测试测试测试测试，测试测试测试测试测试，测试测试测。</p><p>测试测试测试测试测试，测试测试，测试测试，测试测试测试测试测试，测试测试测试测试测试，测试测试测试测试测试，测试测试测。</p><p>测试测试测试测试测试，测试测试，测试测试，测试测试测试测试测试，测试测试测试测试测试</p>`,
-				directoryList: [],  //目录列表
-				currentPage: 0,   //当前页
-				
-				innerHeight: 0,   //截取至整行的最大高度
-				
-				preChapter: {   //上一章数据
-					ready: false,  //是否准备完毕
-					chapterIndex: '',
-					chapterName: '',
-					text: '',
-					totalPage: '',
-					canRead: true
+				percent: 80,
+				toggle: false,
+				tool: null,
+				width: this.winWidth,
+				height: 0,
+				pageImg: '',
+				step: 0,
+				size: 0,
+				otherList: ['#8b7753', '#60735f', '#666', '#827777', '#71747d', '#4b4b4b'],
+				colorList: ['#4b3013', 'rgb(21, 40, 20)', 'rgb(0, 0, 0)', 'rgb(170, 158, 158)',
+					'rgb(150, 153, 162)', '#7a7a7a'
+				],
+				pageColorIndex: 0,
+				pageColorList: ['#e8c99d', 'rgb(211, 227, 214)', 'rgb(255, 255, 255)', 'rgb(61, 49, 49)',
+					'rgb(47, 50, 55)', '#000000'
+				],
+				fontSize: 15,
+				lineHeightIndex: 0,
+				lineHeightList: [(this.winHeight - 100) / 20, (this.winHeight - 100) / 16, (this.winHeight - 100) / 14],
+				menuShow: false,
+				isClick: true,
+				startX: 0,
+				startY: 0,
+				page: 0,
+				isMove: false,
+				otherBg: {
+					bg: ['#ffffff', '#191919'],
+					font: [{
+							title: '#131313',
+							sub: '#161616'
+						},
+						{
+							title: '#666666',
+							sub: '#6d6d6d'
+						}
+					],
+					slider: [{
+							bg: '#f5f5f5',
+							activeBg: '#e0e0e0',
+							block: '#ffffff'
+						},
+						{
+							bg: '#121212',
+							activeBg: '#303030',
+							block: '#666666'
+						}
+					],
+					tool: [{
+							bg: '#f5f5f5',
+							color: '#898989'
+						},
+						{
+							bg: '#303030',
+							color: '#646464'
+						}
+					],
+					add: [{
+							bg: '#2f281e',
+							color: '#ffffff'
+						},
+						{
+							bg: '#666666',
+							color: '#3d3d3d'
+						}
+					]
 				},
-				
-				curChapter: {   //本一章数据
-					chapterIndex: '',
-					chapterName: '',
-					text: '',
-					totalPage: '',
-					canRead: true
-				},
-				
-				nextChapter: {   //下一章数据
-					ready: false,  //是否准备完毕
-					chapterIndex: '',
-					chapterName: '',
-					text: '',
-					totalPage: '',
-					canRead: true
-				},
-				
-				tmpChapter: {  //暂存章节内容
-					text: '',
-					canRead: true
-				},
-				
-				cover: {    //封面的状态
-					pageTranslate: ['', '', ''],  //页面位移，三个数对应三种翻页方式
-				},
-				
-				prePage: {    //上一页数据
-					ready: false,  //是否准备完毕
-					chapterName: '',
-					text: '',
-					pageNum: '',
-					totalPage: 1,
-					pageTranslate: ['', '', ''],  //页面位移，三个数对应三种翻页方式
-					canRead: true
-				},
-				
-				curPage: {   //本页数据
-					ready: false,  //是否准备完毕
-					chapterName: '',
-					text: '',
-					pageNum: 1,
-					totalPage: 1,
-					pageTranslate: ['', '', ''],  //页面位移，三个数对应三种翻页方式
-					canRead: true
-				},
-				
-				nextPage: {   //下一页数据
-					ready: false,  //是否准备完毕
-					chapterName: '',
-					text: '',
-					pageNum: '',
-					totalPage: '',
-					pageTranslate: ['', '', ''],  //页面位移，三个数对应三种翻页方式
-					canRead: true
-				},
-				
-				
-				next: false,  //用户是否正在翻下一页
-				pre: false,  //用户是否正在翻上一页
-				
-				waitForNext: false,  //是否正在等待下一页准备完毕后跳转
-				waitForPre: false,  //是否正在等待上一页准备完毕后跳转
-				waitForNextChapter: false,  //是否正在等待下一章准备完毕后跳转
-				waitForPreChapter: false,  //是否正在等待上一章准备完毕后跳转
-				
-				showAnimation: false, //是否开启动画
-				showShadow: false, //是否显示页面阴影
-				
-				windowWidth: 0,   //可用屏幕宽度
-				windowHeight: 0,   //可用屏幕高度
-				contentHeight: 0,  //阅读区域高度
-				
-				platform: '',  //设备
-				batteryState: '', //电池状态
-				batteryLevel: 80, //电量
-				systemTime: '',   //系统时间
-				systemTimeStr: '',   //系统时间字符串
-				statusBarHeight: 0, //状态栏高度
-				pixelRatio: '',    //设备像素比
-				
-				touchStartX: 0,  // 触屏起始点x
-				touchX: 0,  // 瞬时触屏点x
-				delta: 0,  // 手指瞬时位移
-				
-				touchStartY: 0,  // 触屏起始点y
-				touchY: 0,  // 瞬时触屏点y
-				
-				menuShow: false,  //菜单栏box是否渲染
-				itemShow: false,  // 菜单栏动画控制
-				settingShow: false,  //设置栏动画控制
-				directoryShow: false,  //目录动画控制
-				directoryShowBefore: false,  // 目录渲染
-				turnPageTime: .5,  //翻页动画时间
-				
-				maxFontSize: 30,   //最大字体大小，px
-				minFontSize: 14,   //最小字体大小，px
-				turnType: 0,  //翻页方式
-				fontSize: '',   //字体大小，
-				simplified: '',   //是否简体
-				lineHeight: '',   //行高，注意是fontSize的倍数
-				background: '',    //背景
-				colorList: ['#000', '#666'],   //与背景对应的字体颜色
-
-				chapterProgress: 0,   //‘章节进度条’的参数
-				progressTouched: false   //是否正在点击‘章节进度条’
-				
+				brightness: 0,
+				brightnessCheck: false,
+				autoTimer: null,
+				scrollTop:0,
+				contentHeight:0,
+				down:false,
+				downTimer:null
 			}
+		},
+		filters: {
+			num(val) {
+				if (val % 2 != 0) {
+					return val.toFixed(1)
+				} else {
+					return val.toFixed(0)
+				}
+			},
+			time(val) {
+				if (val < 10) {
+					return '0' + val
+				} else {
+					return val
+				}
+			}
+		},
+		watch: {
+			step: {
+				handler(val, oldVal) {
+					this.page = this.step / (this.size - 1) * 100
+				},
+				deep: true
+			}
+		},
+		created() {
+			let _this = this
+			this.height = this.winHeight - 100
+			//  #ifndef  H5
+			screen.getBrigthness(function(res) {
+				_this.brightness = res
+			})
+			//  #endif
+			this.loadData()
+			this.getTime()
+			setInterval(function() {
+				util.getBattery(function(res) {
+					_this.percent = res
+				})
+			}, 5000)
+			this.animation = uni.createAnimation()
 		},
 		onLoad() {
-			this.getSystemInfo()
+			_this = this;
 		},
-		onUnload() {
-			
-			// #ifdef APP-PLUS
-				// 退出全屏
-				plus.navigator.setFullscreen(false)
-			// #endif
-			
-			this.setStorage()
-		},
-		onHide() {
-			this.setStorage()
-		},
-		mounted() {
-			this.initPage()
-		},
-		computed:{
-			progress() {      //章节的阅读进度
-				if (this.curChapter.totalPage === 1) {
-					return 0
-				}
-				return this.currentPage / (this.curChapter.totalPage - 1)
-			}
+		destroyed() {
+			clearInterval(timer)
+			clearTimeout(this.downTimer)
 		},
 		methods: {
-			
-			setStorage() {
-				let history = uni.getStorageSync('history')
-				if (typeof history !== 'object') {
-					history = []
-				}
-				let have = false
-				history.forEach((value) => {
-					if (value.bookId === this.bookId) {
-						have = true
-						value.chapterIndex = this.curChapter.chapterIndex
-						value.progress = this.progress
-					}
-				})
-				if (!have) {
-					history.push({
-						bookId: this.bookId,
-						chapterIndex: this.curChapter.chapterIndex,
-						progress: this.progress
-					})
-				}
-				uni.setStorageSync('history', history)
+			onScroll(e){
+				let self = this
+				this.scrollViewTop=e.detail.scrollTop
+				this.sliderValue=Number(((e.detail.scrollTop/(this.contentHeight-this.height))*100))
+				this.page=Number(((e.detail.scrollTop/(this.contentHeight-this.height))*100))
 			},
-			
-			/**
-			* 返回上一页面
-			**/
-			back() {
-				uni.navigateBack()
-			},
-			
-			/**
-			* 获取设备信息
-			**/
-			getSystemInfo() {
-				
-				const { windowWidth, windowHeight, statusBarHeight, platform, pixelRatio } = uni.getSystemInfoSync()
-				//获取一些必要的设备参数
-				this.statusBarHeight = statusBarHeight
-				this.windowWidth = windowWidth
-				this.windowHeight = windowHeight
-				this.pixelRatio = pixelRatio
-				this.platform = platform
-				// #ifdef APP-PLUS
-					// 全屏
-					plus.navigator.setFullscreen(true)
-					// 取消ios左滑返回
-					let page = this.$mp.page.$getAppWebview()
-					page.setStyle({ popGesture: 'none' })
-					
-					if (this.platform === 'ios') {
-						// 获取ios电量
-						let UIDevice = plus.ios.import("UIDevice")
-						let dev = UIDevice.currentDevice()
-						if (!dev.isBatteryMonitoringEnabled()) {  
-						    dev.setBatteryMonitoringEnabled(true) 
-						}
-						setInterval(() => {
-							this.batteryState = dev.batteryState()
-							this.batteryLevel = dev.batteryLevel() * 100
-						}, 1000)
-						
-					}
-					else {
-						// 获取安卓电量
-						let main = plus.android.runtimeMainActivity();
-						let Intent = plus.android.importClass('android.content.Intent');  
-						let recevier = plus.android.implements('io.dcloud.feature.internal.reflect.BroadcastReceiver', {  
-						    onReceive: (context, intent) => {  
-						        let action = intent.getAction();  
-						        if (action == Intent.ACTION_BATTERY_CHANGED) {  
-						            this.batteryState = intent.getIntExtra("status", 0); //电池状态  
-									this.batteryLevel = intent.getIntExtra("level", 0); //电量
-						        }  
-						    }  
-						 });  
-						let IntentFilter = plus.android.importClass('android.content.IntentFilter');  
-						let filter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);  
-						main.registerReceiver(recevier, filter); 
-					}
-					
-				// #endif
-				
-				// 设置时间
-				let date = new Date();
-				this.systemTime = Date.parse(date);
-				this.systemTimeStr = dateToStr(this.systemTime);
-				setInterval(() => {
-					this.systemTime += 60000;
-					this.systemTimeStr = dateToStr(this.systemTime);
-				}, 60000)
-				
-				// 获取字体、排版等信息
-				
-				/*****************************************/
-				/**********    根据需要更改    ************/
-				/*****************************************/
-				
-				//可能缓存在前端可能从后端拿，如果是异步注意同步处理
-				this.fontSize = uni.getStorageSync('fontSize')
-				if (typeof this.fontSize !== 'number') {
-					this.fontSize = 16
-				}
-				this.simplified = uni.getStorageSync('simplified')
-				if (typeof this.simplified !== 'number') {
-					this.simplified = 1
-				}
-				this.lineHeight = uni.getStorageSync('lineHeight')
-				if (typeof this.lineHeight !== 'number') {
-					this.lineHeight = 1.5
-				}
-				this.background = uni.getStorageSync('background')
-				if (typeof this.background !== 'number') {
-					this.background = 1
-				}
-				this.turnType = uni.getStorageSync('turnType')
-				if (typeof this.turnType !== 'number') {
-					this.turnType = 0
-				}
-				let history = uni.getStorageSync('history')
-				if (typeof history !== 'object') {
-					history = []
-				}
-				history.forEach((value) => {
-					if (value.bookId === this.bookId) {
-						this.history = value
-					}
-				})
-				
-				/*****************************************/
-				/*****************************************/
-				/*****************************************/
-				
-			},
-			
-			/**
-			* 获取数据并计算页面
-			**/
-			async initPage() {
-				uni.showLoading({
-					title: '加载中',
-					mask: true
-				})
-				this.cover.pageTranslate = [
-					`(${-this.windowWidth}px,0)`,
-					`(${-this.windowWidth}px,0)`,
-					`(0,${-this.windowHeight}px)`
-				]
-				await this.calcHeight()
-				await this.getDirectoryList()
-				
-				if (this.history.chapterIndex > this.directoryList.length - 1 || !this.history.chapterIndex) {
-					this.history.chapterIndex = 0
-				}
-				await this.getThreeChapter(this.history.chapterIndex)
-				let page = Math.floor((this.curChapter.totalPage - 1) * this.history.progress)
-				this.goToPage(page)
-				uni.hideLoading()
-				
-			},
-			
-			/**
-			* 计算innerHeight，用于截取至整行
-			**/
-			calcHeight() {
-				if (this.contentHeight) {
-					let lineHeight = this.fontSize * this.lineHeight;
-					// #ifdef APP-PLUS || MP-WEIXIN
-						lineHeight = Math.floor(lineHeight*this.pixelRatio)/this.pixelRatio
-					// #endif
-					let lineNum = Math.floor((this.contentHeight + Math.floor((lineHeight - this.fontSize)/2)) / lineHeight)
-					this.innerHeight = lineNum * lineHeight
-				}
-				else {
-					return new Promise((resolve, reject) => {
-						this.$nextTick(() => {
-							const query = uni.createSelectorQuery().in(this);
-							query.select('#content').boundingClientRect(data => {
-								let height = data.height;
-								this.contentHeight = height;
-								let lineHeight = this.fontSize * this.lineHeight;
-								
-								// #ifdef APP-PLUS || MP-WEIXIN
-									lineHeight = Math.floor(lineHeight*this.pixelRatio)/this.pixelRatio
-								// #endif
-								let lineNum = Math.floor((height + Math.floor((lineHeight - this.fontSize)/2)) / lineHeight)
-								this.innerHeight = lineNum * lineHeight
-								resolve()
-							}).exec();
+			scrolltoupper(e){
+				let _this=this
+				if(e.detail.direction=='top'&&e.type=="scrolltoupper"&&!this.down){
+					if (this.read > 0) {
+						uni.showLoading({
+							title: '请稍等...'
 						})
-						
-					})
-				}
-				
-			},
-			
-			/**
-			* 计算本章页数
-			**/
-			calcCurChapter() {
-				return new Promise((resolve, reject) => {
-					// 此处setTimeout 100ms是为了确保元素渲染完毕从而获取正确高度，如果遇到页面页数计算不正确的情况可以增加时间试试看
-					setTimeout(() => {
-						const query = uni.createSelectorQuery().in(this);
-						query.select('#curChapter').boundingClientRect(data => {
-							let height = data.height;
-							// #ifdef APP-PLUS || MP-WEIXIN
-							
-								height = Math.round(height*this.pixelRatio)/this.pixelRatio
-							// #endif
-							this.curChapter.totalPage = Math.ceil(height/this.innerHeight) || 1
-							this.curChapter.ready = true   //章节准备完毕
-							resolve()
-						}).exec();
-					}, 100)
-					
-				})
-			},
-			
-			/**
-			* 计算上一章页数,并翻页（如果有）
-			**/
-			calcPreChapter() {
-				return new Promise((resolve, reject) => {
-					// 此处setTimeout 100ms是为了确保元素渲染完毕从而获取正确高度，如果遇到页面页数计算不正确的情况可以增加时间试试看
-					setTimeout(() => {
-						const query = uni.createSelectorQuery().in(this);
-						query.select('#preChapter').boundingClientRect(data => {
-							let height = data.height;
-							// #ifdef APP-PLUS || MP-WEIXIN
-								height = Math.round(height*this.pixelRatio)/this.pixelRatio
-							// #endif
-							this.preChapter.totalPage = Math.ceil(height/this.innerHeight) || 1
-							this.preChapter.ready = true   //章节准备完毕
-							if (this.waitForPre) {    //发生在用户翻至上一章，但是上一章数据未准备完毕时
-								uni.hideLoading()   //把loading关掉
-								this.waitForPre = false;
-								//页面准备完毕
-								this.goPrePage()
-							}
-							if (this.waitForPreChapter) {
-								uni.hideLoading()
-								this.waitForPreChapter = false
-								this.goPreChapter()
-							}
-							resolve()
-						}).exec();
-					},100)
-					
-				})
-				
-			},
-			
-			/**
-			* 计算下一章页数,并翻页（如果有）
-			**/
-			calcNextChapter() {
-				return new Promise((resolve, reject) => {
-					// 此处setTimeout 100ms是为了确保元素渲染完毕从而获取正确高度，如果遇到页面页数计算不正确的情况可以增加时间试试看
-					setTimeout(() => {
-						const query = uni.createSelectorQuery().in(this);
-						query.select('#nextChapter').boundingClientRect(data => {
-							let height = data.height;
-							// #ifdef APP-PLUS || MP-WEIXIN
-								height = Math.round(height*this.pixelRatio)/this.pixelRatio
-							// #endif
-							this.nextChapter.totalPage = Math.ceil(height/this.innerHeight) || 1
-							this.nextChapter.ready = true   //章节准备完毕
-							if (this.waitForNext) {   //发生在用户翻至下一章，但是下一章数据未准备完毕时
-								uni.hideLoading()    //把loading关掉
-								this.waitForNext = false;
-								//页面准备完毕
-								this.goNextPage()
-							}
-							if (this.waitForNextChapter) {
-								uni.hideLoading()
-								this.waitForNextChapter = false
-								this.goNextChapter()
-							}
-							resolve()
-						}).exec();
-						
-					},100)
-					
-				})
-				
-			},
-			
-			/**
-			* 触摸开始（封面）
-			**/
-			coverTouchStart(e) {
-				this.showAnimation = false    //关掉动画，否则翻页会很慢
-				this.touchX = e.touches[0].clientX
-				this.touchStartX = e.touches[0].clientX
-				this.touchY = e.touches[0].clientY
-				this.touchStartY = e.touches[0].clientY
-			},
-			
-			/**
-			* 触摸（封面）
-			**/
-			coverTouchMove(e) {
-				this.showShadow = true
-				let delta = 0
-				if (this.turnType === 0 || this.turnType === 1) {  //翻页方式为‘覆盖’或者‘左右平移’
-					delta = e.touches[0].clientX - this.touchStartX;
-					
-					// 限制边界
-					if (delta>this.windowWidth) {
-						delta = this.windowWidth
-					}
-					if (delta<-this.windowWidth) {
-						delta = -this.windowWidth
-					}
-					
-					this.delta = e.touches[0].clientX - this.touchX;
-					this.touchX = e.touches[0].clientX;
-				}
-				else {	//翻页方式为‘上下平移’
-					delta = e.touches[0].clientY - this.touchStartY;
-					
-					// 限制边界
-					if (delta>this.windowHeight) {
-						delta = this.windowHeight
-					}
-					if (delta<-this.windowHeight) {
-						delta = -this.windowHeight
-					}
-					
-					this.delta = e.touches[0].clientY - this.touchY;
-					this.touchY = e.touches[0].clientY;
-				}
-				
-				if (this.next) {   //首次翻下一页之后
-				
-					// 限制边界
-					if (delta>0) {
-						delta = 0
-					}
-					
-					this.cover.pageTranslate = [
-						`(${delta}px,0)`,
-						`(${delta}px,0)`,
-						`(0,${delta}px)`
-					]
-					this.curPage.pageTranslate = [
-						`(0,0)`,
-						`(${this.windowWidth + delta}px,0)`,
-						`(0,${this.windowHeight + delta}px)`
-					]
-				}
-				if (!this.pre && !this.next && delta < 0) {  //首次翻下一页
-					this.next = true
-					this.cover.pageTranslate = [
-						`(${delta}px,0)`,
-						`(${delta}px,0)`,
-						`(0,${delta}px)`
-					]
-					this.curPage.pageTranslate = [
-						`(0,0)`,
-						`(${this.windowWidth + delta}px,0)`,
-						`(0,${this.windowHeight + delta}px,)`
-					]
-				}
-				if (this.pre) {   //首次右滑后，由于是封面不做任何操作
-					return
-				}
-				if (!this.pre && !this.next && delta > 0) {  //首次右滑
-					this.pre = true
-					uni.showToast({
-						title: '已经是第一页了',
-						icon: 'none'
-					})
-				}
-				
-				
-			},
-			
-			/**
-			* 触摸结束（封面）
-			**/
-			coverTouchEnd(e) {
-				this.showAnimation = true
-				this.showShadow = false
-				let delta = 0
-				if (this.turnType === 0 || this.turnType === 1) {  //翻页方式为‘覆盖’或者‘左右平移’
-					delta = e.changedTouches[0].clientX - this.touchStartX;
-				}
-				else {   //翻页方式为‘上下平移’
-					delta = e.changedTouches[0].clientY - this.touchStartY;
-				}
-				if (delta === 0) {
-					if (e.changedTouches[0].clientX<this.windowWidth/3) { //点击屏幕左1/3为上一页
+						setTimeout(function() {
+							_this.read--
+							_this.getHeight(true)
+							uni.hideLoading()
+							_this.sliderValue = 0
+							_this.scrollViewTop=0
+						}, 300)
+					} else {
 						uni.showToast({
-							title: '已经是第一页了',
-							icon: 'none'
+							icon: 'none',
+							title: '已经在最开头'
 						})
 					}
-					else if (e.changedTouches[0].clientX>this.windowWidth/3*2) { //点击屏幕右1/3为下一页
-						this.cover.pageTranslate = [
-							`(${-this.windowWidth}px,0)`,
-							`(${-this.windowWidth}px,0)`,
-							`(0,${-this.windowHeight}px)`
-						]
-						this.curPage.pageTranslate = [
-							`(0,0)`,
-							`(0,0)`,
-							`(0,0)`
-						]
-					}
-					else if (e.changedTouches[0].clientX<=this.windowWidth/3*2 && e.changedTouches[0].clientX>=this.windowWidth/3) { //点击屏幕中间1/3为呼出菜单
-						this.showMenu()
-					}
 				}
-				else {
-					if (this.next && this.delta <= 0) {  //下一页
-						this.cover.pageTranslate = [
-							`(${-this.windowWidth}px,0)`,
-							`(${-this.windowWidth}px,0)`,
-							`(0,${-this.windowHeight}px)`
-						]
-						this.curPage.pageTranslate = [
-							`(0,0)`,
-							`(0,0)`,
-							`(0,0)`
-						]
-					}
-					else if (this.next && this.delta > 0) {  //取消翻页
-						this.cover.pageTranslate = [
-							`(0,0)`,
-							`(0,0)`,
-							`(0,0)`
-						]
-						this.curPage.pageTranslate = [
-							`(0,0)`,
-							`(${this.windowWidth}px,0)`,
-							`(0,${this.windowHeight}px)`
-						]
-					}
-				}
-				this.next = false
-				this.pre = false
-				
 			},
-			
-			/**
-			* 触摸取消（封面）
-			**/
-			coverTouchcancel() {
-				
-				// 取消翻页
-				this.showAnimation = false
-				this.showShadow = false
-				this.cover.pageTranslate = [
-					`(0,0)`,
-					`(0,0)`,
-					`(0,0)`
-				]
-				this.curPage.pageTranslate = [
-					`(0,0)`,
-					`(${this.windowWidth}px,0)`,
-					`(0,${this.windowHeight}px)`
-				]
-				this.next = false
-				this.pre = false
+			cleadown(){
+				let self = this
+				this.downTimer=setTimeout(function(){
+					self.down=false
+				},30)
 			},
-			
-			/**
-			* 触摸开始
-			**/
-			touchStart(e) {
-				this.showAnimation = false
-				this.touchX = e.touches[0].clientX;
-				this.touchStartX = e.touches[0].clientX;
-				this.touchY = e.touches[0].clientY;
-				this.touchStartY = e.touches[0].clientY;
+			scrolltolower(e){
+				let _this=this
+				if(e.detail.direction=='bottom'&&e.type=="scrolltolower"){
+					if (this.read < (this.detail.data.length - 1)) {
+						uni.showLoading({
+							title: '请稍等...'
+						})
+						setTimeout(function() {
+							_this.step = 0
+							_this.read += 1
+							_this.getHeight()
+							uni.hideLoading()
+							_this.sliderValue = 0
+							_this.scrollViewTop=0
+							_this.down=true
+							_this.cleadown()
+						}, 300)
+					} else {
+						uni.showToast({
+							icon: 'none',
+							title: '已加载全部'
+						})
+					}
+				}
 			},
+			loadData() {
+				let u = "";
+				for(let j=0;j<100;j++){
+					u = u + "阿UI和代发IU稍等哈UI发货吧UI返回IU修"
+				}
+				for(let i=0;i<100;i++){
+					this.detail.title = '1'
+					this.detail.data.push({
+						id: i, 
+						sub: i,
+						content: u
+					})
+					
+				}
+				this.getHeight()
+				uni.hideLoading()
+				return
+				let _this = this
+				uni.showLoading({
+					title: '加载中...'
+				})
+						let res = '../../static/data/data.txt'
+						let arr = res.data.split('\n')
+						let index = 0
+						_this.articleList = []
+						for (let i in arr) {
+							let html = ''
+							if (arr[i]) {
+								// let reg='/第[一二三四五六七八九十]{1,10}章/'
+								if (arr[i].indexOf('《') !== -1 || arr[i].indexOf('》') !== -1) {
+									_this.detail.title = arr[i].replace(/\s+/g, "")
+									_this.detail.data.push({
+										id: index + 1,
+										sub: arr[i].replace(/\s+/g, ""),
+										content: ""
+									})
+								} else if (arr[i].indexOf('楔子') !== -1 || arr[i].indexOf('章') !== -1 ||
+									arr[i].indexOf('篇') !== -1 || arr[i].indexOf('第') !== -1 || arr[i]
+									.indexOf('节') !== -1) {
+									if (arr[i].length < 20) {
+										_this.detail.data.push({
+											id: index + 1,
+											sub: arr[i].replace(/\s+/g, ""),
+											content: ""
+										})
+										index++
+									}
+								} else {
+									_this.detail.data[index].content += "<p>" + arr[i].replace(/\s+/g,
+										"") + '</p>'
+								}
+							}
+						}
+					
 			
-			/**
-			* 触摸
-			**/
-			touchMove(e) {
-				this.showShadow = true;
-				let delta = 0
-				if (this.turnType === 0 || this.turnType === 1) {  //翻页方式为‘覆盖’或者‘左右平移’
-					delta = e.touches[0].clientX - this.touchStartX;
-					
-					// 限制边界
-					if (delta>this.windowWidth) {
-						delta = this.windowWidth
-					}
-					if (delta<-this.windowWidth) {
-						delta = -this.windowWidth
-					}
-					
-					this.delta = e.touches[0].clientX - this.touchX;
-					this.touchX = e.touches[0].clientX;
+			
+			},
+			brightnessCheckBox(e) {
+				let self = this
+				if (e.detail.value.includes(0)) {
+					this.brightnessCheck = true
+					screen.setBrigthness(null, true, function(res) {
+
+					})
+				} else {
+					this.brightnessCheck = false
+					screen.setBrigthness(this.brightness, false, function(res) {
+
+					})
 				}
-				else {	//翻页方式为‘上下平移’
-					delta = e.touches[0].clientY - this.touchStartY;
-					
-					// 限制边界
-					if (delta>this.windowHeight) {
-						delta = this.windowHeight
-					}
-					if (delta<-this.windowHeight) {
-						delta = -this.windowHeight
-					}
-					
-					this.delta = e.touches[0].clientY - this.touchY;
-					this.touchY = e.touches[0].clientY;
-				}
-				
-				if (this.next && this.nextPage.ready) {   //首次翻下一页之后
-					if (this.nextPage.isEnd) {
-						return
-					}
-					
-					// 限制边界
-					if (delta>0) {
-						delta = 0
-					}
-					
-					this.prePage.pageTranslate = [
-						`(${-this.windowWidth}px,0)`,
-						`(${-this.windowWidth+delta}px,0)`,
-						`(0,${-this.windowHeight+delta}px)`
-					]
-					this.curPage.pageTranslate = [
-						`(${delta}px,0)`,
-						`(${delta}px,0)`,
-						`(0,${delta}px)`
-					]
-					this.nextPage.pageTranslate = [
-						`(0,0)`,
-						`(${this.windowWidth+delta}px,0)`,
-						`(0,${this.windowHeight+delta}px)`
-					]
-				}
-				if (!this.pre && !this.next && delta < 0) {  //首次翻下一页
-					this.next = true
-					if (this.nextPage.ready) {  //页面准备好了
-						if (this.nextPage.isEnd) {
-							
-							
-							/*****************************************/
-							/**********    根据需要更改    ************/
-							/*****************************************/
+			},
+			brightnessChange(e) {
+				let self = this
+				screen.setBrigthness(e.detail.value, false, function(res) {
+					self.brightness = res
+				})
+			},
+			animateBtn(index) {
+				this.pageType = index
+			},
+			pageBack() {
+				uni.navigateBack({
+					delta: 1
+				})
+			},
+			getTime() {
+				let _this = this
+				timer = setInterval(function() {
+					_this.hour = new Date().getHours()
+					_this.second = new Date().getMinutes()
+				}, 1000)
+			},
+			getHeight(prev) {
+				let _this = this
+				this.$nextTick(function() {
+					const query = uni.createSelectorQuery().in(this);
+					query.select('#html .content').boundingClientRect(data => {
+						_this.contentHeight=data.height
+						_this.transList = []
+						_this.size = Math.ceil(data.height / _this.height)
+						if (data.height < _this.height) {
+							_this.page = 100
+						}
+						if (prev) {
+							_this.step = _this.size - 1
+						}
+					}).exec();
+				})
+			},
+			prev() {
+				let _this = this
+				if (this.isClick) {
+					if (this.step > 0) {
+						this.step--
+						this.sliderValue = (this.step / (this.size - 1) * 100).toFixed(1)
+						this.isClick = false
+						setTimeout(function() {
+							_this.isClick = true
+						}, 300)
+					} else {
+						if (this.read > 0) {
+							uni.showLoading({
+								title: '请稍等...'
+							})
+							this.isClick = false
+							setTimeout(function() {
+								_this.read--
+								_this.getHeight(true)
+								uni.hideLoading()
+								_this.sliderValue = 0
+								_this.isClick = true
+							}, 300)
+						} else {
 							uni.showToast({
-								title:'跳转推荐页',
-								icon:'none'
-							})
-							/*****************************************/
-							/*****************************************/
-							/*****************************************/
-							
-							
-						}
-						else {
-							this.prePage.pageTranslate = [
-								`(${-this.windowWidth}px,0)`,
-								`(${-this.windowWidth+delta}px,0)`,
-								`(0,${-this.windowHeight+delta}px)`
-							]
-							this.curPage.pageTranslate = [
-								`(${delta}px,0)`,
-								`(${delta}px,0)`,
-								`(0,${delta}px)`
-							]
-							this.nextPage.pageTranslate = [
-								`(0,0)`,
-								`(${this.windowWidth+delta}px,0)`,
-								`(0,${this.windowHeight+delta}px)`
-							]
-						}
-					}
-					else if (this.nextChapter.ready) {  //下一章已经准备好了
-						this.nextPage = {
-							ready: this.nextChapter.ready,
-							chapterName: this.nextChapter.chapterName,
-							text: this.nextChapter.text,
-							pageNum: 0,
-							totalPage: this.nextChapter.totalPage,
-							pageTranslate: [
-								`(0,0)`,
-								`(${this.windowWidth}px,0)`,
-								`(0,${this.windowHeight}px)`
-							],
-							canRead: this.nextChapter.canRead
-						}
-						this.prePage.pageTranslate = [
-							`(${-this.windowWidth}px,0)`,
-							`(${-this.windowWidth+delta}px,0)`,
-							`(0,${-this.windowHeight+delta}px)`
-						]
-						this.curPage.pageTranslate = [
-							`(${delta}px,0)`,
-							`(${delta}px,0)`,
-							`(0,${delta}px)`
-						]
-						this.nextPage.pageTranslate = [
-							`(0,0)`,
-							`(${this.windowWidth+delta}px,0)`,
-							`(0,${this.windowHeight+delta}px)`
-						]
-					}
-				}
-				if (this.pre && this.prePage.ready) {   //首次翻上一页之后
-					
-					// 限制边界
-					if (delta<0) {
-						delta = 0
-					}
-					
-					if (this.prePage.isCover) {  //上一页是封面
-						this.cover.pageTranslate = [
-							`(${-this.windowWidth+delta}px,0)`,
-							`(${-this.windowWidth+delta}px,0)`,
-							`(0,${-this.windowHeight+delta}px)`
-						]
-						this.curPage.pageTranslate = [
-							`(0,0)`,
-							`(${delta}px,0)`,
-							`(0,${delta}px)`
-						]
-					}
-					else {
-						this.prePage.pageTranslate = [
-							`(${-this.windowWidth+delta}px,0)`,
-							`(${-this.windowWidth+delta}px,0)`,
-							`(0,${-this.windowHeight+delta}px)`
-						]
-						this.curPage.pageTranslate = [
-							`(0,0)`,
-							`(${delta}px,0)`,
-							`(0,${delta}px)`
-						]
-						this.nextPage.pageTranslate = [
-							`(0,0)`,
-							`(${this.windowWidth+delta}px,0)`,
-							`(0,${this.windowHeight+delta}px)`
-						]
-					}
-				}
-				if (!this.pre && !this.next && delta > 0) {  //首次翻上一页
-					this.pre = true
-					if (this.prePage.ready) {  //页面准备好了
-						if (this.prePage.isCover) {  //上一页是封面
-							this.cover.pageTranslate = [
-								`(${-this.windowWidth+delta}px,0)`,
-								`(${-this.windowWidth+delta}px,0)`,
-								`(0,${-this.windowHeight+delta}px)`
-							]
-							this.curPage.pageTranslate = [
-								`(0,0)`,
-								`(${delta}px,0)`,
-								`(0,${delta}px)`
-							]
-						}
-						else {
-							this.prePage.pageTranslate = [
-								`(${-this.windowWidth+delta}px,0)`,
-								`(${-this.windowWidth+delta}px,0)`,
-								`(0,${-this.windowHeight+delta}px)`
-							]
-							this.curPage.pageTranslate = [
-								`(0,0)`,
-								`(${delta}px,0)`,
-								`(0,${delta}px)`
-							]
-							this.nextPage.pageTranslate = [
-								`(0,0)`,
-								`(${this.windowWidth+delta}px,0)`,
-								`(0,${this.windowHeight+delta}px)`
-							]
-						}
-					}
-					else if (this.preChapter.ready) {  //上一章已经准备好了
-						this.prePage = {
-							ready: this.preChapter.ready,
-							chapterName: this.preChapter.chapterName,
-							text: this.preChapter.text,
-							pageNum: this.preChapter.totalPage - 1,
-							totalPage: this.preChapter.totalPage,
-							pageTranslate: [
-								`(${-this.windowWidth}px,0)`,
-								`(${-this.windowWidth}px,0)`,
-								`(0,${-this.windowHeight}px)`
-							],
-							canRead: this.preChapter.canRead
-						}
-						this.prePage.pageTranslate = [
-							`(${-this.windowWidth+delta}px,0)`,
-							`(${-this.windowWidth+delta}px,0)`,
-							`(0,${-this.windowHeight+delta}px)`
-						]
-						this.curPage.pageTranslate = [
-							`(0,0)`,
-							`(${delta}px,0)`,
-							`(0,${delta}px)`
-						]
-						this.nextPage.pageTranslate = [
-							`(0,0)`,
-							`(${this.windowWidth+delta}px,0)`,
-							`(0,${this.windowHeight+delta}px)`
-						]
-					}
-				}
-				
-			},
-			
-			/**
-			* 触摸结束
-			**/
-			touchEnd(e) {
-				this.showAnimation = true
-				this.showShadow = false
-				let delta = 0
-				if (this.turnType === 0 || this.turnType === 1) {
-					delta = e.changedTouches[0].clientX - this.touchStartX;
-				}
-				else {
-					delta = e.changedTouches[0].clientY - this.touchStartY;
-				}
-				if (delta < 0.8 && delta > -0.8) {   //部分手机点击屏幕时无法做到delta===0
-					if (e.changedTouches[0].clientX<this.windowWidth/3) { //点击屏幕左1/3为上一页
-						this.goPrePage()
-					}
-					else if (e.changedTouches[0].clientX>this.windowWidth/3*2) { //点击屏幕右1/3为下一页
-						this.goNextPage()
-					}
-					else if (e.changedTouches[0].clientX<=this.windowWidth/3*2 && e.changedTouches[0].clientX>=this.windowWidth/3) { //点击屏幕中间1/3为呼出菜单
-						this.showMenu()
-					}
-				}
-				else {
-					if (this.next && this.delta <= 0) {  //下一页
-						this.goNextPage()
-					}
-					else if (this.next && this.delta > 0) {  //取消翻页
-						this.prePage.pageTranslate = [
-							`(${-this.windowWidth}px,0)`,
-							`(${-this.windowWidth}px,0)`,
-							`(0,${-this.windowHeight}px)`
-						]
-						this.curPage.pageTranslate = [
-							`(0,0)`,
-							`(0,0)`,
-							`(0,0)`
-						]
-						this.nextPage.pageTranslate = [
-							`(0,0)`,
-							`(${this.windowWidth}px,0)`,
-							`(0,${this.windowHeight}px)`
-						]
-					}
-					else if (this.pre && this.delta >= 0) {  //上一页
-						this.goPrePage()
-					}
-					else if (this.pre && this.delta < 0) {  //取消翻页
-						this.prePage.pageTranslate = [
-							`(${-this.windowWidth}px,0)`,
-							`(${-this.windowWidth}px,0)`,
-							`(0,${-this.windowHeight}px)`
-						]
-						this.curPage.pageTranslate = [
-							`(0,0)`,
-							`(0,0)`,
-							`(0,0)`
-						]
-						this.nextPage.pageTranslate = [
-							`(0,0)`,
-							`(${this.windowWidth}px,0)`,
-							`(0,${this.windowHeight}px)`
-						]
-						this.cover.pageTranslate = [
-							`(${-this.windowWidth}px,0)`,
-							`(${-this.windowWidth}px,0)`,
-							`(0,${-this.windowHeight}px)`
-						]
-					}
-				}
-				this.next = false
-				this.pre = false
-				
-			},
-			
-			/**
-			* 取消触摸
-			**/
-			touchcancel() {
-				
-				//取消翻页,重置页面
-				this.showAnimation = false
-				this.showShadow = false
-				this.prePage.pageTranslate = [
-					`(${-this.windowWidth}px,0)`,
-					`(${-this.windowWidth}px,0)`,
-					`(0,${-this.windowHeight}px)`
-				]
-				this.curPage.pageTranslate = [
-					`(0,0)`,
-					`(0,0)`,
-					`(0,0)`
-				]
-				this.nextPage.pageTranslate = [
-					`(0,0)`,
-					`(${this.windowWidth}px,0)`,
-					`(0,${this.windowHeight}px)`
-				]
-				this.cover.pageTranslate = [
-					`(${-this.windowWidth}px,0)`,
-					`(${-this.windowWidth}px,0)`,
-					`(0,${-this.windowHeight}px)`
-				]
-				this.next = false
-				this.pre = false
-			},
-			
-			/**
-			* 呼出菜单
-			**/
-			showMenu() {
-				// #ifdef APP-PLUS
-					plus.navigator.setFullscreen(false);
-				// #endif
-				this.menuShow = true;
-				setTimeout(() => {
-					this.itemShow = true
-				},100)
-			},
-			
-			/**
-			* 关闭菜单
-			**/
-			closeMenu() {
-				// #ifdef APP-PLUS
-					plus.navigator.setFullscreen(true);
-				// #endif
-				this.itemShow = false
-				this.settingShow = false
-				this.directoryShow = false
-				setTimeout(() => {
-					this.directoryShowBefore = false
-					this.menuShow = false
-				},300)
-			},
-			
-			/**
-			* 关闭菜单栏，呼出设置栏
-			**/
-			openSetting() {
-				
-				this.itemShow = false
-				setTimeout(() => {
-					this.settingShow = true
-				},300)
-			},
-			
-			/**
-			* 关闭菜单栏，呼出目录栏
-			**/
-			openDirectory() {
-				// #ifdef APP-PLUS
-					plus.navigator.setFullscreen(true);
-				// #endif
-				this.itemShow = false
-				this.directoryShowBefore = true
-				setTimeout(() => {
-					this.directoryShow = true
-				},300)
-			},
-			
-			/**
-			* 拖动进度条
-			**/
-			slideChanging(e){
-				this.progressTouched = true
-				this.chapterProgress = e.detail.value
-			},
-			
-			/**
-			* 结束拖动进度条
-			**/
-			async slideChange(e) {
-				
-				this.chapterProgress = e.detail.value
-				uni.showLoading({
-					title: '加载中'
-				})
-				await this.getThreeChapter(e.detail.value)
-				this.progressTouched = false
-				this.goToPage(0)
-				uni.hideLoading()
-				
-			},
-			
-			/**
-			* 上一页,页面轮换
-			**/
-			goPrePage() {
-				
-				if (this.prePage.isCover) {   //如果是首页
-					this.cover.pageTranslate = [
-						`(0,0)`,
-						`(0,0)`,
-						`(0,0)`
-					]
-					this.curPage.pageTranslate = [
-						`(0,0)`,
-						`(${this.windowWidth}px,0)`,
-						`(0,${this.windowHeight}px)`
-					]
-					return 
-				}
-				if (!this.prePage.ready && !this.preChapter.ready) {
-					this.waitForPre = true
-					uni.showLoading({
-						title: '正在准备上一章',
-						mask: true
-					})
-					return
-				}
-				let showChapter = false
-				this.currentPage -= 1
-				if (this.currentPage === -1) {   //翻至上一章了
-					showChapter = true
-					this.currentPage = this.preChapter.totalPage - 1
-					this.chapterRotate('pre')
-				}
-				
-				let cur = [].concat(this.curPage.pageTranslate)
-				let pre = [].concat(this.prePage.pageTranslate)
-				this.goToPage(this.currentPage)
-				this.prePage.pageTranslate = [
-					`(${-this.windowWidth}px,0)`,
-					`(${-this.windowWidth}px,0)`,
-					`(0,${-this.windowHeight}px)`
-				]
-				this.curPage.pageTranslate = pre
-				this.nextPage.pageTranslate = cur
-				setTimeout(()=> {
-					if (showChapter) {
-						uni.showToast({
-							title: this.curChapter.chapterName,
-							icon: 'none'
-						})
-					}
-					this.showAnimation = true
-					this.prePage.pageTranslate = [
-						`(${-this.windowWidth}px,0)`,
-						`(${-this.windowWidth}px,0)`,
-						`(0,${-this.windowHeight}px)`
-					]
-					this.curPage.pageTranslate = [
-						`(0,0)`,
-						`(0,0)`,
-						`(0,0)`
-					]
-					this.nextPage.pageTranslate = [
-						`(0,0)`,
-						`(${this.windowWidth}px,0)`,
-						`(0,${this.windowHeight}px)`
-					]
-				},50)
-			},
-			
-			
-			/**
-			* 下一页,页面轮换
-			**/
-			goNextPage() {
-				if (this.nextPage.isEnd) {   //如果翻至本书末尾
-				
-					/*****************************************/
-					/**********    根据需要更改    ************/
-					/*****************************************/
-					uni.showToast({						title:'跳转推荐页',						icon:'none'					})
-					/*****************************************/
-					/*****************************************/
-					/*****************************************/
-					return 
-				}
-				if (!this.nextPage.ready && !this.nextChapter.ready) {
-					this.waitForNext = true
-					uni.showLoading({
-						title: '正在准备下一章',
-						mask: true
-					})
-					return
-				}
-				this.currentPage += 1
-				let showChapter = false
-				if (this.currentPage === this.curChapter.totalPage) {   //翻至下一章了
-					showChapter = true
-					this.currentPage = 0
-					this.chapterRotate('next')
-				}
-				
-				let cur = [].concat(this.curPage.pageTranslate)
-				let next = [].concat(this.nextPage.pageTranslate)
-				this.goToPage(this.currentPage)
-				this.prePage.pageTranslate = cur
-				this.curPage.pageTranslate = next
-				this.nextPage.pageTranslate = [
-					`(0,0)`,
-					`(${this.windowWidth}px,0)`,
-					`(0,${this.windowHeight}px)`
-				]
-				setTimeout(()=> {
-					if (showChapter) {
-						uni.showToast({
-							title: this.curChapter.chapterName,
-							icon: 'none'
-						})
-					}
-					this.showAnimation = true
-					this.prePage.pageTranslate = [
-						`(${-this.windowWidth}px,0)`,
-						`(${-this.windowWidth}px,0)`,
-						`(0,${-this.windowHeight}px)`
-					]
-					this.curPage.pageTranslate = [
-						`(0,0)`,
-						`(0,0)`,
-						`(0,0)`
-					]
-					this.nextPage.pageTranslate = [
-						`(0,0)`,
-						`(${this.windowWidth}px,0)`,
-						`(0,${this.windowHeight}px)`
-					]
-				},50)
-			},
-			
-			/**
-			* 章节轮换
-			**/
-			async chapterRotate(type) {
-				if (type === 'next') {
-					this.preChapter = Object.assign({}, this.curChapter)
-					this.curChapter = Object.assign({}, this.nextChapter)
-					if (this.curChapter.chapterIndex !== this.directoryList.length - 1) {//最后一章是根据目录列表长度判断
-						this.nextChapter = {
-							ready: false,
-							chapterIndex: this.curChapter.chapterIndex + 1,
-							chapterName: this.directoryList[this.curChapter.chapterIndex + 1].name,
-						}
-						await this.getOneChapter(this.directoryList[this.curChapter.chapterIndex + 1].chapterId)
-						this.$set(this.nextChapter, 'text', this.tmpChapter.text)
-						this.$set(this.nextChapter, 'canRead', this.tmpChapter.canRead)
-						this.calcNextChapter()
-					}
-					else {
-						this.nextChapter = {ready: true,isEnd: true}
-					}
-				}
-				if (type === 'pre') {
-					this.nextChapter = Object.assign({}, this.curChapter)
-					this.curChapter = Object.assign({}, this.preChapter)
-					if (this.curChapter.chapterIndex !== 0) {
-						this.preChapter = {
-							ready: false,
-							chapterIndex: this.curChapter.chapterIndex - 1,
-							chapterName: this.directoryList[this.curChapter.chapterIndex - 1].name,
-						}
-						await this.getOneChapter(this.directoryList[this.curChapter.chapterIndex - 1].chapterId)
-						this.$set(this.preChapter, 'text', this.tmpChapter.text)
-						this.$set(this.preChapter, 'canRead', this.tmpChapter.canRead)
-						this.calcPreChapter()
-					}
-					else {
-						this.preChapter = {ready: true,isCover: true}
-					}
-				}
-			},
-			
-			
-			/**
-			* 跳转下一章
-			**/
-			goNextChapter() {
-				if (this.curChapter.chapterIndex === this.directoryList.length - 1) {
-					uni.showToast({
-						title: '已经是最后一章了',
-						icon: 'none'
-					})
-					return
-				}
-				if (this.waitForNext || this.waitForPre) {
-					return 
-				}
-				if (this.nextChapter.ready) {
-					this.chapterRotate('next')
-					this.goToPage(0)
-				}
-				else {
-					uni.showLoading({
-						title: '正在准备下一章'
-					})
-					this.waitForNextChapter = true
-				}
-				
-			},
-			
-			/**
-			* 跳转上一章
-			**/
-			goPreChapter(page) {
-				if (this.curChapter.chapterIndex === 0) {
-					uni.showToast({
-						title: '这是第一章',
-						icon: 'none'
-					})
-					return
-				}
-				if (this.waitForNext || this.waitForPre) {
-					return 
-				}
-				if (this.preChapter.ready) {
-					this.chapterRotate('pre')
-					this.goToPage(0)
-				}
-				else {
-					uni.showLoading({
-						title: '正在准备上一章'
-					})
-					this.waitForPreChapter = true
-				}
-			},
-			
-			
-			/**
-			* 根据页码跳转
-			**/
-			goToPage(page) {
-				
-				this.currentPage = page
-				this.showAnimation = false
-				this.curPage = {
-					ready: this.curChapter.ready,
-					chapterName: this.curChapter.chapterName,
-					text: this.curChapter.text,
-					pageNum: this.currentPage,
-					totalPage: this.curChapter.totalPage,
-					pageTranslate: [
-						`(0,0)`,
-						`(0,0)`,
-						`(0,0)`
-					],
-					canRead: this.curChapter.canRead
-				}
-				if (this.currentPage === 0) {
-					if (this.preChapter.ready && this.preChapter.isCover) {    //翻至封面了
-						this.prePage = {
-							ready: true,
-							isCover: true,
-							pageTranslate: [
-								`(${-this.windowWidth}px,0)`,
-								`(${-this.windowWidth}px,0)`,
-								`(0,${-this.windowHeight}px)`
-							]
-						}
-					}
-					else {
-						this.prePage = {
-							ready: this.preChapter.ready,
-							chapterName: this.preChapter.chapterName,
-							text: this.preChapter.text,
-							pageNum: this.preChapter.totalPage - 1,
-							totalPage: this.preChapter.totalPage,
-							pageTranslate: [
-								`(${-this.windowWidth}px,0)`,
-								`(${-this.windowWidth}px,0)`,
-								`(0,${-this.windowHeight}px)`
-							],
-							canRead: this.preChapter.canRead
-						}
-					}
-				}
-				else {
-					this.prePage = {
-						ready: true,
-						chapterName: this.curChapter.chapterName,
-						text: this.curChapter.text,
-						pageNum: this.currentPage - 1,
-						totalPage: this.curChapter.totalPage,
-						pageTranslate: [
-							`(${-this.windowWidth}px,0)`,
-							`(${-this.windowWidth}px,0)`,
-							`(0,${-this.windowHeight}px)`
-						],
-						canRead: this.curChapter.canRead
-					}
-				}
-				if (this.currentPage >= this.curChapter.totalPage - 1) {
-					if (this.nextChapter.ready && this.nextChapter.isEnd) {    //翻至最后一章了
-						this.nextPage = {
-							ready: true,
-							isEnd: true,
-							pageTranslate: [
-								`(0,0)`,
-								`(${this.windowWidth}px,0)`,
-								`(0,${this.windowHeight}px)`
-							]
-						}
-					}
-					else {
-						this.nextPage = {
-							ready: this.nextChapter.ready,
-							chapterName: this.nextChapter.chapterName,
-							text: this.nextChapter.text,
-							pageNum: 0,
-							totalPage: this.nextChapter.totalPage,
-							pageTranslate: [
-								`(0,0)`,
-								`(${this.windowWidth}px,0)`,
-								`(0,${this.windowHeight}px)`
-							],
-							canRead: this.nextChapter.canRead
-						}
-					}
-				}
-				else {
-					this.nextPage = {
-						ready: true,
-						chapterName: this.curChapter.chapterName,
-						text: this.curChapter.text,
-						pageNum: this.currentPage + 1,
-						totalPage: this.curChapter.totalPage,
-						pageTranslate: [
-							`(0,0)`,
-							`(${this.windowWidth}px,0)`,
-							`(0,${this.windowHeight}px)`
-						],
-						canRead: this.curChapter.canRead
-					}
-				}
-			},
-			
-			/**
-			* 跳转到指定章节
-			**/
-			async goToChapter(index) {
-				this.progressTouched = false
-				this.closeMenu()
-				uni.showLoading({
-					title: '加载中'
-				})
-				await this.getThreeChapter(index)
-				this.goToPage(0)
-				uni.hideLoading()
-			},
-			
-			/**
-			* 加大字体
-			**/
-			async bigSize() {
-				let progress = this.progress   //记录阅读进度用于调整字体后跳转
-				this.fontSize +=2
-				uni.setStorageSync('fontSize', this.fontSize)
-				this.calcHeight()
-				await this.calcCurChapter()
-				let page = Math.floor((this.curChapter.totalPage - 1) * progress)
-				this.goToPage(page)
-				if (this.preChapter.ready && !this.preChapter.isCover) {
-					this.preChapter.ready = false
-					await this.calcPreChapter()
-				}
-				if (this.nextChapter.ready && !this.nextChapter.isEnd) {
-					this.nextChapter.ready = false
-					await this.calcNextChapter()
-				}
-				
-				
-				
-			},
-			
-			/**
-			* 缩小字体
-			**/
-			async smallSize() {
-				let progress = this.progress
-				this.fontSize -= 2
-				uni.setStorageSync('fontSize', this.fontSize)
-				this.calcHeight()
-				await this.calcCurChapter()
-				let page = Math.floor((this.curChapter.totalPage - 1) * progress)
-				this.goToPage(page)
-				if (this.preChapter.ready && !this.preChapter.isCover) {
-					this.preChapter.ready = false
-					await this.calcPreChapter()
-				}
-				if (this.nextChapter.ready && !this.nextChapter.isEnd) {
-					this.nextChapter.ready = false
-					await this.calcNextChapter()
-				}
-				
-			},
-			
-			/**
-			* 切换繁体简体
-			**/
-			changeFont(type) {
-				if (type === 2) {   //切换为繁体
-					this.preChapter.text = traditionalized(this.preChapter.text)
-					this.curChapter.text = traditionalized(this.curChapter.text)
-					this.nextChapter.text = traditionalized(this.nextChapter.text)
-					this.prePage.text = traditionalized(this.prePage.text)
-					this.curPage.text = traditionalized(this.curPage.text)
-					this.nextPage.text = traditionalized(this.nextPage.text)
-					this.simplified = 2
-					uni.setStorageSync('simplified', 2)
-				}
-				else {   //切换为简体
-					this.preChapter.text = simplized(this.preChapter.text)
-					this.curChapter.text = simplized(this.curChapter.text)
-					this.nextChapter.text = simplized(this.nextChapter.text)
-					this.prePage.text = simplized(this.prePage.text)
-					this.curPage.text = simplized(this.curPage.text)
-					this.nextPage.text = simplized(this.nextPage.text)
-					this.simplified = 1
-					uni.setStorageSync('simplified', 1)
-				}
-			},
-			
-			/**
-			* 改变行距
-			**/
-			async changeLineHeight(lineHeight) {
-				let progress = this.progress
-				if (lineHeight === this.lineHeight) {
-					return
-				}
-				else {
-					this.lineHeight = lineHeight;
-					uni.setStorageSync('lineHeight', this.lineHeight)
-					this.calcHeight()
-					await this.calcCurChapter()
-					let page = Math.floor((this.curChapter.totalPage - 1) * progress)
-					this.goToPage(page)
-					if (this.preChapter.ready && !this.preChapter.isCover) {
-						this.preChapter.ready = false
-						await this.calcPreChapter()
-					}
-					if (this.nextChapter.ready && !this.nextChapter.isEnd) {
-						this.nextChapter.ready = false
-						await this.calcNextChapter()
-					}
-					
-				}
-			},
-			
-			
-			/**
-			* 改变翻页方式
-			**/
-			changeTurnType(turnType) {
-				if (turnType === this.turnType) {
-					return
-				}
-				else {
-					this.showAnimation = false
-					this.turnType = turnType;
-					uni.setStorageSync('turnType', this.turnType)
-				}
-			},
-			
-			/**
-			* 改变背景
-			**/
-			changeBackground(background) {
-				if (background === this.background) {
-					return
-				}
-				else {
-					this.background = background;
-					uni.setStorageSync('background', this.background)
-				}
-			},
-			
-			/**
-			* 获取目录
-			**/
-			getDirectoryList(showLoading) {
-				
-				/*****************************************/
-				/**********    根据需要更改    ************/
-				/*****************************************/
-				
-				if (showLoading) {
-					uni.showLoading({
-						title: '加载中',
-						mask: true
-					})
-				}
-				
-				return new Promise((resolve, reject) => {
-					// 模拟网络时间
-					setTimeout(() => {
-						
-						if (showLoading) {
-							uni.hideLoading()
-						}
-						
-						// 生成目录，正常是后端传过来
-						for (let i=1;i<=1000;i++) {
-							this.directoryList.push({
-								index: i-1,
-								chapterId: i,   //注意：这个chapterId用于获取章节内容而不是index
-								name: `第${i}章 测试测试测试测试测测`    //每一章章节名
+								icon: 'none',
+								title: '已经在最开头'
 							})
 						}
-						resolve()
-					}, 300)
-					
-				}).then(() => {}, ()=> {
-					
-					// 此处是网络连接失败的逻辑
-					uni.hideLoading()
-					return new Promise((resolve, reject)=> {
-						uni.showModal({
-							title: '连接失败',
-							content: '请检查您的网络状态',
-							confirmText: '重试',
-							success: async(res) => {
-								if (res.confirm) {
-									//用户点击了重试
-									await this.getDirectoryList(true)
-									resolve()
-								} else if (res.cancel) {
-									//用户点击取消
-									this.back()
-								}
-							}
-						})
-					})
-					
-				})
-				/*****************************************/
-				/*****************************************/
-				/*****************************************/
-			},
-			
-			
-			/**
-			* 获取一章数据
-			**/
-			getOneChapter(chapterId, showLoading) {
-				
-				/*****************************************/
-				/**********    根据需要更改    ************/
-				/*****************************************/
-				
-				if (showLoading) {
-					uni.showLoading({
-						title: '加载中',
-						mask: true
-					})
+					}
+					if (!this.auto) {
+						this.tool = null
+					}
+					this.toggle = false
 				}
-				
-				return new Promise((resolve, reject) => {
-					// 模拟网络时间
-					setTimeout(() => {
-						
-						if (showLoading) {
-							uni.hideLoading()
-						}
-						
-						if (chapterId<500) {  //修改
-							this.tmpChapter.text = `<h1 class="chapterName" style="text-indent: 0;margin-bottom: 30px;">第${chapterId}章</h1>` + this.text  //模拟数据    章节内容
-							
-							// 根据业务实际情况判断该用户是否可阅读,逻辑后端判断
-							this.tmpChapter.canRead = true
-						}
-						else {
-							this.tmpChapter.text = ''  //注意：不能阅读章节请赋值为空字符串
-							
-							// 根据业务实际情况判断该用户是否可阅读,逻辑后端判断
-							this.tmpChapter.canRead = false
-						}
- 						
-						
-						if (this.simplified === 2) {   //切换为繁体  注意：这里默认数据库中是简体字
-							this.tmpChapter.text = traditionalized(this.tmpChapter.text)
-						}
-						
-						resolve()
-					}, 300)
-				}).then(() => {}, ()=> {
-					
-					// 此处是网络连接失败的逻辑
-					uni.hideLoading()
-					return new Promise((resolve, reject)=> {
-						uni.showModal({
-							title: '连接失败',
-							content: '请检查您的网络状态',
-							confirmText: '重试',
-							success: async(res) => {
-								if (res.confirm) {
-									//用户点击了重试
-									await this.getOneChapter(chapterId, true)
-									resolve()
-								} else if (res.cancel) {
-									//用户点击取消
-									this.back()
-								}
-							}
-						})
-					})
-					
-				})
-				/*****************************************/
-				/*****************************************/
-				/*****************************************/
-			},
-			
-			
-			/**
-			* 获取三章数据
-			**/
-			async getThreeChapter(index) {
-				await this.getOneChapter(this.directoryList[index].chapterId)
-				this.curChapter = {
-					chapterIndex: index,
-					chapterName: this.directoryList[index].name,
-					text: this.tmpChapter.text,
-					canRead: this.tmpChapter.canRead
-				}
-				
-				if (this.curChapter.chapterIndex !== 0) {
-					await this.getOneChapter(this.directoryList[index - 1].chapterId)
-					this.preChapter = {
-						chapterIndex: index - 1,
-						chapterName: this.directoryList[index - 1].name,
-						text: this.tmpChapter.text,
-						canRead: this.tmpChapter.canRead
+				if (this.auto) {
+					if (this.step >= 0) {
+						this.back()
 					}
 				}
-				else {
-					this.preChapter = {ready: true,isCover: true}
+			},
+			next(from) {
+				let _this = this
+				if (this.isClick) {
+					if (this.step < this.size - 1) {
+						this.step++
+						this.sliderValue = (this.step / (this.size - 1) * 100).toFixed(1)
+						this.isClick = false
+						setTimeout(function() {
+							_this.isClick = true
+						}, 300)
+					} else {
+						if (this.read < (this.detail.data.length - 1)) {
+							uni.showLoading({
+								title: '请稍等...'
+							})
+							this.isClick = false
+							setTimeout(function() {
+								_this.step = 0
+								_this.read += 1
+								_this.getHeight()
+								uni.hideLoading()
+								_this.sliderValue = 0
+								_this.isClick = true
+							}, 300)
+						} else {
+							uni.showToast({
+								icon: 'none',
+								title: '已加载全部'
+							})
+						}
+					}
+					if (!this.auto) {
+						this.tool = null
+					}
+					this.toggle = false
 				}
-				
-				if (this.curChapter.chapterIndex !== this.directoryList.length - 1) {
-					await this.getOneChapter(this.directoryList[index + 1].chapterId)
-					this.nextChapter = {
-						chapterIndex: index + 1,
-						chapterName: this.directoryList[index + 1].name,
-						text: this.tmpChapter.text,
-						canRead: this.tmpChapter.canRead
+				if (from) {
+					if (this.step <= this.detail.data.length) {
+						this.back()
 					}
 				}
-				else {
-					this.nextChapter = {ready: true,isEnd: true}
-				}
-				await this.calcCurChapter()
-				await this.calcPreChapter()
-				await this.calcNextChapter()
 			},
-			
-			/**
-			* 购买书籍接口
-			**/
-			buyBook() {
-				//在回调中调用this.initPage()刷新本页
+			back() {
+				this.animate()
+			},
+			fontPrev() {
+				if (this.fontSize > 12) {
+					this.fontSize -= 2
+					this.getHeight()
+				}
+			},
+			fontNext() {
+				this.fontSize += 2
+				this.getHeight()
+			},
+			changeBgColor(index) {
+				this.pageColorIndex = index
+			},
+			sapce(index) {
+				this.lineHeightIndex = index
+				this.getHeight()
+			},
+			toggleShow() {
+				if (!this.auto) {
+					this.toggle = !this.toggle
+					this.tool = !this.tool
+				} else {
+					if (this.tool == 2) {
+						this.tool = null
+					} else {
+						this.tool = 2
+					}
+				}
+			},
+			tabClick(index) {
+				if (index != 1) {
+					this.tool = index
+					if (index == 2) {
+						this.auto = true
+						this.animate()
+					}
+				} else {
+					if (index == 1) {
+						this.night = !this.night
+						if (this.night) {
+							this.pageColorIndex = 5
+						} else {
+							this.pageColorIndex = 0
+						}
+					}
+				}
+			},
+			menuClick(index) {
+				this.step = 0
+				this.read = index
+				this.tool = null
+				this.toggle = false
+			},
+			speedPrev() {
+				if (this.speed < 100) {
+					this.speed++
+					this.animate()
+				}
+			},
+			speedNext() {
+				if (this.speed > 0) {
+					this.speed--
+					this.animate()
+				}
+			},
+			out() {
+				this.animationData = this.animation.export()
+				this.auto = false
+				this.tool = null
+				this.toggle = false
+				clearTimeout(this.autoTimer)
+			},
+			animate() {
+				let _this = this
+				if (this.auto) {
+					if (this.autoTimer) {
+						clearTimeout(this.autoTimer)
+					}
+					this.animation.translateY(0).step()
+					this.animation.translateY(this.height).step({
+						duration: _this.speed * 1000
+					})
+					this.animationData = this.animation.export()
+					this.autoTimer = setTimeout(function() {
+						_this.next('animate')
+					}, _this.speed * 1000)
+				}
+			},
+			changing(e) {
 				uni.showToast({
-					title: '跳转至购买页面，如果未登陆则跳转登陆',
-					icon: 'none'
+					icon: 'none',
+					title: e.detail.value + '%'
 				})
+			},
+			sliderChange(e) {
+				if(this.pageType!=2){
+					this.getHeight()
+					this.step = parseInt(this.size * (e.detail.value / 100))
+					this.sliderValue = e.detail.value
+				}else{
+					this.scrollViewTop=(this.contentHeight-this.height)*(e.detail.value/100)
+				}
+			},
+			prevBig() {
+				let _this = this
+				if (this.isClick) {
+					if (this.read > 0) {
+						uni.showLoading({
+							title: '请稍等...'
+						})
+						this.isClick = false
+						setTimeout(function() {
+							_this.step = 0
+							_this.read -= 1
+							_this.getHeight()
+							uni.hideLoading()
+							_this.sliderValue = 0
+							_this.isClick = true
+						}, 300)
+					} else {
+						uni.showToast({
+							icon: 'none',
+							title: '已经在最开头'
+						})
+					}
+				}
+			},
+			nextBig() {
+				let _this = this
+				if (this.isClick) {
+					if (this.read < this.detail.data.length - 1) {
+						uni.showLoading({
+							title: '请稍等...'
+						})
+						this.isClick = false
+						setTimeout(function() {
+							_this.step = 0
+							_this.read++
+							_this.getHeight()
+							_this.sliderValue = 0
+							uni.hideLoading()
+							_this.isClick = true
+						}, 300)
+					} else {
+						uni.showToast({
+							icon: 'none',
+							title: '已加载全部'
+						})
+					}
+				}
+			},
+			touchstart(e) {
+				this.startX = e.changedTouches[0].clientX
+				this.startY = e.changedTouches[0].clientY
+			},
+			touchMove(e) {
+				let _dir = e.changedTouches[0].clientX - this.startX;
+				if (_dir < -100 || _dir > 100) {
+					this.isMove = true;
+				} else {
+					this.isMove = false;
+				}
+			},
+			touchend(e) {
+				let x = 0,
+					y = 0;
+				if (this.startX - e.changedTouches[0].clientX > 0) {
+					x = this.startX - e.changedTouches[0].clientX
+				} else {
+					x = e.changedTouches[0].clientX - this.startX
+				}
+				if (this.startY - e.changedTouches[0].clientY > 0) {
+					y = this.startY - e.changedTouches[0].clientY
+				} else {
+					y = e.changedTouches[0].clientY - this.startY
+				}
+				if (x > y) {
+					if (this.startX - e.changedTouches[0].clientX > 100) {
+						this.next()
+					}
+					if (this.startX - e.changedTouches[0].clientX < -100) {
+						this.prev()
+					}
+				}
 			}
-			
-			
 		}
 	}
 </script>
 
-<style lang="scss" scoped>
-	page{
+<style lang="less" scoped>
+	.page {
+		width: 100%;
+		height: 100%;
 		position: relative;
-		width: 100%;
-		height: 100%;
-	}
-	.chapterName{
-		
-	}
-	.addBook{
-		    position: absolute;
-		    top: 0;
-		    right: 0;
-		    padding-right: 20rpx;
-	}
-	.hidden{
-		opacity: 0;
-	}
-	.action{
-		position: fixed;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		display: flex;
-		justify-content: center;
-		.item{
-			flex: 1;
-			height: 100%;
-		}
-	}
-	.container{
-		position: fixed;
-		top: 0;
-		left: 0;
-		display: flex;
-		flex-flow: column nowrap;
-		justify-content: center;
-		align-items: center;
-		padding: 0px 20px;
-		height: 100%;
-		width: 100%;
-		background-color: #fff;
-		overflow: hidden;
-		.chapter{
-			font-size: 14px;
-			color: $minor-text-color;
-			height:30px;
-			width: 100%;
-			line-height: 30px;
-		}
-		.bottom-bar{
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			font-size: 14px;
-			color: $minor-text-color;
-			height:30px;
+
+		.page-img {
 			width: 100%;
 		}
-		.content{
-			flex: 1 1 auto;
-			overflow: hidden;
-			.inner-box{
-				overflow: hidden;
-				.book-inner{
-					text-indent: 2em;
-					text-align:justify;
+
+		#html {
+			width: 100%;
+			position: fixed;
+			z-index: 1;
+			top: 0;
+			left: 0;
+			bottom: 0;
+			box-sizing: border-box;
+
+			.content {
+				padding: 0 40upx;
+				box-sizing: border-box;
+				font-weight: 400;
+				font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimSun, sans-serif;
+				;
+				text-indent: 36upx;
+			}
+		}
+
+		.html-content {
+			position: fixed;
+			z-index: 10;
+			top: 0;
+			left: 0;
+			bottom: 0;
+			box-sizing: border-box;
+
+			.tops {
+				width: 100%;
+				height: 50px;
+				display: flex;
+				flex-direction: row;
+				justify-content: space-between;
+				align-items: center;
+				box-sizing: border-box;
+				padding: 0 25upx;
+
+				.left {
+					height: 50px;
+					display: flex;
+					flex-direction: row;
+					justify-content: flex-start;
+					align-items: center;
+
+					.icon-fanhui {
+						font-size: 30upx;
+						color: #8b7753;
+					}
+
+					span {
+						font-size: 24upx;
+						margin-left: 10upx;
+					}
 				}
 			}
-		}
-		
-	}
-	.container0{
-		background: url(../../static/background1.jpg);
-		background-color: #fff;
-		background-size: 100% 100%;
-	}
-	.container1{
-		background-color: #000;
-	}
-	.menu{
-		position: fixed;
-		top: 0;
-		left: 0;
-		z-index: 300;
-		// transition: all .3s;
-		.menu-top{
-			position: absolute;
-			left: 0;
-			width: 100%;
-			background-color: #333;
-			transition: top .3s;
-			.head{
+
+			.center {
+				display: flex;
+				flex-direction: row;
+				justify-content: flex-start;
+				height: calc(100% - 50px - 50px);
 				position: relative;
-				display: flex;
-				justify-content: center;
-				align-items: center;
-				height: 40px;
+
+				.html {
+					width: 100%;
+					overflow-y: hidden;
+
+					.article {
+						padding: 0 40upx;
+						box-sizing: border-box;
+						font-weight: 400;
+						font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimSun, sans-serif;;
+						text-indent: 36upx;
+					}
+				}
+
+				.special {
+					position: absolute;
+					top: 0;
+				}
+			}
+
+			.bottoms {
 				width: 100%;
-				line-height: 40px;
-				color: #fff;
-			}
-			.back{
-				position: absolute;
-				top: 0;
-				left: 10px;
-			}
-		}
-		.directory{
-			position: absolute;
-			top: 0;
-			display: flex;
-			flex-flow: column;
-			width: 600rpx;
-			height: 100%;
-			transition: left .1s;
-			.bookname{
-				padding: 20px 0 20px 10px;
-				height: 60px;
-				font-size: 18px;
-			}
-			.directory-listItem{
-				display: flex;
-				align-items: center;
-				padding-left: 10px;
-				height: 40px;
-				font-size: 14px;
-				border-bottom: #eee solid 1px;
-			}
-			.active{
-				color: red
-			}
-		}
-		.menu-bottom{
-			position: absolute;
-			left: 0;
-			width: 100%;
-			background-color: #333;
-			transition: bottom .3s;
-			color: #fff;
-			.show-chapter{
-				position: absolute;
-				left: 50%;
-				top: 0;
-				transform: translate(-50%, -110%);
-				padding: 5px 10px;
-				line-height: 20px;
-				border-radius: 10rpx;
-				font-size: 13px;
-				background-color: #333;
-			}
-			.progress-box{
+				height: 50px;
 				display: flex;
 				justify-content: space-between;
 				align-items: center;
-				padding: 0 20px;
-				height: 50px;
-				width: 100%;
-				font-size: 15px;
+				flex-direction: row;
+				box-sizing: border-box;
+				padding: 0 25upx;
+
+				.left {
+					display: flex;
+					flex-direction: row;
+					justify-content: flex-start;
+					align-items: center;
+					height: 50px;
+
+					.box {
+						width: 30upx;
+						height: 10upx;
+						padding: 4upx;
+						border-radius: 6upx;
+						position: relative;
+						margin-right: 20upx;
+
+						.middle {
+							height: 100%;
+						}
+
+						.small {
+							position: absolute;
+							z-index: 1;
+							top: 0;
+							bottom: 0;
+							right: -5upx;
+							width: 5upx;
+							height: 10upx;
+							border-radius: 35upx;
+							margin: auto;
+						}
+					}
+				}
+
+				span {
+					font-size: 24upx;
+					color: #8b7753;
+				}
 			}
-			.items-box{
+		}
+
+		.act {
+			width: 100%;
+			position: fixed;
+			z-index: 101;
+			top: 0;
+			left: 0;
+			bottom: 0;
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+
+			.center {
+				width: 50%;
+				height: 100%;
+			}
+
+			.item {
+				width: 25%;
+				height: 100%;
+			}
+		}
+	}
+
+	.head {
+		width: 100%;
+		height: 100upx;
+		position: fixed;
+		z-index: 102;
+		top: 0;
+		left: 0;
+		box-sizing: border-box;
+		padding: 0 25upx;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+
+		.left {
+			display: flex;
+			flex-direction: row;
+			justify-content: flex-start;
+			align-items: center;
+			height: 100upx;
+
+			.icon-fanhui {
+				font-size: 36upx;
+			}
+
+			span {
+				font-size: 26upx;
+				margin-left: 10upx;
+			}
+		}
+	}
+
+	.footer {
+		width: 100%;
+		position: fixed;
+		z-index: 102;
+		bottom: 0;
+		left: 0;
+		padding: 40upx 30upx 10upx 30upx;
+		box-sizing: border-box;
+
+		.tool {
+			.top {
 				display: flex;
+				flex-direction: row;
 				justify-content: space-around;
 				align-items: center;
-				height: 80px;
-				width: 100%;
-				.item-box{
-					display: flex;
-					flex-flow: column;
-					justify-content: center;
-					align-items: center;
-					height: 100%;
+				height: 40upx;
+				margin-bottom: 30upx;
+
+				.item {
+					font-size: 28upx;
+				}
+
+				/deep/ .slider {
+					width: 420upx;
+					height: 30upx;
+					padding: 0 30upx;
+					margin: 0;
+
+					.uni-slider-thumb {
+						width: 40upx !important;
+						height: 40upx !important;
+						margin-top: -20upx !important;
+					}
+
+					.uni-slider-tap-area {
+						padding: 0;
+					}
+
+					.uni-slider-handle-wrapper {
+						height: 30upx;
+						border-radius: 35upx;
+					}
 				}
 			}
-		}
-		.setting{
-			position: absolute;
-			left: 0;
-			display: flex;
-			flex-direction: column;
-			justify-content: space-around;
-			padding: 10px 20px;
-			width: 100%;
-			color: #fff;
-			background-color: #333;
-			transition: bottom .3s;
-			.item{
+
+			.bottom {
 				display: flex;
-				align-items: center;
-				height: 70px;
-				.item-name{
-					padding: 10px;
-					color: #fff;
-					font-size: 14px;
-				}
-				.icon{
-					margin-right: 10px;
-					padding: 5px 20px;
-					font-size: 15px;
-					height: 32px;
-					line-height: 20px;
-					width: auto;
-					text-align: center;
-					border-radius: 20px;
-					border: #fff solid 1px;
-				}
-				.type-setting{
+				flex-direction: row;
+				justify-content: space-between;
+				padding: 0 10upx 30upx 10upx;
+
+				.tool-item {
 					display: flex;
 					flex-direction: column;
-					justify-content: space-around;
+					justify-content: center;
 					align-items: center;
-					margin-right: 10px;
-					padding: 5px;
-					height: 30px;
-					width: 30px;
-					border-radius: 5px;
-					border: #fff solid 1px;
-					.line{
-						width: 100%;
-						border-bottom: #fff solid 1px; 
+
+					.iconfont {
+						font-size: 40upx;
+						margin-bottom: 8upx;
+						width: 45upx;
+						height: 45upx;
+						line-height: 45upx;
+						text-align: center;
 					}
-					.lineActive{
-						width: 100%;
-						border-bottom: #FF9900 solid 1px; 
+
+					.span {
+						font-size: 22upx;
+						line-height: 36upx;
 					}
 				}
-				.active{
-					color: #FF9900;
-					border: #FF9900 solid 1px;
+
+				.tool-item:nth-child(2) {
+					.iconfont {
+						font-size: 42upx;
+					}
+				}
+
+				.tool-item:nth-child(3) {
+					.iconfont {
+						font-size: 34upx;
+					}
+
+					.icon-rijianmoshi {
+						font-size: 42upx;
+					}
+				}
+
+				.tool-item:nth-child(4) {
+					.iconfont {
+						font-size: 38upx;
+					}
+				}
+			}
+		}
+
+		.style {
+			.style-item {
+				display: flex;
+				flex-direction: row;
+				justify-content: space-between;
+				margin-bottom: 30upx;
+
+				.left {
+					width: 100upx;
+					line-height: 64upx;
+					font-size: 28upx;
+				}
+
+				.right {
+					display: flex;
+					flex-direction: row;
+					align-items: center;
+					height: 64upx;
+					flex: 1;
+				}
+
+				.brightness {
+					justify-content: space-between;
+					align-items: center;
+					height: 50upx;
+
+					.brightness-left {
+						width: 400upx;
+						background-color: #121212;
+						display: flex;
+						flex-direction: row;
+						justify-content: space-between;
+						align-items: center;
+						border-radius: 35upx;
+						padding: 0 20upx;
+
+						.iconfont {
+							font-size: 36upx;
+							color: #666666;
+						}
+
+						/deep/ .slider {
+							width: 420upx;
+							height: 50upx;
+							padding: 0 30upx;
+							margin: 0;
+
+							.uni-slider-thumb {
+								width: 40upx !important;
+								height: 40upx !important;
+								margin-top: -20upx !important;
+							}
+
+							.uni-slider-tap-area {
+								padding: 0;
+							}
+
+							.uni-slider-handle-wrapper {
+								height: 50upx;
+								border-radius: 35upx;
+							}
+						}
+					}
+
+					.brightness-right {
+						label {
+							display: flex;
+							flex-direction: row;
+							justify-content: flex-end;
+							align-items: center;
+
+							text {
+								font-size: 24upx;
+								color: #666666;
+							}
+
+							/deep/ checkbox {
+								border-radius: 50%;
+								transform: scale(0.9);
+							}
+
+							/deep/ .uni-checkbox-input {
+								border-radius: 50%;
+								transform: scale(0.9);
+								background-color: rgba(255, 255, 255, 0.5);
+								border-color: rgba(255, 255, 255, 0.5);
+							}
+						}
+					}
+				}
+
+				.font {
+					justify-content: flex-start;
+
+					button {
+						width: 200upx;
+						height: 64upx;
+						line-height: 64upx;
+						border-radius: 30upx;
+						font-size: 32upx;
+					}
+
+					span {
+						width: 190upx;
+						line-height: 64upx;
+						text-align: center;
+						display: block;
+						font-size: 28upx;
+					}
+				}
+
+				.background {
+					justify-content: space-around;
+
+					.color {
+						width: 60upx;
+						height: 60upx;
+						border-radius: 50%;
+						border: 4upx solid #eee;
+					}
+				}
+
+				.space {
+					justify-content: space-around;
+
+					button {
+						width: 180upx;
+						height: 68upx;
+						line-height: 68upx;
+						border-radius: 35upx;
+						display: flex;
+						flex-direction: column;
+						justify-content: center;
+						align-items: center;
+
+						span {
+							width: 32upx;
+							height: 2upx;
+						}
+
+						.span1 {
+							margin: 3upx 0;
+						}
+
+						.span2 {
+							margin: 5upx 0;
+						}
+
+						.span3 {
+							margin: 7upx 0;
+						}
+					}
+				}
+
+				.animatebox {
+					justify-content: space-between;
+
+					button {
+						width: 180upx;
+						height: 68upx;
+						line-height: 68upx;
+						border-radius: 35upx;
+						font-size: 24upx;
+						text-align: center;
+					}
 				}
 			}
 		}
 	}
-	.cover{
-		image{
-			height: 400rpx;
-			width: 300rpx;
-			background-color: #eee;
+
+	.menu {
+		position: fixed;
+		z-index: 102;
+		top: 0;
+		left: 0;
+		background-color: rgba(0, 0, 0, 0.7);
+
+		.box {
+			width: 70%;
+			height: 100%;
+			padding: 20upx;
+			box-sizing: border-box;
+			background-color: #e8c99d;
+
+			.top {
+				width: 100%;
+				font-size: 32upx;
+				color: rgb(144, 126, 90);
+				line-height: 50upx;
+				margin-bottom: 10upx;
+			}
+
+			.item {
+				width: 100%;
+				font-size: 26upx;
+				color: rgb(100, 85, 54);
+				line-height: 30upx;
+				margin: 40upx 0;
+				display: block;
+			}
 		}
 	}
-	
+
+	button:hover {
+		opacity: 0.8 !important;
+		transition: all 02s;
+	}
+
+	button::after {
+		content: none;
+	}
+
+	button {
+		margin: 0;
+	}
+
+	.auto {
+		width: 100%;
+		position: fixed;
+		z-index: 102;
+		bottom: 0;
+		left: 0;
+		background-color: #343436;
+
+		.top {
+			padding: 40upx 30upx;
+			box-sizing: border-box;
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			align-items: center;
+
+			.left {
+				width: 100upx;
+				line-height: 60upx;
+				font-size: 28upx;
+				color: rgb(186, 186, 186);
+			}
+
+			.right {
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+				justify-content: space-between;
+				height: 60upx;
+				width: 590upx;
+
+				button {
+					width: 200upx;
+					height: 60upx;
+					line-height: 60upx;
+					border-radius: 30upx;
+					background-color: rgb(66, 66, 66);
+					font-size: 32upx;
+					color: rgb(186, 186, 186);
+				}
+
+				span {
+					width: 190upx;
+					line-height: 60upx;
+					text-align: center;
+					display: block;
+					font-size: 28upx;
+					color: rgb(186, 186, 186);
+				}
+			}
+		}
+
+		.bottom {
+			padding: 30upx 0;
+			display: flex;
+			flex-direction: row;
+			justify-content: center;
+			align-items: center;
+
+			.iconfont {
+				font-size: 28upx;
+				color: rgb(186, 186, 186);
+			}
+
+			.text {
+				font-size: 28upx;
+				color: rgb(186, 186, 186);
+				margin-left: 20upx;
+			}
+		}
+	}
+
+	.action {
+		position: fixed;
+		width: 20upx;
+		left: 0;
+		top: 0;
+		z-index: 101;
+		margin: 50px 0;
+
+		view {
+			display: block;
+			width: 0;
+			height: 0;
+			border-top: 10upx solid transparent;
+			border-bottom: 10upx solid transparent;
+			border-left: 20upx solid #343436;
+		}
+	}
+
+	.addbook {
+		position: fixed;
+		z-index: 102;
+		right: 0;
+		top: 80px;
+		padding: 15upx 25upx 15upx 30upx;
+		border-top-left-radius: 35upx;
+		border-bottom-left-radius: 35upx;
+		font-size: 26upx;
+	}
 </style>
+

@@ -15,12 +15,14 @@
 		}
 	    ,{
             "path" : "pages/read/read",
-            "style": {
-            	"navigationStyle": "custom",
-				"app-plus":{
-					"bounce":"none"
-				}
-            }
+           "style": {
+           	"navigationBarTitleText": "",
+           	"navigationStyle":"custom",
+           	"disableScroll": true,
+			"navigationBarRightButton": {
+			      "hide": true
+			}
+           }
         },
 		{
 			"path": "pages/Category/Category",
