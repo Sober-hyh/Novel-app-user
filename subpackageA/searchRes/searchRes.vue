@@ -73,9 +73,16 @@
 	</view>
 	<view v-show="showsearch"  class="secjiegou">
 		<u-gap height="70" bgColor="#ffffff"></u-gap>
-		<view>
-			 <u-tabs @click="clitab()" :list="secjglist"></u-tabs>
+		<view class="flex justify-between">
+			<view>
+				<u-tabs @click="clitab()" :list="secjglist"></u-tabs>
+			</view>
+			<view @click="opensx()" style="padding-top: 14rpx;">
+			
+				<u-icon name="arrow-down" size="26"></u-icon>
+			</view>
 		</view>
+		
 		<u-gap height="20" bgColor="#ffffff"></u-gap>
 		<span style="display: none;">搜索结果</span>
 		<!-- 搜索显示综合 -->
@@ -145,6 +152,33 @@
 				<view>阅读1本书</view>
 			</view>
 		</view>
+		<u-popup :show="showxs" :round="10" mode="bottom" @close="closesx" @open="opensx">
+		            <view class="pop">
+		               <view class="flex padding-left-lg padding-top-lg">
+						   <view style="width: 40%;" @click="closesx">
+							   <u-icon name="arrow-down" size="26"></u-icon>
+						   </view>
+						   <view style="width: 60%;">
+							   <text style="font-size: 18px; font-weight: bold;">标签</text>
+						   </view>
+					   </view>
+					   <view class="flex">
+						    <view class="grid col-1" v-for="(item,index1) in 4">
+								<view v-for="(item, index) in checkboxs" :key="index">
+									<u-tag style="width: 180rpx;height: 57rpx;" v-if="index1 == 0 &&index < 4" :text="index" :plain="!item.checked" type="warning" :name="index"
+									@click="checkboxClick"></u-tag>
+									<u-tag style="width: 180rpx;height: 57rpx;" v-if="index1 == 1 && index < 8 && index >= 4" :text="index" :plain="!item.checked" type="warning" :name="index"
+									@click="checkboxClick"></u-tag>
+									<u-tag style="width: 180rpx;height: 57rpx;" v-if="index1 == 2 &&index < 12 && index >= 8" :text="index" :plain="!item.checked" type="warning" :name="index"
+									@click="checkboxClick"></u-tag>
+									<u-tag style="width: 180rpx;height: 57rpx;" v-if="index1 == 3 &&index < 16 && index >= 12" :text="index" :plain="!item.checked" type="warning" :name="index"
+									@click="checkboxClick"></u-tag>
+								</view>
+							   
+							</view>
+					   </view>
+		            </view>
+				</u-popup>
 		<!-- 加载动画 -->
 		<view v-show="showload" class="seclist1 margin-bottom-xs" v-for="item in indexList">
 			<div class="loadera">
@@ -162,6 +196,8 @@
 	export default {
 		data() {
 			return {
+				// 筛选显示
+				showxs:false,
 				secjglist: [{
 						name: '综合',
 					}, {
@@ -232,6 +268,27 @@
 				//显示用户
 				showuser:false,
 				showload:false,
+				checkboxs: [{
+							name:"玄幻",
+							checked: true
+						},
+						{
+							name:"玄幻",
+							checked: false
+						},
+						{
+							name:"玄幻",
+							checked: false
+						},
+						{
+							name:"玄幻",
+							checked: false
+						},
+						{
+							name:"玄幻",
+							checked: false
+						},
+					]
 			}
 		},
 		onLoad(op) {
@@ -245,8 +302,18 @@
 			uni.onKeyboardHeightChange(res => {
 			  console.log(res.height)
 			})
+			for(let i =0;i<40;i++){
+				let a = {
+							name:"玄幻",
+							checked: false
+						}
+				_this.checkboxs.push(a)
+			}
 		},
 		methods: {
+			checkboxClick(name) {
+							this.checkboxs[name].checked = !this.checkboxs[name].checked
+						},
 			clitab(e){
 				
 				_this.showzh = false;
@@ -346,6 +413,12 @@
 				uni.redirectTo({
 					url: '../../subpackageA/searchRes/searchRes?text='+_this.secvalue
 				});
+			},
+			closesx(){
+				_this.showxs = false
+			},
+			opensx(){
+				_this.showxs = true
 			}
 			
 		}
@@ -451,5 +524,8 @@
 	  to {
 	    transform: rotate(360deg);
 	  }
+	}
+	.pop{
+		height: 1200rpx;
 	}
 </style>

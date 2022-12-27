@@ -125,4 +125,7 @@ to {
             transform: rotate(360deg);
 }
 }
+.pop {
+  height: 1200rpx;
+}
 
