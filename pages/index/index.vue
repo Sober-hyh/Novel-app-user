@@ -116,7 +116,7 @@
 							<view v-show="showht==false" class="grid col-1" v-for="item in 5">
 								<view class="flex" v-for="item1 in 3" @click="cliht(item1)">
 									<u-icon name="chat-fill" color="#fd601a" size="22"></u-icon>
-									<view class="text-bold httext text-df text-cut" style="width: 200px;padding: 15rpx 0;">开局就无敌，满级大号，单女主</view>
+									<view @click="tpht(id)" class="text-bold httext text-df text-cut" style="width: 200px;padding: 15rpx 0;">开局就无敌，满级大号，单女主</view>
 								</view>
 							</view>
 						</view>
@@ -272,6 +272,11 @@
 			 }, 2000)
 		},
 		methods: {
+			tpht(id){
+				uni.navigateTo({
+					url: '../../subpackageA/topicDetails/topicDetails'
+				})
+			},
 			tpallist(){
 				console.log(1)
 				uni.navigateTo({

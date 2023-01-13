@@ -77,9 +77,14 @@
 			<view>
 				<u-tabs @click="clitab()" :list="secjglist"></u-tabs>
 			</view>
-			<view @click="opensx()" style="padding-top: 14rpx;">
-			
-				<u-icon name="arrow-down" size="26"></u-icon>
+			<view @click="opensx()" style="padding-top: 14rpx;" class="flex">
+				<view style="padding-top: 8rpx;">
+					<text v-if="selectedTag>0">标签<text style="color: orange;">{{selectedTag}}</text></text>
+				</view>
+				<view style="padding-top: 4rpx;">
+					<u-icon name="arrow-down" size="26"></u-icon>
+				</view>
+				
 			</view>
 		</view>
 		
@@ -154,25 +159,41 @@
 		</view>
 		<u-popup :show="showxs" :round="10" mode="bottom" @close="closesx" @open="opensx">
 		            <view class="pop">
-		               <view class="flex padding-left-lg padding-top-lg">
+		               <view class="flex padding-left-lg padding-top-lg padding-bottom-xs">
 						   <view style="width: 40%;" @click="closesx">
 							   <u-icon name="arrow-down" size="26"></u-icon>
 						   </view>
-						   <view style="width: 60%;">
+						   <view style="width: 60%;" class="flex justify-between">
 							   <text style="font-size: 18px; font-weight: bold;">标签</text>
+							   <text style="font-size: 14px; font-weight: bold;text-align: center;line-height: 26px;" class="padding-right-xs">已选择{{selectedTag}}/3</text>
 						   </view>
 					   </view>
 					   <view class="flex">
 						    <view class="grid col-1" v-for="(item,index1) in 4">
-								<view v-for="(item, index) in checkboxs" :key="index">
-									<u-tag style="width: 180rpx;height: 57rpx;" v-if="index1 == 0 &&index < 4" :text="index" :plain="!item.checked" type="warning" :name="index"
+								<view class="aa" v-for="(item, index) in checkboxs" >
+									<view v-if="index1 == 0 &&index < tagnum" class="padding-left-xs padding-right-xs margin-tb-xs">
+									<u-tag style="width: 180rpx;height: 57rpx;" :text="item.name" :plain="!item.checked" type="warning" :name="index"
 									@click="checkboxClick"></u-tag>
-									<u-tag style="width: 180rpx;height: 57rpx;" v-if="index1 == 1 && index < 8 && index >= 4" :text="index" :plain="!item.checked" type="warning" :name="index"
+									</view>
+									<view v-if="index1 == 1 && index < tagnum*2 && index >= tagnum" class="padding-left-xs padding-right-xs margin-tb-xs">
+									<u-tag style="width: 180rpx;height: 57rpx;" :text="item.name" :plain="!item.checked" type="warning" :name="index"
 									@click="checkboxClick"></u-tag>
-									<u-tag style="width: 180rpx;height: 57rpx;" v-if="index1 == 2 &&index < 12 && index >= 8" :text="index" :plain="!item.checked" type="warning" :name="index"
+									</view>
+									<view v-if="index1 == 2 &&index < tagnum*3 && index >= tagnum*2" class="padding-left-xs padding-right-xs margin-tb-xs">
+									<u-tag style="width: 180rpx;height: 57rpx;" :text="item.name" :plain="!item.checked" type="warning" :name="index"
 									@click="checkboxClick"></u-tag>
-									<u-tag style="width: 180rpx;height: 57rpx;" v-if="index1 == 3 &&index < 16 && index >= 12" :text="index" :plain="!item.checked" type="warning" :name="index"
-									@click="checkboxClick"></u-tag>
+									</view>
+									<view v-if="index1 == 3 &&index < tagnum*4 && index >= tagnum*3" class="padding-left-xs padding-right-xs margin-tb-xs">
+										<u-tag :plainFill="false" :disabled="false" borderColor="#ffffff" v-if="item.display==false" style="width: 180rpx;height: 57rpx;" :text="item.name" :plain="!item.checked" type="warning" :name="index"
+										></u-tag>
+										
+										<u-tag v-else style="width: 180rpx;height: 57rpx;" :text="item.name" :plain="!item.checked" type="warning" :name="index"
+										@click="checkboxClick"></u-tag>
+									</view>
+									<!-- <view :class="[item.display == false && 'displayhid']" v-if="index1 == 3 &&index < tagnum*4 && index >= tagnum*3" class="padding-left-xs padding-right-xs margin-tb-xs">
+										<u-tag v-if="item.name" style="width: 180rpx;height: 57rpx;" :text="item.name" :plain="!item.checked" type="warning" :name="index"
+										@click="checkboxClick"></u-tag>
+									</view> -->
 								</view>
 							   
 							</view>
@@ -270,10 +291,6 @@
 				showload:false,
 				checkboxs: [{
 							name:"玄幻",
-							checked: true
-						},
-						{
-							name:"玄幻",
 							checked: false
 						},
 						{
@@ -288,7 +305,14 @@
 							name:"玄幻",
 							checked: false
 						},
-					]
+						{
+							name:"玄幻",
+							checked: false,
+							display:false
+						},
+					],
+					tagnum:0,
+					selectedTag:0
 			}
 		},
 		onLoad(op) {
@@ -302,18 +326,52 @@
 			uni.onKeyboardHeightChange(res => {
 			  console.log(res.height)
 			})
-			for(let i =0;i<40;i++){
+			for(let i =0;i<44;i++){
 				let a = {
 							name:"玄幻",
 							checked: false
 						}
 				_this.checkboxs.push(a)
 			}
+			//计算便签数量每列数
+			_this.tagnum = Math.ceil(_this.checkboxs.length / 4) 
+			for(let i = 0;i<100;i++){
+				if(_this.checkboxs.length % _this.tagnum !== 0){
+					let a = {
+								name:"",
+								checked: false,
+								display:false
+							}
+					_this.checkboxs.push(a)
+				}else{
+					continue
+				}
+			}
+			
+			
 		},
 		methods: {
 			checkboxClick(name) {
-							this.checkboxs[name].checked = !this.checkboxs[name].checked
-						},
+				if(this.checkboxs[name].checked==true){
+					_this.selectedTag--
+				}else{
+					if(_this.selectedTag==3){
+						wx.showToast({
+						  title: '最多选择三个标签',
+						  icon: 'none',
+						  duration: 2000
+						})
+						return
+					}else{
+						_this.selectedTag++
+						
+					}
+					
+				}
+				this.checkboxs[name].checked = !this.checkboxs[name].checked
+				console.log(this.checkboxs)
+				console.log(name)
+			},
 			clitab(e){
 				
 				_this.showzh = false;
@@ -527,5 +585,14 @@
 	}
 	.pop{
 		height: 1200rpx;
+	}
+	.bb{
+		height: 0;
+	}
+	.dispalyhid{
+		visibility:hidden;
+	}
+	.btagtext{
+		padding-left: 30%;
 	}
 </style>

@@ -12,7 +12,8 @@
       "pages": [
         "searchRes/searchRes",
         "allLists/allLists",
-        "allBooks/allBooks"
+        "allBooks/allBooks",
+        "topicDetails/topicDetails"
       ]
     }
   ],

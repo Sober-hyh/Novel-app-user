@@ -83,6 +83,15 @@
                 }
                 
                 }
+                ,{
+                    "path" : "topicDetails/topicDetails",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
             ]
 		
 		}

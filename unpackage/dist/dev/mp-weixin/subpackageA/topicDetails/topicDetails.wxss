@@ -1,0 +1,27 @@
+
+page{
+	background-color: white;
+}
+.head{
+	background-color: antiquewhite;
+	width: 100%;
+	height: 400rpx;
+}
+.taga{
+	background-color: white;
+	height: 40rpx;
+	width: 40rpx;
+	border-radius: 40rpx;
+	text-align: center;
+	line-height: 40rpx;
+}
+.scbtn{
+	width: 120rpx;
+	height: 50rpx;
+	border-radius: 120rpx;
+	line-height: 50rpx;
+	text-align: center;
+	border: none;
+	font-size: 28rpx;
+}
+

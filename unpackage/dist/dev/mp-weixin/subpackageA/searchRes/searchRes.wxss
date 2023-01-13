@@ -128,4 +128,13 @@ to {
 .pop {
   height: 1200rpx;
 }
+.bb {
+  height: 0;
+}
+.dispalyhid {
+  visibility: hidden;
+}
+.btagtext {
+  padding-left: 30%;
+}
 

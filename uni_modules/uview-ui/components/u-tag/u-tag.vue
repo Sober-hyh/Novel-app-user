@@ -32,7 +32,7 @@
 					</view>
 				</slot>
 				<text
-					class="u-tag__text"
+					class="u-tag__text btagtext"
 					:style="[textColor]"
 					:class="[`u-tag__text--${type}`, plain && `u-tag__text--${type}--plain`, `u-tag__text--${size}`]"
 				>{{ text }}</text>
