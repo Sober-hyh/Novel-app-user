@@ -45,6 +45,7 @@
 	/*每个页面公共css */
 	@import url("./static/css/animate.min.css");
 	@import url("./static/css/iconfont.css");
+	
 	/*每个页面公共css */
 	
 	@font-face {

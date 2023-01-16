@@ -1,0 +1,38 @@
+
+.dt-content.data-v-354ced08 {
+  overflow: hidden;
+  text-overflow: clip;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+}
+.button-show.data-v-354ced08 {
+  width: 70rpx;
+  position: absolute;
+  right: -10rpx;
+  bottom:0;
+  /* top: 15px; */
+  z-index: 0;
+  text-align: right;
+  /* background-image: linear-gradient(-180deg, rgba(233, 236, 239, 0) 50%, #FFF 80%); */
+  /* background-color: white; */
+  padding-top: 2rem;
+  /* padding-left: 1rem; */
+}
+.button-show1.data-v-354ced08 {
+  width: 70rpx;
+  position: absolute;
+  right: -10rpx;
+  bottom:0;
+  /* top: 15px; */
+  z-index: 0;
+  text-align: right;
+ background-image: linear-gradient(-180deg, rgba(233, 236, 239, 0) 50%, #6778a6 80%);
+  /* background-color: white; */
+  padding-top: 2rem;
+  /* padding-left: 1rem; */
+}
+.fold-hint.data-v-354ced08 {
+  color: blue;
+  text-align: right
+}
+

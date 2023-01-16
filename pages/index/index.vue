@@ -79,7 +79,7 @@
 									<view class="flex" style="width: 100%;">
 										<span class="cuIcon-hotfill" :class="[item1+1<=3 && item==0 ? 'hotr':'hotw']">
 										</span>
-										<u--text :lines="2" :size="13" :bold="true" text="我用十年青春,赴你最后之约"></u--text>
+										<u--text :lines="2" :size="13" :bold="true" text="我用十年青春,赴你最后之约1"></u--text>
 									</view>
 									<view class="text-sm padding-top-xs smhot padding-left-sm">
 										9999万阅读/热度
@@ -100,7 +100,7 @@
 				<view class="margin-bottom-xl" style="background-color: white;font-weight: bold;color: black;width: 100%;">
 					<u-cell
 						    title="书荒广场"
-						    isLink
+						    
 						    url=""
 							value="更多"
 						></u-cell>
@@ -269,7 +269,7 @@
 				 //模拟加载书籍
 				 this.showbook = false;
 				 this.showht = false;
-			 }, 2000)
+			 }, 1000)
 		},
 		methods: {
 			tpht(id){
