@@ -13,7 +13,8 @@
         "searchRes/searchRes",
         "allLists/allLists",
         "allBooks/allBooks",
-        "topicDetails/topicDetails"
+        "topicDetails/topicDetails",
+        "pushBookdetails/pushBookdetails"
       ]
     }
   ],

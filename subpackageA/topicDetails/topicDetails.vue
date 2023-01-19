@@ -40,7 +40,7 @@
 						</chunLei-popups>
 				</view> -->
 			</view>
-			<view class="margin-top-xs margin-bottom-xs">
+			<view @click="jump()" class="margin-top-xs margin-bottom-xs">
 				<mote-lines-divide :dt="content" :line="3" expandText="展开" foldHint="收起"/>
 			</view>
 		
@@ -66,7 +66,7 @@
 									<img class="img-book" src="https://bookcover.yuewen.com/qdbimg/349573/1035938472/90" alt="">
 								</view>
 								<!-- 书名 -->
-								<view>
+								<view style="width: 80%;">
 									<u--text :lines="2" text="发撒佛奥是佛撒大声地分公司个发送"></u--text>
 								</view>
 							</view>
@@ -175,7 +175,12 @@ import MoteLinesDivide from "@/components/mote-lines-divide/mote-lines-divide"
 
 		},
 		methods:{
-
+			jump(id){
+				console.log(1)
+				uni.navigateTo({
+					url: '../pushBookdetails/pushBookdetails'
+				})
+			}
 		},
 	}
 </script>

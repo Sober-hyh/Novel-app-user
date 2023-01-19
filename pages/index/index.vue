@@ -97,7 +97,7 @@
 			</view>
 			<u-gap height="15" bgColor="#f6f6f6"></u-gap>
 			<view class="contentb">
-				<view class="margin-bottom-xl" style="background-color: white;font-weight: bold;color: black;width: 100%;">
+				<view class="" style="background-color: white;font-weight: bold;color: black;width: 100%;">
 					<u-cell
 						    title="书荒广场"
 						    

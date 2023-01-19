@@ -1,0 +1,14 @@
+{
+  "navigationBarTitleText": "",
+  "enablePullDownRefresh": false,
+  "navigationBarBackgroundColor": "#ffffff",
+  "usingComponents": {
+    "u-gap": "/uni_modules/uview-ui/components/u-gap/u-gap",
+    "u-avatar": "/uni_modules/uview-ui/components/u-avatar/u-avatar",
+    "u--text": "/uni_modules/uview-ui/components/u--text/u--text",
+    "mote-lines-divide": "/components/mote-lines-divide/mote-lines-divide",
+    "u-line": "/uni_modules/uview-ui/components/u-line/u-line",
+    "u-textarea": "/uni_modules/uview-ui/components/u-textarea/u-textarea",
+    "u-icon": "/uni_modules/uview-ui/components/u-icon/u-icon"
+  }
+}

@@ -22,7 +22,7 @@
 							<text class="cuIcon-title text-green"></text> {{item.name}}
 							</view>
 					</view>
-					<view class="cu-list menu-avatar padding-left-xs padding-bottom-xs padding-top-xs" style="color: white;">
+					<view class="cu-list menu-avatar  padding-bottom-xs padding-top-xs" style="color: white;">
 						<view style="width: 100%;background-color: white;min-height: 30px;" class="flex" v-for="item in 9">
 							<view class="bq" >
 								<u-tag @click="clibq(item)" text="标签" size="large" type="warning" shape="circle" icon="https://cdn.uviewui.com/uview/example/tag.png"></u-tag>

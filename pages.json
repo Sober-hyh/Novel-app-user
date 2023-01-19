@@ -93,6 +93,16 @@
                 }
                 
                 }
+                ,{
+                    "path" : "pushBookdetails/pushBookdetails",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "",
+                    "enablePullDownRefresh": false,
+					"navigationBarBackgroundColor":"#ffffff"
+                }
+                
+                }
             ]
 		
 		}
