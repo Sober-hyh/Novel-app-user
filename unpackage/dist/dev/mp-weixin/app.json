@@ -14,7 +14,8 @@
         "allLists/allLists",
         "allBooks/allBooks",
         "topicDetails/topicDetails",
-        "pushBookdetails/pushBookdetails"
+        "pushBookdetails/pushBookdetails",
+        "releaseTopic/releaseTopic"
       ]
     }
   ],

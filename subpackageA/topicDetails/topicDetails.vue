@@ -1,5 +1,5 @@
 <template>
-	<view>
+	<view style="padding-bottom: 30px;">
 		<view class="head">
 			<view class="flex margin-left-xs padding-top-xs">
 				<view>
@@ -118,6 +118,12 @@
 				</view>
 			</view>
 			<u-gap height="20" bgColor="#ffffff"></u-gap>
+		</view>
+		
+		<view class="footer">
+			<view class="fbtn">
+				<button class="flex"><u-icon color="#ffffff" size="32" name="edit-pen"></u-icon>推荐好书</button>
+			</view>
 		</view>
 	</view>
 
@@ -254,5 +260,30 @@ import MoteLinesDivide from "@/components/mote-lines-divide/mote-lines-divide"
 		width: 10%; 
 		margin: 0 auto;
 	}
+	.footer{
+		position: fixed;
+		left: 0px;
+		bottom: 0px;
+		width: 100%;
 	
+		min-height: 50px;
+		background-color: transparent;
+		z-index: 9999;
+	}
+	.fbtn{
+		width: 36%;
+		margin: 0 auto;
+		border-radius: 40px;
+		overflow: hidden;
+	
+	}
+	.fbtn button{
+		border:none;
+		font-size: 30rpx;
+		height: 40px;
+		line-height: 40px;
+		background-color: #f7894a;
+		color: white;
+		text-align: center;
+	}
 </style>

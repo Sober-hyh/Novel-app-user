@@ -103,6 +103,16 @@
                 }
                 
                 }
+                ,{
+                    "path" : "releaseTopic/releaseTopic",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "",
+                    "enablePullDownRefresh": false,
+					"navigationBarBackgroundColor":"#f6f6f6"
+                }
+                
+                }
             ]
 		
 		}

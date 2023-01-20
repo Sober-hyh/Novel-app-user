@@ -100,8 +100,7 @@
 				<view class="" style="background-color: white;font-weight: bold;color: black;width: 100%;">
 					<u-cell
 						    title="书荒广场"
-						    
-						    url=""
+						    url="../../subpackageA/releaseTopic/releaseTopic"
 							value="更多"
 						></u-cell>
 				</view>

@@ -92,7 +92,7 @@
 						title: '反馈与帮助',
 						url:"asdasdasdas"
 					}
-				],
+				],																							
 			}
 		},
 		onLoad() {
