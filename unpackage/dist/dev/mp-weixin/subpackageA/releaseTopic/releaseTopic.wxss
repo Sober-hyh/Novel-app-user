@@ -25,37 +25,21 @@
 /* 透明度 */
 /* 文章场景相关 */
 page {
-  background-color: #f6f6f6;
-}
-.listTopics_item {
-  width: 90%;
-  margin: 0 auto;
   background-color: white;
-  padding: 30rpx;
-  border-radius: 20rpx;
-  letter-spacing: 1px;
 }
-.footer {
-  position: fixed;
-  left: 0px;
-  bottom: 0px;
-  width: 100%;
-  min-height: 50px;
-  background-color: transparent;
-  z-index: 9999;
-}
-.fbtn {
-  width: 40%;
-  margin: 0 auto;
-  border-radius: 40px;
-  overflow: hidden;
-}
-.fbtn button {
+.ts {
   border: none;
-  font-size: 30rpx;
-  height: 40px;
-  line-height: 40px;
-  background-color: #f7894a;
+  border-radius: 40rpx;
   color: white;
+  height: 50rpx;
+  font-size: 24rpx;
+  line-height: 50rpx;
+  min-width: 130rpx;
+}
+.ts_1 {
+  background-color: #f96825;
+}
+.ts_2 {
+  background-color: #ffd2bf;
 }
 

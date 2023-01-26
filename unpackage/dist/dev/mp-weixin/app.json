@@ -15,7 +15,11 @@
         "allBooks/allBooks",
         "topicDetails/topicDetails",
         "pushBookdetails/pushBookdetails",
-        "releaseTopic/releaseTopic"
+        "releaseTopic/releaseTopic",
+        "listTopics/listTopics",
+        "recommendBook/recommendBook",
+        "myDetails/myDetails",
+        "editMyData/editMyData"
       ]
     }
   ],

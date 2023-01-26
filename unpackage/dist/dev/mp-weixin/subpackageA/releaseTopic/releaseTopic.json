@@ -1,10 +1,9 @@
 {
-  "navigationBarTitleText": "",
+  "navigationBarTitleText": "发表话题",
   "enablePullDownRefresh": false,
-  "navigationBarBackgroundColor": "#f6f6f6",
+  "navigationBarBackgroundColor": "#ffffff",
   "usingComponents": {
-    "u-icon": "/uni_modules/uview-ui/components/u-icon/u-icon",
-    "u-gap": "/uni_modules/uview-ui/components/u-gap/u-gap",
-    "u--text": "/uni_modules/uview-ui/components/u--text/u--text"
+    "u--textarea": "/uni_modules/uview-ui/components/u--textarea/u--textarea",
+    "u-gap": "/uni_modules/uview-ui/components/u-gap/u-gap"
   }
 }

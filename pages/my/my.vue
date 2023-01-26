@@ -5,8 +5,9 @@
 			
 		</view>
 		<!-- 头像昵称 -->
+		<u-gap height="20" bgColor="#fafafa"></u-gap>
 		<view class="my_comment">
-			<view class="flex" style="height: 60px;width: 100%;">
+			<view class="flex" @click="jumpmyDetails" style="height: 60px;width: 100%;">
 				<view class="my_avatar">
 					<!-- <u-avatar size="24" :src="src"></u-avatar> -->
 					<img :src="src" alt="">
@@ -91,6 +92,11 @@
 						name: 'server-man',
 						title: '反馈与帮助',
 						url:"asdasdasdas"
+					},
+					{
+						name: 'setting',
+						title: '设置',
+						url:"asdasdasdas"
 					}
 				],																							
 			}
@@ -103,7 +109,12 @@
 		methods: {
 			 click(e) {
 					console.log(e.url)
-				}
+				},
+			jumpmyDetails(){
+				uni.navigateTo({
+					url: '../../subpackageA/myDetails/myDetails'
+				})
+			}
 		}
 	}
 </script>

@@ -109,7 +109,47 @@
                 {
                     "navigationBarTitleText": "",
                     "enablePullDownRefresh": false,
+					"navigationBarTitleText":"发表话题",
+					"navigationBarBackgroundColor":"#ffffff"
+                }
+                
+                }
+                ,{
+                    "path" : "listTopics/listTopics",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "",
+                    "enablePullDownRefresh": false,
 					"navigationBarBackgroundColor":"#f6f6f6"
+                }
+                
+                }
+                ,{
+                    "path" : "recommendBook/recommendBook",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "",
+                    "enablePullDownRefresh": false,
+					"navigationBarTitleText":"推荐好书",
+					"navigationBarBackgroundColor":"#ffffff"
+                }
+                
+                }
+                ,{
+                    "path" : "myDetails/myDetails",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
+                ,{
+                    "path" : "editMyData/editMyData",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "",
+                    "enablePullDownRefresh": false
                 }
                 
                 }

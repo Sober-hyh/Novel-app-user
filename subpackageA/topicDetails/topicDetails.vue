@@ -122,7 +122,7 @@
 		
 		<view class="footer">
 			<view class="fbtn">
-				<button class="flex"><u-icon color="#ffffff" size="32" name="edit-pen"></u-icon>推荐好书</button>
+				<button @click="tp()" class="flex"><u-icon color="#ffffff" size="32" name="edit-pen"></u-icon>推荐好书</button>
 			</view>
 		</view>
 	</view>
@@ -185,6 +185,11 @@ import MoteLinesDivide from "@/components/mote-lines-divide/mote-lines-divide"
 				console.log(1)
 				uni.navigateTo({
 					url: '../pushBookdetails/pushBookdetails'
+				})
+			},
+			tp(){
+				uni.navigateTo({
+					url: '../recommendBook/recommendBook'
 				})
 			}
 		},
@@ -286,4 +291,6 @@ import MoteLinesDivide from "@/components/mote-lines-divide/mote-lines-divide"
 		color: white;
 		text-align: center;
 	}
+	
+	
 </style>
