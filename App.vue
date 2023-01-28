@@ -1,5 +1,6 @@
 <script>
 	import Vue from 'vue'
+	// import $rjapi from './js/rg.js'
 	export default {
 		onLaunch: function() {
 			  uni.getSystemInfo({

@@ -53,22 +53,6 @@
 											name="arrow-right"
 										></u-icon>
 									</u-form-item>
-									
-									
-									<u-form-item
-										label="简介"
-										prop="intro"
-										borderBottom
-										ref="item3"
-									>
-										<u--textarea
-											placeholder="不低于3个字"
-											v-model="model1.intro"
-											count
-										></u--textarea>
-									</u-form-item>
-
-									
 									<u-form-item
 										label="生日"
 										prop="userInfo.birthday"
@@ -88,6 +72,22 @@
 											name="arrow-right"
 										></u-icon>
 									</u-form-item>
+									
+									<u-form-item
+										label="个性签名"
+										prop="intro"
+										borderBottom
+										ref="item3"
+									>
+										<u--textarea
+											placeholder="不低于3个字"
+											v-model="model1.intro"
+											count
+										></u--textarea>
+									</u-form-item>
+
+									
+									
 								</u--form>
 								
 								

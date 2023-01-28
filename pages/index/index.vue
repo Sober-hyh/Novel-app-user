@@ -46,7 +46,7 @@
 			</view>
 			<view style="height: 30px;" class="tag">
 				<u-tabs 
-				:list="list1" 
+				:list="classList" 
 				@click="clitag"
 				lineColor="#ffffff"
 				:activeStyle="{
@@ -67,22 +67,22 @@
 					  <div class="inner"></div>
 					</div>
 					<view v-show="showbook == false" class="gc grid col-1" v-for="item in 5">
-						<view class="flex ones padding-right-xs" v-for="item1 in 4" @click="clibook(item1)">
-							<img class="simg" src="https://p3-tt.byteimg.com/img/pgc-image/4a43885803954ec1b49550bd1327050f~180x234.jpg" alt="">
-							<view class="flex padding-top-xs padding-left-xs padding-right-xs">
-								<text v-if="item==0" :class="[item1+1<=3 && 'stext']">{{item1+1}}</text>
-								<text v-if="item==1" class="">{{item1+1+4}}</text>
-								<text v-if="item==2" class="">{{item1+1+8}}</text>
-								<text v-if="item==3" class="">{{item1+1+12}}</text>
-								<text v-if="item==4" class="">{{item1+1+16}}</text>
+						<view class="flex ones padding-right-xs" v-for="(item1,index) in listBooks[item]" @click="clibook(item1)">
+							<img v-if="item1 && item1.bookid" class="simg" :src="item1.img" alt="">
+							<view v-if="item1.bookid" class="flex padding-top-xs padding-left-xs padding-right-xs">
+								<text v-if="item==0" :class="[index+1<=3 && 'stext']">{{index+1}}</text>
+								<text v-if="item==1" class="">{{index+1+4}}</text>
+								<text v-if="item==2" class="">{{index+1+8}}</text>
+								<text v-if="item==3" class="">{{index+1+12}}</text>
+								<text v-if="item==4" class="">{{index+1+16}}</text>
 								<view class="margin-left-xs smface">
 									<view class="flex" style="width: 100%;">
-										<span class="cuIcon-hotfill" :class="[item1+1<=3 && item==0 ? 'hotr':'hotw']">
+										<span class="cuIcon-hotfill" :class="[index+1<=3 && item==0 ? 'hotr':'hotw']">
 										</span>
-										<u--text :lines="2" :size="13" :bold="true" text="我用十年青春,赴你最后之约1"></u--text>
+										<u--text :lines="2" :size="13" :bold="true" :text="item1.title"></u--text>
 									</view>
 									<view class="text-sm padding-top-xs smhot padding-left-sm">
-										9999万阅读/热度
+										{{item1.hot}}/热度
 									</view>
 								</view>
 							</view>
@@ -193,24 +193,9 @@
 						name: '评分榜',
 					}],
 				//二级标签数据
-				list1: [{
-						name: '全部',
-					}, {
-						name: '都市玄幻',
-					}, {
-						name: '都市'
-					}, {
-						name: '科技'
-					}, {
-						name: '游戏'
-					}, {
-						name: '悬疑'
-					}, {
-						name: '恐怖'
-					}, {
-						name: '言情'
-					}, {
-						name: '手工'
+				classList: [{
+						class_id:0,
+						name: '全部'
 					}],
 				//showbook 书籍loading动画是否显示
 				showbook:true,
@@ -234,7 +219,16 @@
 					id: 3,
 					type: 'image',
 					url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg'
-				}]
+				}],
+				//榜单书籍数据
+				listBooks:[
+					
+					
+				],
+				//当前分类
+				thisClass:0,
+				//当前榜单
+				thisList:1
 			}
 		},
 		onPageScroll(e) {
@@ -259,6 +253,14 @@
 		},
 		onLoad() {
 			_this = this;
+			// this.request({
+			// 	url:'/api.php?action=login',
+			// 	method:'post',
+			// 	data:this.form
+			// 	}).then(res=>{
+			// 		console.log(res)
+			// 	})
+			
 			console.log(uni.$u.utils.getMobileInfo())
 			console.log('刷新')
 			 let menuButtonInfo = uni.getMenuButtonBoundingClientRect()
@@ -269,6 +271,11 @@
 				 this.showbook = false;
 				 this.showht = false;
 			 }, 1000)
+			 //ff
+			 //获取所有分类
+			 this.getAllCategories()
+			 //获取书籍
+			 this.getBooks(1,0)
 		},
 		methods: {
 			tpht(id){
@@ -309,6 +316,8 @@
 			//点击tab
 			clickTabs(item){
 				console.log(item.index)
+				_this.thisList = item.index + 1
+				_this.getBooks(_this.thisList,_this.thisClass)
 			},
 			//点击书本
 			clibook(i){
@@ -320,12 +329,97 @@
 			//点击tag标签
 			clitag(item){
 				console.log(item)
+				_this.thisClass = item.class_id
+				_this.getBooks(_this.thisList,_this.thisClass)
 			},
 			//点击话题
 			cliht(item){
 				console.log(item)
+			},
+			//获取所有分类
+			getAllCategories(){
+				this.request({
+				url:'/api.php?action=getBookclassification',
+				method:'post',
+				}).then(res=>{
+					
+					for(let i=0;i<res.length;i++){
+						let item = {
+							class_id:Number(res[i].class_id),
+							name:res[i].class_name
+						}
+				
+						_this.classList.push(item)
+						// console.log(res[i])
+					}
+				})
+			},
+			//获取书籍
+			getBooks(listType,class_id){
+				_this.showbook = true
+				_this.listBooks = []
+				this.request({
+				url:'/api.php?action=getLeaderboardBooks',
+				header:{'content-type' : "application/x-www-form-urlencoded"},
+				data:{
+					listType:listType,
+					class_id:class_id
+				},
+				method:'post',
+				}).then(res=>{
+					console.log(res)
+					if(res.sum == 0){
+						console.log('空')
+						_this.showbook = false
+						return
+					}
+					
+					let flog = 0;
+					let flog1 = 0;
+					
+					for(let i =0;i<20;i++){
+						flog ++
+						if(flog%4 == 0){
+							let a = []
+							if(res.data.length > flog1){
+								
+							
+							
+							for(let j = flog1;j<flog1+4;j++){
+								if(res.data[j]){
+									let item ={
+									bookid:res.data[j].bookid,
+									img:res.data[j].bookimg,
+									title:res.data[j].bookname,
+									hot:res.data[j].bookHeat
+									}
+									a.push(item)
+								}
+								
+								// console.log(a)
+								// console.log(res.data[0].bookid)
+								
+							}
+							_this.listBooks.push(a)
+							}flog1+=4
+							// console.log(299)
+							
+							// console.log(_this.listBooks)
+						}
+						// console.log(i)
+					}
+					console.log()
+					for(let iy=0;iy<4;iy++){
+						if(_this.listBooks[_this.listBooks.length-1].length!=4){
+							let a = {}
+							_this.listBooks[_this.listBooks.length-1].push(a)
+						}else{
+							continue
+						}
+					}
+					_this.showbook = false
+				})
 			}
-			
 		}
 	}
 </script>

@@ -1,7 +1,11 @@
 import Vue from 'vue'
 import store from './store'
 import App from './App'
+// import rjapi from "js/rg.js";
+// import store from "js/store.js"
 
+
+// Vue.prototype.$rjapi=rjapi;
 Vue.config.productionTip = false
 
 Vue.prototype.$store = store
@@ -14,8 +18,11 @@ const app = new Vue({
 app.$mount()
 import uView from '@/uni_modules/uview-ui'
 Vue.use(uView)
-// require("@/commons/request.js")(app);
+
+require("@/commons/request.js")(app);
 // //导入utils小工具
+import {request} from "./utils/request.js";
+Vue.prototype.request=request
 import utils from "commons/utils.js";
 Vue.use(utils,app);
 // Vue.prototype.staticServer = "http://hyh-demo.top/";
