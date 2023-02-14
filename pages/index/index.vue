@@ -139,7 +139,7 @@
 					    title="猜你喜欢"
 					></u-cell>
 			</view>
-			<view class="grid col-2 booka">
+			<!-- <view class="grid col-2 booka">
 				<view class="onebook padding-top-xl" v-for="item in aa" :class="[item%2==0  ? 'rbor' : 'lbor']">
 					<view class="onebookbg">
 						<view class="pf">9.5分</view>
@@ -153,6 +153,29 @@
 					</view>
 				</view>
 				
+			</view> -->
+			<view v-for="item in youlike">
+				<view class="bg-white flex">
+					<view style="width: 20%;">
+						<img class="cimg" :src="item.bookimg" alt="">
+					</view>
+					<view style="width: 80%;padding: 15rpx;">
+						<view class="flex">
+							<view style="color: black;width: 80%;">
+								<u--text :lines="1" :size="16" color="#000000" :text="item.bookname"></u--text>
+							</view>
+							
+						</view>
+						<view style="width: 80%;">
+							<u--text :lines="3" :size="12" :text="item.bookIntroduction"></u--text>
+						</view>
+						<view style="text-align: left;color: red;width: 100%;">
+								{{item.bookRating}}分
+							</view>
+					</view>
+					
+				</view>
+				<u-gap height="12" bgColor="#f6f6f6"></u-gap>
 			</view>
 		</view>
 		<u-gap height="90" bgColor="#f6f6f6"></u-gap>
@@ -180,7 +203,7 @@
 			return {
 				scrollTop: 0,
 				//测试数据
-				aa:8,
+				aa:0,
 				listtest:[],
 				//距离顶部计算距离
 				ttop:0,
@@ -203,23 +226,7 @@
 				showht:true,
 				showd:false,
 				//轮播图数据
-				swiperList: [{
-					id: 0,
-					type: 'image',
-					url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big84000.jpg'
-				}, {
-					id: 1,
-					type: 'image',
-					url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big37006.jpg',
-				}, {
-					id: 2,
-					type: 'image',
-					url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big39000.jpg'
-				}, {
-					id: 3,
-					type: 'image',
-					url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg'
-				}],
+				swiperList: [],
 				//榜单书籍数据
 				listBooks:[
 					
@@ -228,7 +235,12 @@
 				//当前分类
 				thisClass:0,
 				//当前榜单
-				thisList:1
+				thisList:1,
+				//猜你喜欢当前页
+				likethispage:0,
+				youlike:[
+					
+				]
 			}
 		},
 		onPageScroll(e) {
@@ -245,11 +257,12 @@
 		onReachBottom() {
 			console.log('上拉')
 			_this.showd = true
-			setTimeout(() => {
-				 //模拟加载书籍
-				 _this.aa = _this.aa + 4
-				 _this.showd = false
-			}, 2000)
+			_this.getyoulike(_this.likethispage,4)
+			
+			// setTimeout(() => {
+			// 	 //模拟加载书籍
+				 
+			// }, 2000)
 		},
 		onLoad() {
 			_this = this;
@@ -276,6 +289,10 @@
 			 this.getAllCategories()
 			 //获取书籍
 			 this.getBooks(1,0)
+			 //获取banner
+			 this.getbanner()
+			 //猜你喜欢
+			 this.getyoulike(_this.likethispage,4)
 		},
 		methods: {
 			tpht(id){
@@ -419,7 +436,67 @@
 					}
 					_this.showbook = false
 				})
+			},
+			getbanner(){
+				this.request({
+				url:'/api.php?action=getFirstPageBanner',
+				method:'post',
+				}).then(res=>{
+					console.log(res.data[0].b_img)
+			
+					for(let i=0;i<res.data.length;i++){
+						let a = {
+							id: i,
+							type: 'image',
+							url: res.data[i].b_img
+						}
+						_this.swiperList.push(a)
+					}
+					
+					
+				})
+			},
+			getyoulike(page,pagenum){
+				this.request({
+				url:'/api.php?action=guessYouLike',
+				method:'post',
+				header:{'content-type' : "application/x-www-form-urlencoded"},
+				data:{
+					userid:1,
+					page:page,
+					pagenum:pagenum
+				},
+				}).then(res=>{
+					console.log(res.data)
+					if(res.data.length==0 || res.data.length<4){
+						uni.showToast({
+							title: '没有更多内容了',
+							duration: 2000,
+							icon:'error'
+						});
+						_this.showd = false
+						return
+					}
+					for(let i=0;i<res.data.length;i++){
+						let a = {
+							id: i,
+							bookRating: res.data[i].bookRating,
+							bookid: res.data[i].bookid,
+							bookimg: res.data[i].bookimg,
+							bookname: res.data[i].bookname,
+							bookreadnum: res.data[i].bookreadnum,
+							bookIntroduction:res.data[i].bookIntroduction
+						}
+						_this.youlike.push(a)
+					}
+					_this.likethispage = _this.likethispage+1
+					_this.aa = _this.aa + pagenum
+					_this.showd = false
+					
+				})
+				
 			}
+			
 		}
 	}
 </script>
@@ -643,5 +720,10 @@
 	.loadera{
 		
 	}
-	
+	.cimg{
+		// width: 30rpx;
+		// width: 70%;
+		height: 180rpx;
+		padding: 15rpx;
+	}
 </style>

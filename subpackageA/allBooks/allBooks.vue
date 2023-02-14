@@ -9,14 +9,14 @@
 		</view>
 		<view class="wall">
 			<u-sticky bgColor="#fff">
-		    <u-tabs :list="list1"></u-tabs>
+		    <u-tabs :list="list1" ></u-tabs>
 			</u-sticky>
 		</view>
-		<view class="wall">
+		<!-- <view class="wall">
 			<u-sticky bgColor="#fff">
 		    <u-tabs :list="readjd"></u-tabs>
 			</u-sticky>
-		</view>
+		</view> -->
 		<view class="wall">
 			<u-sticky bgColor="#fff">
 		    <u-tabs :list="bookzt"></u-tabs>
@@ -90,61 +90,35 @@
 		data() {
 			return {
 				value5:'',
+				booklist:[],
 				list1: [{
 						name: '全部',
-					}, {
-						name: '都市玄幻',
-					}, {
-						name: '都市'
-					}, {
-						name: '科技'
-					}, {
-						name: '游戏'
-					}, {
-						name: '悬疑'
-					}, {
-						name: '恐怖'
-					}, {
-						name: '言情'
-					}, {
-						name: '手工'
+						id:0
 					}],
-					//tab阅读进度列表
-					readjd:[
-						{
-							name:"全部"
-						},
-						{
-							name:"未读过"
-						},
-						{
-							name:"未读50章以上"
-						},
-						{
-							name:"未读300章以上"
-						},
-						{
-							name:"已读完"
-						}
-					],
+
 					//书本状态列表
 					bookzt:[
 						{
-							name:"全部"
+							name:"全部",
+							id:0
 						},
 						{
-							name:"完结"
+							name:"完结",
+							id:2
 						},
 						{
-							name:"连载"
+							name:"连载",
+							id:1
 						},
 						{
-							name:"断更"
+							name:"断更",
+							id:3
 						}
 					],
 					bookhot:[
 						{
-							name:"综合"
+							name:"综合",
+							id:0
 						},
 						{
 							name:"最新"
@@ -158,8 +132,57 @@
 		onLoad(op) {
 			_this = this;
 			_this.value5 = op.text;
+			_this.getclass()
 		},
 		methods: {
+			getbooks(){
+				_this.showload = true;
+					_this.booklist = []
+					this.request({
+							url:'/api.php?action=getLeaderboardBooks',
+							method:'post',
+							header:{'content-type' : "application/x-www-form-urlencoded"},
+							data:{
+								listType:list,
+								class_id:classid,
+								maxnum:30
+							},
+							}).then(res=>{
+								console.log(res)
+								for(let i=0;i<res.data.length;i++){
+									let a = {
+										name:res.data[i].bookname,
+										id:res.data[i].bookid,
+										bookstate:res.data[i].bookState==2? '完结':'连载',
+										bookHeat:res.data[i].bookHeat
+									}
+									_this.booklist.push(a)
+								}
+								
+								_this.showload = false
+						})
+				},
+				getclass(){
+					this.request({
+							url:'/api.php?action=getBookclassification',
+							method:'post',
+							header:{'content-type' : "application/x-www-form-urlencoded"},
+				
+							}).then(res=>{
+								console.log(res)
+								for(let i=0;i<res.length;i++){
+									let a = {
+										name:res[i].class_name,
+										id:res[i].class_id
+									}
+									_this.list1.push(a)
+								}
+								
+								
+								
+								
+						})
+				}
 			
 		}
 	}

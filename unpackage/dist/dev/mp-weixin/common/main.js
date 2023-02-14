@@ -33,7 +33,7 @@ _App.default.mpType = 'app';
 var app = new _vue.default(_objectSpread({}, _App.default));
 createApp(app).$mount();
 _vue.default.use(_uviewUi.default);
-__webpack_require__(/*! @/commons/request.js */ 652)(app);
+__webpack_require__(/*! @/commons/request.js */ 161)(app);
 // //导入utils小工具
 
 _vue.default.prototype.request = _request.request;
