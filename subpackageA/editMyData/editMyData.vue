@@ -1,6 +1,6 @@
 <template>
-	<view>
-		
+	<view class="margin-top-lg">
+			<text>上传新的头像</text>
 			<view class="grid col-4 grid-square flex-sub" >
 				<view style="border-radius: 40rpx;" class="bg-img" v-for="(item,index) in imgList" :key="index" @tap="ViewImage"
 					:data-url="imgList[index]">
@@ -16,92 +16,26 @@
 			<view style="width: 95%;margin: 0 auto;">
 				<u-line></u-line>
 			</view>
-			<view>
-				<u--form
-									labelPosition="left"
-									:model="model1"
-									ref="form1"
-								>
-									<u-form-item
-										label="姓名"
-										prop="userInfo.name"
-										borderBottom
-										ref="item1"
-									>
-										<u--input
-											v-model="model1.userInfo.name"
-											border="none"
-											placeholder="姓名,只能为中文"
-										></u--input>
-									</u-form-item>
-									<u-form-item
-										label="性别"
-										prop="userInfo.sex"
-										borderBottom
-										@click="showSex = true; hideKeyboard()"
-										ref="item1"
-									>
-										<u--input
-											v-model="model1.userInfo.sex"
-											disabled
-											disabledColor="#ffffff"
-											placeholder="请选择性别"
-											border="none"
-										></u--input>
-										<u-icon
-											slot="right"
-											name="arrow-right"
-										></u-icon>
-									</u-form-item>
-									<u-form-item
-										label="生日"
-										prop="userInfo.birthday"
-										borderBottom
-										@click="showBirthday = true; hideKeyboard()"
-										ref="item1"
-									>
-										<u--input
-											v-model="model1.userInfo.birthday"
-											disabled
-											disabledColor="#ffffff"
-											placeholder="请选择生日"
-											border="none"
-										></u--input>
-										<u-icon
-											slot="right"
-											name="arrow-right"
-										></u-icon>
-									</u-form-item>
-									
-									<u-form-item
-										label="个性签名"
-										prop="intro"
-										borderBottom
-										ref="item3"
-									>
-										<u--textarea
-											placeholder="不低于3个字"
-											v-model="model1.intro"
-											count
-										></u--textarea>
-									</u-form-item>
-
-									
-									
-								</u--form>
-								
-								
-								<u-action-sheet
-									:show="showSex"
-									:actions="actions"
-									title="请选择性别"
-									description="如果选择保密会报错"
-									@close="showSex = false"
-									@select="sexSelect"
-								>
-								</u-action-sheet>
-							
+			<view class="margin-top-xs">
+				<text>昵称</text>
+				 <u--input
+				    placeholder="请输入内容"
+				    border="bottom"
+				    v-model="info.name"
+				    @change="change"
+					
+				  ></u--input>
 			</view>
+			<view>
+				<text>签名</text>
+				 <u--input
+				    placeholder="请输入内容"
+				    border="bottom"
+				    v-model="info.sign"
+				    @change="change"
+				  ></u--input>
+			</view>
+			
 	</view>
 </template>
 
@@ -113,6 +47,12 @@
 				src:"https://tnuiimage.tnkjapp.com/avatar/xiaomai4.jpg",
 				fileList6: [],
 				imgList: [],
+				
+				info:{
+					name:"",
+					sr:"",
+					sign:""
+				}
 			}
 		},
 		onLoad(){
@@ -159,5 +99,9 @@
 	}
 </script>
 
-<style>
+<style lang="scss">
+	page{
+		width: 90%;
+		margin: 0 auto;
+	}
 </style>

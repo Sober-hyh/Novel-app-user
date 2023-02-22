@@ -340,8 +340,15 @@
 			clibook(i){
 				console.log(i)
 				uni.navigateTo({
-					url: '/pages/read/read'
+					url: '/pages/read/index1',
+					 success: function(res) {
+					    // 通过eventChannel向被打开页面传送数据
+					  
+					  },fail(err) {
+					  	console.log(err)
+					  }
 				})
+				
 			},
 			//点击tag标签
 			clitag(item){

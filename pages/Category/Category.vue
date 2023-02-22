@@ -23,13 +23,13 @@
 							</view>
 					</view>
 					<view class="cu-list menu-avatar  padding-bottom-xs padding-top-xs" style="color: white;">
-						<view style="width: 100%;background-color: white;min-height: 30px;" class="flex" v-for="item in 9">
-							<view class="bq" >
-								<u-tag @click="clibq(item)" text="标签" size="large" type="warning" shape="circle" icon="https://cdn.uviewui.com/uview/example/tag.png"></u-tag>
+						<view style="width: 100%;background-color: white;min-height: 30px;" class="flex flex-wrap" >
+							<view class="bq" v-for="(item1,index1) in item.tag" :key="item1.sid">
+								<u-tag @click="clibq(item1.name)" :text="item1.tagname" size="large" type="warning" shape="circle" icon="https://cdn.uviewui.com/uview/example/tag.png"></u-tag>
 							</view>
-							<view class="bq">
-								<u-tag text="标签" size="large" type="warning" shape="circle" icon="https://cdn.uviewui.com/uview/example/tag.png"></u-tag>
-							</view>
+							<!-- <view class="bq">
+								<u-tag :text="item1.tagname" size="large" type="warning" shape="circle" icon="https://cdn.uviewui.com/uview/example/tag.png"></u-tag>
+							</view> -->
 							<!-- <view class="bq">
 								<u-tag text="标签" type="warning" shape="circle" icon="https://cdn.uviewui.com/uview/example/tag.png"></u-tag>
 							</view> -->
@@ -53,34 +53,7 @@
 				mainCur: 0,
 				verticalNavTop: 0,
 				load: true,
-				list: [{
-						name: '科幻',
-						id:0
-					}, {
-						name: '都市玄幻',
-						id:1
-					}, {
-						name: '都市',
-						id:2
-					}, {
-						name: '科技',
-						id:3
-					}, {
-						name: '游戏',
-						id:4
-					}, {
-						name: '悬疑',
-						id:5
-					}, {
-						name: '恐怖',
-						id:6
-					}, {
-						name: '言情',
-						id:7
-					}, {
-						name: '手工',
-						id:8
-					}],
+				list: [],
 			};
 		},
 		onLoad() {
@@ -96,6 +69,7 @@
 				title: '加载中...',
 				mask: true
 			});
+			_this.getclass()
 			// let list = [{}];
 			// for (let i = 0; i < 26; i++) {
 			// for (let i = 0; i < 26; i++) {
@@ -150,6 +124,59 @@
 						return false
 					}
 				}
+			},
+			//获取分类
+			getclass(){
+				this.request({
+						url:'/api.php?action=getBookclassification',
+						method:'post',
+						header:{'content-type' : "application/x-www-form-urlencoded"},
+			
+						}).then(res=>{
+							console.log(res)
+							for(let i=0;i<res.length;i++){
+								let a = {
+									name:res[i].class_name,
+									id:res[i].class_id,
+									tag:[]
+								}
+								_this.list.push(a)
+							}
+							_this.col = Math.ceil(_this.list.length / 4) 
+							_this.getClassTag()
+							
+							
+					})
+			},
+			getClassTag(){
+				this.request({
+						url:'/api.php?action=getClasstag',
+						method:'post',
+						header:{'content-type' : "application/x-www-form-urlencoded"},
+							
+						}).then(res=>{
+							console.log(res.data)
+							for(let i=0;i<res.data.length;i++){
+								let a = {
+									name:res.data[i].tagname,
+									sid:res.data[i].sid,
+									
+								}
+								for(let j=0;j<_this.list.length;j++){
+									if(res.data[i].class_id == _this.list[j].id){
+										console.log(res.data[i].class_id)
+										_this.list[j].tag.push(res.data[i])
+									}
+								}
+								
+								
+							}
+							
+							
+							
+							
+					})
+				
 			}
 		},
 	}

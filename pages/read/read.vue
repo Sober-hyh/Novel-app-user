@@ -3,7 +3,7 @@
 		<view class='head animated slideInDown fast' :style="{'background-color':night?otherBg.bg[1]:otherBg.bg[0]}"
 			v-if="toggle">
 			<view class="left" @tap="pageBack">
-				<text class="iconfont icon-shouye1"
+				<text style="padding-top: 30rpx;" class="iconfont icon-shouye1"
 					:style="{color:night?otherBg.font[1].title:otherBg.font[0].title}"></text>
 			</view>
 		</view>

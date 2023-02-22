@@ -2,6 +2,7 @@
   "pages": [
     "pages/index/index",
     "pages/read/read",
+    "pages/read/index1",
     "pages/Category/Category",
     "pages/Bookshelf/Bookshelf",
     "pages/my/my"

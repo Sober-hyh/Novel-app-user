@@ -101,22 +101,22 @@ var components
 try {
   components = {
     uGap: function () {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-gap/u-gap */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-gap/u-gap")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-gap/u-gap.vue */ 282))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-gap/u-gap */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-gap/u-gap")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-gap/u-gap.vue */ 290))
     },
     uTabs: function () {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-tabs/u-tabs */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-tabs/u-tabs")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-tabs/u-tabs.vue */ 290))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-tabs/u-tabs */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-tabs/u-tabs")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-tabs/u-tabs.vue */ 298))
     },
     uIcon: function () {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-icon/u-icon */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-icon/u-icon")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-icon/u-icon.vue */ 298))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-icon/u-icon */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-icon/u-icon")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-icon/u-icon.vue */ 306))
     },
     "u-Text": function () {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u--text/u--text */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u--text/u--text")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u--text/u--text.vue */ 307))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u--text/u--text */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u--text/u--text")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u--text/u--text.vue */ 315))
     },
     uCell: function () {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-cell/u-cell */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-cell/u-cell")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-cell/u-cell.vue */ 313))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-cell/u-cell */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-cell/u-cell")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-cell/u-cell.vue */ 321))
     },
     uBackTop: function () {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-back-top/u-back-top */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-back-top/u-back-top")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-back-top/u-back-top.vue */ 321))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-back-top/u-back-top */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-back-top/u-back-top")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-back-top/u-back-top.vue */ 329))
     },
   }
 } catch (e) {
@@ -350,11 +350,34 @@ exports.default = void 0;
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 var _this;
 var lsSkeleton = function lsSkeleton() {
   Promise.all(/*! require.ensure | components/ls-skeleton/ls-skeleton */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/ls-skeleton/ls-skeleton")]).then((function () {
-    return resolve(__webpack_require__(/*! @/components/ls-skeleton/ls-skeleton.nvue */ 329));
+    return resolve(__webpack_require__(/*! @/components/ls-skeleton/ls-skeleton.nvue */ 337));
   }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
 };
 var _default = {
@@ -365,7 +388,7 @@ var _default = {
     return {
       scrollTop: 0,
       //测试数据
-      aa: 8,
+      aa: 0,
       listtest: [],
       //距离顶部计算距离
       ttop: 0,
@@ -388,29 +411,16 @@ var _default = {
       showht: true,
       showd: false,
       //轮播图数据
-      swiperList: [{
-        id: 0,
-        type: 'image',
-        url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big84000.jpg'
-      }, {
-        id: 1,
-        type: 'image',
-        url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big37006.jpg'
-      }, {
-        id: 2,
-        type: 'image',
-        url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big39000.jpg'
-      }, {
-        id: 3,
-        type: 'image',
-        url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg'
-      }],
+      swiperList: [],
       //榜单书籍数据
       listBooks: [],
       //当前分类
       thisClass: 0,
       //当前榜单
-      thisList: 1
+      thisList: 1,
+      //猜你喜欢当前页
+      likethispage: 0,
+      youlike: []
     };
   },
   onPageScroll: function onPageScroll(e) {
@@ -426,11 +436,12 @@ var _default = {
   onReachBottom: function onReachBottom() {
     console.log('上拉');
     _this.showd = true;
-    setTimeout(function () {
-      //模拟加载书籍
-      _this.aa = _this.aa + 4;
-      _this.showd = false;
-    }, 2000);
+    _this.getyoulike(_this.likethispage, 4);
+
+    // setTimeout(() => {
+    // 	 //模拟加载书籍
+
+    // }, 2000)
   },
   onLoad: function onLoad() {
     var _this2 = this;
@@ -458,6 +469,10 @@ var _default = {
     this.getAllCategories();
     //获取书籍
     this.getBooks(1, 0);
+    //获取banner
+    this.getbanner();
+    //猜你喜欢
+    this.getyoulike(_this.likethispage, 4);
   },
   methods: {
     tpht: function tpht(id) {
@@ -504,7 +519,13 @@ var _default = {
     clibook: function clibook(i) {
       console.log(i);
       uni.navigateTo({
-        url: '/pages/read/read'
+        url: '/pages/read/index1',
+        success: function success(res) {
+          // 通过eventChannel向被打开页面传送数据
+        },
+        fail: function fail(err) {
+          console.log(err);
+        }
       });
     },
     //点击tag标签
@@ -596,6 +617,62 @@ var _default = {
           }
         }
         _this.showbook = false;
+      });
+    },
+    getbanner: function getbanner() {
+      this.request({
+        url: '/api.php?action=getFirstPageBanner',
+        method: 'post'
+      }).then(function (res) {
+        console.log(res.data[0].b_img);
+        for (var i = 0; i < res.data.length; i++) {
+          var a = {
+            id: i,
+            type: 'image',
+            url: res.data[i].b_img
+          };
+          _this.swiperList.push(a);
+        }
+      });
+    },
+    getyoulike: function getyoulike(page, pagenum) {
+      this.request({
+        url: '/api.php?action=guessYouLike',
+        method: 'post',
+        header: {
+          'content-type': "application/x-www-form-urlencoded"
+        },
+        data: {
+          userid: 1,
+          page: page,
+          pagenum: pagenum
+        }
+      }).then(function (res) {
+        console.log(res.data);
+        if (res.data.length == 0 || res.data.length < 4) {
+          uni.showToast({
+            title: '没有更多内容了',
+            duration: 2000,
+            icon: 'error'
+          });
+          _this.showd = false;
+          return;
+        }
+        for (var i = 0; i < res.data.length; i++) {
+          var a = {
+            id: i,
+            bookRating: res.data[i].bookRating,
+            bookid: res.data[i].bookid,
+            bookimg: res.data[i].bookimg,
+            bookname: res.data[i].bookname,
+            bookreadnum: res.data[i].bookreadnum,
+            bookIntroduction: res.data[i].bookIntroduction
+          };
+          _this.youlike.push(a);
+        }
+        _this.likethispage = _this.likethispage + 1;
+        _this.aa = _this.aa + pagenum;
+        _this.showd = false;
       });
     }
   }

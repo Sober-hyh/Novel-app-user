@@ -1,4 +1,6 @@
 const BASE_URL = 'http://localhost:80'
+// const BASE_URL = 'http://192.168.137.1:80'
+// const BASE_URL = 'https://4s20r88048.zicp.fun'
 
 export const request = (options => {
 	return new Promise((resolve, reject) => {

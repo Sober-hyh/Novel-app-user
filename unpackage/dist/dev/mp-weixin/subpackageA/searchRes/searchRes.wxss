@@ -134,7 +134,4 @@ to {
 .dispalyhid {
   visibility: hidden;
 }
-.btagtext {
-  padding-left: 30%;
-}
 

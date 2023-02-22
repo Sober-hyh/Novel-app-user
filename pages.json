@@ -23,6 +23,16 @@
 			      "hide": true
 			}
            }
+        },{
+            "path" : "pages/read/index1",
+           "style": {
+           	"navigationBarTitleText": "",
+           	"navigationStyle":"custom",
+           	"disableScroll": true,
+			"navigationBarRightButton": {
+			      "hide": true
+			}
+           }
         },
 		{
 			"path": "pages/Category/Category",
@@ -45,6 +55,7 @@
 				"navigationStyle": "custom"
 			}
 		}
+       
     ],
 	"subPackages": [
 		{

@@ -107,9 +107,9 @@
 						<u-gap height="10" bgColor="#ffffff"></u-gap>
 					</view>
 				</view>
-				<view v-else class="comment_empty">
+				<!-- <view v-else class="comment_empty">
 					<text>期待你的第一条评论</text>
-				</view>
+				</view> -->
 			</view>
 		</view>
 		<!-- <u-gap height="50" bgColor="#ffffff"></u-gap> -->
@@ -168,7 +168,7 @@
 				},
 				value1:"",
 				dzshow:true,
-				test1:0
+				test1:5
 			}
 		},
 		onLoad(){

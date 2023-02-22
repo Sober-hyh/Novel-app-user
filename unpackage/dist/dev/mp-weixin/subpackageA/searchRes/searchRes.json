@@ -11,7 +11,9 @@
     "u-gap": "/uni_modules/uview-ui/components/u-gap/u-gap",
     "u-modal": "/uni_modules/uview-ui/components/u-modal/u-modal",
     "u-tabs": "/uni_modules/uview-ui/components/u-tabs/u-tabs",
+    "u-empty": "/uni_modules/uview-ui/components/u-empty/u-empty",
     "u-avatar": "/uni_modules/uview-ui/components/u-avatar/u-avatar",
+    "u--text": "/uni_modules/uview-ui/components/u--text/u--text",
     "u-popup": "/uni_modules/uview-ui/components/u-popup/u-popup",
     "u-tag": "/uni_modules/uview-ui/components/u-tag/u-tag"
   }
