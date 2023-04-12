@@ -38,13 +38,13 @@
 						</div>
 					</view>
 					<block v-for="(item,index) in booklist">
-					<view class="flex padding-top-lg" >
+					<view class="flex padding-top-lg" @click= "clibook(item.id)">
 						<view :class="[index <= 2 ? 'tetred' : '']" style="text-align: center;" class="tet">{{index+1}}</view>
 						<view class="flex" style="width: 100%;">
 							
 						
 							<view class="imga basis-xs">
-								<img src="https://p3-tt.byteimg.com/img/pgc-image/4a43885803954ec1b49550bd1327050f~180x234.jpg" alt="">
+								<img :src="item.bookimg" alt="">
 							</view>
 							<view class="basis-xl padding-bottom-sm">
 								<u-skeleton
@@ -120,6 +120,12 @@
 			this.getbooks(1,1)
 		},
 		methods: {
+			clibook(i){
+				uni.navigateTo({
+					url: '/pages/read/index1?bid=' + i,
+				
+				})
+			},
 			clibdtab(e){
 				console.log(e)
 				
@@ -198,7 +204,14 @@
 									name:res.data[i].bookname,
 									id:res.data[i].bookid,
 									bookstate:res.data[i].bookState==2? '完结':'连载',
-									bookHeat:res.data[i].bookHeat
+									bookHeat:res.data[i].bookHeat,
+									bookimg:res.data[i].bookimg
+								}
+								if(a.bookimg.length<=30){
+									let ip = uni.getStorageSync('serverIp')
+									
+										a.bookimg = ip+'/'+a.bookimg
+									
 								}
 								_this.booklist.push(a)
 							}

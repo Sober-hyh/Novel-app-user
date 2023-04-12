@@ -30,13 +30,13 @@
 	</view>
 	<u-gap height="180" bgColor="#ffffff"></u-gap>
 	<block v-for="(item,index) in booklist">
-	<view class="flex padding-top-lg" style="width: 90%;margin: auto;">
+	<view class="flex padding-top-lg" style="width: 90%;margin: auto;" @click="clibook(item.bookid)">
 		<view :class="[index <= 2 ? 'tetred' : '']" style="text-align: center;color: white;" class="tet"></view>
 		<view class="flex" style="width: 100%;">
 			
 		
 			<view class="imga basis-xs">
-				<img src="https://p3-tt.byteimg.com/img/pgc-image/4a43885803954ec1b49550bd1327050f~180x234.jpg" alt="">
+				<img :src="item.bookimg" alt="">
 			</view>
 			<view class="basis-xl padding-bottom-sm">
 				<u-skeleton
@@ -167,6 +167,12 @@
 			// }, 2000)
 		},
 		methods: {
+			clibook(i){
+				uni.navigateTo({
+					url: '/pages/read/index1?bid=' + i,
+				
+				})
+			},
 			getbooks(){
 				_this.showload = true;
 					_this.booklist = []
@@ -246,7 +252,12 @@
 											a.bookState = "连载"
 											break
 									}
-							
+									if(a.bookimg.length<=30){
+										let ip = uni.getStorageSync('serverIp')
+										
+											a.bookimg = ip+'/'+a.bookimg
+										
+									}
 									_this.booklist.push(a)
 								}
 								_this.thispage += 1

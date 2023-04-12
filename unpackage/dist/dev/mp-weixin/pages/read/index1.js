@@ -101,19 +101,22 @@ var components
 try {
   components = {
     uIcon: function () {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-icon/u-icon */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-icon/u-icon")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-icon/u-icon.vue */ 306))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-icon/u-icon */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-icon/u-icon")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-icon/u-icon.vue */ 308))
     },
     "u-Text": function () {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u--text/u--text */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u--text/u--text")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u--text/u--text.vue */ 315))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u--text/u--text */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u--text/u--text")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u--text/u--text.vue */ 317))
     },
     uLine: function () {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-line/u-line */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-line/u-line")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-line/u-line.vue */ 345))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-line/u-line */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-line/u-line")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-line/u-line.vue */ 355))
     },
     uGap: function () {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-gap/u-gap */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-gap/u-gap")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-gap/u-gap.vue */ 290))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-gap/u-gap */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-gap/u-gap")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-gap/u-gap.vue */ 292))
     },
     uButton: function () {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-button/u-button */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-button/u-button")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-button/u-button.vue */ 353))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-button/u-button */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-button/u-button")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-button/u-button.vue */ 363))
+    },
+    uPopup: function () {
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-popup/u-popup */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-popup/u-popup")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-popup/u-popup.vue */ 373))
     },
   }
 } catch (e) {
@@ -295,29 +298,116 @@ exports.default = void 0;
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 var _this;
 var _default = {
   data: function data() {
     return {
       ttop: 0,
-      r: 0
+      r: 0,
+      bid: 0,
+      book: {},
+      show: false,
+      line: 5,
+      customStyle: {
+        'backgroundColor': '#d8d3c0'
+      },
+      uid: 0
     };
   },
-  onLoad: function onLoad() {
+  onLoad: function onLoad(op) {
     _this = this;
+    _this.bid = op.bid;
     var menuButtonInfo = uni.getMenuButtonBoundingClientRect();
     _this.ttop = menuButtonInfo.top + 5;
     _this.r = menuButtonInfo.width;
+    var userinfo = uni.getStorageSync('userinfo');
+    _this.uid = userinfo.uid;
+    this.getbook();
+    this.addSee(op.bid);
   },
   methods: {
+    sj: function sj(bl) {
+      this.request({
+        url: '/api.php?action=addBooksToBookshelves',
+        header: {
+          'content-type': "application/x-www-form-urlencoded"
+        },
+        method: 'post',
+        data: {
+          userid: _this.uid,
+          bookid: _this.book.bookid
+        }
+      }).then(function (res) {
+        _this.book.ifsj = !_this.book.ifsj;
+      });
+    },
+    open1: function open1() {
+      console.log(1);
+      _this.line = _this.line == 5 ? 10 : 5;
+    },
+    close: function close() {
+      _this.show = false;
+    },
     tpread: function tpread(id) {
       uni.navigateTo({
-        url: '/pages/read/read'
+        url: '/pages/read/read?bid=' + _this.bid
       });
     },
     pageback: function pageback() {
       uni.navigateBack({});
+    },
+    getbook: function getbook() {
+      this.request({
+        url: '/api.php?action=getBookDetails',
+        header: {
+          'content-type': "application/x-www-form-urlencoded"
+        },
+        method: 'post',
+        data: {
+          bookid: _this.bid,
+          uid: _this.uid
+        }
+      }).then(function (res) {
+        console.log(res);
+        _this.book = res.data;
+        var ip = uni.getStorageSync('serverIp');
+        if (_this.book.bookState == 1) {
+          _this.book.s = '连载';
+        }
+        if (_this.book.bookState == 2) {
+          _this.book.s = '完结';
+        }
+        if (_this.book.bookState == 3) {
+          _this.book.s = '断更';
+        }
+        if (_this.booimg.length <= 30) {
+          _this.bookimg = ip + '/' + userinfo.Himg;
+        }
+      });
+    },
+    addSee: function addSee(id) {
+      this.request({
+        url: '/api.php?action=addBrowsingHistory',
+        header: {
+          'content-type': "application/x-www-form-urlencoded"
+        },
+        method: 'post',
+        data: {
+          uid: _this.uid,
+          bookid: id
+        }
+      }).then(function (res) {
+        console.log('添加浏览记录');
+      });
     }
   }
 };

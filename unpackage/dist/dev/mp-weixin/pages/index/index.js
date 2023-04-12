@@ -101,22 +101,25 @@ var components
 try {
   components = {
     uGap: function () {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-gap/u-gap */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-gap/u-gap")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-gap/u-gap.vue */ 290))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-gap/u-gap */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-gap/u-gap")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-gap/u-gap.vue */ 292))
     },
     uTabs: function () {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-tabs/u-tabs */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-tabs/u-tabs")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-tabs/u-tabs.vue */ 298))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-tabs/u-tabs */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-tabs/u-tabs")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-tabs/u-tabs.vue */ 300))
     },
     uIcon: function () {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-icon/u-icon */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-icon/u-icon")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-icon/u-icon.vue */ 306))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-icon/u-icon */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-icon/u-icon")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-icon/u-icon.vue */ 308))
     },
     "u-Text": function () {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u--text/u--text */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u--text/u--text")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u--text/u--text.vue */ 315))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u--text/u--text */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u--text/u--text")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u--text/u--text.vue */ 317))
     },
     uCell: function () {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-cell/u-cell */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-cell/u-cell")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-cell/u-cell.vue */ 321))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-cell/u-cell */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-cell/u-cell")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-cell/u-cell.vue */ 323))
     },
     uBackTop: function () {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-back-top/u-back-top */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-back-top/u-back-top")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-back-top/u-back-top.vue */ 329))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-back-top/u-back-top */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-back-top/u-back-top")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-back-top/u-back-top.vue */ 331))
+    },
+    uModal: function () {
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-modal/u-modal */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-modal/u-modal")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-modal/u-modal.vue */ 339))
     },
   }
 } catch (e) {
@@ -175,10 +178,17 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {
 
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 3);
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
+var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 56));
+var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 58));
+//
+//
+//
+//
 //
 //
 //
@@ -377,7 +387,7 @@ exports.default = void 0;
 var _this;
 var lsSkeleton = function lsSkeleton() {
   Promise.all(/*! require.ensure | components/ls-skeleton/ls-skeleton */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/ls-skeleton/ls-skeleton")]).then((function () {
-    return resolve(__webpack_require__(/*! @/components/ls-skeleton/ls-skeleton.nvue */ 337));
+    return resolve(__webpack_require__(/*! @/components/ls-skeleton/ls-skeleton.nvue */ 347));
   }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
 };
 var _default = {
@@ -386,6 +396,9 @@ var _default = {
   },
   data: function data() {
     return {
+      showTips: false,
+      loginTitle: "您还未登录",
+      loginTips: "登录以正常使用本小程序",
       scrollTop: 0,
       //测试数据
       aa: 0,
@@ -420,7 +433,9 @@ var _default = {
       thisList: 1,
       //猜你喜欢当前页
       likethispage: 0,
-      youlike: []
+      youlike: [],
+      uid: 0,
+      topic: []
     };
   },
   onPageScroll: function onPageScroll(e) {
@@ -443,9 +458,18 @@ var _default = {
 
     // }, 2000)
   },
+  onShow: function onShow() {
+    this.gengxin();
+  },
   onLoad: function onLoad() {
     var _this2 = this;
     _this = this;
+    if (!uni.$u.utils.isLogin()) {
+      _this.showTips = true;
+    }
+    var userinfo = uni.getStorageSync('userinfo');
+    _this.uid = userinfo.uid;
+    this.gengxin();
     // this.request({
     // 	url:'/api.php?action=login',
     // 	method:'post',
@@ -453,7 +477,6 @@ var _default = {
     // 	}).then(res=>{
     // 		console.log(res)
     // 	})
-
     console.log(uni.$u.utils.getMobileInfo());
     console.log('刷新');
     var menuButtonInfo = uni.getMenuButtonBoundingClientRect();
@@ -473,11 +496,23 @@ var _default = {
     this.getbanner();
     //猜你喜欢
     this.getyoulike(_this.likethispage, 4);
+    this.getip();
+    //获取话题
+    this.get15Topic();
   },
   methods: {
+    loginYes: function loginYes() {},
+    loginNo: function loginNo() {
+      uni.showToast({
+        title: '登录失败，无法正常使用小程序',
+        duration: 1000,
+        icon: 'error'
+      });
+      _this.showTips = false;
+    },
     tpht: function tpht(id) {
       uni.navigateTo({
-        url: '../../subpackageA/topicDetails/topicDetails'
+        url: '../../subpackageA/topicDetails/topicDetails?tid=' + id
       });
     },
     tpallist: function tpallist() {
@@ -519,13 +554,7 @@ var _default = {
     clibook: function clibook(i) {
       console.log(i);
       uni.navigateTo({
-        url: '/pages/read/index1',
-        success: function success(res) {
-          // 通过eventChannel向被打开页面传送数据
-        },
-        fail: function fail(err) {
-          console.log(err);
-        }
+        url: '/pages/read/index1?bid=' + i
       });
     },
     //点击tag标签
@@ -619,6 +648,21 @@ var _default = {
         _this.showbook = false;
       });
     },
+    get15Topic: function get15Topic() {
+      this.request({
+        url: '/api.php?action=get15topic',
+        method: 'post'
+      }).then(function (res) {
+        for (var j = 0; j < 5; j++) {
+          var b = [];
+          for (var i = j * 3; i < j * 3 + 3; i++) {
+            var a = res.data[i];
+            b.push(a);
+          }
+          _this.topic.push(b);
+        }
+      });
+    },
     getbanner: function getbanner() {
       this.request({
         url: '/api.php?action=getFirstPageBanner',
@@ -633,6 +677,111 @@ var _default = {
           };
           _this.swiperList.push(a);
         }
+      });
+    },
+    getip: function getip() {
+      this.request({
+        url: '/api.php?action=getHost',
+        method: 'post'
+      }).then(function (res) {
+        console.log(res.data[0].ip);
+        console.log('ip');
+        uni.setStorageSync('serverIp', res.data[0].ip);
+      });
+    },
+    //登录
+    WXlogin: function WXlogin() {
+      var _this3 = this;
+      _this.showTips = false;
+      uni.getUserProfile({
+        desc: '登录',
+        success: function success(resinfo) {
+          // console.log(res) //微信头像昵称
+          uni.login({
+            provider: "weixin",
+            //
+            success: function () {
+              var _success = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee(resa) {
+                var result;
+                return _regenerator.default.wrap(function _callee$(_context) {
+                  while (1) {
+                    switch (_context.prev = _context.next) {
+                      case 0:
+                        _context.next = 2;
+                        return _this3.request({
+                          url: '/api.php?action=code2id',
+                          method: 'post',
+                          header: {
+                            'content-type': "application/x-www-form-urlencoded"
+                          },
+                          data: {
+                            code: resa.code
+                          }
+                        }).then(function (res) {
+                          console.log(res);
+                          console.log(resinfo);
+                          if (res.status == 'error') {
+                            uni.showToast({
+                              title: res.data,
+                              icon: 'none'
+                            });
+                          } else {
+                            var wxinfo = {
+                              openid: res.data,
+                              name: resinfo.userInfo.nickName,
+                              img: resinfo.userInfo.avatarUrl
+                            };
+                            _this3.request({
+                              url: '/api.php?action=login',
+                              method: 'post',
+                              data: wxinfo
+                            }).then(function (reslogin) {
+                              console.log(reslogin);
+                              uni.setStorageSync('userinfo', reslogin.data[0]);
+                              uni.showToast({
+                                title: '登录成功',
+                                icon: 'success'
+                              });
+                              if (reslogin.firstLogin == 1) {
+                                // 跳转个人信息编辑
+                                console.log('首次登录');
+                                uni.navigateTo({
+                                  url: '../../subpackageA/editMyData/editMyData?type=1'
+                                });
+                              }
+                            });
+                            // console.log(wxinfo) //个人信息
+                          }
+                        });
+                      case 2:
+                        result = _context.sent;
+                      case 3:
+                      case "end":
+                        return _context.stop();
+                    }
+                  }
+                }, _callee);
+              }));
+              function success(_x) {
+                return _success.apply(this, arguments);
+              }
+              return success;
+            }()
+          });
+        }
+      });
+    },
+    tpedit: function tpedit() {},
+    gengxin: function gengxin() {
+      this.request({
+        url: '/api.php?action=refreshInfo',
+        method: 'post',
+        data: {
+          uid: _this.uid
+        }
+      }).then(function (res) {
+        uni.setStorageSync('userinfo', res.data[0]);
+        console.log('信息更新', res);
       });
     },
     getyoulike: function getyoulike(page, pagenum) {

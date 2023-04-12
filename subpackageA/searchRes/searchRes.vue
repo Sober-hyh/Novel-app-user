@@ -100,7 +100,7 @@
 			</u-empty>
 		</view>
 		<!-- 搜索显示综合 -->
-		<view v-if="showzh && item.bookid" class="flex seclist margin-bottom-xs" v-for="item in seachlist">
+		<view v-if="showzh && item.bookid" class="flex seclist margin-bottom-xs" v-for="item in seachlist" @click="clibook(item.bookid)">
 			<view>
 				<u-avatar
 				slot="icon"
@@ -135,7 +135,7 @@
 			</view>
 		</view>
 		<!-- 书籍 -->
-		<view v-show="showbook" class="flex seclist margin-bottom-xs" v-for="item in seachlist">
+		<view v-show="showbook" class="flex seclist margin-bottom-xs" v-for="item in seachlist" @click="clibook(item.bookid)">
 			<view>
 				<u-avatar
 				slot="icon"
@@ -363,6 +363,12 @@
 			
 		},
 		methods: {
+			clibook(i){
+				uni.navigateTo({
+					url: '/pages/read/index1?bid=' + i,
+				
+				})
+			},
 			checkboxClick(name,index) {
 				let a = [];
 				if(this.list1[index].checked==true){

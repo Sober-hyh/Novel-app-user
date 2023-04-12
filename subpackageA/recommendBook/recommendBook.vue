@@ -11,8 +11,8 @@
 		            </view>
 					<view class="cu-bar search bg-white margin-top-xs" >
 						<view class="search-form " style="background-color: white; border-radius: 5px;">
-							<text class="cuIcon-search"></text>
-							<input style="background-color: #f5f4f0;" @input="enterBooks" @blur="enterBooks" :adjust-position="false" type="text" placeholder="搜索书架里的书籍" confirm-type="search"></input>
+							
+							<input style="background-color: #f5f4f0;" @input="enterBooks" v-model="value" @blur="enterBooks" :adjust-position="false" type="text" placeholder="搜索书架里的书籍" confirm-type="search"></input>
 						</view>
 						<view class="action">
 							<!-- <button class="cu-btn bg-green shadow-blur round">搜索</button> -->
@@ -33,7 +33,7 @@
 											<text style="font-weight: bold;color: red;">{{item1.score}}分</text>
 										</view>
 										<view class="padding-left-xs padding-bottom-xs" style="text-align: left;">
-											{{item1.bookTag}}
+											<!-- {{item1.bookTag}} -->
 										</view>
 									</view>
 									<view @click="pickbook(item1,index)" style="width: 20%;color: black;position: relative;">
@@ -56,14 +56,14 @@
 			<u--textarea
 			 v-model="tuishu_content"
 			  autoHeight  
-			  placeholder="推荐符合要求的书籍,变身推书达人..."
+			  placeholder="Tips:介绍最少7字,最多100字,至少选择一本书"
 			  border="none"
 			  :adjustPosition="true"
 			  :height="50"
 			  :showConfirmBar="false"
 			  :cursorSpacing="10"
 			  :count="true"
-			  :maxlength="300"
+			  :maxlength="100"
 			  @input="tuishu_input"
 			  ></u--textarea>
 		</view>
@@ -82,7 +82,7 @@
 							<text style="font-weight: bold;color: red;">{{item.score}}分</text>
 						</view>
 						<view class="padding-left-xs padding-bottom-xs" style="text-align: left;">
-							{{item.bookTag}}
+							<!-- {{item.bookTag}} -->
 						</view>
 					</view>
 					<view @click="delid(item,index)" style="position: absolute;right: 20rpx;top: 0;">
@@ -100,7 +100,9 @@
 		<view class="padding-top-xs" style="height: 30px;">
 			<button class="ts ts_1" @click="published()" style="float: right;">发表</button>
 		</view>
-		
+		<view>
+			<u-notify message="介绍最少7字,最多100字,至少选择一本书" :show="show"></u-notify>
+		</view>
 		
 		
 	
@@ -112,6 +114,7 @@
 	export default {
 		data() {
 			return {
+				value:"",
 				tuishu_content:"",
 				tj:false,
 				booklist:[
@@ -148,48 +151,27 @@
 				popHeight:0,
 				books_title:"",
 				currentSearchBooks:[
-					{
-						id:0,
-						title:"哈哈哈哈4",
-						mgsrc:"https://bookcover.yuewen.com/qdbimg/349573/1035938472/90",
-						bookTag:"玄幻",
-						score:7.9,
-						ifselect:false
-					},
-					{
-						id:1,
-						title:"哈哈哈哈4",
-						mgsrc:"https://bookcover.yuewen.com/qdbimg/349573/1035938472/90",
-						bookTag:"玄幻",
-						score:8.9,
-						ifselect:false
-					},
-					{
-						id:2,
-						title:"哈哈哈哈4",
-						mgsrc:"https://bookcover.yuewen.com/qdbimg/349573/1035938472/90",
-						bookTag:"玄幻",
-						score:9.9,
-						ifselect:false
-					},
-					{
-						id:3,
-						title:"哈哈哈哈4",
-						mgsrc:"https://bookcover.yuewen.com/qdbimg/349573/1035938472/90",
-						bookTag:"玄幻",
-						score:7.1
-					}
+
+
 				],
 				selectBooks:[
 					
-				]
+				],
+				tid:0,
+				uid:0,
+				topic:{},
+				bookshelf:[],
+				showtips:false
 			}
 		},
-		onLoad(){
+		onLoad(op){
 			_this = this;
-			uni.setNavigationBarTitle({
-				title: '@我用十年青春,赴你最后之约我用十年青春,赴你最后之约我用十年青春,赴你最后之约',
-			});
+			_this.tid = op.tid
+			_this.gettopic(op.tid)
+			const userinfo = uni.getStorageSync('userinfo')
+			_this.uid = userinfo.uid
+			_this.bookshelf = uni.getStorageSync('bookshelf')
+			this.setbookslist()
 			uni.getSystemInfo({
 				success:function (res){
 					console.log()
@@ -198,10 +180,74 @@
 			})
 		
 		},
+		mounted() {
+	
+		},
 		methods:{
+			setbookslist(){
+				_this.currentSearchBooks = []
+				for(let i=0;i<_this.bookshelf.length;i++){
+					let a = {
+						id:_this.bookshelf[i].bookid,
+						title:_this.bookshelf[i].bookname,
+						mgsrc:_this.bookshelf[i].bookimg,
+						score:_this.bookshelf[i].bookRating,
+						ifselect:false
+					}
+					if(a.mgsrc.length<30){
+						let ip = uni.getStorageSync('serverIp')
+						a.mgsrc = ip + '/' + a.mgsrc
+					}
+					_this.currentSearchBooks.push(a)
+				}
+			},
 			published(){
-				if(!_this.tj){
+				if(_this.tuishu_content == "" || _this.tuishu_content.length<=7 || _this.tuishu_content.length>=100||_this.selectBooks.length==0){
+					uni.showToast({
+						title: '检查输入内容',
+						duration: 2000,
+						icon:'error'
+					});
+					_this.showtips = true
+					setTimeout(function(){
+						_this.showtips = false
+					},3000)
 					return
+				}else{
+					let a = "";
+					for(let i =0;i<_this.selectBooks.length;i++){
+						if(a==""){
+							a=_this.selectBooks[i].id
+						}else{
+							a = a + ',' + _this.selectBooks[i].id
+						}
+					}
+					this.request({
+					url:'/api.php?action=huatituishu',
+					header:{'content-type' : "application/x-www-form-urlencoded"},
+					method:'post',
+					data:{
+						uid:_this.uid,
+						tid:_this.tid,
+						bookid:a,
+						jieshao:_this.tuishu_content
+					}
+					}).then(res=>{
+				
+						console.log(res)
+						if(res){
+							uni.showToast({
+								title: '发布成功',
+								duration: 1000,
+								icon:'success'
+							});
+							setTimeout(function(){
+								uni.navigateBack()
+							},1000)
+						}
+					
+					
+					})
 				}
 			},
 			tuishu_input(){
@@ -217,6 +263,26 @@
 			
 				
 			},
+			gettopic(tid){
+				this.request({
+				url:'/api.php?action=getTopicDetails',
+				header:{'content-type' : "application/x-www-form-urlencoded"},
+				method:'post',
+				data:{
+					uid:_this.uid,
+					topicid:tid
+				}
+				}).then(res=>{
+					console.log(111)
+					console.log(res.data)
+					_this.topic = res.data
+					uni.setNavigationBarTitle({
+						title: '@'+res.data.t_name,
+					});
+
+				
+				})
+			},
 			closePopUpBooks(){
 				_this.PopUpBooks = false
 			},
@@ -226,7 +292,34 @@
 			},
 			enterBooks(){
 				//触发搜索 填充数据 关闭弹窗时清除搜索数据
-				
+				console.log('搜索')
+				if(_this.value!=""){
+					_this.currentSearchBooks = []
+					 var reg = new RegExp(_this.value)			
+					for(let i=0;i<_this.bookshelf.length;i++){
+
+
+						if (reg.test(_this.bookshelf[i].bookname)) {
+							console.log(211)
+							let a = {
+								id:_this.bookshelf[i].bookid,
+								title:_this.bookshelf[i].bookname,
+								mgsrc:_this.bookshelf[i].bookimg,
+								score:_this.bookshelf[i].bookRating,
+								ifselect:false
+							}
+							if(a.mgsrc.length<30){
+								let ip = uni.getStorageSync('serverIp')
+								a.mgsrc = ip + '/' + a.mgsrc
+							}
+						        _this.currentSearchBooks.push(a)
+								
+								
+						      }
+					}
+				}else{
+					_this.setbookslist()
+				}
 			},
 			onblurbook(){
 				

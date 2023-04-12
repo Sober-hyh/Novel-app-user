@@ -129,7 +129,7 @@
                     "path" : "listTopics/listTopics",
                     "style" :                                                                                    
                 {
-                    "navigationBarTitleText": "",
+                    "navigationBarTitleText": "话题列表",
                     "enablePullDownRefresh": false,
 					"navigationBarBackgroundColor":"#f6f6f6"
                 }

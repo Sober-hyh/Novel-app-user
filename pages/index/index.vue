@@ -67,7 +67,7 @@
 					  <div class="inner"></div>
 					</div>
 					<view v-show="showbook == false" class="gc grid col-1" v-for="item in 5">
-						<view class="flex ones padding-right-xs" v-for="(item1,index) in listBooks[item]" @click="clibook(item1)">
+						<view class="flex ones padding-right-xs" v-for="(item1,index) in listBooks[item]" @click="clibook(item1.bookid)">
 							<img v-if="item1 && item1.bookid" class="simg" :src="item1.img" alt="">
 							<view v-if="item1.bookid" class="flex padding-top-xs padding-left-xs padding-right-xs">
 								<text v-if="item==0" :class="[index+1<=3 && 'stext']">{{index+1}}</text>
@@ -112,12 +112,13 @@
 							  <div class="middle"></div>
 							  <div class="inner"></div>
 							</div>
-							<view v-show="showht==false" class="grid col-1" v-for="item in 5">
-								<view class="flex" v-for="item1 in 3" @click="cliht(item1)">
+							<view v-show="showht==false" class="grid col-1" v-for="item1 in topic" >
+								<view class="flex" v-for="(item,index) in item1" @click="cliht(item1)">
 									<u-icon name="chat-fill" color="#fd601a" size="22"></u-icon>
-									<view @click="tpht(id)" class="text-bold httext text-df text-cut" style="width: 200px;padding: 15rpx 0;">开局就无敌，满级大号，单女主</view>
+									<view @click="tpht(item.tid)" class="text-bold httext text-df text-cut" style="width: 200px;padding: 15rpx 0;">{{item.t_name}}</view>
 								</view>
 							</view>
+							
 						</view>
 					</view>
 				</view>
@@ -155,7 +156,7 @@
 				
 			</view> -->
 			<view v-for="item in youlike">
-				<view class="bg-white flex">
+				<view class="bg-white flex" @click="clibook(item.bookid)">
 					<view style="width: 20%;">
 						<img class="cimg" :src="item.bookimg" alt="">
 					</view>
@@ -189,6 +190,9 @@
 		<view>
 			<u-back-top :scroll-top="scrollTop"></u-back-top>
 		</view>
+		<view>
+			<u-modal :show="showTips" @confirm = "WXlogin()" @cancel="loginNo" :showCancelButton="true" :title="loginTitle" :content='loginTips'></u-modal>
+		</view>
 	</view>
 </template>
 
@@ -201,6 +205,9 @@
 		    },
 		data() {
 			return {
+				showTips:false,
+				loginTitle:"您还未登录",
+				loginTips:"登录以正常使用本小程序",
 				scrollTop: 0,
 				//测试数据
 				aa:0,
@@ -240,7 +247,9 @@
 				likethispage:0,
 				youlike:[
 					
-				]
+				],
+				uid:0,
+				topic:[]
 			}
 		},
 		onPageScroll(e) {
@@ -264,8 +273,17 @@
 				 
 			// }, 2000)
 		},
+		onShow(){
+			this.gengxin()
+		},
 		onLoad() {
 			_this = this;
+			if(!uni.$u.utils.isLogin()){
+				_this.showTips = true
+			}
+			const userinfo = uni.getStorageSync('userinfo')
+			_this.uid = userinfo.uid
+			this.gengxin()
 			// this.request({
 			// 	url:'/api.php?action=login',
 			// 	method:'post',
@@ -273,7 +291,6 @@
 			// 	}).then(res=>{
 			// 		console.log(res)
 			// 	})
-			
 			console.log(uni.$u.utils.getMobileInfo())
 			console.log('刷新')
 			 let menuButtonInfo = uni.getMenuButtonBoundingClientRect()
@@ -293,11 +310,25 @@
 			 this.getbanner()
 			 //猜你喜欢
 			 this.getyoulike(_this.likethispage,4)
+			 this.getip()
+			 //获取话题
+			 this.get15Topic()
 		},
 		methods: {
+			loginYes(){
+				
+			},
+			loginNo(){
+				uni.showToast({
+					title: '登录失败，无法正常使用小程序',
+					duration: 1000,
+					icon:'error'
+				});
+				_this.showTips =false
+			},
 			tpht(id){
 				uni.navigateTo({
-					url: '../../subpackageA/topicDetails/topicDetails'
+					url: '../../subpackageA/topicDetails/topicDetails?tid=' + id,
 				})
 			},
 			tpallist(){
@@ -340,13 +371,8 @@
 			clibook(i){
 				console.log(i)
 				uni.navigateTo({
-					url: '/pages/read/index1',
-					 success: function(res) {
-					    // 通过eventChannel向被打开页面传送数据
-					  
-					  },fail(err) {
-					  	console.log(err)
-					  }
+					url: '/pages/read/index1?bid=' + i,
+
 				})
 				
 			},
@@ -444,6 +470,27 @@
 					_this.showbook = false
 				})
 			},
+			get15Topic(){
+				
+				this.request({
+				url:'/api.php?action=get15topic',
+				method:'post',
+				}).then(res=>{
+					
+					for(let j=0;j<5;j++){
+						let b = []
+						for(let i=j*3;i<j*3+3;i++){
+							
+							let a = res.data[i]
+							b.push(a)
+						}
+						_this.topic.push(b)
+					}
+					
+					
+					
+				})
+			},
 			getbanner(){
 				this.request({
 				url:'/api.php?action=getFirstPageBanner',
@@ -461,6 +508,97 @@
 					}
 					
 					
+				})
+			},
+			getip(){
+				
+					this.request({
+						url:'/api.php?action=getHost',
+						method:'post',
+						}).then(res=>{
+							console.log(res.data[0].ip)
+							console.log('ip')
+							uni.setStorageSync('serverIp',res.data[0].ip)
+							
+						})
+				
+				
+			},
+			//登录
+			WXlogin(){
+				_this.showTips =false
+				uni.getUserProfile({
+					desc:'登录',
+					success:(resinfo) =>{
+						// console.log(res) //微信头像昵称
+						uni.login({
+							provider:"weixin", //
+							 success:async (resa)=>{
+								 const result = await this.request({
+								 		url:'/api.php?action=code2id',
+								 		method:'post',
+								 		header:{'content-type' : "application/x-www-form-urlencoded"},
+								 		data:{
+								 			code:resa.code
+								 		},
+								 		}).then(res=>{
+											console.log(res)
+											console.log(resinfo)
+											
+									
+								 			if(res.status == 'error'){
+								 				uni.showToast({ title: res.data, icon: 'none' });
+								 			}else{
+												
+								 				const wxinfo = {
+								 					openid: res.data,
+								 					name: resinfo.userInfo.nickName,
+								 					img:resinfo.userInfo.avatarUrl
+								 				}
+												this.request({
+												url:'/api.php?action=login',
+												method:'post',
+												data:wxinfo
+												}).then(reslogin=>{
+													console.log(reslogin)
+													uni.setStorageSync('userinfo',reslogin.data[0]);
+													uni.showToast({ title: '登录成功', icon: 'success' });
+													if(reslogin.firstLogin==1){
+														// 跳转个人信息编辑
+														console.log('首次登录')
+														uni.navigateTo({
+															url: '../../subpackageA/editMyData/editMyData?type=1'
+														});
+													}
+													
+													
+												})
+								 				// console.log(wxinfo) //个人信息
+								 				
+								 			}
+								 			
+								 			
+								 	})
+									
+								
+							}
+						})
+					}
+				})
+			},
+			tpedit(){
+				
+			},
+			gengxin(){
+				this.request({
+						url:'/api.php?action=refreshInfo',
+						method:'post',
+						data:{
+							uid:_this.uid,
+						},
+						}).then(res=>{
+							uni.setStorageSync('userinfo',res.data[0])
+							console.log('信息更新',res)
 				})
 			},
 			getyoulike(page,pagenum){

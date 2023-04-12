@@ -498,7 +498,7 @@ var _default = {
   data: function data() {
     return {
       addStatus: false,
-      pageType: 0,
+      pageType: 1,
       animationData: {},
       speed: 30,
       auto: false,
@@ -572,7 +572,9 @@ var _default = {
       scrollTop: 0,
       contentHeight: 0,
       down: false,
-      downTimer: null
+      downTimer: null,
+      bid: 0,
+      uid: 0
     };
   },
   filters: {
@@ -605,7 +607,18 @@ var _default = {
     _brightness.default.getBrigthness(function (res) {
       _this.brightness = res;
     });
-    this.loadData();
+  },
+  onLoad: function onLoad(op) {
+    _this = this;
+    var userinfo = uni.getStorageSync('userinfo');
+    _this.uid = userinfo.id;
+    uni.setStorageSync('readtime', 0);
+    var timerr = setInterval(function () {
+      var time = uni.getStorageSync('readtime') + 10;
+      uni.setStorageSync('readtime', time);
+    }, 10000);
+    _this.bid = op.bid;
+    this.loadData(op.bid);
     this.getTime();
     setInterval(function () {
       _battery.default.getBattery(function (res) {
@@ -613,9 +626,7 @@ var _default = {
       });
     }, 5000);
     this.animation = uni.createAnimation();
-  },
-  onLoad: function onLoad() {
-    _this = this;
+    this.addreadnum(op.bid);
   },
   destroyed: function destroyed() {
     clearInterval(timer);
@@ -659,6 +670,7 @@ var _default = {
     scrolltolower: function scrolltolower(e) {
       var _this = this;
       if (e.detail.direction == 'bottom' && e.type == "scrolltolower") {
+        console.log(this.read, this.detail.data.length);
         if (this.read < this.detail.data.length - 1) {
           uni.showLoading({
             title: '请稍等...'
@@ -681,19 +693,54 @@ var _default = {
         }
       }
     },
-    loadData: function loadData() {
-      var u = "";
-      for (var j = 0; j < 100; j++) {
-        u = u + "阿UI和代发IU稍等哈UI发货吧UI返回IU修";
-      }
-      for (var i = 0; i < 100; i++) {
-        this.detail.title = '1';
-        this.detail.data.push({
-          id: i,
-          sub: i,
-          content: u
-        });
-      }
+    loadData: function loadData(id) {
+      var _this2 = this;
+      this.request({
+        url: '/api.php?action=getChapt',
+        method: 'post',
+        header: {
+          'content-type': "application/x-www-form-urlencoded"
+        },
+        data: {
+          bookid: id
+        }
+      }).then(function (res) {
+        console.log(res);
+        for (var i = 0; i < res.data.length; i++) {
+          _this2.detail.title = '1';
+          _this2.detail.data.push({
+            id: i,
+            cid: res.data[i].cid,
+            sub: '第' + (i + 1) + '章 ' + res.data[i].Chaptername,
+            content: res.data[i].Chaptertext
+          });
+        }
+        // for(let i=0;i<10;i++){
+
+        // 	this.detail.title = '1'
+        // 	this.detail.data.push({
+        // 		id: i,
+        // 		cid:res.data[0].cid,
+        // 		sub: '第' + (i+1) + '章 '+ res.data[0].Chaptername,
+        // 		content: res.data[0].Chaptertext
+        // 	})
+        // }
+      });
+
+      console.log('加载');
+      // let u = "";
+      // for(let j=0;j<100;j++){
+      // 	u = u + "阿UI和代发IU稍等哈UI发货吧UI返回IU修"
+      // }
+      // for(let i=0;i<100;i++){
+      // 	this.detail.title = '1'
+      // 	this.detail.data.push({
+      // 		id: i, 
+      // 		sub: '第' + (i+1) + '章',
+      // 		content: u
+      // 	})
+
+      // }
       this.getHeight();
       uni.hideLoading();
       return;
@@ -705,28 +752,28 @@ var _default = {
       var arr = res.data.split('\n');
       var index = 0;
       _this.articleList = [];
-      for (var _i in arr) {
+      for (var i in arr) {
         var html = '';
-        if (arr[_i]) {
+        if (arr[i]) {
           // let reg='/第[一二三四五六七八九十]{1,10}章/'
-          if (arr[_i].indexOf('《') !== -1 || arr[_i].indexOf('》') !== -1) {
-            _this.detail.title = arr[_i].replace(/\s+/g, "");
+          if (arr[i].indexOf('《') !== -1 || arr[i].indexOf('》') !== -1) {
+            _this.detail.title = arr[i].replace(/\s+/g, "");
             _this.detail.data.push({
               id: index + 1,
-              sub: arr[_i].replace(/\s+/g, ""),
+              sub: arr[i].replace(/\s+/g, ""),
               content: ""
             });
-          } else if (arr[_i].indexOf('楔子') !== -1 || arr[_i].indexOf('章') !== -1 || arr[_i].indexOf('篇') !== -1 || arr[_i].indexOf('第') !== -1 || arr[_i].indexOf('节') !== -1) {
-            if (arr[_i].length < 20) {
+          } else if (arr[i].indexOf('楔子') !== -1 || arr[i].indexOf('章') !== -1 || arr[i].indexOf('篇') !== -1 || arr[i].indexOf('第') !== -1 || arr[i].indexOf('节') !== -1) {
+            if (arr[i].length < 20) {
               _this.detail.data.push({
                 id: index + 1,
-                sub: arr[_i].replace(/\s+/g, ""),
+                sub: arr[i].replace(/\s+/g, ""),
                 content: ""
               });
               index++;
             }
           } else {
-            _this.detail.data[index].content += "<p>" + arr[_i].replace(/\s+/g, "") + '</p>';
+            _this.detail.data[index].content += "<p>" + arr[i].replace(/\s+/g, "") + '</p>';
           }
         }
       }
@@ -741,6 +788,33 @@ var _default = {
         _brightness.default.setBrigthness(this.brightness, false, function (res) {});
       }
     },
+    addreadnum: function addreadnum(id) {
+      var _this3 = this;
+      this.request({
+        url: '/api.php?action=addBookread',
+        header: {
+          'content-type': "application/x-www-form-urlencoded"
+        },
+        method: 'post',
+        data: {
+          bookid: id
+        }
+      }).then(function (res) {
+        console.log('添加阅读人数');
+        _this3.request({
+          url: '/api.php?action=addBookClicks',
+          header: {
+            'content-type': "application/x-www-form-urlencoded"
+          },
+          method: 'post',
+          data: {
+            bookid: id
+          }
+        }).then(function (res) {
+          console.log('添加热度');
+        });
+      });
+    },
     brightnessChange: function brightnessChange(e) {
       var self = this;
       _brightness.default.setBrigthness(e.detail.value, false, function (res) {
@@ -751,6 +825,29 @@ var _default = {
       this.pageType = index;
     },
     pageBack: function pageBack() {
+      uni.navigateTo({
+        url: '/pages/idnex/index'
+      });
+    },
+    pageBack1: function pageBack1() {
+      console.log('返回');
+      var userinfo = uni.getStorageSync('userinfo');
+      this.request({
+        url: '/api.php?action=addReadingTime',
+        header: {
+          'content-type': "application/x-www-form-urlencoded"
+        },
+        method: 'post',
+        data: {
+          userid: userinfo.uid,
+          time: uni.getStorageSync('readtime')
+        }
+      }).then(function (res) {
+        console.log('添加时间');
+        uni.setStorageSync('readtime', 0);
+      });
+
+      //存储时间
       uni.navigateBack({
         delta: 1
       });

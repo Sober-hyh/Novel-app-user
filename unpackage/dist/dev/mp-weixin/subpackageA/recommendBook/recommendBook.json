@@ -6,6 +6,7 @@
     "u-popup": "/uni_modules/uview-ui/components/u-popup/u-popup",
     "u-gap": "/uni_modules/uview-ui/components/u-gap/u-gap",
     "u-icon": "/uni_modules/uview-ui/components/u-icon/u-icon",
-    "u--textarea": "/uni_modules/uview-ui/components/u--textarea/u--textarea"
+    "u--textarea": "/uni_modules/uview-ui/components/u--textarea/u--textarea",
+    "u-notify": "/uni_modules/uview-ui/components/u-notify/u-notify"
   }
 }

@@ -101,10 +101,10 @@ var components
 try {
   components = {
     "u-Textarea": function () {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u--textarea/u--textarea */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u--textarea/u--textarea")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u--textarea/u--textarea.vue */ 512))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u--textarea/u--textarea */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u--textarea/u--textarea")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u--textarea/u--textarea.vue */ 514))
     },
     uGap: function () {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-gap/u-gap */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-gap/u-gap")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-gap/u-gap.vue */ 290))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-gap/u-gap */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-gap/u-gap")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-gap/u-gap.vue */ 292))
     },
   }
 } catch (e) {
@@ -161,7 +161,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-
+/* WEBPACK VAR INJECTION */(function(uni) {
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -212,24 +212,54 @@ var _default = {
     return {
       topic_title: "",
       topic_content: "",
-      tj: false
+      tj: false,
+      uid: 0
     };
   },
   onLoad: function onLoad() {
     _this = this;
+    var userinfo = uni.getStorageSync('userinfo');
+    _this.uid = userinfo.uid;
   },
   methods: {
     published: function published() {
       if (!_this.tj) {
         return;
       }
+      _this.sub();
     },
     topic_input: function topic_input(e) {
       return _this.topic_title && _this.topic_content ? _this.tj = true : _this.tj = false;
+    },
+    sub: function sub() {
+      this.request({
+        url: '/api.php?action=releaseTopic',
+        header: {
+          'content-type': "application/x-www-form-urlencoded"
+        },
+        method: 'post',
+        data: {
+          tname: _this.topic_title,
+          userid: _this.uid,
+          introduce: _this.topic_content
+        }
+      }).then(function (res) {
+        console.log('发布话题');
+        console.log(res);
+        uni.showToast({
+          title: '发布成功',
+          duration: 1000,
+          icon: 'success'
+        });
+      });
+      setTimeout(function () {
+        uni.navigateBack();
+      }, 3000);
     }
   }
 };
 exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

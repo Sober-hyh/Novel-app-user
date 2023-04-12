@@ -100,14 +100,14 @@ __webpack_require__.r(__webpack_exports__);
 var components
 try {
   components = {
-    uIcon: function () {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-icon/u-icon */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-icon/u-icon")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-icon/u-icon.vue */ 306))
-    },
     uGap: function () {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-gap/u-gap */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-gap/u-gap")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-gap/u-gap.vue */ 290))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-gap/u-gap */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-gap/u-gap")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-gap/u-gap.vue */ 292))
     },
     "u-Text": function () {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u--text/u--text */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u--text/u--text")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u--text/u--text.vue */ 315))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u--text/u--text */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u--text/u--text")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u--text/u--text.vue */ 317))
+    },
+    uIcon: function () {
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-icon/u-icon */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-icon/u-icon")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-icon/u-icon.vue */ 308))
     },
   }
 } catch (e) {
@@ -203,23 +203,84 @@ exports.default = void 0;
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 var _this;
 var _default = {
   data: function data() {
     return {
-      phit: 0
+      phit: 0,
+      topicList: [],
+      page: 0,
+      showloading: false
     };
   },
   onLoad: function onLoad() {
     _this = this;
+    _this.page = 0;
     var menuButtonInfo = uni.getMenuButtonBoundingClientRect();
     _this.phit = menuButtonInfo.top;
+    this.getTopiclist();
+  },
+  onReachBottom: function onReachBottom() {
+    var _this2 = this;
+    console.log('上拉');
+    _this.showloading = true;
+    setTimeout(function () {
+      //模拟加载书籍
+      _this2.getTopiclist();
+    }, 1000);
   },
   methods: {
+    tp: function tp(tid) {
+      uni.navigateTo({
+        url: '../topicDetails/topicDetails?tid=' + tid
+      });
+    },
     tp_restp: function tp_restp() {
       uni.navigateTo({
         url: '../releaseTopic/releaseTopic'
+      });
+    },
+    getTopiclist: function getTopiclist(page, pagenum) {
+      if (_this.page == 0) {
+        _this.topicList = [];
+      }
+      this.request({
+        url: '/api.php?action=getTopiclist',
+        header: {
+          'content-type': "application/x-www-form-urlencoded"
+        },
+        method: 'post',
+        data: {
+          page: _this.page,
+          pagenum: 15
+        }
+      }).then(function (res) {
+        console.log(res);
+        if (res.sum == 0) {
+          uni.showToast({
+            title: '没有更多内容了',
+            duration: 2000,
+            icon: 'error'
+          });
+          return;
+        }
+        for (var i = 0; i < res.data.length; i++) {
+          var a = res.data[i];
+          _this.topicList.push(a);
+          // console.log(res[i])
+        }
+
+        _this.page += 1;
+        _this.showloading = false;
       });
     }
   }

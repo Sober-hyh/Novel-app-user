@@ -1,10 +1,10 @@
 {
-  "navigationBarTitleText": "",
+  "navigationBarTitleText": "话题列表",
   "enablePullDownRefresh": false,
   "navigationBarBackgroundColor": "#f6f6f6",
   "usingComponents": {
-    "u-icon": "/uni_modules/uview-ui/components/u-icon/u-icon",
     "u-gap": "/uni_modules/uview-ui/components/u-gap/u-gap",
-    "u--text": "/uni_modules/uview-ui/components/u--text/u--text"
+    "u--text": "/uni_modules/uview-ui/components/u--text/u--text",
+    "u-icon": "/uni_modules/uview-ui/components/u-icon/u-icon"
   }
 }

@@ -148,7 +148,7 @@
 						@tap="nextBig">下一章</text>
 				</view>
 				<view class="bottom">
-					<view class="tool-item" @tap='pageBack'>
+					<view class="tool-item" @tap='pageBack1'>
 						<text class="iconfont icon-fanhui"
 							:style="{color:night?otherBg.font[1].title:otherBg.font[0].title}"></text>
 						<text class="span" :style="{color:night?otherBg.font[1].sub:otherBg.font[0].sub}">返回</text>
@@ -280,8 +280,8 @@
 			</view>
 		</view>
 
-		<view class="menu" :style="{width:width+'px',height:winHeight+'px'}" v-if="tool===0" @tap="toggleShow">
-			<view class="box">
+		<view class="menu" :style="{width:width+'px'}" v-if="tool===0" @tap="toggleShow" style="height: 100%;"> <!-- height:winHeight+'px' -->
+			<view class="box" style="overflow-y: auto;">
 				<view class="top">
 					更新至 {{detail.data[detail.data.length-1].sub}}
 				</view>
@@ -329,7 +329,7 @@
 		data() {
 			return {
 				addStatus: false,
-				pageType: 0,
+				pageType: 1,
 				animationData: {},
 				speed: 30,
 				auto: false,
@@ -415,7 +415,9 @@
 				scrollTop:0,
 				contentHeight:0,
 				down:false,
-				downTimer:null
+				downTimer:null,
+				bid:0,
+				uid:0
 			}
 		},
 		filters: {
@@ -450,7 +452,19 @@
 				_this.brightness = res
 			})
 			//  #endif
-			this.loadData()
+			
+		},
+		onLoad(op) {
+			_this = this;
+			const userinfo = uni.getStorageSync('userinfo')
+			_this.uid = userinfo.id
+			uni.setStorageSync('readtime',0)
+			const timerr =  setInterval(function(){
+				let time = uni.getStorageSync('readtime') +10
+				uni.setStorageSync('readtime',time)
+			},10000)
+			_this.bid = op.bid
+			this.loadData(op.bid)
 			this.getTime()
 			setInterval(function() {
 				util.getBattery(function(res) {
@@ -458,9 +472,8 @@
 				})
 			}, 5000)
 			this.animation = uni.createAnimation()
-		},
-		onLoad() {
-			_this = this;
+			this.addreadnum(op.bid)
+			
 		},
 		destroyed() {
 			clearInterval(timer)
@@ -504,6 +517,7 @@
 			scrolltolower(e){
 				let _this=this
 				if(e.detail.direction=='bottom'&&e.type=="scrolltolower"){
+					console.log(this.read,this.detail.data.length)
 					if (this.read < (this.detail.data.length - 1)) {
 						uni.showLoading({
 							title: '请稍等...'
@@ -526,20 +540,55 @@
 					}
 				}
 			},
-			loadData() {
-				let u = "";
-				for(let j=0;j<100;j++){
-					u = u + "阿UI和代发IU稍等哈UI发货吧UI返回IU修"
+			loadData(id) {
+
+				this.request({
+				url:'/api.php?action=getChapt',
+				method:'post',
+				header:{'content-type' : "application/x-www-form-urlencoded"},
+				data:{
+					bookid:id
 				}
-				for(let i=0;i<100;i++){
-					this.detail.title = '1'
-					this.detail.data.push({
-						id: i, 
-						sub: i,
-						content: u
-					})
+				}).then(res=>{
+					console.log(res)
 					
-				}
+					for(let i=0;i<res.data.length;i++){
+					
+						this.detail.title = '1'
+						this.detail.data.push({
+							id: i,
+							cid:res.data[i].cid,
+							sub: '第' + (i+1) + '章 '+ res.data[i].Chaptername,
+							content: res.data[i].Chaptertext
+						})
+					}
+					// for(let i=0;i<10;i++){
+					
+					// 	this.detail.title = '1'
+					// 	this.detail.data.push({
+					// 		id: i,
+					// 		cid:res.data[0].cid,
+					// 		sub: '第' + (i+1) + '章 '+ res.data[0].Chaptername,
+					// 		content: res.data[0].Chaptertext
+					// 	})
+					// }
+					
+					
+				})
+				console.log('加载')
+				// let u = "";
+				// for(let j=0;j<100;j++){
+				// 	u = u + "阿UI和代发IU稍等哈UI发货吧UI返回IU修"
+				// }
+				// for(let i=0;i<100;i++){
+				// 	this.detail.title = '1'
+				// 	this.detail.data.push({
+				// 		id: i, 
+				// 		sub: '第' + (i+1) + '章',
+				// 		content: u
+				// 	})
+					
+				// }
 				this.getHeight()
 				uni.hideLoading()
 				return
@@ -597,6 +646,30 @@
 					})
 				}
 			},
+			addreadnum(id){
+				this.request({
+				url:'/api.php?action=addBookread',
+				header:{'content-type' : "application/x-www-form-urlencoded"},
+				method:'post',
+				data:{
+					bookid:id
+				}
+				}).then(res=>{
+					console.log('添加阅读人数')
+					this.request({
+					url:'/api.php?action=addBookClicks',
+					header:{'content-type' : "application/x-www-form-urlencoded"},
+					method:'post',
+					data:{
+						bookid:id
+					}
+					}).then(res=>{
+						console.log('添加热度')
+						})
+					})
+					
+					
+			},
 			brightnessChange(e) {
 				let self = this
 				screen.setBrigthness(e.detail.value, false, function(res) {
@@ -607,6 +680,30 @@
 				this.pageType = index
 			},
 			pageBack() {
+				
+				uni.navigateTo({
+					url: '/pages/idnex/index',
+				
+				})
+			},
+			pageBack1() {
+				console.log('返回')
+				const userinfo = uni.getStorageSync('userinfo')
+				this.request({
+				url:'/api.php?action=addReadingTime',
+				header:{'content-type' : "application/x-www-form-urlencoded"},
+				method:'post',
+				data:{
+					userid:userinfo.uid,
+					time:uni.getStorageSync('readtime')
+				}
+				}).then(res=>{
+					console.log('添加时间')
+					uni.setStorageSync('readtime',0)
+					
+					})
+				
+				//存储时间
 				uni.navigateBack({
 					delta: 1
 				})
@@ -687,6 +784,7 @@
 							_this.isClick = true
 						}, 300)
 					} else {
+						
 						if (this.read < (this.detail.data.length - 1)) {
 							uni.showLoading({
 								title: '请稍等...'

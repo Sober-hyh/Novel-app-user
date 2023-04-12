@@ -64,7 +64,7 @@
 			<!-- 阅读分钟+编辑 -->
 			<u-gap v-if="editshow == false" height="20" bgColor="#ffffff"></u-gap>
 			<view v-if="editshow == false" class="flex justify-between padding-left-xl padding-right-xs">
-				<view class="readtime">累计阅读9999分钟</view>
+				<view class="readtime">累计阅读{{userinfo.readtime}}</view>
 				<view class="edit padding-right-xs flex">
 					<view class="padding-right-xs" @click="tapPopup1()">{{modetext}}</view>
 					<view>|</view>
@@ -143,12 +143,12 @@
 				<view class="grid col-3">
 					    
 				   
-				<view class="sj" v-for="(item,index) in 10">
+				<view class="sj" v-for="(item,index) in booklist" :key="item.bookid">
 					<text class="text-xl text-bold" v-if="index==0 && bookshekf == false">今天</text>
 					<text class="text-xl text-bold" v-if="index==6 && bookshekf == false">前天</text>
 					<text class="text-xl text-bold" v-if="index==9 && bookshekf == false">更早之前</text>
 					<text class="text-xl text-bold" v-show="bookshekf == false" v-else style="color: white;">更早之前</text>
-					<img src="https://p3-tt.byteimg.com/img/pgc-image/4a43885803954ec1b49550bd1327050f~180x234.jpg" alt="">
+					<img :src="item.bookimg" alt="" @click="clibook(item.bookid)">
 					<view style="width: 170rpx;" class="text-bold">
 						<view v-if="editshow">
 							<u-checkbox
@@ -162,12 +162,12 @@
 												>
 												</u-checkbox>
 						</view>
-						<u--text :lines="2" text="我用十年青春,赴你最后之约"></u--text>
+						<u--text :lines="2" :text="item.bookname"></u--text>
 						
 						</view>
-					<view style="color: #cdcdcd">100章未读</view>
+					<view style="color: #cdcdcd">{{item.totalChapter-item.endreadChapter}}章未读</view>
 				</view>  
-				<view class="sj" v-if="10%3 != 0" v-for="item in (3-1)"></view>
+				<view class="sj" v-if="thisbu!= 0" v-for="item in (3 - thisbu)"></view>
 				</view>
 				 </u-checkbox-group> 
 				   
@@ -185,7 +185,7 @@
 			    placement="column"
 			    @change="checkboxChange"
 			>
-			<block v-for="(item,index) in 10">
+			<block v-for="(item,index) in booklist" :key="item.bookid">
 				<text class="text-xl text-bold padding-left-xs" v-if="index==0 && bookshekf == false">今天</text>
 				<text class="text-xl text-bold padding-left-xs" v-if="index==6 && bookshekf == false">前天</text>
 				<text class="text-xl text-bold padding-left-xs" v-if="index==9 && bookshekf == false">更早之前</text>
@@ -193,13 +193,13 @@
 			
 			<view class="flex seclist margin-bottom-xl" >
 				<view>
-					<img class="imglist" src="https://p3-tt.byteimg.com/img/pgc-image/4a43885803954ec1b49550bd1327050f~180x234.jpg" alt="">
+					<img class="imglist" :src="item.bookimg" @click="clibook(item.bookid)" alt="">
 				</view>
 				<view class="flex">
 					<view>
-						<view class="text-bold">我用十年青春,赴你最后之约我用十年青春</view>
-						<view>我是作者</view>
-						<view  style="color: #cdcdcd">100章未读</view>
+						<view class="text-bold">{{item.bookname}}</view>
+						<view>{{item.nickname}}</view>
+						<view  style="color: #cdcdcd">{{item.totalChapter-item.endreadChapter}}章未读</view>
 					</view>
 					<view v-if="editshow" style="margin-top:40rpx;">
 						<u-checkbox
@@ -243,6 +243,7 @@
 				],
 				x:0,
 				y:0,
+				thisbu:0,
 				//tab距离
 				phit:0,
 				rwit:0,
@@ -266,6 +267,7 @@
 				taglist:[
 					
 				],
+				booklist:[],
 				//已选择选择标签列表
 				seltaglist:[
 					
@@ -309,34 +311,8 @@
 				//大tag标签
 				booktag:[
 					{
-						name:"全部"
-					},
-					{
-						name:"玄幻"
-					},
-					{
-						name:"都市"
-					},
-					{
-						name:"系统"
-					},
-					{
-						name:"游戏"
-					},
-					{
-						name:"科幻"
-					},
-					{
-						name:"穿越"
-					},
-					{
-						name:"重生"
-					},
-					{
-						name:"仙侠"
-					},
-					{
-						name:"历史"
+						name:"全部",
+						id:0
 					}
 				],
 				//显示编辑
@@ -363,8 +339,12 @@
 				//全部选择是否
 				ifselall:false,
 				//删除模态框
-				ifshowdelpop:false
+				ifshowdelpop:false,
+				userinfo:{}
 			}
+		},
+		onShow() {
+			// this.getBookshelf()
 		},
 		onLoad() {
 			_this = this;
@@ -373,8 +353,19 @@
 			_this.rwit = menuButtonInfo.width+20
 			_this.x = menuButtonInfo.left - 20
 			_this.y = menuButtonInfo.bottom
+			_this.userinfo = uni.getStorageSync('userinfo')
+			
+			_this.userinfo.readtime = uni.$u.utils.shiftTimeStamp(Number(_this.userinfo.readtime))
+			_this.getClass()
+			_this.getBookshelf()
 		},
 		methods: {
+			clibook(i){
+				uni.navigateTo({
+					url: '/pages/read/index1?bid=' + i,
+				
+				})
+			},
 			checkboxChange(n) {
 				console.log('change', n);
 				_this.checkboxValue1 = n
@@ -430,6 +421,60 @@
 					console.log('变为列表')
 					return
 				}
+				
+			},
+			getClass(){
+				this.request({
+						url:'/api.php?action=getBookclassification',
+						method:'post',
+						header:{'content-type' : "application/x-www-form-urlencoded"},
+							
+						}).then(res=>{
+							console.log(res)
+							for(let i=0;i<res.length;i++){
+								let a = {
+									name:res[i].class_name,
+									id:res[i].class_id,
+									
+								}
+								_this.booktag.push(a)
+							}
+							// _this.col = Math.ceil(_this.list.length / 4) 
+						
+							
+							
+					})
+			},
+			//获取书架书本
+			getBookshelf(){
+					_this.booklist = []
+					this.request({
+							url:'/api.php?action=getAllBooksOnShelf',
+							method:'post',
+							header:{'content-type' : "application/x-www-form-urlencoded"},
+							data:{
+								uid:_this.userinfo.uid
+							},
+							}).then(res=>{
+								// console.log(res)
+								for(let i=0;i<res.data.length;i++){
+									let a = res.data[i]
+									if(a.bookimg.length<=30){
+										let ip = uni.getStorageSync('serverIp')
+										
+											a.bookimg = ip+'/'+a.bookimg
+										
+									}
+									_this.booklist.push(a)
+								}
+								uni.setStorageSync('bookshelf',_this.booklist)
+								// _this.col = Math.ceil(_this.list.length / 4) 
+							
+								
+								
+						})
+			},
+			getReadtime(){
 				
 			},
 			//打开关闭标签筛选

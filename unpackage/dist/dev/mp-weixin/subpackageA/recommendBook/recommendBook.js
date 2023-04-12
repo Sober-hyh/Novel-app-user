@@ -101,16 +101,19 @@ var components
 try {
   components = {
     uPopup: function () {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-popup/u-popup */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-popup/u-popup")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-popup/u-popup.vue */ 386))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-popup/u-popup */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-popup/u-popup")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-popup/u-popup.vue */ 373))
     },
     uGap: function () {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-gap/u-gap */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-gap/u-gap")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-gap/u-gap.vue */ 290))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-gap/u-gap */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-gap/u-gap")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-gap/u-gap.vue */ 292))
     },
     uIcon: function () {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-icon/u-icon */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-icon/u-icon")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-icon/u-icon.vue */ 306))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-icon/u-icon */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-icon/u-icon")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-icon/u-icon.vue */ 308))
     },
     "u-Textarea": function () {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u--textarea/u--textarea */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u--textarea/u--textarea")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u--textarea/u--textarea.vue */ 512))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u--textarea/u--textarea */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u--textarea/u--textarea")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u--textarea/u--textarea.vue */ 514))
+    },
+    uNotify: function () {
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-notify/u-notify */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-notify/u-notify")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-notify/u-notify.vue */ 519))
     },
   }
 } catch (e) {
@@ -282,11 +285,14 @@ exports.default = void 0;
 //
 //
 //
+//
+//
 
 var _this;
 var _default = {
   data: function data() {
     return {
+      value: "",
       tuishu_content: "",
       tj: false,
       booklist: [{
@@ -317,42 +323,23 @@ var _default = {
       PopUpBooks: false,
       popHeight: 0,
       books_title: "",
-      currentSearchBooks: [{
-        id: 0,
-        title: "哈哈哈哈4",
-        mgsrc: "https://bookcover.yuewen.com/qdbimg/349573/1035938472/90",
-        bookTag: "玄幻",
-        score: 7.9,
-        ifselect: false
-      }, {
-        id: 1,
-        title: "哈哈哈哈4",
-        mgsrc: "https://bookcover.yuewen.com/qdbimg/349573/1035938472/90",
-        bookTag: "玄幻",
-        score: 8.9,
-        ifselect: false
-      }, {
-        id: 2,
-        title: "哈哈哈哈4",
-        mgsrc: "https://bookcover.yuewen.com/qdbimg/349573/1035938472/90",
-        bookTag: "玄幻",
-        score: 9.9,
-        ifselect: false
-      }, {
-        id: 3,
-        title: "哈哈哈哈4",
-        mgsrc: "https://bookcover.yuewen.com/qdbimg/349573/1035938472/90",
-        bookTag: "玄幻",
-        score: 7.1
-      }],
-      selectBooks: []
+      currentSearchBooks: [],
+      selectBooks: [],
+      tid: 0,
+      uid: 0,
+      topic: {},
+      bookshelf: [],
+      showtips: false
     };
   },
-  onLoad: function onLoad() {
+  onLoad: function onLoad(op) {
     _this = this;
-    uni.setNavigationBarTitle({
-      title: '@我用十年青春,赴你最后之约我用十年青春,赴你最后之约我用十年青春,赴你最后之约'
-    });
+    _this.tid = op.tid;
+    _this.gettopic(op.tid);
+    var userinfo = uni.getStorageSync('userinfo');
+    _this.uid = userinfo.uid;
+    _this.bookshelf = uni.getStorageSync('bookshelf');
+    this.setbookslist();
     uni.getSystemInfo({
       success: function success(res) {
         console.log();
@@ -360,10 +347,71 @@ var _default = {
       }
     });
   },
+  mounted: function mounted() {},
   methods: {
+    setbookslist: function setbookslist() {
+      _this.currentSearchBooks = [];
+      for (var i = 0; i < _this.bookshelf.length; i++) {
+        var a = {
+          id: _this.bookshelf[i].bookid,
+          title: _this.bookshelf[i].bookname,
+          mgsrc: _this.bookshelf[i].bookimg,
+          score: _this.bookshelf[i].bookRating,
+          ifselect: false
+        };
+        if (a.mgsrc.length < 30) {
+          var ip = uni.getStorageSync('serverIp');
+          a.mgsrc = ip + '/' + a.mgsrc;
+        }
+        _this.currentSearchBooks.push(a);
+      }
+    },
     published: function published() {
-      if (!_this.tj) {
+      if (_this.tuishu_content == "" || _this.tuishu_content.length <= 7 || _this.tuishu_content.length >= 100 || _this.selectBooks.length == 0) {
+        uni.showToast({
+          title: '检查输入内容',
+          duration: 2000,
+          icon: 'error'
+        });
+        _this.showtips = true;
+        setTimeout(function () {
+          _this.showtips = false;
+        }, 3000);
         return;
+      } else {
+        var a = "";
+        for (var i = 0; i < _this.selectBooks.length; i++) {
+          if (a == "") {
+            a = _this.selectBooks[i].id;
+          } else {
+            a = a + ',' + _this.selectBooks[i].id;
+          }
+        }
+        this.request({
+          url: '/api.php?action=huatituishu',
+          header: {
+            'content-type': "application/x-www-form-urlencoded"
+          },
+          method: 'post',
+          data: {
+            uid: _this.uid,
+            tid: _this.tid,
+            bookid: a,
+            jieshao: _this.tuishu_content
+          }
+        }).then(function (res) {
+          console.log(res);
+          if (res) {
+            uni.showToast({
+              title: '发布成功',
+              duration: 1000,
+              icon: 'success'
+            });
+            setTimeout(function () {
+              uni.navigateBack();
+            }, 1000);
+          }
+        });
       }
     },
     tuishu_input: function tuishu_input() {},
@@ -375,6 +423,26 @@ var _default = {
       console.log(bid);
       _this.currentSearchBooks[bid].ifselect = false;
     },
+    gettopic: function gettopic(tid) {
+      this.request({
+        url: '/api.php?action=getTopicDetails',
+        header: {
+          'content-type': "application/x-www-form-urlencoded"
+        },
+        method: 'post',
+        data: {
+          uid: _this.uid,
+          topicid: tid
+        }
+      }).then(function (res) {
+        console.log(111);
+        console.log(res.data);
+        _this.topic = res.data;
+        uni.setNavigationBarTitle({
+          title: '@' + res.data.t_name
+        });
+      });
+    },
     closePopUpBooks: function closePopUpBooks() {
       _this.PopUpBooks = false;
     },
@@ -384,6 +452,30 @@ var _default = {
     },
     enterBooks: function enterBooks() {
       //触发搜索 填充数据 关闭弹窗时清除搜索数据
+      console.log('搜索');
+      if (_this.value != "") {
+        _this.currentSearchBooks = [];
+        var reg = new RegExp(_this.value);
+        for (var i = 0; i < _this.bookshelf.length; i++) {
+          if (reg.test(_this.bookshelf[i].bookname)) {
+            console.log(211);
+            var a = {
+              id: _this.bookshelf[i].bookid,
+              title: _this.bookshelf[i].bookname,
+              mgsrc: _this.bookshelf[i].bookimg,
+              score: _this.bookshelf[i].bookRating,
+              ifselect: false
+            };
+            if (a.mgsrc.length < 30) {
+              var ip = uni.getStorageSync('serverIp');
+              a.mgsrc = ip + '/' + a.mgsrc;
+            }
+            _this.currentSearchBooks.push(a);
+          }
+        }
+      } else {
+        _this.setbookslist();
+      }
     },
     onblurbook: function onblurbook() {},
     pickbook: function pickbook(item, index) {

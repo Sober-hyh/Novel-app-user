@@ -101,34 +101,34 @@ var components
 try {
   components = {
     uModal: function () {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-modal/u-modal */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-modal/u-modal")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-modal/u-modal.vue */ 371))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-modal/u-modal */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-modal/u-modal")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-modal/u-modal.vue */ 339))
     },
     uIcon: function () {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-icon/u-icon */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-icon/u-icon")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-icon/u-icon.vue */ 306))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-icon/u-icon */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-icon/u-icon")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-icon/u-icon.vue */ 308))
     },
     uTabs: function () {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-tabs/u-tabs */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-tabs/u-tabs")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-tabs/u-tabs.vue */ 298))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-tabs/u-tabs */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-tabs/u-tabs")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-tabs/u-tabs.vue */ 300))
     },
     chunLeiPopups: function () {
-      return Promise.all(/*! import() | components/chunLei-popups/chunLei-popups */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/chunLei-popups/chunLei-popups")]).then(__webpack_require__.bind(null, /*! @/components/chunLei-popups/chunLei-popups.vue */ 379))
+      return Promise.all(/*! import() | components/chunLei-popups/chunLei-popups */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/chunLei-popups/chunLei-popups")]).then(__webpack_require__.bind(null, /*! @/components/chunLei-popups/chunLei-popups.vue */ 389))
     },
     uGap: function () {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-gap/u-gap */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-gap/u-gap")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-gap/u-gap.vue */ 290))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-gap/u-gap */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-gap/u-gap")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-gap/u-gap.vue */ 292))
     },
     uTag: function () {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-tag/u-tag */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-tag/u-tag")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-tag/u-tag.vue */ 363))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-tag/u-tag */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-tag/u-tag")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-tag/u-tag.vue */ 381))
     },
     uPopup: function () {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-popup/u-popup */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-popup/u-popup")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-popup/u-popup.vue */ 386))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-popup/u-popup */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-popup/u-popup")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-popup/u-popup.vue */ 373))
     },
     uCheckboxGroup: function () {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-checkbox-group/u-checkbox-group */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-checkbox-group/u-checkbox-group")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-checkbox-group/u-checkbox-group.vue */ 394))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-checkbox-group/u-checkbox-group */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-checkbox-group/u-checkbox-group")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-checkbox-group/u-checkbox-group.vue */ 396))
     },
     uCheckbox: function () {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-checkbox/u-checkbox */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-checkbox/u-checkbox")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-checkbox/u-checkbox.vue */ 402))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-checkbox/u-checkbox */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-checkbox/u-checkbox")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-checkbox/u-checkbox.vue */ 404))
     },
     "u-Text": function () {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u--text/u--text */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u--text/u--text")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u--text/u--text.vue */ 315))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u--text/u--text */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u--text/u--text")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u--text/u--text.vue */ 317))
     },
   }
 } catch (e) {
@@ -154,7 +154,7 @@ var render = function () {
   var _c = _vm._self._c || _h
   var l0 =
     _vm.mode == "grid"
-      ? _vm.__map(10, function (item, index) {
+      ? _vm.__map(_vm.booklist, function (item, index) {
           var $orig = _vm.__get_orig(item)
           var a0 = _vm.editshow ? {} : null
           return {
@@ -165,7 +165,7 @@ var render = function () {
       : null
   var l1 =
     _vm.mode == "list"
-      ? _vm.__map(10, function (item, index) {
+      ? _vm.__map(_vm.booklist, function (item, index) {
           var $orig = _vm.__get_orig(item)
           var a1 = _vm.editshow ? {} : null
           return {
@@ -239,7 +239,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 var chunLeiPopups = function chunLeiPopups() {
   Promise.all(/*! require.ensure | components/chunLei-popups/chunLei-popups */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/chunLei-popups/chunLei-popups")]).then((function () {
-    return resolve(__webpack_require__(/*! @/components/chunLei-popups/chunLei-popups.vue */ 379));
+    return resolve(__webpack_require__(/*! @/components/chunLei-popups/chunLei-popups.vue */ 389));
   }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
 };
 var _this;
@@ -257,6 +257,7 @@ var _default = {
       }],
       x: 0,
       y: 0,
+      thisbu: 0,
       //tab距离
       phit: 0,
       rwit: 0,
@@ -275,6 +276,7 @@ var _default = {
       modetext: '列表',
       //选择标签列表
       taglist: [],
+      booklist: [],
       //已选择选择标签列表
       seltaglist: [],
       //标签筛选弹出层
@@ -303,25 +305,8 @@ var _default = {
       }],
       //大tag标签
       booktag: [{
-        name: "全部"
-      }, {
-        name: "玄幻"
-      }, {
-        name: "都市"
-      }, {
-        name: "系统"
-      }, {
-        name: "游戏"
-      }, {
-        name: "科幻"
-      }, {
-        name: "穿越"
-      }, {
-        name: "重生"
-      }, {
-        name: "仙侠"
-      }, {
-        name: "历史"
+        name: "全部",
+        id: 0
       }],
       //显示编辑
       editshow: false,
@@ -342,8 +327,12 @@ var _default = {
       //全部选择是否
       ifselall: false,
       //删除模态框
-      ifshowdelpop: false
+      ifshowdelpop: false,
+      userinfo: {}
     };
+  },
+  onShow: function onShow() {
+    // this.getBookshelf()
   },
   onLoad: function onLoad() {
     _this = this;
@@ -352,8 +341,17 @@ var _default = {
     _this.rwit = menuButtonInfo.width + 20;
     _this.x = menuButtonInfo.left - 20;
     _this.y = menuButtonInfo.bottom;
+    _this.userinfo = uni.getStorageSync('userinfo');
+    _this.userinfo.readtime = uni.$u.utils.shiftTimeStamp(Number(_this.userinfo.readtime));
+    _this.getClass();
+    _this.getBookshelf();
   },
   methods: {
+    clibook: function clibook(i) {
+      uni.navigateTo({
+        url: '/pages/read/index1?bid=' + i
+      });
+    },
     checkboxChange: function checkboxChange(n) {
       console.log('change', n);
       _this.checkboxValue1 = n;
@@ -410,6 +408,52 @@ var _default = {
         return;
       }
     },
+    getClass: function getClass() {
+      this.request({
+        url: '/api.php?action=getBookclassification',
+        method: 'post',
+        header: {
+          'content-type': "application/x-www-form-urlencoded"
+        }
+      }).then(function (res) {
+        console.log(res);
+        for (var i = 0; i < res.length; i++) {
+          var a = {
+            name: res[i].class_name,
+            id: res[i].class_id
+          };
+          _this.booktag.push(a);
+        }
+        // _this.col = Math.ceil(_this.list.length / 4) 
+      });
+    },
+    //获取书架书本
+    getBookshelf: function getBookshelf() {
+      _this.booklist = [];
+      this.request({
+        url: '/api.php?action=getAllBooksOnShelf',
+        method: 'post',
+        header: {
+          'content-type': "application/x-www-form-urlencoded"
+        },
+        data: {
+          uid: _this.userinfo.uid
+        }
+      }).then(function (res) {
+        // console.log(res)
+        for (var i = 0; i < res.data.length; i++) {
+          var a = res.data[i];
+          if (a.bookimg.length <= 30) {
+            var ip = uni.getStorageSync('serverIp');
+            a.bookimg = ip + '/' + a.bookimg;
+          }
+          _this.booklist.push(a);
+        }
+        uni.setStorageSync('bookshelf', _this.booklist);
+        // _this.col = Math.ceil(_this.list.length / 4) 
+      });
+    },
+    getReadtime: function getReadtime() {},
     //打开关闭标签筛选
     closepop: function closepop() {
       _this.tagpopshow = false;

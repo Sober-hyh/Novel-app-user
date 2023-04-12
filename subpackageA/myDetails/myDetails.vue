@@ -6,7 +6,7 @@
 			<view class="my-content-bg padding-top-lg" >
 				<view class="flex justify-between align-center" style="z-index: 10;height: 60px; padding:0 30rpx;">
 					<view style="width: 50%;">
-						<u-image :height="60" :width="60" src="https://cdn.uviewui.com/uview/album/1.jpg" shape="circle"></u-image>
+						<u-image :height="60" :width="60" :src="userinfo.Himg" shape="circle"></u-image>
 					</view>
 					<view style="width: 50%;">
 						<button @click="tpEdit()" class="btn1">编辑资料</button>
@@ -14,15 +14,15 @@
 					</view>
 				</view>
 				<view class="my-name-text flex">
-					<text>爱吃水果的h</text>
+					<text>{{userinfo.nickname}}</text>
 					<u-icon name="man" color="#00aaff"></u-icon>
-					<u-icon name="woman" color="#ff557f"></u-icon>
+					<!-- <u-icon name="woman" color="#ff557f"></u-icon> -->
 				</view>
 				<view class="my-gq-text">
-					<text>加油加藤鹰加油加油,加油，交友</text>
+					<text>{{userinfo.Signature}}</text>	+
 				</view>
 				<view class="my-read-time">
-					<text>阅读100本书•11时1分</text>
+					<text>阅读{{userinfo.readnum}}本书•11时1分</text>
 				</view>
 			</view>
 			<view class="my-book">
@@ -68,11 +68,19 @@
 				src: 'http://pic2.sc.chinaz.com/Files/pic/pic9/202002/hpic2119_s.jpg',
 				  list1: [{
 							name: '话题',
-						}]
+						}],
+				userinfo:{}
 			}
 		},
 		onLoad() {
 			_this = this
+			let ip = uni.getStorageSync('serverIp')
+			let menuButtonInfo = uni.getMenuButtonBoundingClientRect();
+			_this.phit = menuButtonInfo.top;
+			_this.userinfo = uni.getStorageSync('userinfo')
+			if(_this.userinfo.Himg.length<=30){
+				_this.userinfo.Himg =  ip+'/'+ _this.userinfo.Himg
+			}
 		},
 		methods: {
 			tpEdit(){

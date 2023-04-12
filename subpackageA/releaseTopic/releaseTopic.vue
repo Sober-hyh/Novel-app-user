@@ -43,21 +43,48 @@
 			return {
 				topic_title:"",
 				topic_content:"",
-				tj:false
+				tj:false,
+				uid:0
 			}
 		},
 		onLoad(){
 			_this = this;
-
+			const userinfo = uni.getStorageSync('userinfo')
+			_this.uid = userinfo.uid
 		},
 		methods:{
 			published(){
 				if(!_this.tj){
 					return
 				}
+				_this.sub()
 			},
 			topic_input(e){
 				return _this.topic_title && _this.topic_content ? _this.tj = true :  _this.tj = false
+			},
+			sub(){
+				this.request({
+				url:'/api.php?action=releaseTopic',
+				header:{'content-type' : "application/x-www-form-urlencoded"},
+				method:'post',
+				data:{
+					tname:_this.topic_title,
+					userid:_this.uid,
+					introduce:_this.topic_content
+				}
+				}).then(res=>{
+					console.log('发布话题')
+					console.log(res)
+					uni.showToast({
+						title: '发布成功',
+						duration: 1000,
+						icon:'success'
+					});
+					
+			})
+			setTimeout(function(){
+				uni.navigateBack()
+			},3000)
 			}
 			
 		},

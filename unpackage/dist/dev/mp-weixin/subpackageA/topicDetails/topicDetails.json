@@ -7,6 +7,7 @@
     "u--text": "/uni_modules/uview-ui/components/u--text/u--text",
     "mote-lines-divide": "/components/mote-lines-divide/mote-lines-divide",
     "u-gap": "/uni_modules/uview-ui/components/u-gap/u-gap",
+    "u-empty": "/uni_modules/uview-ui/components/u-empty/u-empty",
     "u-avatar": "/uni_modules/uview-ui/components/u-avatar/u-avatar",
     "u-line": "/uni_modules/uview-ui/components/u-line/u-line"
   }

@@ -10,6 +10,7 @@
     "u--text": "/uni_modules/uview-ui/components/u--text/u--text",
     "u-line": "/uni_modules/uview-ui/components/u-line/u-line",
     "u-gap": "/uni_modules/uview-ui/components/u-gap/u-gap",
-    "u-button": "/uni_modules/uview-ui/components/u-button/u-button"
+    "u-button": "/uni_modules/uview-ui/components/u-button/u-button",
+    "u-popup": "/uni_modules/uview-ui/components/u-popup/u-popup"
   }
 }

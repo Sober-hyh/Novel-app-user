@@ -101,25 +101,25 @@ var components
 try {
   components = {
     uGap: function () {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-gap/u-gap */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-gap/u-gap")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-gap/u-gap.vue */ 290))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-gap/u-gap */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-gap/u-gap")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-gap/u-gap.vue */ 292))
     },
     uAvatar: function () {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-avatar/u-avatar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-avatar/u-avatar")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-avatar/u-avatar.vue */ 465))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-avatar/u-avatar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-avatar/u-avatar")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-avatar/u-avatar.vue */ 467))
     },
     "u-Text": function () {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u--text/u--text */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u--text/u--text")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u--text/u--text.vue */ 315))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u--text/u--text */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u--text/u--text")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u--text/u--text.vue */ 317))
     },
     moteLinesDivide: function () {
-      return __webpack_require__.e(/*! import() | components/mote-lines-divide/mote-lines-divide */ "components/mote-lines-divide/mote-lines-divide").then(__webpack_require__.bind(null, /*! @/components/mote-lines-divide/mote-lines-divide.vue */ 497))
+      return __webpack_require__.e(/*! import() | components/mote-lines-divide/mote-lines-divide */ "components/mote-lines-divide/mote-lines-divide").then(__webpack_require__.bind(null, /*! @/components/mote-lines-divide/mote-lines-divide.vue */ 499))
     },
     uLine: function () {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-line/u-line */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-line/u-line")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-line/u-line.vue */ 345))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-line/u-line */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-line/u-line")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-line/u-line.vue */ 355))
     },
     uTextarea: function () {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-textarea/u-textarea */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-textarea/u-textarea")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-textarea/u-textarea.vue */ 504))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-textarea/u-textarea */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-textarea/u-textarea")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-textarea/u-textarea.vue */ 506))
     },
     uIcon: function () {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-icon/u-icon */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-icon/u-icon")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-icon/u-icon.vue */ 306))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-icon/u-icon */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-icon/u-icon")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-icon/u-icon.vue */ 308))
     },
   }
 } catch (e) {
@@ -337,6 +337,7 @@ exports.default = void 0;
 //
 //
 //
+//
 
 var _this;
 var _default = {
@@ -350,15 +351,105 @@ var _default = {
       },
       value1: "",
       dzshow: true,
-      test1: 5
+      test1: 5,
+      uid: 0,
+      tid: 0,
+      pid: 0,
+      topic: {},
+      post: [],
+      comment: [],
+      restype: 0,
+      resid: 0
     };
   },
-  onLoad: function onLoad() {
+  onLoad: function onLoad(op) {
     _this = this;
+    _this.tid = op.tid;
+    _this.pid = op.pid;
+    var userinfo = uni.getStorageSync('userinfo');
+    _this.uid = userinfo.uid;
+    this.gettopic(op.tid);
+    this.getPost(op.pid);
+    this.getcomment(op.pid);
   },
   methods: {
-    moreReplies: function moreReplies() {
-      _this.test++;
+    dz: function dz(pid, zt, i) {
+      var _this2 = this;
+      this.request({
+        url: '/api.php?action=topicPostLikes',
+        header: {
+          'content-type': "application/x-www-form-urlencoded"
+        },
+        method: 'post',
+        data: {
+          uid: _this.uid,
+          pid: _this.pid
+        }
+      }).then(function (res) {
+        if (_this.post.ifdz) {
+          _this2.post.dz -= 1;
+        } else {
+          _this2.post.dz += 1;
+        }
+        _this2.post.ifdz = !zt;
+        console.log(res);
+      });
+    },
+    tp: function tp() {
+      uni.navigateTo({
+        url: '../recommendBook/recommendBook?tid=' + _this.tid
+      });
+    },
+    sub: function sub(id) {
+      if (_this.restype == 0) {
+        this.request({
+          url: '/api.php?action=addFirstLevelCommentOnPost',
+          header: {
+            'content-type': "application/x-www-form-urlencoded"
+          },
+          method: 'post',
+          data: {
+            userid: _this.uid,
+            content: _this.value1,
+            post_id: _this.pid
+          }
+        }).then(function (res) {
+          console.log(res);
+        });
+      } else {
+        this.request({
+          url: '/api.php?action=addSecondLevelCommentOnPost',
+          header: {
+            'content-type': "application/x-www-form-urlencoded"
+          },
+          method: 'post',
+          data: {
+            content: _this.value1,
+            userid: _this.uid,
+            post_id: _this.pid,
+            reid: _this.resid
+          }
+        }).then(function (res) {
+          console.log(res);
+        });
+      }
+      _this.restype = 0;
+      _this.value1 = "";
+      uni.setStorageSync('comment_content', "");
+      uni.redirectTo({
+        url: '../pushBookdetails/pushBookdetails?pid=' + _this.pid + '&tid=' + _this.tid
+      });
+    },
+    res: function res(id) {
+      _this.restype = 1;
+      _this.resid = id;
+      _this.click_textarea();
+    },
+    back: function back() {
+      uni.navigateBack();
+    },
+    moreReplies: function moreReplies(index, index1) {
+      _this.comment[index1].rescomment.flog += 3;
     },
     click_textarea: function click_textarea() {
       // 点击输入框判断缓存是否有之前没发出的评论,有就填充
@@ -376,6 +467,81 @@ var _default = {
         uni.setStorageSync('comment_content', _this.value1);
       }
       _this.value1 = "";
+      _this.restype = 0;
+    },
+    gettopic: function gettopic(tid) {
+      this.request({
+        url: '/api.php?action=getTopicDetails',
+        header: {
+          'content-type': "application/x-www-form-urlencoded"
+        },
+        method: 'post',
+        data: {
+          uid: _this.uid,
+          topicid: tid
+        }
+      }).then(function (res) {
+        console.log(111);
+        console.log(res.data);
+        _this.topic = res.data;
+      });
+    },
+    getPost: function getPost(pid) {
+      this.request({
+        url: '/api.php?action=getthisPost',
+        header: {
+          'content-type': "application/x-www-form-urlencoded"
+        },
+        method: 'post',
+        data: {
+          uid: _this.uid,
+          postid: pid
+        }
+      }).then(function (res) {
+        console.log(res);
+        if (res.data[0].Himg.length < 30) {
+          var ip = uni.getStorageSync('serverIp');
+          res.data[0].Himg = ip + '/' + res.data[0].Himg;
+        }
+        for (var j = 0; j < res.data[0].books.length; j++) {
+          if (res.data[0].books[j][0].bookimg.length < 30) {
+            var _ip = uni.getStorageSync('serverIp');
+            res.data[0].books[j][0].bookimg = _ip + '/' + res.data[0].books[j][0].bookimg;
+          }
+        }
+        res.data[0].post_tme = uni.$u.utils.UnixToDate(res.data[0].post_tme, false, 8);
+        _this.post = res.data[0];
+      });
+    },
+    getcomment: function getcomment(pid) {
+      this.request({
+        url: '/api.php?action=getPostComments',
+        header: {
+          'content-type': "application/x-www-form-urlencoded"
+        },
+        method: 'post',
+        data: {
+          postid: pid
+        }
+      }).then(function (res) {
+        console.log(res.data);
+        for (var i = 0; i < res.data.length; i++) {
+          var a = res.data[i];
+          if (res.data[i].Himg.length < 30) {
+            var ip = uni.getStorageSync('serverIp');
+            a.Himg = ip + '/' + res.data[i].Himg;
+          }
+          a.comment1_time = uni.$u.utils.UnixToDate(a.comment1_time, false, 8);
+          for (var j = 0; j < a.rescomment.data.length; j++) {
+            if (a.rescomment.data[j].Himg.length < 30) {
+              var _ip2 = uni.getStorageSync('serverIp');
+              a.rescomment.data[j].Himg = _ip2 + '/' + a.rescomment.data[j].Himg;
+            }
+            a.rescomment.flog = 2;
+          }
+          _this.comment.push(a);
+        }
+      });
     }
   }
 };

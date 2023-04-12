@@ -101,22 +101,25 @@ var components
 try {
   components = {
     uIcon: function () {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-icon/u-icon */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-icon/u-icon")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-icon/u-icon.vue */ 306))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-icon/u-icon */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-icon/u-icon")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-icon/u-icon.vue */ 308))
     },
     "u-Text": function () {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u--text/u--text */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u--text/u--text")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u--text/u--text.vue */ 315))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u--text/u--text */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u--text/u--text")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u--text/u--text.vue */ 317))
     },
     moteLinesDivide: function () {
-      return __webpack_require__.e(/*! import() | components/mote-lines-divide/mote-lines-divide */ "components/mote-lines-divide/mote-lines-divide").then(__webpack_require__.bind(null, /*! @/components/mote-lines-divide/mote-lines-divide.vue */ 497))
+      return __webpack_require__.e(/*! import() | components/mote-lines-divide/mote-lines-divide */ "components/mote-lines-divide/mote-lines-divide").then(__webpack_require__.bind(null, /*! @/components/mote-lines-divide/mote-lines-divide.vue */ 499))
     },
     uGap: function () {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-gap/u-gap */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-gap/u-gap")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-gap/u-gap.vue */ 290))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-gap/u-gap */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-gap/u-gap")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-gap/u-gap.vue */ 292))
+    },
+    uEmpty: function () {
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-empty/u-empty */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-empty/u-empty")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-empty/u-empty.vue */ 459))
     },
     uAvatar: function () {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-avatar/u-avatar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-avatar/u-avatar")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-avatar/u-avatar.vue */ 465))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-avatar/u-avatar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-avatar/u-avatar")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-avatar/u-avatar.vue */ 467))
     },
     uLine: function () {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-line/u-line */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-line/u-line")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-line/u-line.vue */ 345))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-line/u-line */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-line/u-line")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-line/u-line.vue */ 355))
     },
   }
 } catch (e) {
@@ -179,9 +182,181 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var _this;
 var MoteLinesDivide = function MoteLinesDivide() {
   __webpack_require__.e(/*! require.ensure | components/mote-lines-divide/mote-lines-divide */ "components/mote-lines-divide/mote-lines-divide").then((function () {
-    return resolve(__webpack_require__(/*! @/components/mote-lines-divide/mote-lines-divide */ 497));
+    return resolve(__webpack_require__(/*! @/components/mote-lines-divide/mote-lines-divide */ 499));
   }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
 };
 var _default = {
@@ -190,7 +365,7 @@ var _default = {
   },
   data: function data() {
     return {
-      content: "\u5C71\u4E0D\u5728\u9AD8\uFF0C\u6709\u4ED9\u5219\u540D\u3002\u6C34\u4E0D\u5728\u6DF1\uFF0C\u6709\u9F99\u5219\u7075\u3002\u65AF\u662F\u964B\u5BA4\uFF0C\u60DF\u543E\u5FB7\u99A8\u3002\n\t\t\t\t\t\t\t\t\u82D4\u75D5\u4E0A\u9636\u7EFF\uFF0C\u8349\u8272\u5165\u5E18\u9752\u3002\u8C08\u7B11\u6709\u9E3F\u5112\uFF0C\u5F80\u6765\u65E0\u767D\u4E01\u3002\u53EF\u4EE5\u8C03\u7D20\u7434\uFF0C\u9605\u91D1\u7ECF\u3002\n\t\t\t\t\t\t\t\t\u65E0\u4E1D\u7AF9\u4E4B\u4E71\u8033\uFF0C\u65E0\u6848\u724D\u4E4B\u52B3\u5F62\u3002\u5357\u9633\u8BF8\u845B\u5E90\uFF0C\u897F\u8700\u5B50\u4E91\u4EAD\u3002\u5B54\u5B50\u4E91\uFF1A\u4F55\u964B\u4E4B\u6709\uFF1F",
+      showloading: false,
       shadowStyle: {
         backgroundImage: "none",
         // backgroundImage: "linear-gradient(-180deg, rgba(255, 255, 255, 0) 0%, #fff 50%)",
@@ -216,20 +391,181 @@ var _default = {
       }, {
         books: true,
         booknum: 2
-      }]
+      }],
+      uid: 0,
+      topic: {},
+      tid: 0,
+      page: 0,
+      tiezilist: []
     };
   },
-  onLoad: function onLoad() {},
+  onReachBottom: function onReachBottom() {
+    var _this2 = this;
+    console.log('上拉');
+    _this.showloading = true;
+    setTimeout(function () {
+      //模拟加载书籍
+      _this2.getTiezi(_this.topic.tid, _this.page);
+    }, 1000);
+  },
+  onLoad: function onLoad(op) {
+    _this = this;
+    var userinfo = uni.getStorageSync('userinfo');
+    _this.uid = userinfo.uid;
+    if (op.tid) {
+      _this.tid = op.tid;
+      this.getTopic(op.tid);
+      this.getTiezi(op.tid, _this.page);
+    } else {
+      uni.showToast({
+        title: '数据错误',
+        duration: 2000,
+        icon: 'error'
+      });
+      uni.navigateBack();
+    }
+  },
   methods: {
     jump: function jump(id) {
       console.log(1);
       uni.navigateTo({
-        url: '../pushBookdetails/pushBookdetails'
+        url: '../pushBookdetails/pushBookdetails?pid=' + id + '&tid=' + _this.tid
+      });
+    },
+    dz: function dz(pid, zt, i) {
+      this.request({
+        url: '/api.php?action=topicPostLikes',
+        header: {
+          'content-type': "application/x-www-form-urlencoded"
+        },
+        method: 'post',
+        data: {
+          uid: _this.uid,
+          pid: pid
+        }
+      }).then(function (res) {
+        if (_this.tiezilist[i].ifdz) {
+          _this.tiezilist[i].dz -= 1;
+        } else {
+          _this.tiezilist[i].dz += 1;
+        }
+        _this.tiezilist[i].ifdz = !zt;
+        console.log(res);
+      });
+    },
+    sc: function sc(tid) {
+      this.request({
+        url: '/api.php?action=scTopic',
+        header: {
+          'content-type': "application/x-www-form-urlencoded"
+        },
+        method: 'post',
+        data: {
+          uid: _this.uid,
+          tid: tid
+        }
+      }).then(function (res) {
+        console.log(res);
+        if (res) {
+          uni.showToast({
+            title: '更新成功',
+            duration: 2000,
+            icon: 'success'
+          });
+          _this.topic.ifsc = _this.topic.ifsc ? false : true;
+          _this.ifsc = _this.topic.ifsc == true ? '已收藏' : '收藏';
+        } else {
+          uni.showToast({
+            title: '网络错误',
+            duration: 2000,
+            icon: 'error'
+          });
+        }
+        // 	for(let i=0;i<res.data.length;i++){
+        // 		let a = res.data[i]
+
+        // 		_this.topicList.push(a)
+        // 		// console.log(res[i])
+        // 	}
       });
     },
     tp: function tp() {
       uni.navigateTo({
-        url: '../recommendBook/recommendBook'
+        url: '../recommendBook/recommendBook?tid=' + _this.tid
+      });
+    },
+    getTopic: function getTopic(tid) {
+      this.request({
+        url: '/api.php?action=getTopicDetails',
+        header: {
+          'content-type': "application/x-www-form-urlencoded"
+        },
+        method: 'post',
+        data: {
+          uid: _this.uid,
+          topicid: tid
+        }
+      }).then(function (res) {
+        console.log(111);
+        console.log(res.data);
+        _this.topic = res.data;
+        _this.ifsc = _this.topic.ifsc == true ? '已收藏' : '收藏';
+        // 	for(let i=0;i<res.data.length;i++){
+        // 		let a = res.data[i]
+
+        // 		_this.topicList.push(a)
+        // 		// console.log(res[i])
+        // 	}
+      });
+    },
+    getTiezi: function getTiezi(tid, page) {
+      _this.showloading = true;
+      if (page == 0) {
+        _this.tiezilist = [];
+      }
+      this.request({
+        url: '/api.php?action=getAllPostsOnTopics',
+        header: {
+          'content-type': "application/x-www-form-urlencoded"
+        },
+        method: 'post',
+        data: {
+          tid: tid,
+          page: page,
+          pagenum: 10,
+          uid: _this.uid
+        }
+      }).then(function (res) {
+        console.log(111);
+        console.log(res.data);
+        for (var i = 0; i < res.data.length; i++) {
+          var a = res.data[i];
+          if (a.Himg.length < 30) {
+            var ip = uni.getStorageSync('serverIp');
+            a.Himg = ip + '/' + a.Himg;
+          }
+          for (var j = 0; j < a.books.length; j++) {
+            if (a.books[j][0].bookimg.length < 30) {
+              var _ip = uni.getStorageSync('serverIp');
+              a.books[j][0].bookimg = _ip + '/' + a.books[j][0].bookimg;
+            }
+          }
+          a.post_tme = uni.$u.utils.UnixToDate(a.post_tme, false, 8);
+          _this.tiezilist.push(a);
+          // console.log(res[i])
+        }
+
+        if (res.sum == 0) {
+          uni.showToast({
+            title: '没有更多内容了',
+            duration: 2000,
+            icon: 'error'
+          });
+          _this.showloading = false;
+          return;
+        }
+        _this.showloading = false;
+        _this.page += 1;
       });
     }
   }

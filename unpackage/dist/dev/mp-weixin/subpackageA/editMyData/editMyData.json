@@ -3,6 +3,7 @@
   "enablePullDownRefresh": false,
   "usingComponents": {
     "u-line": "/uni_modules/uview-ui/components/u-line/u-line",
-    "u--input": "/uni_modules/uview-ui/components/u--input/u--input"
+    "u--input": "/uni_modules/uview-ui/components/u--input/u--input",
+    "u-button": "/uni_modules/uview-ui/components/u-button/u-button"
   }
 }

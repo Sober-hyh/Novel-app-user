@@ -10,14 +10,14 @@
 			<view class="flex" @click="jumpmyDetails" style="height: 60px;width: 100%;">
 				<view class="my_avatar">
 					<!-- <u-avatar size="24" :src="src"></u-avatar> -->
-					<img :src="src" alt="">
+					<img :src="userinfo.Himg" alt="">
 				</view>
 				<view class="grid col-1 margin-left-xs padding-top-xs">
 					<view>
-						<text style="color: #494949;font-size: 40rpx;font-weight: bold;">我是小姐姐</text>	
+						<text style="color: #494949;font-size: 40rpx;font-weight: bold;">{{userinfo.nickname}}</text>	
 					</view>
 					<view>
-						<u-text size="12" text="个性签名个性签名个性签名个性签名" :lines="1" color="#9e9e9e"></u-text>
+						<u-text size="12" :text="userinfo.Signature" :lines="1" color="#9e9e9e"></u-text>
 						
 					</view>
 					
@@ -47,6 +47,7 @@
 			                        :customStyle="{paddingTop:30+'rpx'}"
 			                        :name="listItem.name"
 			                        :size="22"
+									
 			                ></u-icon>
 			                <text class="grid-text">{{listItem.title}}</text>
 			            </u-grid-item>
@@ -97,23 +98,41 @@
 						name: 'setting',
 						title: '设置',
 						url:"asdasdasdas"
-					}
-				],																							
+					},
+					
+				],userinfo:{}																					
 			}
 		},
 		onLoad() {
 			_this = this;
+			let ip = uni.getStorageSync('serverIp')
 			let menuButtonInfo = uni.getMenuButtonBoundingClientRect();
 			_this.phit = menuButtonInfo.top;
+			_this.userinfo = uni.getStorageSync('userinfo')
+			if(_this.userinfo.Himg.length<=30){
+				_this.userinfo.Himg =  ip+'/'+ _this.userinfo.Himg
+			}
 		},
 		methods: {
 			 click(e) {
 					console.log(e.url)
+					uni.showToast({
+						title: '功能未开放',
+						duration: 2000,
+						icon:'error'
+					});
 				},
 			jumpmyDetails(){
 				uni.navigateTo({
 					url: '../../subpackageA/myDetails/myDetails'
 				})
+			},
+			testtips(){
+				uni.showToast({
+					title: '功能未开放',
+					duration: 2000,
+					icon:'error'
+				});
 			}
 		}
 	}
